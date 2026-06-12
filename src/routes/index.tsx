@@ -287,7 +287,7 @@ function WhatItDoes() {
 function WorkspaceSection() {
   return (
     <section id="workspace" className="relative">
-      <div className="mx-auto max-w-7xl px-6 pt-24">
+      <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-6 sm:pt-20 md:pt-24">
         <SectionHeader
           eyebrow="The Workspace"
           title={<>Evidence becomes timeline. <br className="hidden md:block" />Timeline becomes <span className="text-gradient-primary">findings</span>.</>}
@@ -295,7 +295,7 @@ function WorkspaceSection() {
         />
       </div>
 
-      <div className="mx-auto mt-12 max-w-7xl px-6 pb-24">
+      <div className="mx-auto mt-10 max-w-7xl px-5 pb-16 sm:px-6 sm:mt-12 sm:pb-20 md:pb-24">
         <Workspace />
         <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-3">
           {[
@@ -311,6 +311,7 @@ function WorkspaceSection() {
         </div>
       </div>
     </section>
+
   );
 }
 
