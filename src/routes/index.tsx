@@ -5,6 +5,7 @@ import {
   Database, Hash, Fingerprint, ScrollText, Layers, Sparkles, Check, X,
   Smartphone, FileText, Camera, AudioLines, MessageSquare, Mail, ArrowDown,
   Box, Package, Workflow, Eye, Gavel, UserRound, Briefcase,
+  Inbox, Wand2, Calendar, FolderSearch, FileBadge2, Network, MessageCircleOff,
 } from "lucide-react";
 import { useState } from "react";
 
