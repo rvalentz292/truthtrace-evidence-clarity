@@ -574,9 +574,9 @@ function Architecture() {
   return (
     <Section id="moat">
       <SectionHeader
-        eyebrow="Technical Moat"
+        eyebrow="Technology Moat"
         title={<>Evidence architecture. <span className="text-gradient-primary">Not AI magic.</span></>}
-        sub="Every finding remains traceable to source evidence."
+        sub="A defensible technical stack — evidence identity, deterministic processing, citation discipline, and verifiable provenance. Every finding remains traceable to source evidence."
       />
       <div className="mt-12 grid gap-8 md:grid-cols-12">
         <div className="md:col-span-7">
