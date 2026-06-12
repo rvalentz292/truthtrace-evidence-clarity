@@ -5,6 +5,7 @@ import {
   Database, Hash, Fingerprint, ScrollText, Layers, Sparkles, Check, X,
   Smartphone, FileText, Camera, AudioLines, MessageSquare, Mail, ArrowDown,
   Box, Package, Workflow, Eye, Gavel, UserRound, Briefcase,
+  Inbox, Wand2, Calendar, FolderSearch, FileBadge2, Network, MessageCircleOff,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -43,9 +44,11 @@ function Home() {
       <main className="relative pt-14">
         <Hero />
         <TrustBar />
+        <EvidenceEntropy />
         <Problem />
         <WhatItDoes />
         <WorkspaceSection />
+        <ParentJourney />
         <ForParents />
         <HowItWorks />
         <MultipleViews />
@@ -571,9 +574,9 @@ function Architecture() {
   return (
     <Section id="moat">
       <SectionHeader
-        eyebrow="Technical Moat"
+        eyebrow="Technology Moat"
         title={<>Evidence architecture. <span className="text-gradient-primary">Not AI magic.</span></>}
-        sub="Every finding remains traceable to source evidence."
+        sub="A defensible technical stack — evidence identity, deterministic processing, citation discipline, and verifiable provenance. Every finding remains traceable to source evidence."
       />
       <div className="mt-12 grid gap-8 md:grid-cols-12">
         <div className="md:col-span-7">
@@ -917,3 +920,167 @@ function FooterCol({ title, items }: { title: string; items: string[] }) {
     </div>
   );
 }
+
+/* ───────────────────────────── Evidence Entropy (definition) ───────────────────────────── */
+
+function EvidenceEntropy() {
+  const symptoms = [
+    { icon: Inbox,        k: "Fragmentation",  v: "Evidence spread across phones, apps, drives, inboxes, and exports." },
+    { icon: Calendar,     k: "Lost chronology",v: "Events lose their order — context collapses as volume grows." },
+    { icon: FolderSearch, k: "Search failure", v: "Keyword search returns noise. Critical moments stay hidden." },
+    { icon: Network,      k: "Lost relationships", v: "Actors, threads, and references can no longer be reconstructed." },
+  ];
+  return (
+    <Section id="entropy">
+      <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-5">
+          <Eyebrow>What is evidence entropy</Eyebrow>
+          <h2 className="mt-4 text-balance text-[28px] font-semibold leading-[1.08] tracking-tight sm:text-[34px] md:text-[40px] lg:text-[44px]">
+            Evidence doesn't disappear.{" "}
+            <span className="text-gradient-primary">It becomes harder to understand.</span>
+          </h2>
+          <p className="mt-4 text-pretty text-[15px] leading-relaxed text-muted-foreground md:text-base">
+            <span className="text-foreground">Evidence entropy</span> is the measurable loss of
+            structure, chronology, and meaning that occurs when communications, recordings,
+            documents, and exports accumulate faster than any human can organize them.
+          </p>
+          <p className="mt-3 text-pretty text-[14px] leading-relaxed text-muted-foreground">
+            TruthTrace is the first platform built to <span className="text-foreground">measure and reduce</span> evidence entropy as a system property — not a feeling.
+          </p>
+
+          <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-border bg-surface/60 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="text-success">entropy ↓ 92%</span>
+            <span className="text-border">·</span>
+            <span>structure resolved</span>
+          </div>
+        </div>
+
+        <div className="lg:col-span-7">
+          <div className="grid gap-3 sm:grid-cols-2">
+            {symptoms.map((s, i) => (
+              <motion.div
+                key={s.k}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06, duration: 0.45 }}
+                className="rounded-xl border border-border bg-surface/40 p-5"
+              >
+                <div className="flex items-center gap-2.5">
+                  <div className="grid size-8 shrink-0 place-items-center rounded-md bg-primary/15 ring-1 ring-primary/30">
+                    <s.icon className="size-4 text-primary" />
+                  </div>
+                  <div className="text-sm font-semibold tracking-tight">{s.k}</div>
+                </div>
+                <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground">{s.v}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ───────────────────────────── Parent Journey ───────────────────────────── */
+
+function ParentJourney() {
+  const steps = [
+    {
+      phase: "Day 1",
+      title: "The realization",
+      body: "Years of texts, voicemails, screenshots, and PDFs scattered across devices. You know the truth is in there. You can't show it.",
+      icon: Inbox,
+      tone: "muted" as const,
+    },
+    {
+      phase: "Day 7",
+      title: "Upload & preserve",
+      body: "Drop everything into TruthTrace. Each artifact is sealed into an immutable EvidenceObject with SHA-256 identity and chain-of-custody.",
+      icon: Lock,
+      tone: "primary" as const,
+    },
+    {
+      phase: "Day 14",
+      title: "Structure emerges",
+      body: "A normalized timeline of events, actors, dates, and relationships is reconstructed from the noise — deterministically, not by guess.",
+      icon: ScrollText,
+      tone: "primary" as const,
+    },
+    {
+      phase: "Day 21",
+      title: "Findings, citation-bound",
+      body: "Every claim is linked to its source excerpt. Nothing is generated without a verifiable pointer back into the evidence base.",
+      icon: Quote,
+      tone: "primary" as const,
+    },
+    {
+      phase: "Day 30",
+      title: "Attorney-reviewable packet",
+      body: "Hand your attorney a sealed, structured, source-linked evidence packet — not a binder of screenshots. They start at minute one.",
+      icon: FileBadge2,
+      tone: "success" as const,
+    },
+  ];
+
+  return (
+    <Section id="journey">
+      <SectionHeader
+        eyebrow="The Parent Journey"
+        title={<>From <span className="text-foreground/60">chaos</span> to <span className="text-gradient-primary">clarity</span> — in thirty days.</>}
+        sub="TruthTrace meets parents where the entropy lives — and walks them, step by step, toward an evidence base their attorney can actually use."
+      />
+
+      <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        {steps.map((s, i) => {
+          const ring =
+            s.tone === "success" ? "border-success/30 bg-gradient-to-b from-success/[0.06] to-background" :
+            s.tone === "primary" ? "border-border bg-surface/40" :
+                                   "border-border bg-surface/20";
+          const iconClass =
+            s.tone === "success" ? "bg-success/15 ring-success/30 text-success" :
+                                   "bg-primary/15 ring-primary/30 text-primary";
+          return (
+            <motion.div
+              key={s.phase}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.07, duration: 0.5 }}
+              className={`relative flex flex-col rounded-xl border p-5 ${ring}`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  {s.phase}
+                </span>
+                <div className={`grid size-8 place-items-center rounded-md ring-1 ${iconClass}`}>
+                  <s.icon className="size-4" />
+                </div>
+              </div>
+              <h3 className="mt-4 text-[15px] font-semibold tracking-tight">{s.title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">{s.body}</p>
+              {i < steps.length - 1 && (
+                <div className="pointer-events-none absolute -right-2 top-1/2 hidden -translate-y-1/2 lg:block">
+                  <ArrowRight className="size-4 text-border" />
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+
+      <div className="mt-8 rounded-2xl border border-border bg-surface/30 p-5 sm:p-6">
+        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            <MessageCircleOff className="size-3.5 text-muted-foreground" />
+            <span>TruthTrace never offers legal advice, predicts outcomes, or replaces your attorney.</span>
+          </div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-success">
+            evidence · structured · sealed
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
