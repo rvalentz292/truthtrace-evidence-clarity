@@ -893,6 +893,8 @@ function Footer() {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-5 font-mono text-[11px] text-muted-foreground">
           <div>© {new Date().getFullYear()} TruthTrace · Forensic Evidence Intelligence</div>
           <div className="flex items-center gap-4">
+            <span>patent pending</span>
+            <span className="text-border">·</span>
             <span>not legal advice</span>
             <span className="text-border">·</span>
             <span>chain-of-custody preserved</span>
