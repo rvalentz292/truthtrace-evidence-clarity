@@ -174,7 +174,7 @@ export function Workspace() {
           </aside>
 
           {/* CENTER — Timeline */}
-          <section className="col-span-12 lg:col-span-6 border-b lg:border-b-0 lg:border-r border-border bg-background/10">
+          <section className={`col-span-12 lg:col-span-6 lg:border-r border-border bg-background/10 ${tab === "timeline" ? "block" : "hidden"} lg:block`}>
             <PanelHeader icon={CircleDot} title="Timeline" right={<span className="font-mono text-[10px] text-muted-foreground">5 of 498 events</span>} />
 
             <div className="relative p-4">
