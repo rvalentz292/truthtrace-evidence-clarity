@@ -1,13 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
-  ArrowRight, ShieldCheck, GitBranch, Quote, Lock, Cpu, FileCheck2,
-  Database, Hash, Fingerprint, ScrollText, Layers, Sparkles, Check, X,
-  Smartphone, FileText, Camera, AudioLines, MessageSquare, Mail, ArrowDown,
-  Box, Package, Workflow, Eye, Gavel, UserRound, Briefcase,
-  Inbox, Wand2, Calendar, FolderSearch, FileBadge2, Network, MessageCircleOff,
+  ArrowRight, ShieldCheck, Quote, Lock, Cpu, FileCheck2,
+  Database, Fingerprint, Check, X, ArrowDown,
+  Box, UserRound, Briefcase, Eye,
+  Inbox, Calendar, FileBadge2, Network,
 } from "lucide-react";
-import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Nav } from "@/components/site/Nav";
@@ -18,10 +16,10 @@ import { Section, SectionHeader, Eyebrow } from "@/components/site/Section";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TruthTrace — Forensic Evidence Intelligence" },
-      { name: "description", content: "TruthTrace transforms fragmented evidence into immutable EvidenceObjects, citation-bound timelines, and attorney-reviewable packets. Reduce evidence entropy." },
-      { property: "og:title", content: "TruthTrace — Forensic Evidence Intelligence" },
-      { property: "og:description", content: "Stop drowning in evidence. Evidence entropy becomes attorney-reviewable clarity." },
+      { title: "TruthTrace — The Forensic Evidence Intelligence Platform for Family Law" },
+      { name: "description", content: "TruthTrace transforms messages, emails, screenshots, recordings, and filings into source-linked timelines, citation-bound findings, and attorney-ready case packets." },
+      { property: "og:title", content: "TruthTrace — Forensic Evidence Intelligence for Family Law" },
+      { property: "og:description", content: "Evidence chaos becomes attorney-reviewable clarity. Built for parents, attorneys, and evaluators." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -32,7 +30,6 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <div id="top" className="relative min-h-screen overflow-hidden bg-background text-foreground">
-      {/* Ambient background */}
       <div aria-hidden className="pointer-events-none fixed inset-0">
         <div className="absolute inset-0 grid-bg opacity-[0.35]" />
         <div className="absolute -top-40 left-1/2 h-[720px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--primary)_18%,transparent),transparent)] blur-2xl" />
@@ -44,19 +41,14 @@ function Home() {
       <main className="relative pt-14">
         <Hero />
         <TrustBar />
-        <EvidenceEntropy />
-        <Problem />
-        <WhatItDoes />
+        <CategoryFlow />
+        <WhyExists />
+        <BeforeAfter />
+        <RoleValue />
         <WorkspaceSection />
-        <ParentJourney />
-        <ForParents />
-        <HowItWorks />
-        <MultipleViews />
-        <NotAChatbot />
-        <Architecture />
-        <ModeledImpact />
-        <Category />
-        <MobileIntake />
+        <AttorneyPacket />
+        <PatentTech />
+        <TrustLimits />
         <FinalCta />
         <Footer />
       </main>
@@ -64,32 +56,34 @@ function Home() {
   );
 }
 
-/* ───────────────────────────── Hero ───────────────────────────── */
+/* ─────────────── 1. Hero ─────────────── */
 
 function Hero() {
   return (
     <Section className="!pt-12 sm:!pt-16 md:!pt-24 !pb-12 sm:!pb-16">
       <div className="grid items-end gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <Eyebrow>Forensic Evidence Intelligence</Eyebrow>
-          <h1 className="mt-5 text-balance text-[36px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] sm:leading-[1.02] md:text-[56px] lg:text-[68px]">
-            <span className="text-gradient">Stop Drowning In Evidence.</span>
+          <Eyebrow>Forensic Evidence Intelligence · Family Law</Eyebrow>
+          <h1 className="mt-5 text-balance text-[34px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] sm:leading-[1.02] md:text-[56px] lg:text-[64px]">
+            The <span className="text-gradient">Forensic Evidence Intelligence</span> Platform for Family Law
           </h1>
-          <h2 className="mt-4 text-balance text-lg font-medium tracking-tight text-foreground/85 sm:text-xl md:text-[28px]">
-            Evidence Entropy becomes <span className="text-gradient-primary">attorney-reviewable clarity</span>.
-          </h2>
-          <p className="mt-5 max-w-2xl text-pretty text-[14px] leading-relaxed text-muted-foreground sm:text-[15px] md:text-base">
-            TruthTrace transforms fragmented texts, emails, recordings, screenshots, PDFs, court
-            filings, and exports into immutable <span className="text-foreground">EvidenceObjects</span>,
-            citation-bound timelines, and attorney-reviewable evidence packets.
+          <p className="mt-6 max-w-2xl text-pretty text-[15px] leading-relaxed text-muted-foreground sm:text-base md:text-[17px]">
+            TruthTrace transforms messages, emails, screenshots, recordings, court filings, and digital
+            evidence into <span className="text-foreground">source-linked timelines</span>,{" "}
+            <span className="text-foreground">citation-bound findings</span>, and{" "}
+            <span className="text-foreground">attorney-ready case packets</span>.
+          </p>
+
+          <p className="mt-4 max-w-2xl text-[12.5px] leading-relaxed text-muted-foreground/80">
+            Built for evidence organization, review, and attorney preparation. Not legal advice.
           </p>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Button variant="hero" size="xl" className="w-full sm:w-auto">
-              Request Demo <ArrowRight className="size-4" />
+              Request Early Access <ArrowRight className="size-4" />
             </Button>
             <Button variant="wire" size="xl" asChild className="w-full sm:w-auto">
-              <a href="#workspace">Explore the Workspace</a>
+              <a href="#how">See How It Works</a>
             </Button>
           </div>
 
@@ -115,7 +109,7 @@ function Hero() {
   );
 }
 
-/* ───────────────────────────── Trust Bar ───────────────────────────── */
+/* ─────────────── Trust Bar ─────────────── */
 
 function TrustBar() {
   const items = [
@@ -144,280 +138,45 @@ function TrustBar() {
   );
 }
 
-/* ───────────────────────────── Problem ───────────────────────────── */
+/* ─────────────── 2. Category Creation ─────────────── */
 
-function Problem() {
-  return (
-    <Section id="problem">
-      <SectionHeader
-        eyebrow="The Problem"
-        title={<>The problem is not missing evidence. <span className="text-gradient-primary">It's evidence entropy.</span></>}
-        sub="Most families don't suffer from a lack of evidence. They suffer from an inability to organize, understand, and present it."
-      />
-
-      <div className="mt-14 grid gap-5 lg:grid-cols-2">
-        {/* Chaos */}
-        <div className="relative overflow-hidden rounded-2xl border border-border bg-surface/30 p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Before · evidence entropy</div>
-            <div className="font-mono text-[10px] text-destructive/80">unstructured</div>
-          </div>
-          <div className="relative h-[280px] rounded-lg border border-border bg-background/40 p-3">
-            <div className="absolute inset-0 grid-bg opacity-30" />
-            <div className="relative grid h-full grid-cols-8 gap-1.5">
-              {Array.from({ length: 96 }).map((_, i) => {
-                const types = ["msg", "mail", "pdf", "img", "aud"];
-                const t = types[i % 5];
-                const colors: Record<string, string> = {
-                  msg:  "bg-foreground/10 text-muted-foreground",
-                  mail: "bg-accent/10 text-accent/70",
-                  pdf:  "bg-foreground/15 text-foreground/60",
-                  img:  "bg-primary/10 text-primary/70",
-                  aud:  "bg-success/10 text-success/70",
-                };
-                return (
-                  <div
-                    key={i}
-                    className={`grid place-items-center rounded-sm font-mono text-[7px] ${colors[t]}`}
-                    style={{ transform: `rotate(${(i % 7) - 3}deg)` }}
-                  >
-                    {t}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="mt-4 grid grid-cols-3 gap-3 text-[11px] text-muted-foreground">
-            <Stat n="4,023" l="messages" />
-            <Stat n="287" l="screenshots" />
-            <Stat n="638" l="files" />
-          </div>
-          <ul className="mt-4 space-y-1 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2"><X className="size-3.5 text-destructive/80" /> no structure</li>
-            <li className="flex items-center gap-2"><X className="size-3.5 text-destructive/80" /> no chronology</li>
-            <li className="flex items-center gap-2"><X className="size-3.5 text-destructive/80" /> no clarity</li>
-          </ul>
-        </div>
-
-        {/* Clarity */}
-        <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/[0.06] to-background p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">After · TruthTrace</div>
-            <div className="font-mono text-[10px] text-success">structured · cited · sealed</div>
-          </div>
-          <div className="rounded-lg border border-border bg-background/40 p-4">
-            <div className="space-y-2.5">
-              {[
-                { l: "Timeline",         k: "498 events",        c: "primary" },
-                { l: "EvidenceObjects",  k: "7,380 sealed",      c: "primary" },
-                { l: "Citations",        k: "2,941 verified",    c: "accent" },
-                { l: "Findings",         k: "126 high-evidence", c: "accent" },
-                { l: "Packet",           k: "1 attorney-ready",  c: "success" },
-              ].map((r, i) => (
-                <motion.div
-                  key={r.l}
-                  initial={{ opacity: 0, x: -8 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.05 * i }}
-                  className="flex items-center justify-between rounded-md border border-border bg-surface/40 px-3 py-2.5"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className={`size-1.5 rounded-full ${
-                      r.c === "primary" ? "bg-primary shadow-[0_0_8px_var(--primary)]" :
-                      r.c === "accent"  ? "bg-accent" : "bg-success shadow-[0_0_8px_var(--success)]"
-                    }`} />
-                    <span className="text-sm font-medium">{r.l}</span>
-                  </div>
-                  <span className="font-mono text-[11px] text-muted-foreground">{r.k}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-          <ul className="mt-4 space-y-1 text-sm text-foreground/85">
-            <li className="flex items-center gap-2"><Check className="size-3.5 text-success" /> deterministic ingest</li>
-            <li className="flex items-center gap-2"><Check className="size-3.5 text-success" /> source-bound citations</li>
-            <li className="flex items-center gap-2"><Check className="size-3.5 text-success" /> attorney-reviewable export</li>
-          </ul>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-function Stat({ n, l }: { n: string; l: string }) {
-  return (
-    <div className="rounded-md border border-border bg-surface/40 px-3 py-2">
-      <div className="font-mono text-base text-foreground">{n}</div>
-      <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{l}</div>
-    </div>
-  );
-}
-
-/* ───────────────────────────── What it does ───────────────────────────── */
-
-function WhatItDoes() {
-  const cards = [
-    { icon: Lock,        title: "Preserve",  body: "Create immutable EvidenceObjects with SHA-256 identity and full provenance from the moment of ingestion." },
-    { icon: GitBranch,   title: "Normalize", body: "Build structured timelines from fragmented evidence — events, actors, dates, and relationships." },
-    { icon: ShieldCheck, title: "Validate",  body: "Generate citation-bound findings, each linked back to its underlying source material and excerpt." },
-  ];
-  return (
-    <Section>
-      <SectionHeader eyebrow="What TruthTrace Does" title="Three primitives. One evidence base." />
-      <div className="mt-12 grid gap-5 md:grid-cols-3">
-        {cards.map((c, i) => (
-          <motion.div
-            key={c.title}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="group relative overflow-hidden rounded-xl border border-border bg-surface/40 p-6"
-          >
-            <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-            <div className="grid size-10 place-items-center rounded-md bg-primary/15 ring-1 ring-primary/30">
-              <c.icon className="size-5 text-primary" />
-            </div>
-            <div className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">0{i + 1}</div>
-            <h3 className="mt-1 text-xl font-semibold tracking-tight">{c.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
-          </motion.div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-/* ───────────────────────────── Workspace (centerpiece) ───────────────────────────── */
-
-function WorkspaceSection() {
-  return (
-    <section id="workspace" className="relative">
-      <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-6 sm:pt-20 md:pt-24">
-        <SectionHeader
-          eyebrow="The Workspace"
-          title={<>Evidence becomes timeline. <br className="hidden md:block" />Timeline becomes <span className="text-gradient-primary">findings</span>.</>}
-          sub="A live forensic intelligence surface — sources on the left, normalized timeline at the center, evidence inspector on the right. Every event is traceable to source, every citation is sealed."
-        />
-      </div>
-
-      <div className="mx-auto mt-10 max-w-7xl px-5 pb-16 sm:px-6 sm:mt-12 sm:pb-20 md:pb-24">
-        <Workspace />
-        <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-3">
-          {[
-            { k: "Left panel",   v: "Evidence sources, types, counts, metadata, custody chain." },
-            { k: "Center panel", v: "Normalized timeline of events, actors, tags, severity, relationships." },
-            { k: "Right panel",  v: "EvidenceObject identity, source excerpt, citations, review status, confidence." },
-          ].map((x) => (
-            <div key={x.k} className="rounded-md border border-border bg-surface/40 px-4 py-3 text-xs">
-              <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{x.k}</div>
-              <div className="mt-1 text-foreground/90">{x.v}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-  );
-}
-
-/* ───────────────────────────── For overwhelmed parents ───────────────────────────── */
-
-function ForParents() {
-  const before = [
-    { n: "4,000", l: "Messages" },
-    { n: "300",   l: "Screenshots" },
-    { n: "12",    l: "Recordings" },
-    { n: "5",     l: "PDF Binders" },
-  ];
-  const after = [
-    { n: "7,380", l: "EvidenceObjects" },
-    { n: "498",   l: "Timeline events" },
-    { n: "126",   l: "Findings" },
-    { n: "1",     l: "Attorney-ready packet" },
-  ];
-  return (
-    <Section id="parents">
-      <SectionHeader
-        eyebrow="Built for Overwhelmed Parents"
-        title={<>You already have the evidence. <br className="hidden md:block" /><span className="text-gradient-primary">TruthTrace helps you understand it.</span></>}
-        sub="TruthTrace helps parents organize and understand evidence before sharing it with legal professionals. We never promise outcomes, custody results, or legal advice."
-      />
-      <div className="mt-12 grid items-stretch gap-4 md:grid-cols-[1fr_auto_1fr]">
-        <ColumnList label="Before" tone="muted" items={before} foot={["no timeline", "no structure", "no clarity"]} />
-        <div className="grid place-items-center">
-          <div className="grid size-12 place-items-center rounded-full border border-border bg-surface/60 text-muted-foreground">
-            <ArrowRight className="size-5 md:rotate-0" />
-          </div>
-        </div>
-        <ColumnList label="After" tone="primary" items={after} foot={["chronology built", "citations bound", "packet generated"]} />
-      </div>
-    </Section>
-  );
-}
-
-function ColumnList({
-  label, tone, items, foot,
-}: { label: string; tone: "muted" | "primary"; items: { n: string; l: string }[]; foot: string[] }) {
-  return (
-    <div className={`rounded-2xl border p-6 ${tone === "primary" ? "border-primary/25 bg-gradient-to-br from-primary/[0.06] to-background" : "border-border bg-surface/30"}`}>
-      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{label}</div>
-      <div className="mt-4 grid grid-cols-2 gap-3">
-        {items.map((i) => (
-          <div key={i.l} className="rounded-md border border-border bg-background/40 px-3 py-3">
-            <div className={`font-mono text-2xl tracking-tight ${tone === "primary" ? "text-foreground" : "text-foreground/70"}`}>{i.n}</div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{i.l}</div>
-          </div>
-        ))}
-      </div>
-      <ul className="mt-4 space-y-1.5 text-[13px]">
-        {foot.map((f) => (
-          <li key={f} className="flex items-center gap-2">
-            {tone === "primary"
-              ? <Check className="size-3.5 text-success" />
-              : <X className="size-3.5 text-muted-foreground/60" />}
-            <span className={tone === "primary" ? "text-foreground/85" : "text-muted-foreground"}>{f}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-/* ───────────────────────────── How it works ───────────────────────────── */
-
-function HowItWorks() {
+function CategoryFlow() {
   const steps = [
-    { k: "Upload Evidence",                       sub: "Messages · audio · screenshots · emails · PDFs · photos", icon: Layers },
-    { k: "TruthTrace creates EvidenceObjects",    sub: "SHA-256 identity · provenance · chunk reuse",             icon: Box },
-    { k: "Timeline is constructed",               sub: "Events · actors · dates · relationships",                 icon: ScrollText },
-    { k: "Findings are citation-bound",           sub: "Each finding linked to its source excerpt",               icon: Quote },
-    { k: "Generate attorney-reviewable packet",   sub: "Exportable · provenance manifest · sealed",               icon: Package },
+    { icon: Inbox,       label: "Upload Evidence",  sub: "Texts · emails · audio · PDFs · exports" },
+    { icon: Fingerprint, label: "EvidenceObjects",  sub: "Immutable source identity" },
+    { icon: Calendar,    label: "Timeline",         sub: "Events · actors · chronology" },
+    { icon: Quote,       label: "Citations",        sub: "Source-bound excerpts" },
+    { icon: FileBadge2,  label: "Attorney Packet",  sub: "Inventory · findings · provenance" },
+    { icon: Eye,         label: "Review",           sub: "Human review before use" },
   ];
   return (
     <Section id="how">
-      <SectionHeader eyebrow="How It Works" title="A deterministic pipeline. From raw artifact to sealed export." />
-      <div className="mt-12 grid gap-3 md:grid-cols-5">
+      <SectionHeader
+        eyebrow="Category"
+        title={<>Most systems store information. <span className="text-gradient-primary">TruthTrace creates evidence intelligence.</span></>}
+        sub="Traditional evidence remains scattered across screenshots, emails, messages, recordings, and documents. TruthTrace organizes evidence into a structured, reviewable system where every finding can be traced back to source material."
+      />
+
+      <div className="mt-14 grid gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
         {steps.map((s, i) => (
           <motion.div
-            key={s.k}
-            initial={{ opacity: 0, y: 14 }}
+            key={s.label}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.06 }}
             className="relative rounded-xl border border-border bg-surface/40 p-5"
           >
-            <div className="flex items-center justify-between">
-              <div className="font-mono text-[10px] tracking-[0.18em] text-muted-foreground">STEP {String(i + 1).padStart(2, "0")}</div>
-              <s.icon className="size-4 text-primary" />
+            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              0{i + 1}
             </div>
-            <div className="mt-3 text-[15px] font-semibold leading-snug">{s.k}</div>
-            <div className="mt-1.5 text-[12px] leading-relaxed text-muted-foreground">{s.sub}</div>
+            <div className="mt-3 grid size-10 place-items-center rounded-md bg-primary/15 ring-1 ring-primary/30">
+              <s.icon className="size-5 text-primary" />
+            </div>
+            <div className="mt-3 text-sm font-medium text-foreground">{s.label}</div>
+            <div className="mt-1 text-[12px] leading-relaxed text-muted-foreground">{s.sub}</div>
             {i < steps.length - 1 && (
-              <div className="pointer-events-none absolute -right-2 top-1/2 hidden -translate-y-1/2 md:block">
-                <ArrowRight className="size-4 text-border" />
-              </div>
+              <ArrowDown className="absolute -bottom-3 right-4 size-3.5 text-muted-foreground/50 md:hidden" />
             )}
           </motion.div>
         ))}
@@ -426,445 +185,344 @@ function HowItWorks() {
   );
 }
 
-/* ───────────────────────────── Multiple Views ───────────────────────────── */
+/* ─────────────── 3. Why TruthTrace Exists ─────────────── */
 
-function MultipleViews() {
-  const tabs = [
-    { id: "parent",    label: "Parent",    icon: UserRound },
-    { id: "attorney",  label: "Attorney",  icon: Briefcase },
-    { id: "evaluator", label: "Evaluator", icon: Eye },
-    { id: "gal",       label: "GAL",       icon: Gavel },
-  ];
-  const [active, setActive] = useState("attorney");
-  const content: Record<string, { headline: string; rows: { k: string; v: string }[] }> = {
-    parent: {
-      headline: "Plain-English timeline of key events.",
-      rows: [
-        { k: "Mar 18 · evening", v: "Co-parent referenced an agreement that was never made." },
-        { k: "Mar 19 · morning", v: "Pediatrician appointment scheduled without notice." },
-        { k: "Mar 22 · afternoon", v: "Text thread directly contradicted earlier voicemail." },
-      ],
+function WhyExists() {
+  const rows = [
+    {
+      role: "Parent Side",
+      body: "Years of messages, recordings, emails, screenshots, and court documents become difficult to organize and review.",
+      icon: UserRound,
     },
-    attorney: {
-      headline: "Claim matrix with citations, evidence links, provenance.",
-      rows: [
-        { k: "Claim · notice violation",      v: "5 supporting citations · 3 high-evidence · EO-…7f3a, EO-…ce21" },
-        { k: "Claim · agreement misrepresent.", v: "4 citations · transcribed audio EO-…7f3a#t=00:18" },
-        { k: "Claim · pattern of inconsistency", v: "12 citations · 8 distinct events · provenance verified" },
-      ],
+    {
+      role: "Attorney Side",
+      body: "Large evidence collections require significant time to sort, verify, and prepare.",
+      icon: Briefcase,
     },
-    evaluator: {
-      headline: "Chronology, patterns, and supporting evidence.",
-      rows: [
-        { k: "Pattern", v: "Communication breakdown clusters around scheduled exchanges." },
-        { k: "Frequency", v: "31 inconsistency events across 90-day window." },
-        { k: "Severity distribution", v: "high: 18 · supporting: 80 · low: 400" },
-      ],
+    {
+      role: "Evaluator Side",
+      body: "Important events are often buried inside fragmented timelines and disconnected records.",
+      icon: Eye,
     },
-    gal: {
-      headline: "Child-centered timeline with third-party corroboration.",
-      rows: [
-        { k: "Third-party records", v: "School (4), pediatrician (2), therapist (1)" },
-        { k: "Direct child impact", v: "12 events with documented effect" },
-        { k: "Corroborated events", v: "26 of 31 inconsistencies cross-referenced" },
-      ],
-    },
-  };
-  const c = content[active];
-  return (
-    <Section id="views">
-      <SectionHeader
-        eyebrow="One Evidence Base · Multiple Professional Views"
-        title="Same evidence. Different presentation."
-        sub="Every audience sees a presentation tuned to their role — built deterministically from one shared evidence base."
-      />
-      <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-surface/30">
-        <div className="flex flex-wrap gap-1 border-b border-border bg-background/40 p-2">
-          {tabs.map((t) => {
-            const a = t.id === active;
-            return (
-              <button
-                key={t.id}
-                onClick={() => setActive(t.id)}
-                className={`inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-[13px] transition-colors ${
-                  a ? "bg-primary/15 text-foreground ring-1 ring-primary/30" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                <t.icon className="size-3.5" /> {t.label}
-              </button>
-            );
-          })}
-        </div>
-        <div className="grid gap-0 md:grid-cols-12">
-          <div className="border-b border-border p-6 md:col-span-4 md:border-b-0 md:border-r">
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{active} view</div>
-            <h3 className="mt-2 text-xl font-semibold leading-snug">{c.headline}</h3>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Built from the same EvidenceObjects, the same timeline, and the same citations as every other view.
-            </p>
-          </div>
-          <div className="p-6 md:col-span-8">
-            <div className="space-y-2.5">
-              {c.rows.map((r, i) => (
-                <motion.div
-                  key={r.k}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="flex flex-col gap-2 rounded-md border border-border bg-background/40 px-4 py-3 sm:flex-row sm:items-start sm:gap-4"
-                >
-                  <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground sm:w-44 sm:shrink-0">{r.k}</div>
-                  <div className="text-sm text-foreground/90">{r.v}</div>
-                </motion.div>
-              ))}
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-/* ───────────────────────────── Not a chatbot ───────────────────────────── */
-
-function NotAChatbot() {
-  const cards = [
-    { t: "Immutable EvidenceObjects", s: "Every artifact is sealed at ingest. Nothing is rewritten." },
-    { t: "SHA-256 Identity",          s: "Cryptographic identity for each evidence chunk and parent." },
-    { t: "Deterministic Chunk Reuse", s: "Same input → same chunks → reproducible processing." },
-    { t: "Timeline Normalization",    s: "Schema-bound events, actors, and relationships." },
-    { t: "Citation Enforcement",      s: "No finding without a source-pointer back to evidence." },
-    { t: "Export Provenance",         s: "Every export carries a verifiable manifest." },
   ];
   return (
-    <Section id="pipeline">
+    <Section id="why">
       <SectionHeader
-        eyebrow="Architecture"
-        title={<>Not a chatbot. <span className="text-gradient-primary">A deterministic evidence pipeline.</span></>}
-        sub="TruthTrace is built around evidence identity, chronology, provenance, and citation discipline — not generic AI generation."
-      />
-      <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
-        {cards.map((c) => (
-          <div key={c.t} className="bg-background/60 p-6">
-            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
-              <Hash className="size-3" /> primitive
-            </div>
-            <h3 className="mt-3 text-[17px] font-semibold tracking-tight">{c.t}</h3>
-            <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{c.s}</p>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-/* ───────────────────────────── Architecture / Moat ───────────────────────────── */
-
-function Architecture() {
-  const layers = [
-    { l: "Original Artifact",  s: "raw upload · preserved" },
-    { l: "EvidenceObject",     s: "sha-256 · sealed identity" },
-    { l: "Normalized Event",   s: "actor · date · relationship" },
-    { l: "Citation Pointer",   s: "source-bound reference" },
-    { l: "Finding",            s: "evidence-constrained" },
-    { l: "Report",             s: "claim matrix · structured" },
-    { l: "Export Manifest",    s: "attorney-reviewable · verifiable" },
-  ];
-  return (
-    <Section id="moat">
-      <SectionHeader
-        eyebrow="Technology Moat"
-        title={<>Evidence architecture. <span className="text-gradient-primary">Not AI magic.</span></>}
-        sub="A defensible technical stack — evidence identity, deterministic processing, citation discipline, and verifiable provenance. Every finding remains traceable to source evidence."
-      />
-      <div className="mt-12 grid gap-8 md:grid-cols-12">
-        <div className="md:col-span-7">
-          <div className="rounded-2xl border border-border bg-surface/30 p-6">
-            <div className="space-y-2">
-              {layers.map((x, i) => (
-                <div key={x.l} className="flex items-stretch gap-3">
-                  <div className="flex w-10 flex-col items-center">
-                    <div className="grid size-8 place-items-center rounded-md border border-primary/30 bg-primary/10 font-mono text-[11px] text-primary">
-                      {String(i + 1).padStart(2, "0")}
-                    </div>
-                    {i < layers.length - 1 && <div className="my-1 flex-1 w-px bg-gradient-to-b from-primary/40 to-transparent" />}
-                  </div>
-                  <div className="flex-1 rounded-md border border-border bg-background/50 px-4 py-3">
-                    <div className="text-sm font-medium">{x.l}</div>
-                    <div className="font-mono text-[11px] text-muted-foreground">{x.s}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="md:col-span-5 space-y-3">
-          {[
-            { t: "Idempotent ingest",     s: "Re-running the pipeline produces identical EvidenceObjects.", icon: Workflow },
-            { t: "Source-pointer discipline", s: "Findings cannot exist without a verifiable citation chain.", icon: Quote },
-            { t: "Provenance manifests",   s: "Every exported packet ships with a verifiable origin trail.", icon: FileCheck2 },
-            { t: "Evidence-constrained reasoning", s: "Analysis is bounded by what evidence actually supports.", icon: ShieldCheck },
-          ].map((c) => (
-            <div key={c.t} className="flex gap-3 rounded-xl border border-border bg-surface/30 p-4">
-              <div className="grid size-9 shrink-0 place-items-center rounded-md bg-primary/15 ring-1 ring-primary/30">
-                <c.icon className="size-4 text-primary" />
-              </div>
-              <div>
-                <div className="text-sm font-semibold">{c.t}</div>
-                <div className="mt-0.5 text-[13px] text-muted-foreground">{c.s}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-/* ───────────────────────────── Modeled Impact ───────────────────────────── */
-
-function ModeledImpact() {
-  return (
-    <Section id="impact">
-      <SectionHeader
-        eyebrow="Modeled Impact"
-        title="Modeled. Illustrative. Validation ongoing."
-        sub="Internal modeling against representative case volumes. Results are illustrative — empirical validation is in progress."
+        eyebrow="Why TruthTrace Exists"
+        title={<>Evidence chaos <span className="text-gradient-primary">creates risk</span>.</>}
+        sub="TruthTrace helps create a clearer, more reviewable record across every role in a family law matter."
       />
       <div className="mt-12 grid gap-4 md:grid-cols-3">
-        <FlowCard
-          title="Funnel"
-          rows={[
-            { l: "Ingested messages",       v: "7,380" },
-            { l: "Relevant items",          v: "977"   },
-            { l: "High-evidence items",     v: "498"   },
-          ]}
-        />
-        <FlowCard
-          title="Labor"
-          rows={[
-            { l: "Manual review",           v: "75–100 hrs" },
-            { l: "With TruthTrace",         v: "10–20 hrs"  },
-            { l: "Modeled reduction",       v: "68%", accent: true },
-          ]}
-        />
-        <FlowCard
-          title="Efficiency"
-          rows={[
-            { l: "Embedding reuse",         v: "60%" },
-            { l: "Readiness compression",   v: "4–24 wks" },
-            { l: "Citation density",        v: "5.9 / event" },
-          ]}
-        />
-      </div>
-      <div className="mt-6 flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-        <Badge>modeled</Badge>
-        <Badge>illustrative</Badge>
-        <Badge>validation ongoing</Badge>
-      </div>
-    </Section>
-  );
-}
-
-function Badge({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="rounded-full border border-border bg-surface/60 px-2 py-1 text-muted-foreground">
-      {children}
-    </span>
-  );
-}
-
-function FlowCard({ title, rows }: { title: string; rows: { l: string; v: string; accent?: boolean }[] }) {
-  return (
-    <div className="rounded-2xl border border-border bg-surface/30 p-6">
-      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{title}</div>
-      <div className="mt-4 space-y-3">
         {rows.map((r, i) => (
-          <div key={r.l}>
-            <div className="flex items-baseline justify-between">
-              <span className="text-sm text-muted-foreground">{r.l}</span>
-              <span className={`font-mono ${r.accent ? "text-2xl text-gradient-primary" : "text-base text-foreground"}`}>{r.v}</span>
+          <motion.div
+            key={r.role}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.07 }}
+            className="rounded-xl border border-border bg-surface/40 p-6"
+          >
+            <div className="grid size-10 place-items-center rounded-md bg-accent/15 ring-1 ring-accent/30">
+              <r.icon className="size-5 text-accent" />
             </div>
-            {i < rows.length - 1 && <div className="mt-3 flex justify-center"><ArrowDown className="size-3 text-border" /></div>}
-          </div>
+            <div className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{r.role}</div>
+            <p className="mt-2 text-sm leading-relaxed text-foreground/85">{r.body}</p>
+          </motion.div>
         ))}
       </div>
-    </div>
+    </Section>
   );
 }
 
-/* ───────────────────────────── Category ───────────────────────────── */
+/* ─────────────── 4. Before / After ─────────────── */
 
-function Category() {
-  const rows = [
-    "Evidence Identity",
-    "Timeline Normalization",
-    "Citation Enforcement",
-    "Chain of Custody",
-    "Evidence-Constrained Analysis",
-    "Attorney Packet Generation",
-    "Export Provenance",
+function BeforeAfter() {
+  const before = [
+    "Screenshots everywhere",
+    "Messages without context",
+    "Audio disconnected from events",
+    "Duplicate records",
+    "Manual timelines",
+    "Difficult attorney review",
   ];
-  const cols = [
-    { k: "Communication Apps", marks: [false, false, false, false, false, false, false] },
-    { k: "Document Storage",   marks: [false, false, false, true,  false, false, false] },
-    { k: "Generic AI",         marks: [false, false, false, false, false, false, false] },
-    { k: "TruthTrace",         marks: [true,  true,  true,  true,  true,  true,  true], hi: true },
+  const after = [
+    "Structured EvidenceObjects",
+    "Chronological timeline",
+    "Source-linked citations",
+    "Centralized review",
+    "Attorney packet generation",
+    "Reviewable exports",
   ];
   return (
-    <Section id="category">
+    <Section>
       <SectionHeader
-        eyebrow="Category Positioning"
-        title="TruthTrace is the evidence intelligence layer."
-        sub="A new category — distinct from messaging, storage, and generic AI."
+        eyebrow="Before · After"
+        title={<>From evidence dump to <span className="text-gradient-primary">reviewable record</span>.</>}
       />
-      <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-surface/30">
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[720px] border-collapse">
-            <thead>
-              <tr className="border-b border-border bg-background/40">
-                <th className="px-5 py-4 text-left font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Capability</th>
-                {cols.map((c) => (
-                  <th
-                    key={c.k}
-                    className={`px-5 py-4 text-center text-[12px] font-medium ${c.hi ? "bg-primary/[0.08] text-foreground" : "text-muted-foreground"}`}
-                  >
-                    {c.k}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r, i) => (
-                <tr key={r} className="border-b border-border/60 last:border-0">
-                  <td className="px-5 py-4 text-sm text-foreground/90">{r}</td>
-                  {cols.map((c) => (
-                    <td key={c.k} className={`px-5 py-4 text-center ${c.hi ? "bg-primary/[0.05]" : ""}`}>
-                      {c.marks[i]
-                        ? <Check className={`mx-auto size-4 ${c.hi ? "text-success" : "text-muted-foreground"}`} />
-                        : <span className="text-border">—</span>}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="mt-12 grid gap-5 lg:grid-cols-2">
+        <div className="rounded-2xl border border-border bg-surface/30 p-6">
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Without a system</div>
+          <ul className="mt-5 space-y-2.5">
+            {before.map((b) => (
+              <li key={b} className="flex items-start gap-3 text-sm text-foreground/80">
+                <X className="mt-0.5 size-4 shrink-0 text-destructive/80" /> {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/[0.06] to-background p-6">
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">With TruthTrace</div>
+          <ul className="mt-5 space-y-2.5">
+            {after.map((a) => (
+              <li key={a} className="flex items-start gap-3 text-sm text-foreground/90">
+                <Check className="mt-0.5 size-4 shrink-0 text-success" /> {a}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </Section>
   );
 }
 
-/* ───────────────────────────── Mobile Intake ───────────────────────────── */
+/* ─────────────── 5. Role-Based Value ─────────────── */
 
-function MobileIntake() {
-  const inputs = [
-    { icon: Camera,        l: "Screenshot" },
-    { icon: AudioLines,    l: "Audio" },
-    { icon: ImageIconSafe, l: "Photo" },
-    { icon: FileText,      l: "PDF" },
+function RoleValue() {
+  const cards = [
+    {
+      icon: UserRound,
+      role: "Parents",
+      headline: "Make Sense of Years of Evidence",
+      body: "Organize messages, screenshots, recordings, and documents into a structured timeline that is easier to review and share.",
+    },
+    {
+      icon: Briefcase,
+      role: "Attorneys",
+      headline: "Reduce Evidence Review Time",
+      body: "Receive structured timelines, source-linked citations, and attorney-ready packets that reduce evidence preparation overhead.",
+    },
+    {
+      icon: Eye,
+      role: "Evaluators",
+      headline: "Review Evidence With Context",
+      body: "Follow events chronologically and trace findings directly to source material.",
+    },
   ];
-  const flow = ["Preserve source", "Extract context", "Build timeline", "Review findings", "Generate packet"];
   return (
-    <Section id="mobile">
+    <Section id="roles">
       <SectionHeader
-        eyebrow="Mobile Intake"
-        title="Evidence collection starts on the phone."
-        sub="Capture in the moment. Preserve in the cloud. Surface in the workspace."
+        eyebrow="Who It's For"
+        title={<>One platform. <span className="text-gradient-primary">Three perspectives.</span></>}
       />
-      <div className="mt-12 grid items-center gap-10 lg:grid-cols-12">
-        {/* Phone */}
+      <div className="mt-12 grid gap-5 md:grid-cols-3">
+        {cards.map((c, i) => (
+          <motion.div
+            key={c.role}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.08 }}
+            className="group relative overflow-hidden rounded-2xl border border-border bg-surface/40 p-7"
+          >
+            <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="grid size-11 place-items-center rounded-lg bg-primary/15 ring-1 ring-primary/30">
+              <c.icon className="size-5 text-primary" />
+            </div>
+            <div className="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{c.role}</div>
+            <h3 className="mt-1 text-xl font-semibold tracking-tight">{c.headline}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.body}</p>
+          </motion.div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/* ─────────────── 6. Workspace ─────────────── */
+
+function WorkspaceSection() {
+  return (
+    <section id="workspace" className="relative">
+      <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-6 sm:pt-20 md:pt-24">
+        <SectionHeader
+          eyebrow="The Workspace"
+          title={<>Evidence becomes timeline. Timeline becomes <span className="text-gradient-primary">findings</span>.</>}
+          sub="A live forensic intelligence surface — sources, normalized timeline, and an evidence inspector. Every event is traceable to source, every citation is sealed."
+        />
+      </div>
+      <div className="mx-auto mt-10 max-w-7xl px-5 pb-16 sm:px-6 sm:mt-12 sm:pb-20 md:pb-24">
+        <Workspace />
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────── 7. Attorney Packet ─────────────── */
+
+function AttorneyPacket() {
+  const flow = [
+    { label: "Evidence Sources",  sub: "All inbound material" },
+    { label: "Timeline",          sub: "Events · actors · dates" },
+    { label: "Findings",          sub: "Reviewable observations" },
+    { label: "Citation Registry", sub: "Every claim · every source" },
+    { label: "Packet Export",     sub: "Inventory · provenance · limitations" },
+  ];
+  return (
+    <Section id="packet">
+      <SectionHeader
+        eyebrow="Attorney Packet"
+        title={<>From evidence dump to <span className="text-gradient-primary">attorney-ready packet</span>.</>}
+        sub="A structured, reviewable export designed to reduce attorney preparation overhead — without implying filing, conclusions, or legal advice."
+      />
+      <div className="mt-12 grid gap-3 md:grid-cols-5">
+        {flow.map((f, i) => (
+          <motion.div
+            key={f.label}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.06 }}
+            className="rounded-xl border border-border bg-surface/40 p-5"
+          >
+            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">0{i + 1}</div>
+            <div className="mt-2 text-sm font-medium text-foreground">{f.label}</div>
+            <div className="mt-1 text-[12px] leading-relaxed text-muted-foreground">{f.sub}</div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-border bg-surface/40 p-6">
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Packet contents</div>
+          <ul className="mt-4 space-y-2 text-sm text-foreground/85">
+            <li className="flex items-center gap-2"><Check className="size-4 text-success" /> Timeline summary</li>
+            <li className="flex items-center gap-2"><Check className="size-4 text-success" /> Key events</li>
+            <li className="flex items-center gap-2"><Check className="size-4 text-success" /> Source excerpts</li>
+            <li className="flex items-center gap-2"><Check className="size-4 text-success" /> Citation registry</li>
+            <li className="flex items-center gap-2"><Check className="size-4 text-success" /> Export package</li>
+          </ul>
+        </div>
+        <div className="rounded-2xl border border-border bg-gradient-to-br from-accent/[0.06] to-background p-6">
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Designed for review</div>
+          <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+            Every export carries provenance, citation IDs, and explicit limitations. TruthTrace does not
+            assert filings, conclusions, or legal positions — it produces a reviewable record for
+            attorneys and evaluators to assess on their own terms.
+          </p>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ─────────────── 8. Patent-Pending Technology ─────────────── */
+
+function PatentTech() {
+  const features = [
+    { icon: Fingerprint, label: "Immutable evidence identity" },
+    { icon: Cpu,         label: "Deterministic processing" },
+    { icon: Quote,       label: "Citation-bound outputs" },
+    { icon: ShieldCheck, label: "Chain-of-custody-aware reporting" },
+    { icon: Eye,         label: "Human review before high-risk use" },
+  ];
+  return (
+    <Section id="technology">
+      <SectionHeader
+        eyebrow="Patent-Pending Technology"
+        title={<>Patent-pending <span className="text-gradient-primary">forensic evidence architecture</span>.</>}
+        sub="TruthTrace was designed around evidence traceability, deterministic processing, immutable evidence identity, and citation-bound outputs. Every generated finding remains traceable to source evidence."
+      />
+      <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        {features.map((f, i) => (
+          <motion.div
+            key={f.label}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.06 }}
+            className="rounded-xl border border-border bg-surface/40 p-5"
+          >
+            <div className="grid size-9 place-items-center rounded-md bg-primary/15 ring-1 ring-primary/30">
+              <f.icon className="size-4 text-primary" />
+            </div>
+            <div className="mt-4 text-sm font-medium text-foreground">{f.label}</div>
+          </motion.div>
+        ))}
+      </div>
+      <p className="mt-6 max-w-3xl text-[12.5px] leading-relaxed text-muted-foreground/80">
+        Patent applications have been filed covering aspects of the TruthTrace platform. Intellectual
+        property strategy is being developed with the assistance of Finnegan, as intellectual property
+        counsel.
+      </p>
+    </Section>
+  );
+}
+
+/* ─────────────── 9. Trust & Limitations ─────────────── */
+
+function TrustLimits() {
+  const not = [
+    "Legal advice",
+    "Clinical opinions",
+    "Custody recommendations",
+    "Diagnoses",
+    "Truth determinations",
+  ];
+  return (
+    <Section id="trust">
+      <div className="grid items-start gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <div className="relative mx-auto w-[280px]">
-            <div className="absolute -inset-6 rounded-[48px] bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--primary)_22%,transparent),transparent)] blur-xl" />
-            <div className="relative rounded-[40px] border border-border bg-surface/60 p-3 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
-              <div className="rounded-[32px] border border-border bg-background p-4">
-                <div className="mb-3 flex items-center justify-between font-mono text-[10px] text-muted-foreground">
-                  <span>9:41</span>
-                  <span>● ● ●</span>
-                </div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Capture</div>
-                <div className="mt-2 grid grid-cols-2 gap-2">
-                  {inputs.map((i) => (
-                    <div key={i.l} className="flex items-center gap-2 rounded-lg border border-border bg-surface/40 px-2.5 py-3">
-                      <i.icon className="size-4 text-primary" />
-                      <span className="text-[12px]">{i.l}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4 rounded-lg border border-border bg-surface/40 p-3">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Last upload</div>
-                  <div className="mt-1 text-[12px]">voicemail_2024-03-18.m4a</div>
-                  <div className="mt-2 flex items-center gap-2 font-mono text-[10px] text-success">
-                    <span className="size-1.5 rounded-full bg-success shadow-[0_0_8px_var(--success)]" /> sealed · EO-…7f3a
-                  </div>
-                </div>
-                <button className="mt-4 w-full rounded-lg bg-primary py-2.5 text-[13px] font-medium text-primary-foreground">
-                  Capture evidence
-                </button>
-              </div>
+          <SectionHeader
+            eyebrow="Trust & Limitations"
+            title={<>Built for review. <span className="text-gradient-primary">Not conclusions.</span></>}
+            sub="TruthTrace helps organize and review evidence. All outputs require user and attorney review."
+          />
+        </div>
+        <div className="lg:col-span-7">
+          <div className="rounded-2xl border border-border bg-surface/40 p-6">
+            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">TruthTrace does not provide</div>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {not.map((n) => (
+                <li key={n} className="flex items-center gap-2 rounded-md border border-border bg-background/40 px-3 py-2 text-sm text-foreground/85">
+                  <X className="size-4 shrink-0 text-destructive/80" /> {n}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <Network className="size-3.5" /> Human review · attorney workflow · evaluator context
             </div>
           </div>
         </div>
-
-        {/* Flow */}
-        <div className="lg:col-span-7">
-          <ol className="space-y-2.5">
-            {flow.map((f, i) => (
-              <motion.li
-                key={f}
-                initial={{ opacity: 0, x: 8 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.07 }}
-                className="flex items-center gap-4 rounded-xl border border-border bg-surface/40 px-4 py-4"
-              >
-                <div className="grid size-9 place-items-center rounded-md border border-primary/30 bg-primary/10 font-mono text-[12px] text-primary">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <div className="flex-1 text-[15px] font-medium">{f}</div>
-                <ArrowRight className="size-4 text-muted-foreground/60" />
-              </motion.li>
-            ))}
-          </ol>
-        </div>
       </div>
     </Section>
   );
 }
 
-// alias to avoid clash with lucide ImageIcon already imported elsewhere — local safe re-export
-function ImageIconSafe(props: React.SVGProps<SVGSVGElement>) {
-  return <Camera {...props} />;
-}
-
-/* ───────────────────────────── Final CTA ───────────────────────────── */
+/* ─────────────── 10. Final CTA ─────────────── */
 
 function FinalCta() {
   return (
-    <Section id="cta">
-      <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-surface/60 to-background p-10 md:p-16">
-        <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.35]" />
-        <div className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--primary)_25%,transparent),transparent)] blur-2xl" />
+    <Section id="cta" className="!pb-28">
+      <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary/[0.08] via-surface/40 to-background p-10 sm:p-14 md:p-16">
+        <div className="pointer-events-none absolute inset-0 grid-bg opacity-30" />
         <div className="relative mx-auto max-w-3xl text-center">
-          <Eyebrow>Reduce Evidence Entropy</Eyebrow>
-          <h2 className="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-[56px] md:leading-[1.05]">
-            <span className="text-gradient">Transform evidence into clarity.</span>
+          <Eyebrow>Early Access</Eyebrow>
+          <h2 className="mt-5 text-balance text-[32px] font-semibold leading-[1.05] tracking-tight sm:text-[40px] md:text-[52px]">
+            Ready to turn evidence chaos into <span className="text-gradient-primary">clarity</span>?
           </h2>
-          <p className="mt-5 text-pretty text-[15px] text-muted-foreground md:text-base">
-            TruthTrace reduces evidence entropy through deterministic processing, citation-bound findings, and attorney-reviewable outputs.
+          <p className="mt-5 text-pretty text-[15px] leading-relaxed text-muted-foreground sm:text-base">
+            Join the waitlist to receive updates and early access opportunities.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button variant="hero" size="xl">Request Demo <ArrowRight className="size-4" /></Button>
-            <Button variant="wire" size="xl">Schedule Review</Button>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button variant="hero" size="xl" className="w-full sm:w-auto">
+              Request Early Access <ArrowRight className="size-4" />
+            </Button>
+            <Button variant="wire" size="xl" asChild className="w-full sm:w-auto">
+              <a href="#workspace">Explore the Workspace</a>
+            </Button>
           </div>
-          <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            <span>not legal advice</span>
-            <span className="text-border">·</span>
-            <span>not a chatbot</span>
-            <span className="text-border">·</span>
-            <span>evidence-constrained</span>
+          <div className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">
+            Patent Pending Technology · Built for Review · Not Legal Advice
           </div>
         </div>
       </div>
@@ -872,215 +530,19 @@ function FinalCta() {
   );
 }
 
-/* ───────────────────────────── Footer ───────────────────────────── */
+/* ─────────────── Footer ─────────────── */
 
 function Footer() {
   return (
     <footer className="relative border-t border-border bg-background/60">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
-        <div className="md:col-span-2">
-          <div className="flex items-center gap-2.5">
-            <div className="relative grid size-7 place-items-center rounded-md bg-primary/15 ring-1 ring-primary/40">
-              <div className="size-2 rounded-sm bg-primary shadow-[0_0_12px_var(--primary)]" />
-            </div>
-            <span className="text-[15px] font-semibold tracking-tight">TruthTrace</span>
-          </div>
-          <p className="mt-3 max-w-md text-sm text-muted-foreground">
-            The forensic evidence intelligence platform. Immutable EvidenceObjects, citation-bound timelines, attorney-reviewable packets.
-          </p>
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-5 py-8 sm:flex-row sm:items-center sm:px-6">
+        <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+          TruthTrace · Forensic Evidence Intelligence
         </div>
-        <FooterCol title="Platform" items={["Workspace", "Pipeline", "Architecture", "Mobile intake"]} />
-        <FooterCol title="Company" items={["Category", "Modeled impact", "Patent strategy", "Contact"]} />
-      </div>
-      <div className="border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-5 font-mono text-[11px] text-muted-foreground">
-          <div>© {new Date().getFullYear()} TruthTrace · Forensic Evidence Intelligence</div>
-          <div className="flex items-center gap-4">
-            <span>patent pending</span>
-            <span className="text-border">·</span>
-            <span>not legal advice</span>
-            <span className="text-border">·</span>
-            <span>chain-of-custody preserved</span>
-          </div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
+          © {new Date().getFullYear()} TruthTrace. Not legal advice.
         </div>
       </div>
     </footer>
   );
 }
-
-function FooterCol({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div>
-      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{title}</div>
-      <ul className="mt-3 space-y-2 text-sm">
-        {items.map((i) => (
-          <li key={i}><a href="#" className="text-foreground/85 hover:text-foreground">{i}</a></li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-/* ───────────────────────────── Evidence Entropy (definition) ───────────────────────────── */
-
-function EvidenceEntropy() {
-  const symptoms = [
-    { icon: Inbox,        k: "Fragmentation",  v: "Evidence spread across phones, apps, drives, inboxes, and exports." },
-    { icon: Calendar,     k: "Lost chronology",v: "Events lose their order — context collapses as volume grows." },
-    { icon: FolderSearch, k: "Search failure", v: "Keyword search returns noise. Critical moments stay hidden." },
-    { icon: Network,      k: "Lost relationships", v: "Actors, threads, and references can no longer be reconstructed." },
-  ];
-  return (
-    <Section id="entropy">
-      <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-5">
-          <Eyebrow>What is evidence entropy</Eyebrow>
-          <h2 className="mt-4 text-balance text-[28px] font-semibold leading-[1.08] tracking-tight sm:text-[34px] md:text-[40px] lg:text-[44px]">
-            Evidence doesn't disappear.{" "}
-            <span className="text-gradient-primary">It becomes harder to understand.</span>
-          </h2>
-          <p className="mt-4 text-pretty text-[15px] leading-relaxed text-muted-foreground md:text-base">
-            <span className="text-foreground">Evidence entropy</span> is the measurable loss of
-            structure, chronology, and meaning that occurs when communications, recordings,
-            documents, and exports accumulate faster than any human can organize them.
-          </p>
-          <p className="mt-3 text-pretty text-[14px] leading-relaxed text-muted-foreground">
-            TruthTrace is the first platform built to <span className="text-foreground">measure and reduce</span> evidence entropy as a system property — not a feeling.
-          </p>
-
-          <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-border bg-surface/60 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-            <span className="text-success">entropy ↓ 92%</span>
-            <span className="text-border">·</span>
-            <span>structure resolved</span>
-          </div>
-        </div>
-
-        <div className="lg:col-span-7">
-          <div className="grid gap-3 sm:grid-cols-2">
-            {symptoms.map((s, i) => (
-              <motion.div
-                key={s.k}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06, duration: 0.45 }}
-                className="rounded-xl border border-border bg-surface/40 p-5"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="grid size-8 shrink-0 place-items-center rounded-md bg-primary/15 ring-1 ring-primary/30">
-                    <s.icon className="size-4 text-primary" />
-                  </div>
-                  <div className="text-sm font-semibold tracking-tight">{s.k}</div>
-                </div>
-                <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground">{s.v}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-/* ───────────────────────────── Parent Journey ───────────────────────────── */
-
-function ParentJourney() {
-  const steps = [
-    {
-      phase: "Day 1",
-      title: "The realization",
-      body: "Years of texts, voicemails, screenshots, and PDFs scattered across devices. You know the truth is in there. You can't show it.",
-      icon: Inbox,
-      tone: "muted" as const,
-    },
-    {
-      phase: "Day 7",
-      title: "Upload & preserve",
-      body: "Drop everything into TruthTrace. Each artifact is sealed into an immutable EvidenceObject with SHA-256 identity and chain-of-custody.",
-      icon: Lock,
-      tone: "primary" as const,
-    },
-    {
-      phase: "Day 14",
-      title: "Structure emerges",
-      body: "A normalized timeline of events, actors, dates, and relationships is reconstructed from the noise — deterministically, not by guess.",
-      icon: ScrollText,
-      tone: "primary" as const,
-    },
-    {
-      phase: "Day 21",
-      title: "Findings, citation-bound",
-      body: "Every claim is linked to its source excerpt. Nothing is generated without a verifiable pointer back into the evidence base.",
-      icon: Quote,
-      tone: "primary" as const,
-    },
-    {
-      phase: "Day 30",
-      title: "Attorney-reviewable packet",
-      body: "Hand your attorney a sealed, structured, source-linked evidence packet — not a binder of screenshots. They start at minute one.",
-      icon: FileBadge2,
-      tone: "success" as const,
-    },
-  ];
-
-  return (
-    <Section id="journey">
-      <SectionHeader
-        eyebrow="The Parent Journey"
-        title={<>From <span className="text-foreground/60">chaos</span> to <span className="text-gradient-primary">clarity</span> — in thirty days.</>}
-        sub="TruthTrace meets parents where the entropy lives — and walks them, step by step, toward an evidence base their attorney can actually use."
-      />
-
-      <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-        {steps.map((s, i) => {
-          const ring =
-            s.tone === "success" ? "border-success/30 bg-gradient-to-b from-success/[0.06] to-background" :
-            s.tone === "primary" ? "border-border bg-surface/40" :
-                                   "border-border bg-surface/20";
-          const iconClass =
-            s.tone === "success" ? "bg-success/15 ring-success/30 text-success" :
-                                   "bg-primary/15 ring-primary/30 text-primary";
-          return (
-            <motion.div
-              key={s.phase}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.07, duration: 0.5 }}
-              className={`relative flex flex-col rounded-xl border p-5 ${ring}`}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                  {s.phase}
-                </span>
-                <div className={`grid size-8 place-items-center rounded-md ring-1 ${iconClass}`}>
-                  <s.icon className="size-4" />
-                </div>
-              </div>
-              <h3 className="mt-4 text-[15px] font-semibold tracking-tight">{s.title}</h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">{s.body}</p>
-              {i < steps.length - 1 && (
-                <div className="pointer-events-none absolute -right-2 top-1/2 hidden -translate-y-1/2 lg:block">
-                  <ArrowRight className="size-4 text-border" />
-                </div>
-              )}
-            </motion.div>
-          );
-        })}
-      </div>
-
-      <div className="mt-8 rounded-2xl border border-border bg-surface/30 p-5 sm:p-6">
-        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-            <MessageCircleOff className="size-3.5 text-muted-foreground" />
-            <span>TruthTrace never offers legal advice, predicts outcomes, or replaces your attorney.</span>
-          </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-success">
-            evidence · structured · sealed
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
