@@ -133,6 +133,10 @@ function TrustBar() {
           </div>
         ))}
       </div>
+      <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-6 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">
+        <span className="inline-block size-1 rounded-full bg-primary/70 shadow-[0_0_8px_var(--primary)]" />
+        <span>Patent Pending Technology</span>
+      </div>
     </div>
   );
 }
@@ -889,6 +893,8 @@ function Footer() {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-5 font-mono text-[11px] text-muted-foreground">
           <div>© {new Date().getFullYear()} TruthTrace · Forensic Evidence Intelligence</div>
           <div className="flex items-center gap-4">
+            <span>patent pending</span>
+            <span className="text-border">·</span>
             <span>not legal advice</span>
             <span className="text-border">·</span>
             <span>chain-of-custody preserved</span>

@@ -4,7 +4,7 @@ import {
   ArrowRight, ArrowDown, ShieldCheck, GitBranch, Quote, Hash, ScrollText,
   Package, FileCheck2, Layers, Eye, UserRound, Briefcase, Gavel, Users,
   Scale, Building2, Search, FileSearch, Sparkles, Check, X, Compass,
-  Workflow, Lock, Microscope, Network,
+  Workflow, Lock, Microscope, Network, Fingerprint, Cpu,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -44,6 +44,7 @@ function About() {
         <Principles />
         <HumanReview />
         <WhoWeServe />
+        <IntellectualProperty />
         <Future />
         <FinalCta />
         <Footer />
@@ -727,7 +728,97 @@ function Future() {
   );
 }
 
-/* ---------- Final CTA ---------- */
+/* ---------- Intellectual Property & Innovation ---------- */
+function IntellectualProperty() {
+  const pillars = [
+    { icon: Fingerprint, label: "Evidence Identity" },
+    { icon: Cpu, label: "Deterministic Processing" },
+    { icon: GitBranch, label: "Timeline Normalization" },
+    { icon: Quote, label: "Citation-Bound Outputs" },
+    { icon: ShieldCheck, label: "Provenance & Custody" },
+    { icon: Microscope, label: "Forensic Evidence Intelligence" },
+  ];
+  return (
+    <Section id="ip">
+      <SectionHeader
+        eyebrow="Intellectual Property & Innovation"
+        title={<>A proprietary foundation for <span className="text-gradient-primary">forensic evidence intelligence</span>.</>}
+        sub="TruthTrace is developing proprietary technology across evidence identity, deterministic processing, timeline normalization, citation-bound outputs, and provenance."
+      />
+
+      <div className="mt-12 grid gap-6 lg:grid-cols-12">
+        {/* Left: filings panel */}
+        <div className="lg:col-span-7 relative overflow-hidden rounded-2xl border border-border bg-surface/30 p-7 md:p-9">
+          <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.18]" />
+          <div className="relative">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+                <Lock className="size-3.5 text-primary" />
+                <span>Patent Status</span>
+              </div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary/90">Pending</div>
+            </div>
+
+            <h3 className="mt-5 text-balance text-2xl font-semibold tracking-tight md:text-[28px]">
+              Patent applications have been filed covering aspects of the TruthTrace platform.
+            </h3>
+            <p className="mt-4 max-w-2xl text-pretty text-[15px] leading-relaxed text-muted-foreground">
+              Our filings span the systems and methods that turn fragmented artifacts into immutable
+              EvidenceObjects, normalize them into citation-bound timelines, and produce
+              attorney-reviewable packets with verifiable provenance.
+            </p>
+
+            <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-border md:grid-cols-3">
+              {pillars.map((p) => (
+                <div key={p.label} className="flex items-center gap-2.5 bg-background/60 px-4 py-4">
+                  <p.icon className="size-4 shrink-0 text-primary" />
+                  <span className="text-[12px] font-medium tracking-tight text-foreground/90">{p.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right: counsel panel */}
+        <div className="lg:col-span-5 relative overflow-hidden rounded-2xl border border-border bg-background/40 p-7 md:p-9">
+          <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            <Scale className="size-3.5 text-primary" />
+            <span>Intellectual Property Counsel</span>
+          </div>
+
+          <div className="mt-5 rounded-xl border border-border/80 bg-surface/30 p-5">
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">Counsel of Record</div>
+            <div className="mt-2 text-xl font-semibold tracking-tight">Finnegan</div>
+            <div className="mt-1 text-[12px] text-muted-foreground">Intellectual property law</div>
+          </div>
+
+          <p className="mt-5 text-[14px] leading-relaxed text-muted-foreground">
+            TruthTrace's intellectual property strategy and patent filings are being developed with the
+            assistance of <span className="text-foreground">Finnegan</span>, one of the world's leading
+            intellectual property law firms.
+          </p>
+
+          <div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-lg bg-border text-center">
+            {[
+              { k: "Strategy", v: "Portfolio" },
+              { k: "Filings", v: "Pending" },
+              { k: "Scope", v: "Platform" },
+            ].map((s) => (
+              <div key={s.k} className="bg-background/60 px-3 py-3">
+                <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-muted-foreground">{s.k}</div>
+                <div className="mt-1 text-[12px] font-medium tracking-tight text-foreground/90">{s.v}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">
+        Patent pending · No legal endorsement implied · Counsel relationship disclosed for transparency
+      </p>
+    </Section>
+  );
+}
 function FinalCta() {
   return (
     <Section className="pb-28">
