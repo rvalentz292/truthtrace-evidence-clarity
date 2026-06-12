@@ -44,9 +44,11 @@ function Home() {
       <main className="relative pt-14">
         <Hero />
         <TrustBar />
+        <EvidenceEntropy />
         <Problem />
         <WhatItDoes />
         <WorkspaceSection />
+        <ParentJourney />
         <ForParents />
         <HowItWorks />
         <MultipleViews />
