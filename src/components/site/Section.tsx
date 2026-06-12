@@ -37,8 +37,9 @@ export function Section({
   className = "",
 }: { id?: string; children: ReactNode; className?: string }) {
   return (
-    <section id={id} className={`relative mx-auto w-full max-w-7xl px-6 py-20 md:py-28 ${className}`}>
+    <section id={id} className={`relative mx-auto w-full max-w-7xl px-5 py-14 sm:px-6 sm:py-20 md:py-24 lg:py-28 ${className}`}>
       {children}
     </section>
   );
 }
+
