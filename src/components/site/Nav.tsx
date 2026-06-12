@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 
 const links = [
   { label: "Workspace", to: "/" as const, hash: "workspace" },
-  { label: "Architecture", to: "/" as const, hash: "how" },
-  { label: "Category", to: "/" as const, hash: "category" },
-  { label: "Impact", to: "/" as const, hash: "impact" },
+  { label: "How It Works", to: "/" as const, hash: "how" },
+  { label: "Technology", to: "/" as const, hash: "technology" },
+  { label: "Trust", to: "/" as const, hash: "trust" },
   { label: "About", to: "/about" as const },
 ];
 
@@ -63,7 +63,7 @@ export function Nav() {
             Sign in
           </Button>
           <Button variant="hero" size="sm" className="hidden sm:inline-flex">
-            Request Demo
+            Request Early Access
           </Button>
           <button
             type="button"
@@ -112,7 +112,7 @@ export function Nav() {
               Sign in
             </Button>
             <Button variant="hero" size="lg" className="w-full justify-center">
-              Request Demo
+              Request Early Access
             </Button>
           </div>
         </nav>
