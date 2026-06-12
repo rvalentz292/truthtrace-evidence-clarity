@@ -8,17 +8,17 @@ import {
 
 
 type Source = {
-  id: string; icon: typeof MessageSquare; label: string; count: number; active?: boolean;
+  id: string; icon: typeof MessageSquare; label: string; status: string; active?: boolean;
 };
 
 const sources: Source[] = [
-  { id: "msg",   icon: MessageSquare, label: "Messages",    count: 4023, active: true },
-  { id: "mail",  icon: Mail,          label: "Emails",      count: 612 },
-  { id: "audio", icon: AudioLines,    label: "Audio",       count: 12 },
-  { id: "pdf",   icon: FileText,      label: "PDFs",        count: 38 },
-  { id: "photo", icon: Camera,        label: "Photos",      count: 287 },
-  { id: "exp",   icon: Database,      label: "Exports",     count: 9 },
-  { id: "meta",  icon: Tag,           label: "Metadata",    count: 2399 },
+  { id: "msg", icon: MessageSquare, label: "Messages", status: "linked", active: true },
+  { id: "mail", icon: Mail, label: "Emails", status: "linked" },
+  { id: "audio", icon: AudioLines, label: "Audio", status: "linked" },
+  { id: "pdf", icon: FileText, label: "Documents", status: "linked" },
+  { id: "photo", icon: Camera, label: "Screenshots", status: "linked" },
+  { id: "exp", icon: Database, label: "Exports", status: "linked" },
+  { id: "meta", icon: Tag, label: "Metadata", status: "preserved" },
 ];
 
 const events = [
@@ -105,11 +105,11 @@ export function Workspace() {
             <Filter className="size-3.5" /> 6 filters
           </button>
           <div className="ml-auto hidden shrink-0 items-center gap-3 font-mono text-[11px] text-muted-foreground md:flex">
-            <span>7,380 items</span>
+            <span>evidence indexed</span>
             <span className="text-border">·</span>
-            <span>977 relevant</span>
+            <span>sources linked</span>
             <span className="text-border">·</span>
-            <span className="text-foreground">498 high-evidence</span>
+            <span className="text-foreground">review required</span>
           </div>
         </div>
 
@@ -158,7 +158,7 @@ export function Workspace() {
                 >
                   <s.icon className={`size-4 ${s.active ? "text-primary" : "text-muted-foreground"}`} />
                   <span className="flex-1 truncate">{s.label}</span>
-                  <span className="font-mono text-[10px] text-muted-foreground">{s.count.toLocaleString()}</span>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">{s.status}</span>
                 </button>
               ))}
             </div>
@@ -166,16 +166,16 @@ export function Workspace() {
             <div className="mx-3 mt-2 rounded-md border border-border bg-surface/40 p-3">
               <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Custody chain</div>
               <div className="mt-2 space-y-1.5 font-mono text-[11px]">
-                <Row k="ingested" v="2024-03-24 11:02Z" />
-                <Row k="hashed"   v="sha-256 · 7,380/7,380" />
-                <Row k="sealed"   v="verified" valueClass="text-success" />
+                <Row k="ingested" v="complete" />
+                <Row k="identity" v="sha-256" />
+                <Row k="provenance" v="preserved" valueClass="text-success" />
               </div>
             </div>
           </aside>
 
           {/* CENTER — Timeline */}
           <section className={`col-span-12 lg:col-span-6 lg:border-r border-border bg-background/10 ${tab === "timeline" ? "block" : "hidden"} lg:block`}>
-            <PanelHeader icon={CircleDot} title="Timeline" right={<span className="font-mono text-[10px] text-muted-foreground">5 of 498 events</span>} />
+            <PanelHeader icon={CircleDot} title="Timeline" right={<span className="font-mono text-[10px] text-muted-foreground">illustrative view</span>} />
 
             <div className="relative p-4">
               {/* spine */}
@@ -256,7 +256,7 @@ export function Workspace() {
               <div className="rounded-md border border-border bg-surface/40 p-3">
                 <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Source excerpt</div>
                 <blockquote className="mt-2 border-l-2 border-primary/60 pl-2.5 text-[12px] italic text-foreground/90">
-                  "We never agreed to that pickup. Don't tell your attorney we did."
+                  Source excerpts remain attached to the originating EvidenceObject for professional review.
                 </blockquote>
                 <div className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground">
                   <Quote className="size-3" /> cite/EO-2024-03-18-7f3a#t=00:18
@@ -266,19 +266,14 @@ export function Workspace() {
               <div className="rounded-md border border-border bg-surface/40 p-3">
                 <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Citations</div>
                 <div className="mt-2 space-y-1.5">
-                  {[
-                    { id: "EO-…7f3a#t=00:18", w: 92 },
-                    { id: "EO-…b210 msg/4421", w: 78 },
-                    { id: "EO-…ce21 cal/event", w: 64 },
-                    { id: "EO-…44a8 email/322", w: 51 },
-                  ].map((c) => (
-                    <div key={c.id} className="space-y-1">
+                  {["Audio excerpt", "Message thread", "Calendar event", "Email record"].map((citation) => (
+                    <div key={citation} className="space-y-1">
                       <div className="flex items-center justify-between font-mono text-[10px]">
-                        <span className="text-foreground/90">{c.id}</span>
-                        <span className="text-muted-foreground">{c.w}%</span>
+                        <span className="text-foreground/90">{citation}</span>
+                        <span className="text-success">linked</span>
                       </div>
                       <div className="h-1 rounded-full bg-border/60">
-                        <div className="h-full rounded-full bg-gradient-to-r from-primary to-accent" style={{ width: `${c.w}%` }} />
+                        <div className="h-full w-full rounded-full bg-gradient-to-r from-primary to-accent" />
                       </div>
                     </div>
                   ))}
@@ -293,8 +288,8 @@ export function Workspace() {
                   </span>
                 </div>
                 <div className="mt-2 flex items-center justify-between text-[11px]">
-                  <span className="text-muted-foreground">Confidence</span>
-                  <span className="font-mono text-foreground">0.93</span>
+                  <span className="text-muted-foreground">Human review</span>
+                  <span className="font-mono text-foreground">required</span>
                 </div>
                 <div className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground">
                   chain-of-custody <ChevronRight className="size-3" /> verified

@@ -7,31 +7,31 @@ import {
 const flow = [
   {
     icon: Inbox,
-    label: "Evidence Entropy",
+    label: "Upload Evidence",
     sub: "Texts · Emails · Audio · PDFs · Screenshots · Exports",
     tone: "muted",
   },
   {
     icon: Fingerprint,
-    label: "EvidenceObjects",
+    label: "Create EvidenceObjects",
     sub: "Immutable source identity · SHA-256",
     tone: "primary",
   },
   {
     icon: Calendar,
-    label: "Timeline Normalization",
+    label: "Build Timeline",
     sub: "Events · actors · dates · chronology",
     tone: "primary",
   },
   {
     icon: Quote,
-    label: "Citation Binding",
+    label: "Link Citations",
     sub: "Source excerpts · citation IDs · review status",
     tone: "primary",
   },
   {
     icon: FileCheck2,
-    label: "Attorney-Reviewable Packet",
+    label: "Generate Packet",
     sub: "Inventory · findings · provenance · limitations",
     tone: "accent",
   },

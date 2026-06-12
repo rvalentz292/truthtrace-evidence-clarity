@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import {
   ArrowRight, ArrowDown, ShieldCheck, GitBranch, Quote, Hash, ScrollText,
   Package, FileCheck2, Layers, Eye, UserRound, Briefcase, Gavel, Users,
-  Scale, Building2, Search, FileSearch, Sparkles, Check, X, Compass,
+  Scale, FileSearch, Check, X, Compass,
   Workflow, Lock, Microscope, Network, Fingerprint, Cpu,
 } from "lucide-react";
 
@@ -14,7 +14,7 @@ import { Section, SectionHeader, Eyebrow } from "@/components/site/Section";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About TruthTrace — Building the Evidence Intelligence Category" },
+      { title: "About TruthTrace | Evidence Intelligence" },
       { name: "description", content: "TruthTrace transforms fragmented evidence into immutable EvidenceObjects, citation-bound timelines, and attorney-reviewable outputs. We're building forensic evidence intelligence." },
       { property: "og:title", content: "About TruthTrace — Forensic Evidence Intelligence" },
       { property: "og:description", content: "Why TruthTrace exists, what evidence entropy is, and the new category we're creating." },
@@ -66,9 +66,9 @@ function Hero() {
             transition={{ duration: 0.6 }}
             className="mt-5 text-balance text-[36px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] md:text-[56px] lg:text-[64px] lg:leading-[1.02]"
           >
-            <span className="text-gradient">We believe the truth is often</span>
+            <span className="text-gradient">The evidence is there.</span>
             <br />
-            <span className="text-gradient-primary">buried in the evidence.</span>
+            <span className="text-gradient-primary">The structure is missing.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -85,9 +85,9 @@ function Hero() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
           >
-            <Button variant="hero" size="lg" className="w-full sm:w-auto">Request Demo <ArrowRight /></Button>
+            <Button variant="hero" size="lg" className="w-full sm:w-auto">Request Early Access <ArrowRight /></Button>
             <Button variant="wire" size="lg" asChild className="w-full sm:w-auto">
-              <Link to="/">Explore Platform</Link>
+              <Link to="/" hash="how">See How It Works</Link>
             </Button>
           </motion.div>
 
@@ -213,7 +213,7 @@ function HeroVisual() {
       </div>
 
       <div className="mt-3 border-t border-border/60 pt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-        <span className="text-success">entropy ↓ 92%</span> · structure resolved
+        <span className="text-success">Structure resolved</span> · sources remain linked
       </div>
     </div>
   );
@@ -268,9 +268,9 @@ function Entropy() {
             </div>
 
             <div className="mt-2 grid grid-cols-3 gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-              <div>14,212 messages</div>
-              <div>3,841 photos</div>
-              <div>922 PDFs</div>
+              <div>Messages</div>
+              <div>Recordings</div>
+              <div>Documents</div>
             </div>
           </div>
         </div>
@@ -444,7 +444,9 @@ function System() {
     { icon: GitBranch, k: "Normalization", v: "Schema-bound representation" },
     { icon: ScrollText, k: "Timeline", v: "Deterministic chronology" },
     { icon: Quote, k: "Citation Binding", v: "Source-pointer linked" },
-    { icon: FileCheck2, k: "Finding", v: "Evidence-constrained conclusion" },
+    { icon: FileCheck2, k: "Finding", v: "Evidence-constrained observation" },
+    { icon: Layers, k: "Incremental Ingestion", v: "New evidence without breaking prior work" },
+    { icon: Eye, k: "Role-Gated Output", v: "Appropriate views from one evidence record" },
     { icon: Package, k: "Export Package", v: "Attorney-reviewable packet" },
   ];
 
@@ -496,9 +498,9 @@ function System() {
 
         <div className="col-span-12 lg:col-span-4 space-y-4">
           {[
-            { icon: ShieldCheck, k: "Source-linked", v: "Every output points back to its origin artifact." },
-            { icon: Workflow, k: "Deterministic", v: "Same evidence in → same structure out, reproducibly." },
-            { icon: Lock, k: "Provenance preserved", v: "Chain of custody is intact through export." },
+            { icon: ShieldCheck, k: "Source-linked", v: "Outputs retain pointers to their origin artifacts." },
+            { icon: Workflow, k: "Deterministic", v: "Stable processing preserves traceability across review." },
+            { icon: Lock, k: "Provenance preserved", v: "Custody and provenance records follow evidence through export." },
           ].map((p) => (
             <div key={p.k} className="rounded-xl border border-border bg-surface/40 p-5">
               <div className="flex items-center gap-2.5">
@@ -522,7 +524,7 @@ function Principles() {
     { icon: FileSearch, k: "Source Before Summary", v: "We surface evidence first. Interpretation is always anchored to artifacts." },
     { icon: Workflow, k: "Structure Before Narrative", v: "Chronology and citations precede any claim about what occurred." },
     { icon: Eye, k: "Transparency Before Automation", v: "Every transformation is inspectable. Black boxes are unacceptable." },
-    { icon: ShieldCheck, k: "Evidence Before Assumptions", v: "Findings are evidence-constrained — never inferred without source pointers." },
+             { icon: ShieldCheck, k: "Evidence Before Assumptions", v: "Findings are evidence-constrained and remain connected to source pointers." },
     { icon: Users, k: "Human Review Before Reliance", v: "TruthTrace assists professional judgment. It does not replace it." },
   ];
   return (
@@ -605,16 +607,16 @@ function HumanReview() {
                 <div className="mt-1 font-mono text-[10px] text-muted-foreground">review · interpret · decide</div>
               </div>
               <div className="col-span-2 rounded-lg border border-border bg-background/50 p-4">
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">workflow split</div>
-                <div className="mt-3 flex h-3 overflow-hidden rounded-full border border-border">
-                  <div className="w-[28%] bg-primary/60" />
-                  <div className="w-[72%] bg-success/50" />
+                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">review workflow</div>
+                <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                  {["Evidence organized", "Sources linked", "Professional review"].map((step, index) => (
+                    <div key={step} className="rounded-md border border-border bg-surface/40 px-3 py-2">
+                      <span className="font-mono text-[9px] text-primary">0{index + 1}</span>
+                      <div className="mt-1 text-[11px] text-foreground/90">{step}</div>
+                    </div>
+                  ))}
                 </div>
-                <div className="mt-2 flex justify-between font-mono text-[10px] text-muted-foreground">
-                  <span>Organize 28%</span>
-                  <span>Evaluate 72%</span>
-                </div>
-                <div className="mt-2 font-mono text-[10px] text-muted-foreground">Modeled. Not a guarantee. Always under professional review.</div>
+                <div className="mt-3 font-mono text-[10px] text-muted-foreground">Always subject to professional review.</div>
               </div>
             </div>
           </div>
@@ -632,12 +634,6 @@ function WhoWeServe() {
     { icon: Microscope, k: "Evaluators" },
     { icon: ShieldCheck, k: "Guardians ad Litem" },
     { icon: Scale, k: "Family Law Professionals" },
-  ];
-  const future = [
-    { icon: Search, k: "Investigations" },
-    { icon: Building2, k: "Employment" },
-    { icon: Lock, k: "Compliance" },
-    { icon: Gavel, k: "Civil Litigation" },
   ];
   return (
     <Section id="who">
@@ -666,31 +662,6 @@ function WhoWeServe() {
         </div>
       </div>
 
-      <div className="mt-10">
-        <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Future markets</div>
-        <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {future.map((a, i) => (
-            <motion.div
-              key={a.k}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.45 }}
-              className="rounded-xl border border-dashed border-border bg-background/40 p-4"
-            >
-              <div className="flex items-center justify-between">
-                <div className="grid size-8 place-items-center rounded-md bg-surface/60 ring-1 ring-border">
-                  <a.icon className="size-4 text-accent" />
-                </div>
-                <span className="rounded-full border border-border bg-background px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
-                  Roadmap
-                </span>
-              </div>
-              <div className="mt-3 text-sm font-medium">{a.k}</div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
     </Section>
   );
 }
@@ -763,9 +734,9 @@ function IntellectualProperty() {
               Patent applications have been filed covering aspects of the TruthTrace platform.
             </h3>
             <p className="mt-4 max-w-2xl text-pretty text-[15px] leading-relaxed text-muted-foreground">
-              Our filings span the systems and methods that turn fragmented artifacts into immutable
-              EvidenceObjects, normalize them into citation-bound timelines, and produce
-              attorney-reviewable packets with verifiable provenance.
+              TruthTrace incorporates patent-pending technology related to deterministic evidence
+              processing, evidence object identity, timeline normalization, provenance tracking, and
+              citation-bound outputs.
             </p>
 
             <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-border md:grid-cols-3">
@@ -788,14 +759,14 @@ function IntellectualProperty() {
 
           <div className="mt-5 rounded-xl border border-border/80 bg-surface/30 p-5">
             <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">Counsel of Record</div>
-            <div className="mt-2 text-xl font-semibold tracking-tight">Finnegan</div>
-            <div className="mt-1 text-[12px] text-muted-foreground">Intellectual property law</div>
+             <div className="mt-2 text-xl font-semibold tracking-tight">Finnegan</div>
+             <div className="mt-1 text-[12px] text-muted-foreground">Intellectual property counsel</div>
           </div>
 
           <p className="mt-5 text-[14px] leading-relaxed text-muted-foreground">
-            TruthTrace's intellectual property strategy and patent filings are being developed with the
-            assistance of <span className="text-foreground">Finnegan</span>, one of the world's leading
-            intellectual property law firms.
+             TruthTrace's intellectual property strategy and patent filings are being developed with the
+             assistance of <span className="text-foreground">Finnegan</span>, serving as intellectual
+             property counsel.
           </p>
 
           <div className="mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-lg bg-border text-center">
@@ -834,9 +805,9 @@ function FinalCta() {
             TruthTrace reduces evidence entropy through deterministic processing, citation-bound findings, and attorney-reviewable outputs.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button variant="hero" size="xl">Request Demo <ArrowRight /></Button>
+            <Button variant="hero" size="xl">Request Early Access <ArrowRight /></Button>
             <Button variant="wire" size="xl" asChild>
-              <Link to="/">Explore Platform</Link>
+              <Link to="/" hash="how">See How It Works</Link>
             </Button>
           </div>
         </div>

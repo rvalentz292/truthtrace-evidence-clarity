@@ -16,10 +16,10 @@ import { Section, SectionHeader, Eyebrow } from "@/components/site/Section";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TruthTrace — The Forensic Evidence Intelligence Platform for Family Law" },
-      { name: "description", content: "TruthTrace transforms messages, emails, screenshots, recordings, and filings into source-linked timelines, citation-bound findings, and attorney-ready case packets." },
-      { property: "og:title", content: "TruthTrace — Forensic Evidence Intelligence for Family Law" },
-      { property: "og:description", content: "Evidence chaos becomes attorney-reviewable clarity. Built for parents, attorneys, and evaluators." },
+      { title: "TruthTrace | Forensic Evidence Intelligence" },
+      { name: "description", content: "Turn family law evidence chaos into structured timelines, source-linked findings, and attorney-ready evidence packets." },
+      { property: "og:title", content: "TruthTrace | Forensic Evidence Intelligence" },
+      { property: "og:description", content: "The forensic evidence intelligence layer between raw family law case materials and professional review." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -61,17 +61,15 @@ function Home() {
 function Hero() {
   return (
     <Section className="!pt-12 sm:!pt-16 md:!pt-24 !pb-12 sm:!pb-16">
-      <div className="grid items-end gap-10 lg:grid-cols-12">
+      <div className="grid items-center gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <Eyebrow>Forensic Evidence Intelligence · Family Law</Eyebrow>
+          <Eyebrow>The Forensic Evidence Intelligence Layer for Family Law</Eyebrow>
           <h1 className="mt-5 text-balance text-[34px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] sm:leading-[1.02] md:text-[56px] lg:text-[64px]">
-            The <span className="text-gradient">Forensic Evidence Intelligence</span> Platform for Family Law
+            Turn Evidence Chaos Into <span className="text-gradient">Court-Ready Clarity.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-pretty text-[15px] leading-relaxed text-muted-foreground sm:text-base md:text-[17px]">
-            TruthTrace transforms messages, emails, screenshots, recordings, court filings, and digital
-            evidence into <span className="text-foreground">source-linked timelines</span>,{" "}
-            <span className="text-foreground">citation-bound findings</span>, and{" "}
-            <span className="text-foreground">attorney-ready case packets</span>.
+            TruthTrace transforms messages, emails, screenshots, recordings, and documents into structured
+            timelines, source-linked findings, and attorney-ready evidence packets.
           </p>
 
           <p className="mt-4 max-w-2xl text-[12.5px] leading-relaxed text-muted-foreground/80">
@@ -87,12 +85,13 @@ function Hero() {
             </Button>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5"><Lock className="size-3" /> chain-of-custody</span>
-            <span className="text-border">·</span>
-            <span className="inline-flex items-center gap-1.5"><Fingerprint className="size-3" /> SHA-256 identity</span>
-            <span className="text-border">·</span>
-            <span className="inline-flex items-center gap-1.5"><Quote className="size-3" /> citation enforced</span>
+          <div className="mt-8 grid max-w-2xl grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-5">
+            {["Upload Evidence", "Create EvidenceObjects", "Build Timeline", "Link Citations", "Generate Packet"].map((step, index) => (
+              <div key={step} className="flex items-center gap-2 bg-background/80 px-3 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-foreground/80">
+                <span className="text-primary">0{index + 1}</span>
+                <span>{step}</span>
+              </div>
+            ))}
           </div>
         </div>
         <div className="lg:col-span-5">
@@ -143,11 +142,10 @@ function TrustBar() {
 function CategoryFlow() {
   const steps = [
     { icon: Inbox,       label: "Upload Evidence",  sub: "Texts · emails · audio · PDFs · exports" },
-    { icon: Fingerprint, label: "EvidenceObjects",  sub: "Immutable source identity" },
-    { icon: Calendar,    label: "Timeline",         sub: "Events · actors · chronology" },
-    { icon: Quote,       label: "Citations",        sub: "Source-bound excerpts" },
-    { icon: FileBadge2,  label: "Attorney Packet",  sub: "Inventory · findings · provenance" },
-    { icon: Eye,         label: "Review",           sub: "Human review before use" },
+    { icon: Fingerprint, label: "Create EvidenceObjects",  sub: "Immutable source identity" },
+    { icon: Calendar,    label: "Build Timeline",         sub: "Events · actors · chronology" },
+    { icon: Quote,       label: "Link Citations",        sub: "Source-bound excerpts" },
+    { icon: FileBadge2,  label: "Generate Packet",  sub: "Inventory · findings · provenance" },
   ];
   return (
     <Section id="how">
@@ -419,20 +417,21 @@ function AttorneyPacket() {
 
 function PatentTech() {
   const features = [
-    { icon: Fingerprint, label: "Immutable evidence identity" },
-    { icon: Cpu,         label: "Deterministic processing" },
-    { icon: Quote,       label: "Citation-bound outputs" },
-    { icon: ShieldCheck, label: "Chain-of-custody-aware reporting" },
-    { icon: Eye,         label: "Human review before high-risk use" },
+    { icon: Fingerprint, label: "Immutable EvidenceObjects", detail: "Source materials receive a stable cryptographic identity." },
+    { icon: Cpu, label: "Deterministic Processing", detail: "Repeatable processing keeps transformations traceable." },
+    { icon: Calendar, label: "Timeline Normalization", detail: "Events, actors, and dates become structured chronology." },
+    { icon: Quote, label: "Citation-Bound Findings", detail: "Reviewable observations remain linked to source excerpts." },
+    { icon: ShieldCheck, label: "Chain-of-Custody Tracking", detail: "Provenance follows evidence from intake through export." },
+    { icon: Eye, label: "Role-Gated Outputs", detail: "Parents and professionals review the same evidence record through appropriate views." },
   ];
   return (
     <Section id="technology">
       <SectionHeader
-        eyebrow="Patent-Pending Technology"
-        title={<>Patent-pending <span className="text-gradient-primary">forensic evidence architecture</span>.</>}
-        sub="TruthTrace was designed around evidence traceability, deterministic processing, immutable evidence identity, and citation-bound outputs. Every generated finding remains traceable to source evidence."
+        eyebrow="Technology"
+        title={<>The evidence layer between raw materials and <span className="text-gradient-primary">professional review</span>.</>}
+        sub="TruthTrace structures evidence without obscuring its origin. The system is designed for traceability, repeatability, and human review."
       />
-      <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((f, i) => (
           <motion.div
             key={f.label}
@@ -446,13 +445,15 @@ function PatentTech() {
               <f.icon className="size-4 text-primary" />
             </div>
             <div className="mt-4 text-sm font-medium text-foreground">{f.label}</div>
+            <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground">{f.detail}</p>
           </motion.div>
         ))}
       </div>
       <p className="mt-6 max-w-3xl text-[12.5px] leading-relaxed text-muted-foreground/80">
-        Patent applications have been filed covering aspects of the TruthTrace platform. Intellectual
-        property strategy is being developed with the assistance of Finnegan, as intellectual property
-        counsel.
+        TruthTrace incorporates patent-pending technology related to deterministic evidence processing,
+        evidence object identity, timeline normalization, provenance tracking, and citation-bound outputs.
+        Patent applications have been filed covering aspects of the platform. Finnegan serves as
+        intellectual property counsel.
       </p>
     </Section>
   );
@@ -518,7 +519,7 @@ function FinalCta() {
               Request Early Access <ArrowRight className="size-4" />
             </Button>
             <Button variant="wire" size="xl" asChild className="w-full sm:w-auto">
-              <a href="#workspace">Explore the Workspace</a>
+              <a href="#how">See How It Works</a>
             </Button>
           </div>
           <div className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">
