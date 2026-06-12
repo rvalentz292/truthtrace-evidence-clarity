@@ -501,12 +501,13 @@ function MultipleViews() {
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-start gap-4 rounded-md border border-border bg-background/40 px-4 py-3"
+                  className="flex flex-col gap-2 rounded-md border border-border bg-background/40 px-4 py-3 sm:flex-row sm:items-start sm:gap-4"
                 >
-                  <div className="w-44 shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{r.k}</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground sm:w-44 sm:shrink-0">{r.k}</div>
                   <div className="text-sm text-foreground/90">{r.v}</div>
                 </motion.div>
               ))}
+
             </div>
           </div>
         </div>
