@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import {
   ArrowRight, ArrowDown, ShieldCheck, GitBranch, Quote, Hash, ScrollText,
   Package, FileCheck2, Layers, Eye, UserRound, Briefcase, Gavel, Users,
-  Scale, Building2, Search, FileSearch, Sparkles, Check, X, Compass,
+  Scale, FileSearch, Check, X, Compass,
   Workflow, Lock, Microscope, Network, Fingerprint, Cpu,
 } from "lucide-react";
 
@@ -268,9 +268,9 @@ function Entropy() {
             </div>
 
             <div className="mt-2 grid grid-cols-3 gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-              <div>14,212 messages</div>
-              <div>3,841 photos</div>
-              <div>922 PDFs</div>
+              <div>Messages</div>
+              <div>Recordings</div>
+              <div>Documents</div>
             </div>
           </div>
         </div>
@@ -607,16 +607,16 @@ function HumanReview() {
                 <div className="mt-1 font-mono text-[10px] text-muted-foreground">review · interpret · decide</div>
               </div>
               <div className="col-span-2 rounded-lg border border-border bg-background/50 p-4">
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">workflow split</div>
-                <div className="mt-3 flex h-3 overflow-hidden rounded-full border border-border">
-                  <div className="w-[28%] bg-primary/60" />
-                  <div className="w-[72%] bg-success/50" />
+                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">review workflow</div>
+                <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                  {["Evidence organized", "Sources linked", "Professional review"].map((step, index) => (
+                    <div key={step} className="rounded-md border border-border bg-surface/40 px-3 py-2">
+                      <span className="font-mono text-[9px] text-primary">0{index + 1}</span>
+                      <div className="mt-1 text-[11px] text-foreground/90">{step}</div>
+                    </div>
+                  ))}
                 </div>
-                <div className="mt-2 flex justify-between font-mono text-[10px] text-muted-foreground">
-                  <span>Organize 28%</span>
-                  <span>Evaluate 72%</span>
-                </div>
-                <div className="mt-2 font-mono text-[10px] text-muted-foreground">Modeled. Not a guarantee. Always under professional review.</div>
+                <div className="mt-3 font-mono text-[10px] text-muted-foreground">Always subject to professional review.</div>
               </div>
             </div>
           </div>
