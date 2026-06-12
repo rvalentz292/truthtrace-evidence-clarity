@@ -65,21 +65,22 @@ function Home() {
 
 function Hero() {
   return (
-    <Section className="!pt-16 md:!pt-24 !pb-16">
+    <Section className="!pt-12 sm:!pt-16 md:!pt-24 !pb-12 sm:!pb-16">
       <div className="grid items-end gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <Eyebrow>Forensic Evidence Intelligence</Eyebrow>
-          <h1 className="mt-6 text-balance text-[44px] font-semibold leading-[1.02] tracking-tight md:text-[68px]">
+          <h1 className="mt-5 text-balance text-[36px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] sm:leading-[1.02] md:text-[56px] lg:text-[68px]">
             <span className="text-gradient">Stop Drowning In Evidence.</span>
           </h1>
-          <h2 className="mt-4 text-balance text-2xl font-medium tracking-tight text-foreground/85 md:text-[28px]">
+          <h2 className="mt-4 text-balance text-lg font-medium tracking-tight text-foreground/85 sm:text-xl md:text-[28px]">
             Evidence Entropy becomes <span className="text-gradient-primary">attorney-reviewable clarity</span>.
           </h2>
-          <p className="mt-6 max-w-2xl text-pretty text-[15px] leading-relaxed text-muted-foreground md:text-base">
+          <p className="mt-5 max-w-2xl text-pretty text-[14px] leading-relaxed text-muted-foreground sm:text-[15px] md:text-base">
             TruthTrace transforms fragmented texts, emails, recordings, screenshots, PDFs, court
             filings, and exports into immutable <span className="text-foreground">EvidenceObjects</span>,
             citation-bound timelines, and attorney-reviewable evidence packets.
           </p>
+
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button variant="hero" size="xl">
               Request Demo <ArrowRight className="size-4" />
