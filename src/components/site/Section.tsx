@@ -23,13 +23,14 @@ export function SectionHeader({
   return (
     <div className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight md:text-[44px] md:leading-[1.05]">
+      <h2 className="mt-4 text-balance text-[28px] font-semibold leading-[1.1] tracking-tight sm:text-[34px] md:text-[40px] lg:text-[44px] lg:leading-[1.05]">
         {title}
       </h2>
-      {sub && <p className="mt-4 text-pretty text-[15px] leading-relaxed text-muted-foreground md:text-base">{sub}</p>}
+      {sub && <p className="mt-3 text-pretty text-[14px] leading-relaxed text-muted-foreground sm:mt-4 sm:text-[15px] md:text-base">{sub}</p>}
     </div>
   );
 }
+
 
 export function Section({
   id,
