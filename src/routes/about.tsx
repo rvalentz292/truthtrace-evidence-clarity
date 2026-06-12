@@ -44,6 +44,7 @@ function About() {
         <Principles />
         <HumanReview />
         <WhoWeServe />
+        <IntellectualProperty />
         <Future />
         <FinalCta />
         <Footer />
