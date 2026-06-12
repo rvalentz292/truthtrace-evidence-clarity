@@ -81,14 +81,15 @@ function Hero() {
             citation-bound timelines, and attorney-reviewable evidence packets.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button variant="hero" size="xl">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button variant="hero" size="xl" className="w-full sm:w-auto">
               Request Demo <ArrowRight className="size-4" />
             </Button>
-            <Button variant="wire" size="xl" asChild>
+            <Button variant="wire" size="xl" asChild className="w-full sm:w-auto">
               <a href="#workspace">Explore the Workspace</a>
             </Button>
           </div>
+
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
             <span className="inline-flex items-center gap-1.5"><Lock className="size-3" /> chain-of-custody</span>
             <span className="text-border">·</span>
