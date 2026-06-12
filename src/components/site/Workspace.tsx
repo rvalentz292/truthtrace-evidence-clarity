@@ -226,7 +226,7 @@ export function Workspace() {
           </section>
 
           {/* RIGHT — Inspector */}
-          <aside className="col-span-12 lg:col-span-3 bg-background/30">
+          <aside className={`col-span-12 lg:col-span-3 bg-background/30 ${tab === "inspector" ? "block" : "hidden"} lg:block`}>
             <PanelHeader icon={ShieldCheck} title="Evidence Inspector" right={<span className="font-mono text-[10px] text-success">reviewable</span>} />
 
             <div className="space-y-3 p-3">
