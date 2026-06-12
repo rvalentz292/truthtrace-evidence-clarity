@@ -61,7 +61,7 @@ function Home() {
 function Hero() {
   return (
     <Section className="!pt-12 sm:!pt-16 md:!pt-24 !pb-12 sm:!pb-16">
-      <div className="grid items-end gap-10 lg:grid-cols-12">
+      <div className="grid items-center gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <Eyebrow>The Forensic Evidence Intelligence Layer for Family Law</Eyebrow>
           <h1 className="mt-5 text-balance text-[34px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] sm:leading-[1.02] md:text-[56px] lg:text-[64px]">
@@ -519,7 +519,7 @@ function FinalCta() {
               Request Early Access <ArrowRight className="size-4" />
             </Button>
             <Button variant="wire" size="xl" asChild className="w-full sm:w-auto">
-              <a href="#workspace">Explore the Workspace</a>
+              <a href="#how">See How It Works</a>
             </Button>
           </div>
           <div className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">

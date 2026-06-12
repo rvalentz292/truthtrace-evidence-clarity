@@ -14,7 +14,7 @@ import { Section, SectionHeader, Eyebrow } from "@/components/site/Section";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About TruthTrace — Building the Evidence Intelligence Category" },
+      { title: "About TruthTrace | Evidence Intelligence" },
       { name: "description", content: "TruthTrace transforms fragmented evidence into immutable EvidenceObjects, citation-bound timelines, and attorney-reviewable outputs. We're building forensic evidence intelligence." },
       { property: "og:title", content: "About TruthTrace — Forensic Evidence Intelligence" },
       { property: "og:description", content: "Why TruthTrace exists, what evidence entropy is, and the new category we're creating." },
