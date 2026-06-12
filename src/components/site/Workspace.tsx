@@ -71,38 +71,40 @@ const severityColor: Record<string, string> = {
 };
 
 export function Workspace() {
+  const [tab, setTab] = useState<"evidence" | "timeline" | "inspector">("timeline");
   return (
     <div className="relative">
       {/* App chrome */}
       <div className="relative overflow-hidden rounded-2xl border border-border bg-surface/40 shadow-[0_30px_80px_-30px_rgba(79,140,255,0.35)]">
         {/* Title bar */}
-        <div className="flex items-center justify-between border-b border-border bg-background/70 px-4 py-2.5">
-          <div className="flex items-center gap-3">
-            <div className="flex gap-1.5">
+        <div className="flex items-center justify-between gap-3 border-b border-border bg-background/70 px-3 py-2.5 sm:px-4">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="hidden gap-1.5 sm:flex">
               <span className="size-2.5 rounded-full bg-muted-foreground/30" />
               <span className="size-2.5 rounded-full bg-muted-foreground/30" />
               <span className="size-2.5 rounded-full bg-muted-foreground/30" />
             </div>
-            <div className="ml-2 font-mono text-[11px] text-muted-foreground">
-              truthtrace.app / case · <span className="text-foreground/80">smith-v-smith-2024</span>
+            <div className="truncate font-mono text-[11px] text-muted-foreground sm:ml-2">
+              <span className="hidden sm:inline">truthtrace.app / case · </span>
+              <span className="text-foreground/80">smith-v-smith-2024</span>
             </div>
           </div>
-          <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:flex">
+          <div className="hidden shrink-0 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:flex">
             <span className="size-1.5 rounded-full bg-success shadow-[0_0_8px_var(--success)] pulse-soft" />
             workspace · live
           </div>
         </div>
 
         {/* Toolbar */}
-        <div className="flex items-center gap-3 border-b border-border bg-background/40 px-4 py-2 text-xs">
-          <div className="flex items-center gap-1.5 rounded-md border border-border bg-surface/60 px-2 py-1 text-muted-foreground">
-            <Search className="size-3.5" />
-            <span className="font-mono">actor:"co-parent" AND tag:schedule</span>
+        <div className="flex flex-wrap items-center gap-2 border-b border-border bg-background/40 px-3 py-2 text-xs sm:px-4">
+          <div className="flex min-w-0 max-w-full items-center gap-1.5 rounded-md border border-border bg-surface/60 px-2 py-1 text-muted-foreground">
+            <Search className="size-3.5 shrink-0" />
+            <span className="truncate font-mono">actor:"co-parent" AND tag:schedule</span>
           </div>
-          <button className="flex items-center gap-1.5 rounded-md border border-border bg-surface/60 px-2 py-1 text-muted-foreground">
+          <button className="flex shrink-0 items-center gap-1.5 rounded-md border border-border bg-surface/60 px-2 py-1 text-muted-foreground">
             <Filter className="size-3.5" /> 6 filters
           </button>
-          <div className="ml-auto hidden items-center gap-3 font-mono text-[11px] text-muted-foreground md:flex">
+          <div className="ml-auto hidden shrink-0 items-center gap-3 font-mono text-[11px] text-muted-foreground md:flex">
             <span>7,380 items</span>
             <span className="text-border">·</span>
             <span>977 relevant</span>
@@ -111,10 +113,38 @@ export function Workspace() {
           </div>
         </div>
 
+        {/* Mobile tab switcher */}
+        <div role="tablist" aria-label="Workspace panels" className="flex gap-1 border-b border-border bg-background/40 p-1.5 lg:hidden">
+          {([
+            { id: "evidence",  label: "Evidence",  icon: Layers },
+            { id: "timeline",  label: "Timeline",  icon: CircleDot },
+            { id: "inspector", label: "Inspector", icon: ShieldCheck },
+          ] as const).map((t) => {
+            const active = tab === t.id;
+            return (
+              <button
+                key={t.id}
+                role="tab"
+                aria-selected={active}
+                onClick={() => setTab(t.id)}
+                className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-2 py-2 text-[12px] font-medium transition-colors ${
+                  active
+                    ? "bg-primary/15 text-foreground ring-1 ring-primary/30"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <t.icon className="size-3.5" />
+                {t.label}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Three panels */}
-        <div className="grid grid-cols-12 min-h-[600px]">
+        <div className="grid grid-cols-12 lg:min-h-[600px]">
           {/* LEFT — Sources */}
-          <aside className="col-span-12 lg:col-span-3 border-b lg:border-b-0 lg:border-r border-border bg-background/30">
+          <aside className={`col-span-12 lg:col-span-3 lg:border-r border-border bg-background/30 ${tab === "evidence" ? "block" : "hidden"} lg:block`}>
+
             <PanelHeader icon={Layers} title="Evidence Sources" />
             <div className="space-y-1 p-3">
               {sources.map((s) => (
