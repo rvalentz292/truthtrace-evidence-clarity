@@ -55,15 +55,15 @@ function About() {
 /* ---------- Hero ---------- */
 function Hero() {
   return (
-    <Section className="pt-20 md:pt-28 pb-12">
-      <div className="grid grid-cols-12 gap-10 items-center">
+    <Section className="!pt-12 sm:!pt-20 md:!pt-28 !pb-10 sm:!pb-12">
+      <div className="grid grid-cols-12 gap-8 items-center lg:gap-10">
         <div className="col-span-12 lg:col-span-7">
           <Eyebrow>About TruthTrace</Eyebrow>
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-[64px] md:leading-[1.02]"
+            className="mt-5 text-balance text-[36px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] md:text-[56px] lg:text-[64px] lg:leading-[1.02]"
           >
             <span className="text-gradient">We believe the truth is often</span>
             <br />
@@ -73,7 +73,7 @@ function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="mt-6 max-w-2xl text-pretty text-[15px] leading-relaxed text-muted-foreground md:text-[17px]"
+            className="mt-5 max-w-2xl text-pretty text-[14px] leading-relaxed text-muted-foreground sm:text-[15px] md:text-[17px]"
           >
             TruthTrace was created to reduce <span className="text-foreground">evidence entropy</span> — transforming fragmented evidence into immutable <span className="text-foreground">EvidenceObjects</span>, citation-bound timelines, and attorney-reviewable outputs.
           </motion.p>
@@ -82,23 +82,23 @@ function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="mt-8 flex flex-wrap items-center gap-3"
+            className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
           >
-            <Button variant="hero" size="lg">Request Demo <ArrowRight /></Button>
-            <Button variant="wire" size="lg" asChild>
+            <Button variant="hero" size="lg" className="w-full sm:w-auto">Request Demo <ArrowRight /></Button>
+            <Button variant="wire" size="lg" asChild className="w-full sm:w-auto">
               <Link to="/">Explore Platform</Link>
             </Button>
           </motion.div>
 
-          <div className="mt-10 grid grid-cols-3 gap-4 max-w-xl">
+          <div className="mt-8 grid grid-cols-3 gap-2 max-w-xl sm:gap-4">
             {[
               { k: "Deterministic", v: "ingest" },
               { k: "Citation-bound", v: "findings" },
               { k: "Attorney-reviewable", v: "outputs" },
             ].map((s) => (
-              <div key={s.k} className="rounded-md border border-border/70 bg-surface/40 p-3">
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{s.k}</div>
-                <div className="mt-1 text-sm text-foreground">{s.v}</div>
+              <div key={s.k} className="rounded-md border border-border/70 bg-surface/40 p-2.5 sm:p-3">
+                <div className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground sm:text-[10px] sm:tracking-[0.18em]">{s.k}</div>
+                <div className="mt-1 text-xs text-foreground sm:text-sm">{s.v}</div>
               </div>
             ))}
           </div>
@@ -112,6 +112,7 @@ function Hero() {
     </Section>
   );
 }
+
 
 function HeroVisual() {
   // Abstract fragments flowing into structured nodes

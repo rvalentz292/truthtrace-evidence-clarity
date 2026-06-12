@@ -65,29 +65,31 @@ function Home() {
 
 function Hero() {
   return (
-    <Section className="!pt-16 md:!pt-24 !pb-16">
+    <Section className="!pt-12 sm:!pt-16 md:!pt-24 !pb-12 sm:!pb-16">
       <div className="grid items-end gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <Eyebrow>Forensic Evidence Intelligence</Eyebrow>
-          <h1 className="mt-6 text-balance text-[44px] font-semibold leading-[1.02] tracking-tight md:text-[68px]">
+          <h1 className="mt-5 text-balance text-[36px] font-semibold leading-[1.05] tracking-tight sm:text-[44px] sm:leading-[1.02] md:text-[56px] lg:text-[68px]">
             <span className="text-gradient">Stop Drowning In Evidence.</span>
           </h1>
-          <h2 className="mt-4 text-balance text-2xl font-medium tracking-tight text-foreground/85 md:text-[28px]">
+          <h2 className="mt-4 text-balance text-lg font-medium tracking-tight text-foreground/85 sm:text-xl md:text-[28px]">
             Evidence Entropy becomes <span className="text-gradient-primary">attorney-reviewable clarity</span>.
           </h2>
-          <p className="mt-6 max-w-2xl text-pretty text-[15px] leading-relaxed text-muted-foreground md:text-base">
+          <p className="mt-5 max-w-2xl text-pretty text-[14px] leading-relaxed text-muted-foreground sm:text-[15px] md:text-base">
             TruthTrace transforms fragmented texts, emails, recordings, screenshots, PDFs, court
             filings, and exports into immutable <span className="text-foreground">EvidenceObjects</span>,
             citation-bound timelines, and attorney-reviewable evidence packets.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button variant="hero" size="xl">
+
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button variant="hero" size="xl" className="w-full sm:w-auto">
               Request Demo <ArrowRight className="size-4" />
             </Button>
-            <Button variant="wire" size="xl" asChild>
+            <Button variant="wire" size="xl" asChild className="w-full sm:w-auto">
               <a href="#workspace">Explore the Workspace</a>
             </Button>
           </div>
+
           <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
             <span className="inline-flex items-center gap-1.5"><Lock className="size-3" /> chain-of-custody</span>
             <span className="text-border">·</span>
@@ -285,7 +287,7 @@ function WhatItDoes() {
 function WorkspaceSection() {
   return (
     <section id="workspace" className="relative">
-      <div className="mx-auto max-w-7xl px-6 pt-24">
+      <div className="mx-auto max-w-7xl px-5 pt-16 sm:px-6 sm:pt-20 md:pt-24">
         <SectionHeader
           eyebrow="The Workspace"
           title={<>Evidence becomes timeline. <br className="hidden md:block" />Timeline becomes <span className="text-gradient-primary">findings</span>.</>}
@@ -293,7 +295,7 @@ function WorkspaceSection() {
         />
       </div>
 
-      <div className="mx-auto mt-12 max-w-7xl px-6 pb-24">
+      <div className="mx-auto mt-10 max-w-7xl px-5 pb-16 sm:px-6 sm:mt-12 sm:pb-20 md:pb-24">
         <Workspace />
         <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-3">
           {[
@@ -309,6 +311,7 @@ function WorkspaceSection() {
         </div>
       </div>
     </section>
+
   );
 }
 
@@ -501,12 +504,13 @@ function MultipleViews() {
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-start gap-4 rounded-md border border-border bg-background/40 px-4 py-3"
+                  className="flex flex-col gap-2 rounded-md border border-border bg-background/40 px-4 py-3 sm:flex-row sm:items-start sm:gap-4"
                 >
-                  <div className="w-44 shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">{r.k}</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground sm:w-44 sm:shrink-0">{r.k}</div>
                   <div className="text-sm text-foreground/90">{r.v}</div>
                 </motion.div>
               ))}
+
             </div>
           </div>
         </div>
