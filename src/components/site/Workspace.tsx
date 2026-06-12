@@ -256,7 +256,7 @@ export function Workspace() {
               <div className="rounded-md border border-border bg-surface/40 p-3">
                 <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Source excerpt</div>
                 <blockquote className="mt-2 border-l-2 border-primary/60 pl-2.5 text-[12px] italic text-foreground/90">
-                  "We never agreed to that pickup. Don't tell your attorney we did."
+                  Source excerpts remain attached to the originating EvidenceObject for professional review.
                 </blockquote>
                 <div className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground">
                   <Quote className="size-3" /> cite/EO-2024-03-18-7f3a#t=00:18
@@ -266,19 +266,14 @@ export function Workspace() {
               <div className="rounded-md border border-border bg-surface/40 p-3">
                 <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Citations</div>
                 <div className="mt-2 space-y-1.5">
-                  {[
-                    { id: "EO-…7f3a#t=00:18", w: 92 },
-                    { id: "EO-…b210 msg/4421", w: 78 },
-                    { id: "EO-…ce21 cal/event", w: 64 },
-                    { id: "EO-…44a8 email/322", w: 51 },
-                  ].map((c) => (
-                    <div key={c.id} className="space-y-1">
+                  {["Audio excerpt", "Message thread", "Calendar event", "Email record"].map((citation) => (
+                    <div key={citation} className="space-y-1">
                       <div className="flex items-center justify-between font-mono text-[10px]">
-                        <span className="text-foreground/90">{c.id}</span>
-                        <span className="text-muted-foreground">{c.w}%</span>
+                        <span className="text-foreground/90">{citation}</span>
+                        <span className="text-success">linked</span>
                       </div>
                       <div className="h-1 rounded-full bg-border/60">
-                        <div className="h-full rounded-full bg-gradient-to-r from-primary to-accent" style={{ width: `${c.w}%` }} />
+                        <div className="h-full w-full rounded-full bg-gradient-to-r from-primary to-accent" />
                       </div>
                     </div>
                   ))}
@@ -293,8 +288,8 @@ export function Workspace() {
                   </span>
                 </div>
                 <div className="mt-2 flex items-center justify-between text-[11px]">
-                  <span className="text-muted-foreground">Confidence</span>
-                  <span className="font-mono text-foreground">0.93</span>
+                  <span className="text-muted-foreground">Human review</span>
+                  <span className="font-mono text-foreground">required</span>
                 </div>
                 <div className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground">
                   chain-of-custody <ChevronRight className="size-3" /> verified
