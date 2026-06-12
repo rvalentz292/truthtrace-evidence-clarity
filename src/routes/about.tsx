@@ -4,7 +4,7 @@ import {
   ArrowRight, ArrowDown, ShieldCheck, GitBranch, Quote, Hash, ScrollText,
   Package, FileCheck2, Layers, Eye, UserRound, Briefcase, Gavel, Users,
   Scale, Building2, Search, FileSearch, Sparkles, Check, X, Compass,
-  Workflow, Lock, Microscope, Network,
+  Workflow, Lock, Microscope, Network, Fingerprint, Cpu,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
