@@ -30,9 +30,9 @@ function PrivateDemo() {
       </div>
       <main className="relative">
         <div className="border-b border-primary/25 bg-primary/[0.07] px-5 py-3">
-          <div className="mx-auto flex max-w-7xl items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/80">
+          <div className="mx-auto grid max-w-7xl gap-1 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/80 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-x-2">
             <LockKeyhole className="size-3.5 shrink-0 text-primary" />
-            Private demo environment. Not for public distribution.
+            <span><strong className="font-medium text-foreground">Private Demo Environment</strong><span className="mx-2 text-border">·</span>Not For Public Distribution</span>
           </div>
         </div>
 
