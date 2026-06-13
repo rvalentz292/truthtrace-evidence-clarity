@@ -86,7 +86,7 @@ export function Workspace() {
             </div>
             <div className="truncate font-mono text-[11px] text-muted-foreground sm:ml-2">
               <span className="hidden sm:inline">truthtrace.app / case · </span>
-              <span className="text-foreground/80">smith-v-smith-2024</span>
+              <span className="text-foreground/80">illustrative-case-alpha</span>
             </div>
           </div>
           <div className="hidden shrink-0 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:flex">
@@ -284,7 +284,7 @@ export function Workspace() {
                 <div className="flex items-center justify-between">
                   <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Review status</div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-success/15 px-2 py-0.5 font-mono text-[10px] text-success ring-1 ring-success/30">
-                    <Hash className="size-3" /> attorney-ready
+                    <Hash className="size-3" /> reviewable
                   </span>
                 </div>
                 <div className="mt-2 flex items-center justify-between text-[11px]">
