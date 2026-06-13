@@ -214,9 +214,9 @@ function PrivateStatus() {
           <LockKeyhole className="size-5 text-primary" />
         </div>
         <div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Controlled product proof</div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-success">Controlled pilots underway</div>
           <p className="mt-3 max-w-4xl text-lg leading-relaxed text-foreground/90">
-            TruthTrace’s full workspace is maintained as a private demo environment for professional, pilot, investor, and IP-review contexts.
+            TruthTrace is currently working with pilot participants in controlled review environments. The full workspace remains private for pilot, professional, investor, and IP-review contexts.
           </p>
         </div>
       </div>
@@ -268,7 +268,7 @@ function FinalStatus() {
     <section className="relative border-t border-border bg-surface/25">
       <Section className="text-center">
         <h2 className="mx-auto max-w-4xl text-balance text-[30px] font-semibold leading-tight tracking-tight sm:text-[44px]">Built for evidence clarity, professional review, and high-conflict custody documentation.</h2>
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">TruthTrace is currently preparing private pilot and professional review workflows.</p>
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">TruthTrace is currently conducting controlled pilots and professional product reviews.</p>
       </Section>
     </section>
   );
