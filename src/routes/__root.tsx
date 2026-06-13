@@ -86,8 +86,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "TruthTrace | Forensic Evidence Intelligence" },
       { name: "twitter:description", content: "The evidence layer between raw family law case materials and professional review." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f4a0ec22-70e5-4855-8bc9-3f6e6a249c32/id-preview-21bd51bc--27174261-3589-4c48-bd32-0375b044b3d9.lovable.app-1781230150746.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f4a0ec22-70e5-4855-8bc9-3f6e6a249c32/id-preview-21bd51bc--27174261-3589-4c48-bd32-0375b044b3d9.lovable.app-1781230150746.png" },
     ],
     links: [
       {
