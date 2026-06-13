@@ -4,11 +4,12 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
-  { label: "Workspace", to: "/" as const, hash: "workspace" },
+  { label: "Home", to: "/" as const },
   { label: "How It Works", to: "/" as const, hash: "how" },
+  { label: "For Parents", to: "/" as const, hash: "parents" },
+  { label: "For Attorneys", to: "/" as const, hash: "attorneys" },
+  { label: "For Evaluators", to: "/" as const, hash: "evaluators" },
   { label: "Technology", to: "/" as const, hash: "technology" },
-  { label: "Trust", to: "/" as const, hash: "trust" },
-  { label: "About", to: "/about" as const },
 ];
 
 export function Nav() {
@@ -59,21 +60,17 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" className="hidden lg:inline-flex">
-            Sign in
-          </Button>
-          <Button variant="hero" size="sm" className="hidden sm:inline-flex">
-            Request Early Access
-          </Button>
-          <button
+          <Button
+            variant="wire"
+            size="icon"
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-foreground transition-colors hover:bg-surface md:hidden"
+            className="md:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -107,14 +104,6 @@ export function Nav() {
               </Link>
             ),
           )}
-          <div className="mt-2 flex flex-col gap-2 border-t border-border/60 pt-3">
-            <Button variant="wire" size="lg" className="w-full justify-center">
-              Sign in
-            </Button>
-            <Button variant="hero" size="lg" className="w-full justify-center">
-              Request Early Access
-            </Button>
-          </div>
         </nav>
       </div>
     </header>
