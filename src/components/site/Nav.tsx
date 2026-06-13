@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button";
 const links = [
   { label: "Home", to: "/" as const },
   { label: "How It Works", to: "/" as const, hash: "how" },
-  { label: "For Parents", to: "/" as const, hash: "parents" },
-  { label: "For Attorneys", to: "/" as const, hash: "attorneys" },
-  { label: "For Evaluators", to: "/" as const, hash: "evaluators" },
-  { label: "Technology", to: "/" as const, hash: "technology" },
+  { label: "Who It Serves", to: "/" as const, hash: "audiences" },
+  { label: "Trust", to: "/" as const, hash: "trust" },
+  { label: "Technology", to: "/technology" as const },
 ];
 
 export function Nav() {

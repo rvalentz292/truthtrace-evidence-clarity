@@ -16,6 +16,7 @@ import {
 
 import { Nav } from "@/components/site/Nav";
 import { Eyebrow, Section, SectionHeader } from "@/components/site/Section";
+import { HomePage } from "@/components/site/HomePage";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,7 +35,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  component: Home,
+  component: HomePage,
 });
 
 const workflow = [
