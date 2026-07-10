@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import {
   Inbox, Fingerprint, Calendar, Quote, FileCheck2,
-  ChevronDown, CheckCircle2,
+  ChevronDown, Circle,
 } from "lucide-react";
 
 const flow = [
@@ -14,7 +14,7 @@ const flow = [
   {
     icon: Fingerprint,
     label: "Create EvidenceObjects",
-    sub: "Immutable source identity · SHA-256",
+    sub: "Source identity · SHA-256 fingerprint",
     tone: "primary",
   },
   {
@@ -31,7 +31,7 @@ const flow = [
   },
   {
     icon: FileCheck2,
-    label: "Generate Packet",
+    label: "Prepare Review Packet",
     sub: "Inventory · findings · provenance · limitations",
     tone: "accent",
   },
@@ -41,30 +41,31 @@ const chips = [
   "Hash Created",
   "Evidence Linked",
   "Timeline Built",
-  "Citations Verified",
-  "Packet Generated",
+  "Citations Linked",
+  "Review Packet Prepared",
 ];
 
 export function HeroPipeline() {
   return (
-    <div className="relative w-full overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-surface/70 to-background/40 p-5 sm:p-7 md:p-9">
+    <MotionConfig reducedMotion="user">
+      <div className="relative w-full min-w-0 overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-surface/70 to-background/40 p-4 sm:p-7 md:p-9">
       {/* Backdrop */}
       <div className="pointer-events-none absolute inset-0 grid-bg radial-fade opacity-50" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_55%_at_50%_-10%,color-mix(in_oklab,var(--primary)_18%,transparent),transparent)]" />
 
       {/* Header strip */}
-      <div className="relative mb-6 flex items-center justify-between border-b border-border/60 pb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+      <div className="relative mb-6 flex flex-col gap-2 border-b border-border/60 pb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:tracking-[0.22em]">
         <div className="flex min-w-0 items-center gap-2">
-          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-success shadow-[0_0_8px_var(--success)] pulse-soft" />
-          <span className="truncate">Deterministic Evidence Pipeline</span>
+          <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground/60" />
+          <span>Structured Evidence Workflow</span>
         </div>
-        <div className="shrink-0 text-foreground/60">v0.42</div>
+        <div className="text-foreground/60">Illustrative workflow</div>
       </div>
 
       {/* Flow */}
-      <div className="relative flex flex-col items-stretch gap-2.5">
+      <ol className="relative flex flex-col items-stretch gap-2.5">
         {flow.map((s, i) => (
-          <div key={s.label} className="flex flex-col items-stretch">
+          <li key={s.label} className="flex flex-col items-stretch">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -89,6 +90,7 @@ export function HeroPipeline() {
                 ].join(" ")}
               >
                 <s.icon
+                  aria-hidden
                   className={[
                     "size-5",
                     s.tone === "accent"
@@ -101,7 +103,7 @@ export function HeroPipeline() {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="truncate text-sm font-medium text-foreground sm:text-[15px]">
+                  <span className="text-sm font-medium leading-snug text-foreground sm:text-[15px]">
                     {s.label}
                   </span>
                   <span className="hidden shrink-0 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground sm:inline">
@@ -112,9 +114,9 @@ export function HeroPipeline() {
                   {s.sub}
                 </div>
               </div>
-              <div className="hidden shrink-0 items-center gap-1.5 font-mono text-[10px] text-success sm:flex">
-                <span className="size-1.5 rounded-full bg-success shadow-[0_0_6px_var(--success)]" />
-                ok
+              <div className="hidden shrink-0 items-center gap-1.5 font-mono text-[10px] text-muted-foreground sm:flex">
+                <span aria-hidden className="size-1.5 rounded-full bg-muted-foreground/50" />
+                stage
               </div>
             </motion.div>
 
@@ -129,9 +131,9 @@ export function HeroPipeline() {
                 <ChevronDown className="size-3.5 text-muted-foreground/60" />
               </motion.div>
             )}
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
 
       {/* Validation chips */}
       <motion.div
@@ -141,20 +143,21 @@ export function HeroPipeline() {
         className="relative mt-7 border-t border-border/60 pt-5"
       >
         <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          Chain-of-custody validation
+          Source-linkage status
         </div>
         <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {chips.map((c) => (
             <span
               key={c}
-              className="inline-flex items-center gap-1.5 rounded-full border border-success/30 bg-success/10 px-2.5 py-1 text-[11px] font-medium text-success"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-foreground/5 px-2.5 py-1 text-[11px] font-medium text-foreground/75"
             >
-              <CheckCircle2 className="size-3" />
+              <Circle aria-hidden className="size-2.5 fill-current opacity-60" />
               {c}
             </span>
           ))}
         </div>
       </motion.div>
-    </div>
+      </div>
+    </MotionConfig>
   );
 }

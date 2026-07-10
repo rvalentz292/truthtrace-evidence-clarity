@@ -1,7 +1,9 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Briefcase, Check, Eye, Fingerprint, GitBranch, Layers3, Quote, ShieldCheck, UserCheck, UserRound } from "lucide-react";
 import type { ReactNode } from "react";
 
+import { HeroPipeline } from "@/components/site/HeroPipeline";
 import { Nav } from "@/components/site/Nav";
 import { Eyebrow, Section, SectionHeader } from "@/components/site/Section";
 
@@ -35,12 +37,16 @@ function Background() {
 }
 
 function Hero() {
-  return <Section className="!pb-16 !pt-20 sm:!pb-24 sm:!pt-28 lg:!pb-28 lg:!pt-36">
-    <div className="max-w-6xl"><Eyebrow>Forensic Evidence Intelligence for Family Law</Eyebrow>
-      <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mt-6 max-w-5xl text-balance text-[42px] font-semibold leading-[1.01] tracking-tight sm:text-[60px] lg:text-[78px]">Turn Evidence Chaos Into <span className="text-gradient-primary">Court-Ready Clarity.</span></motion.h1>
-      <p className="mt-7 max-w-4xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-xl">TruthTrace helps transform messages, emails, screenshots, recordings, and documents into structured timelines, source-linked findings, and attorney-reviewable evidence packets.</p>
-      <div className="mt-10 border-y border-border py-5"><div className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/80 sm:text-[11px]">{trustStrip.map((item, index) => <span key={item} className="flex items-center gap-5">{index > 0 && <span className="hidden size-1 rounded-full bg-primary sm:block" />}{item}</span>)}</div></div>
-      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Patent-pending forensic evidence processing technology.</p>
+  return <Section className="!pb-16 !pt-20 sm:!pb-24 sm:!pt-28 lg:!pb-28 lg:!pt-32">
+    <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12">
+      <div className="min-w-0"><Eyebrow>Forensic Evidence Intelligence for Family Law</Eyebrow>
+        <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mt-6 max-w-4xl text-balance text-[38px] font-semibold leading-[1.03] tracking-tight sm:text-[52px] lg:text-[62px]">Turn Evidence Chaos Into <span className="text-gradient-primary">Review-Ready Clarity.</span></motion.h1>
+        <p className="mt-7 max-w-3xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">TruthTrace helps transform messages, emails, screenshots, recordings, and documents into structured timelines, source-linked findings, and attorney-reviewable evidence packets.</p>
+        <Link to="/" hash="how" className="mt-8 inline-flex min-h-11 items-center justify-center rounded-md border border-primary/50 bg-primary/10 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">See How It Works</Link>
+        <div className="mt-10 border-y border-border py-5"><div className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/80 sm:text-[11px]">{trustStrip.map((item, index) => <span key={item} className="flex items-center gap-5">{index > 0 && <span aria-hidden className="hidden size-1 rounded-full bg-primary sm:block" />}{item}</span>)}</div></div>
+        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Evidence-focused processing technology.</p>
+      </div>
+      <div className="min-w-0"><HeroPipeline /></div>
     </div>
   </Section>;
 }
@@ -63,17 +69,17 @@ function HowItWorks() {
 }
 
 function LaborMetric() {
-  return <MetricShell eyebrow="Professional Efficiency" title="68% Reduction In Evidence Processing Labor"><div className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-[1fr_1fr_0.8fr]"><MetricCell label="Traditional Review" value="1,090" unit="Hours" /><MetricCell label="TruthTrace" value="349" unit="Hours" /><MetricCell label="Labor Reduction" value="68%" unit="Reduction" accent /></div></MetricShell>;
+  return <MetricShell eyebrow="Professional Efficiency" title="Designed To Reduce Evidence Processing Labor"><div className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2"><WorkflowCell label="Traditional Workflow" body="Manual review, sorting, timeline assembly, and repeated exhibit preparation" /><WorkflowCell label="TruthTrace Workflow" body="Structured intake, reusable evidence identity, timeline normalization, and source-linked review" accent /></div></MetricShell>;
 }
 
-function MetricCell({label,value,unit,accent=false}:{label:string;value:string;unit:string;accent?:boolean}) { return <div className={`min-h-48 p-6 sm:p-8 ${accent ? "bg-primary/10" : "bg-background"}`}><div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{label}</div><div className={`mt-10 text-5xl font-semibold tracking-tight sm:text-6xl ${accent ? "text-primary" : "text-foreground"}`}>{value}</div><div className="mt-2 text-sm text-muted-foreground">{unit}</div></div>; }
+function WorkflowCell({label,body,accent=false}:{label:string;body:string;accent?:boolean}) { return <div className={`min-h-48 p-6 sm:p-8 ${accent ? "bg-primary/10" : "bg-background"}`}><div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{label}</div><p className={`mt-10 max-w-xl text-xl font-medium leading-relaxed tracking-tight sm:text-2xl ${accent ? "text-foreground" : "text-foreground/85"}`}>{body}</p></div>; }
 
 function TechnologyPillars() {
   return <section className="relative border-y border-border bg-surface/20"><Section><SectionHeader eyebrow="Technology Pillars" title={<>Infrastructure built for <span className="text-gradient-primary">evidence integrity.</span></>} sub="The public view focuses on why the system matters—not the mechanics behind it." /><div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-5">{pillars.map(item => <article key={item.title} className="min-h-64 bg-background p-6"><item.icon className="size-5 text-primary"/><h3 className="mt-8 text-lg font-semibold tracking-tight">{item.title}</h3><p className="mt-4 text-sm leading-relaxed text-muted-foreground">{item.body}</p></article>)}</div></Section></section>;
 }
 
 function ProcessingMetric() {
-  return <MetricShell eyebrow="Incremental Evidence Processing" title="Built For Incremental Evidence Processing"><div className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-[1fr_1fr_0.8fr]"><MetricCell label="Traditional Systems" value="28,750" unit="Processing Events" /><MetricCell label="TruthTrace" value="11,500" unit="Processing Events" /><MetricCell label="Efficiency" value="60%" unit="Less Reprocessing" accent /></div><p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">TruthTrace reuses validated work instead of repeatedly reprocessing evidence.</p></MetricShell>;
+  return <MetricShell eyebrow="Incremental Evidence Processing" title="Designed For Less Reprocessing"><div className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2"><WorkflowCell label="Traditional Systems" body="New evidence can require repeated review, sorting, and timeline assembly across the full record." /><WorkflowCell label="TruthTrace Workflow" body="Incremental processing carries forward structured evidence identity and timeline context as new records are added." accent /></div><p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">The workflow is designed to reuse existing structure and focus review on newly added evidence.</p></MetricShell>;
 }
 
 function Audiences() {
@@ -85,11 +91,11 @@ function Trust() {
 }
 
 function Patent() {
-  return <section className="relative border-y border-border bg-surface/20"><Section><div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center"><div><Eyebrow>Patent-Pending Technology</Eyebrow><h2 className="mt-5 text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-5xl">Built Around Evidence Identity And Provenance</h2></div><p className="border-l border-primary/45 pl-6 text-base leading-relaxed text-muted-foreground sm:text-lg">TruthTrace incorporates patent-pending technology focused on evidence identity, provenance, deterministic processing, and citation-bound outputs.</p></div></Section></section>;
+  return <section className="relative border-y border-border bg-surface/20"><Section><div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center"><div><Eyebrow>Evidence-Focused Technology</Eyebrow><h2 className="mt-5 text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-5xl">Built Around Evidence Identity And Provenance</h2></div><p className="border-l border-primary/45 pl-6 text-base leading-relaxed text-muted-foreground sm:text-lg">TruthTrace uses an architecture focused on evidence identity, provenance, consistent processing, and source-linked outputs.</p></div></Section></section>;
 }
 
 function Status() {
-  return <Section><div className="border-y border-border py-10 sm:py-14"><div className="font-mono text-[10px] uppercase tracking-[0.18em] text-success">Private Pilots Active</div><h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Current Status</h2><p className="mt-5 max-w-4xl text-base leading-relaxed text-muted-foreground sm:text-lg">TruthTrace is currently operating in private pilot environments focused on evidence organization, timeline generation, source-linked findings, and professional review workflows.</p></div></Section>;
+  return <Section><div className="border-y border-border py-10 sm:py-14"><div className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Controlled Product Reviews</div><h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl">Current Status</h2><p className="mt-5 max-w-4xl text-base leading-relaxed text-muted-foreground sm:text-lg">TruthTrace supports controlled product reviews focused on evidence organization, timeline generation, source-linked findings, and professional review workflows.</p></div></Section>;
 }
 
 function Footer() { return <footer className="relative border-t border-border px-5 py-8"><div className="mx-auto flex max-w-7xl flex-col gap-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between"><span>© {new Date().getFullYear()} TruthTrace</span><span>Forensic Evidence Intelligence · Professional review required</span></div></footer>; }
