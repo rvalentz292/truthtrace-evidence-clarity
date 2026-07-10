@@ -292,7 +292,7 @@ export function Workspace() {
                   <span className="font-mono text-foreground">required</span>
                 </div>
                 <div className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground">
-                  chain-of-custody <ChevronRight className="size-3" /> verified
+                  source history <ChevronRight className="size-3" /> available for review
                 </div>
               </div>
             </div>

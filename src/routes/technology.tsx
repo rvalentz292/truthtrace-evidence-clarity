@@ -63,13 +63,13 @@ function TechnologyPage() {
         <Section>
           <div className="grid gap-8 border-y border-border py-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Patent-Pending Technology</div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Evidence-Focused Technology</div>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight">Built for defensible review.</h2>
             </div>
             <div className="flex gap-4">
               <CheckCircle2 className="mt-1 size-5 shrink-0 text-success" />
               <p className="max-w-3xl text-base leading-relaxed text-muted-foreground">
-                TruthTrace incorporates patent-pending technology focused on evidence identity, provenance, deterministic processing, and citation-bound outputs. Detailed mechanics remain within controlled review environments.
+                TruthTrace uses an architecture focused on evidence identity, provenance, consistent processing, and source-linked outputs.
               </p>
             </div>
           </div>

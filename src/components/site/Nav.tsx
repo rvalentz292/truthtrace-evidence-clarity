@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
   { label: "Home", to: "/" as const },
-  { label: "How It Works", to: "/" as const, hash: "how" },
+  { label: "See How It Works", to: "/" as const, hash: "how" },
   { label: "Who It Serves", to: "/" as const, hash: "audiences" },
   { label: "Trust", to: "/" as const, hash: "trust" },
   { label: "Technology", to: "/technology" as const },
@@ -13,13 +13,32 @@ const links = [
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        requestAnimationFrame(() => menuButtonRef.current?.focus());
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
+
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [open]);
+
+  function closeMenu() {
+    setOpen(false);
+    requestAnimationFrame(() => menuButtonRef.current?.focus());
+  }
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
@@ -34,7 +53,7 @@ export function Nav() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
           {links.map((l) =>
             l.hash ? (
               <Link
@@ -60,33 +79,34 @@ export function Nav() {
 
         <div className="flex items-center gap-2">
           <Button
+            ref={menuButtonRef}
             variant="wire"
             size="icon"
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
+            aria-controls="mobile-navigation"
+            onClick={() => open ? closeMenu() : setOpen(true)}
             className="md:hidden"
           >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            {open ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}
           </Button>
         </div>
       </div>
 
       {/* Mobile drawer */}
-      <div
-        className={`md:hidden overflow-hidden border-t border-border/60 bg-background/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out ${
-          open ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
-        }`}
+      {open && <div
+        id="mobile-navigation"
+        className="max-h-[80vh] overflow-hidden border-t border-border/60 bg-background/95 opacity-100 backdrop-blur-xl md:hidden"
       >
-        <nav className="flex flex-col gap-1 px-4 py-4">
+        <nav aria-label="Mobile primary" className="flex flex-col gap-1 px-4 py-4">
           {links.map((l) =>
             l.hash ? (
               <Link
                 key={l.label}
                 to={l.to}
                 hash={l.hash}
-                onClick={() => setOpen(false)}
+                onClick={closeMenu}
                 className="rounded-md px-3 py-3 text-[15px] text-foreground/90 hover:bg-surface"
               >
                 {l.label}
@@ -95,7 +115,7 @@ export function Nav() {
               <Link
                 key={l.label}
                 to={l.to}
-                onClick={() => setOpen(false)}
+                onClick={closeMenu}
                 className="rounded-md px-3 py-3 text-[15px] text-foreground/90 hover:bg-surface"
                 activeProps={{ className: "bg-surface text-foreground" }}
               >
@@ -104,7 +124,7 @@ export function Nav() {
             ),
           )}
         </nav>
-      </div>
+      </div>}
     </header>
   );
 }
