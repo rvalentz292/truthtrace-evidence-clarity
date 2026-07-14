@@ -1,0 +1,9 @@
+{
+  "name": "TruthTrace",
+  "short_name": "TruthTrace",
+  "description": "Forensic Evidence Intelligence for Family Law",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070a0f",
+  "theme_color": "#070a0f"
+}

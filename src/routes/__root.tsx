@@ -78,19 +78,48 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "TruthTrace | Forensic Evidence Intelligence" },
-      { name: "description", content: "TruthTrace is the forensic evidence intelligence layer for family law." },
+      {
+        name: "description",
+        content: "TruthTrace is the forensic evidence intelligence layer for family law.",
+      },
       { name: "author", content: "TruthTrace" },
+      { name: "theme-color", content: "#070a0f" },
       { property: "og:title", content: "TruthTrace | Forensic Evidence Intelligence" },
-      { property: "og:description", content: "The evidence layer between raw family law case materials and professional review." },
+      {
+        property: "og:description",
+        content:
+          "The evidence layer between raw family law case materials and professional review.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:image", content: "/og.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: "TruthTrace evidence chain from finding to original source identity",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "TruthTrace | Forensic Evidence Intelligence" },
-      { name: "twitter:description", content: "The evidence layer between raw family law case materials and professional review." },
+      {
+        name: "twitter:description",
+        content:
+          "The evidence layer between raw family law case materials and professional review.",
+      },
+      { name: "twitter:image", content: "/og.png" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "icon",
+        href: "/favicon.png",
+        type: "image/png",
+      },
+      {
+        rel: "manifest",
+        href: "/site.webmanifest",
       },
     ],
   }),

@@ -16,10 +16,26 @@ export const Route = createFileRoute("/private-demo")({
 });
 
 const proofPoints = [
-  { icon: Fingerprint, title: "Evidence identity", body: "Source identity and provenance remain available for controlled review." },
-  { icon: Quote, title: "Citation registry", body: "Findings remain bound to reviewable source excerpts and records." },
-  { icon: ShieldCheck, title: "Evidence inspector", body: "Review evidence context, source relationships, and status in one surface." },
-  { icon: FileCheck2, title: "Packet preview", body: "Preview structured materials prepared for attorney and professional review." },
+  {
+    icon: Fingerprint,
+    title: "Evidence identity",
+    body: "Source identity and provenance remain available for controlled review.",
+  },
+  {
+    icon: Quote,
+    title: "Citation registry",
+    body: "Findings remain bound to reviewable source excerpts and records.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Evidence inspector",
+    body: "Review evidence context, source relationships, and status in one surface.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Packet preview",
+    body: "Preview structured materials prepared for attorney and professional review.",
+  },
 ];
 
 function PrivateDemo() {
@@ -28,18 +44,25 @@ function PrivateDemo() {
       <div aria-hidden className="pointer-events-none fixed inset-0">
         <div className="absolute inset-0 grid-bg opacity-25" />
       </div>
-      <main className="relative">
+      <main id="main-content" className="relative" tabIndex={-1}>
         <div className="border-b border-primary/25 bg-primary/[0.07] px-5 py-3">
           <div className="mx-auto grid max-w-7xl gap-1 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/80 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-x-2">
             <LockKeyhole className="size-3.5 shrink-0 text-primary" />
-            <span><strong className="font-medium text-foreground">Private Demo Environment</strong><span className="mx-2 text-border">·</span>Not For Public Distribution</span>
+            <span>
+              <strong className="font-medium text-foreground">Private Demo Environment</strong>
+              <span className="mx-2 text-border">·</span>Not For Public Distribution
+            </span>
           </div>
         </div>
 
         <Section className="!pb-12 !pt-14 sm:!pt-20">
           <SectionHeader
             eyebrow="Controlled Product Review"
-            title={<>TruthTrace <span className="text-gradient-primary">workspace demonstration</span></>}
+            title={
+              <>
+                TruthTrace <span className="text-gradient-primary">workspace demonstration</span>
+              </>
+            }
             sub="Illustrative product proof for professional, pilot, investor, strategic-partner, and IP-review contexts. Content shown here is not case data and does not provide legal advice or custody recommendations."
           />
         </Section>
@@ -49,10 +72,16 @@ function PrivateDemo() {
         </section>
 
         <Section className="!pt-4">
-          <SectionHeader eyebrow="Review Surfaces" title="Controlled proof, separated from public positioning." />
+          <SectionHeader
+            eyebrow="Review Surfaces"
+            title="Controlled proof, separated from public positioning."
+          />
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {proofPoints.map((item) => (
-              <article key={item.title} className="min-h-52 rounded-xl border border-border bg-surface/40 p-6">
+              <article
+                key={item.title}
+                className="min-h-52 rounded-xl border border-border bg-surface/40 p-6"
+              >
                 <item.icon className="size-5 text-primary" />
                 <h2 className="mt-6 text-lg font-semibold tracking-tight">{item.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>

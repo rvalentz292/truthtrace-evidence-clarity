@@ -45,25 +45,25 @@
   --radius: 0.5rem;
 
   /* TruthTrace dark palette */
-  --background: oklch(0.13 0.012 250);          /* #05070A */
-  --foreground: oklch(0.97 0.004 250);          /* #F7F9FC */
-  --surface: oklch(0.17 0.014 250);             /* slight lift */
-  --surface-elevated: oklch(0.20 0.016 250);
+  --background: oklch(0.13 0.012 250); /* #05070A */
+  --foreground: oklch(0.97 0.004 250); /* #F7F9FC */
+  --surface: oklch(0.17 0.014 250); /* slight lift */
+  --surface-elevated: oklch(0.2 0.016 250);
   --card: oklch(0.16 0.014 250);
   --card-foreground: oklch(0.97 0.004 250);
   --popover: oklch(0.17 0.014 250);
   --popover-foreground: oklch(0.97 0.004 250);
 
-  --primary: oklch(0.68 0.18 258);              /* #4F8CFF */
+  --primary: oklch(0.68 0.18 258); /* #4F8CFF */
   --primary-foreground: oklch(0.13 0.012 250);
-  --accent: oklch(0.85 0.10 230);               /* #8FD3FF */
+  --accent: oklch(0.85 0.1 230); /* #8FD3FF */
   --accent-foreground: oklch(0.13 0.012 250);
-  --success: oklch(0.74 0.18 156);              /* #00D084 */
+  --success: oklch(0.74 0.18 156); /* #00D084 */
 
   --secondary: oklch(0.22 0.016 250);
   --secondary-foreground: oklch(0.97 0.004 250);
-  --muted: oklch(0.20 0.014 250);
-  --muted-foreground: oklch(0.68 0.014 250);    /* #9CA6B5 */
+  --muted: oklch(0.2 0.014 250);
+  --muted-foreground: oklch(0.68 0.014 250); /* #9CA6B5 */
 
   --destructive: oklch(0.62 0.22 25);
   --destructive-foreground: oklch(0.97 0 0);
@@ -81,7 +81,9 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
   html {
     color-scheme: dark;
     overflow-x: hidden;
@@ -96,20 +98,34 @@
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
-  img, svg, video, canvas { max-width: 100%; height: auto; }
-  ::selection { background: color-mix(in oklab, var(--primary) 35%, transparent); color: var(--foreground); }
-  :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 35%, transparent);
+    color: var(--foreground);
+  }
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
 }
-
 
 /* Utilities */
 @utility text-gradient {
@@ -127,14 +143,19 @@
 }
 
 @utility surface-panel {
-  background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 80%, transparent) 0%, color-mix(in oklab, var(--background) 80%, transparent) 100%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--surface) 80%, transparent) 0%,
+    color-mix(in oklab, var(--background) 80%, transparent) 100%
+  );
   border: 1px solid var(--border);
   backdrop-filter: blur(12px);
 }
 
 @utility glow-primary {
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--primary) 30%, transparent),
-              0 8px 40px -8px color-mix(in oklab, var(--primary) 40%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--primary) 30%, transparent),
+    0 8px 40px -8px color-mix(in oklab, var(--primary) 40%, transparent);
 }
 
 @utility grid-bg {
@@ -150,7 +171,9 @@
 }
 
 @keyframes flow-dash {
-  to { stroke-dashoffset: -24; }
+  to {
+    stroke-dashoffset: -24;
+  }
 }
 @utility flow-line {
   stroke-dasharray: 4 4;
@@ -158,28 +181,51 @@
 }
 
 @keyframes pulse-soft {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 @utility pulse-soft {
   animation: pulse-soft 2.4s ease-in-out infinite;
 }
 
 @keyframes scan {
-  0% { transform: translateY(-100%); opacity: 0; }
-  10%, 90% { opacity: 1; }
-  100% { transform: translateY(100%); opacity: 0; }
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 }
 @utility scan-line {
   animation: scan 4s ease-in-out infinite;
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 @utility shimmer-text {
-  background: linear-gradient(90deg, var(--muted-foreground) 0%, var(--foreground) 50%, var(--muted-foreground) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--muted-foreground) 0%,
+    var(--foreground) 50%,
+    var(--muted-foreground) 100%
+  );
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;

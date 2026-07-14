@@ -1,14 +1,29 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  MessageSquare, Mail, AudioLines, FileText, Camera, Database, Tag,
-  ShieldCheck, Hash, Quote, CircleDot, Search, Filter, ChevronRight,
+  MessageSquare,
+  Mail,
+  AudioLines,
+  FileText,
+  Camera,
+  Database,
+  Tag,
+  ShieldCheck,
+  Hash,
+  Quote,
+  CircleDot,
+  Search,
+  Filter,
+  ChevronRight,
   Layers,
 } from "lucide-react";
 
-
 type Source = {
-  id: string; icon: typeof MessageSquare; label: string; status: string; active?: boolean;
+  id: string;
+  icon: typeof MessageSquare;
+  label: string;
+  status: string;
+  active?: boolean;
 };
 
 const sources: Source[] = [
@@ -67,7 +82,7 @@ const events = [
 
 const severityColor: Record<string, string> = {
   high: "bg-primary/20 text-primary ring-primary/30",
-  med:  "bg-accent/15 text-accent ring-accent/30",
+  med: "bg-accent/15 text-accent ring-accent/30",
 };
 
 export function Workspace() {
@@ -114,12 +129,18 @@ export function Workspace() {
         </div>
 
         {/* Mobile tab switcher */}
-        <div role="tablist" aria-label="Workspace panels" className="flex gap-1 border-b border-border bg-background/40 p-1.5 lg:hidden">
-          {([
-            { id: "evidence",  label: "Evidence",  icon: Layers },
-            { id: "timeline",  label: "Timeline",  icon: CircleDot },
-            { id: "inspector", label: "Inspector", icon: ShieldCheck },
-          ] as const).map((t) => {
+        <div
+          role="tablist"
+          aria-label="Workspace panels"
+          className="flex gap-1 border-b border-border bg-background/40 p-1.5 lg:hidden"
+        >
+          {(
+            [
+              { id: "evidence", label: "Evidence", icon: Layers },
+              { id: "timeline", label: "Timeline", icon: CircleDot },
+              { id: "inspector", label: "Inspector", icon: ShieldCheck },
+            ] as const
+          ).map((t) => {
             const active = tab === t.id;
             return (
               <button
@@ -143,8 +164,9 @@ export function Workspace() {
         {/* Three panels */}
         <div className="grid grid-cols-12 lg:min-h-[600px]">
           {/* LEFT — Sources */}
-          <aside className={`col-span-12 lg:col-span-3 lg:border-r border-border bg-background/30 ${tab === "evidence" ? "block" : "hidden"} lg:block`}>
-
+          <aside
+            className={`col-span-12 lg:col-span-3 lg:border-r border-border bg-background/30 ${tab === "evidence" ? "block" : "hidden"} lg:block`}
+          >
             <PanelHeader icon={Layers} title="Evidence Sources" />
             <div className="space-y-1 p-3">
               {sources.map((s) => (
@@ -156,15 +178,21 @@ export function Workspace() {
                       : "border-transparent text-foreground/80 hover:border-border hover:bg-surface/60"
                   }`}
                 >
-                  <s.icon className={`size-4 ${s.active ? "text-primary" : "text-muted-foreground"}`} />
+                  <s.icon
+                    className={`size-4 ${s.active ? "text-primary" : "text-muted-foreground"}`}
+                  />
                   <span className="flex-1 truncate">{s.label}</span>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">{s.status}</span>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
+                    {s.status}
+                  </span>
                 </button>
               ))}
             </div>
 
             <div className="mx-3 mt-2 rounded-md border border-border bg-surface/40 p-3">
-              <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Custody chain</div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                Custody chain
+              </div>
               <div className="mt-2 space-y-1.5 font-mono text-[11px]">
                 <Row k="ingested" v="complete" />
                 <Row k="identity" v="sha-256" />
@@ -174,8 +202,18 @@ export function Workspace() {
           </aside>
 
           {/* CENTER — Timeline */}
-          <section className={`col-span-12 lg:col-span-6 lg:border-r border-border bg-background/10 ${tab === "timeline" ? "block" : "hidden"} lg:block`}>
-            <PanelHeader icon={CircleDot} title="Timeline" right={<span className="font-mono text-[10px] text-muted-foreground">illustrative view</span>} />
+          <section
+            className={`col-span-12 lg:col-span-6 lg:border-r border-border bg-background/10 ${tab === "timeline" ? "block" : "hidden"} lg:block`}
+          >
+            <PanelHeader
+              icon={CircleDot}
+              title="Timeline"
+              right={
+                <span className="font-mono text-[10px] text-muted-foreground">
+                  illustrative view
+                </span>
+              }
+            />
 
             <div className="relative p-4">
               {/* spine */}
@@ -195,13 +233,19 @@ export function Workspace() {
                         : "border-border bg-surface/40 hover:border-foreground/20"
                     }`}
                   >
-                    <span className={`absolute left-[22px] top-4 size-3 -translate-x-1/2 rounded-full ring-4 ring-background ${
-                      e.severity === "high" ? "bg-primary shadow-[0_0_10px_var(--primary)]" : "bg-accent"
-                    }`} />
+                    <span
+                      className={`absolute left-[22px] top-4 size-3 -translate-x-1/2 rounded-full ring-4 ring-background ${
+                        e.severity === "high"
+                          ? "bg-primary shadow-[0_0_10px_var(--primary)]"
+                          : "bg-accent"
+                      }`}
+                    />
                     <div className="flex items-center justify-between">
                       <div className="font-mono text-[10px] text-muted-foreground">{e.t}</div>
                       <div className="flex items-center gap-1.5">
-                        <span className={`rounded-full px-1.5 py-px font-mono text-[9px] uppercase ring-1 ${severityColor[e.severity]}`}>
+                        <span
+                          className={`rounded-full px-1.5 py-px font-mono text-[9px] uppercase ring-1 ${severityColor[e.severity]}`}
+                        >
                           {e.severity === "high" ? "high evidence" : "supporting"}
                         </span>
                       </div>
@@ -211,7 +255,10 @@ export function Workspace() {
                       <span className="font-mono">{e.actor}</span>
                       <span className="text-border">·</span>
                       {e.tags.map((t) => (
-                        <span key={t} className="rounded border border-border bg-background/60 px-1.5 py-px font-mono text-[10px]">
+                        <span
+                          key={t}
+                          className="rounded border border-border bg-background/60 px-1.5 py-px font-mono text-[10px]"
+                        >
                           {t}
                         </span>
                       ))}
@@ -226,12 +273,20 @@ export function Workspace() {
           </section>
 
           {/* RIGHT — Inspector */}
-          <aside className={`col-span-12 lg:col-span-3 bg-background/30 ${tab === "inspector" ? "block" : "hidden"} lg:block`}>
-            <PanelHeader icon={ShieldCheck} title="Evidence Inspector" right={<span className="font-mono text-[10px] text-success">reviewable</span>} />
+          <aside
+            className={`col-span-12 lg:col-span-3 bg-background/30 ${tab === "inspector" ? "block" : "hidden"} lg:block`}
+          >
+            <PanelHeader
+              icon={ShieldCheck}
+              title="Evidence Inspector"
+              right={<span className="font-mono text-[10px] text-success">reviewable</span>}
+            />
 
             <div className="space-y-3 p-3">
               <div className="rounded-md border border-border bg-surface/40 p-3">
-                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">EvidenceObject</div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                  EvidenceObject
+                </div>
                 <div className="mt-1 font-mono text-[11px] text-foreground">EO-2024-03-18-7f3a</div>
                 <div className="mt-2 grid grid-cols-2 gap-2 font-mono text-[10px]">
                   <div>
@@ -254,9 +309,12 @@ export function Workspace() {
               </div>
 
               <div className="rounded-md border border-border bg-surface/40 p-3">
-                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Source excerpt</div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                  Source excerpt
+                </div>
                 <blockquote className="mt-2 border-l-2 border-primary/60 pl-2.5 text-[12px] italic text-foreground/90">
-                  Source excerpts remain attached to the originating EvidenceObject for professional review.
+                  Source excerpts remain attached to the originating EvidenceObject for professional
+                  review.
                 </blockquote>
                 <div className="mt-2 inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground">
                   <Quote className="size-3" /> cite/EO-2024-03-18-7f3a#t=00:18
@@ -264,25 +322,31 @@ export function Workspace() {
               </div>
 
               <div className="rounded-md border border-border bg-surface/40 p-3">
-                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Citations</div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                  Citations
+                </div>
                 <div className="mt-2 space-y-1.5">
-                  {["Audio excerpt", "Message thread", "Calendar event", "Email record"].map((citation) => (
-                    <div key={citation} className="space-y-1">
-                      <div className="flex items-center justify-between font-mono text-[10px]">
-                        <span className="text-foreground/90">{citation}</span>
-                        <span className="text-success">linked</span>
+                  {["Audio excerpt", "Message thread", "Calendar event", "Email record"].map(
+                    (citation) => (
+                      <div key={citation} className="space-y-1">
+                        <div className="flex items-center justify-between font-mono text-[10px]">
+                          <span className="text-foreground/90">{citation}</span>
+                          <span className="text-success">linked</span>
+                        </div>
+                        <div className="h-1 rounded-full bg-border/60">
+                          <div className="h-full w-full rounded-full bg-gradient-to-r from-primary to-accent" />
+                        </div>
                       </div>
-                      <div className="h-1 rounded-full bg-border/60">
-                        <div className="h-full w-full rounded-full bg-gradient-to-r from-primary to-accent" />
-                      </div>
-                    </div>
-                  ))}
+                    ),
+                  )}
                 </div>
               </div>
 
               <div className="rounded-md border border-border bg-surface/40 p-3">
                 <div className="flex items-center justify-between">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Review status</div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                    Review status
+                  </div>
                   <span className="inline-flex items-center gap-1 rounded-full bg-success/15 px-2 py-0.5 font-mono text-[10px] text-success ring-1 ring-success/30">
                     <Hash className="size-3" /> reviewable
                   </span>
@@ -306,7 +370,15 @@ export function Workspace() {
   );
 }
 
-function PanelHeader({ icon: Icon, title, right }: { icon: typeof MessageSquare; title: string; right?: React.ReactNode }) {
+function PanelHeader({
+  icon: Icon,
+  title,
+  right,
+}: {
+  icon: typeof MessageSquare;
+  title: string;
+  right?: React.ReactNode;
+}) {
   return (
     <div className="flex items-center justify-between border-b border-border bg-background/40 px-3.5 py-2.5">
       <div className="inline-flex items-center gap-2 text-[12px] font-medium text-foreground">
@@ -318,7 +390,15 @@ function PanelHeader({ icon: Icon, title, right }: { icon: typeof MessageSquare;
   );
 }
 
-function Row({ k, v, valueClass = "text-foreground/90" }: { k: string; v: string; valueClass?: string }) {
+function Row({
+  k,
+  v,
+  valueClass = "text-foreground/90",
+}: {
+  k: string;
+  v: string;
+  valueClass?: string;
+}) {
   return (
     <div className="flex items-center justify-between">
       <span className="text-muted-foreground">{k}</span>
