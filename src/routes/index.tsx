@@ -8,7 +8,10 @@ export const Route = createFileRoute("/")({
       path: "/",
       title: "TruthTrace | Forensic Evidence Intelligence for Family Law",
       description:
-        "TruthTrace is being designed to turn fragmented family-law evidence into a structured chronology with visible links back to source material for professional review.",
+        "TruthTrace preserves and organizes family-law evidence into source-linked timelines, reviewable findings, and controlled professional workflows.",
+      ogTitle: "Turn evidence chaos into a timeline you can prove.",
+      ogDescription:
+        "Preserved sources, structured chronology, citation-aware review, and human-controlled evidence workflows.",
     }),
   component: HomePage,
 });

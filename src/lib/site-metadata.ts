@@ -2,6 +2,8 @@ type PageMetadata = {
   path: string;
   title: string;
   description: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const APPROVED_SITE_ORIGIN = "https://truth-trace-forge.lovable.app";
@@ -43,7 +45,13 @@ function normalizeConfiguredSiteOrigin(value: string | undefined): string {
   return normalizedOrigin;
 }
 
-export function createPageHead({ path, title, description }: PageMetadata) {
+export function createPageHead({
+  path,
+  title,
+  description,
+  ogTitle = title,
+  ogDescription = description,
+}: PageMetadata) {
   const origin = normalizeConfiguredSiteOrigin(import.meta.env.VITE_SITE_URL);
   const canonical = new URL(path, origin).toString();
   const socialImage = new URL("/og.png", origin).toString();
@@ -52,8 +60,8 @@ export function createPageHead({ path, title, description }: PageMetadata) {
     meta: [
       { title },
       { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
+      { property: "og:title", content: ogTitle },
+      { property: "og:description", content: ogDescription },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "TruthTrace" },
       { property: "og:url", content: canonical },
@@ -65,8 +73,8 @@ export function createPageHead({ path, title, description }: PageMetadata) {
         content: "TruthTrace — structured, source-linked clarity for family-law evidence review",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: title },
-      { name: "twitter:description", content: description },
+      { name: "twitter:title", content: ogTitle },
+      { name: "twitter:description", content: ogDescription },
       { name: "twitter:image", content: socialImage },
       {
         name: "twitter:image:alt",
