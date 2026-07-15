@@ -9,10 +9,18 @@ const read = (path) => readFileSync(resolve(root, path), "utf8");
 
 const homepage = read("src/components/site/HomePage.tsx");
 const nav = read("src/components/site/Nav.tsx");
+const contact = read("src/routes/contact.tsx");
+const privacy = read("src/content/website-privacy.ts");
+const terms = read("src/content/website-terms.ts");
 const publicSource = [
   homepage,
   nav,
+  contact,
+  privacy,
+  terms,
   read("src/routes/index.tsx"),
+  read("src/routes/privacy.tsx"),
+  read("src/routes/terms.tsx"),
   read("src/routes/technology.tsx"),
   read("src/routes/__root.tsx"),
 ].join("\n");
@@ -20,6 +28,7 @@ const packageJson = JSON.parse(read("package.json"));
 const server = read("src/server.ts");
 const errorPage = read("src/lib/error-page.ts");
 const metadata = read("src/lib/site-metadata.ts");
+const styles = read("src/styles.css");
 const robots = read("public/robots.txt");
 const sitemap = read("public/sitemap.xml");
 const manifest = JSON.parse(read("public/site.webmanifest"));
@@ -59,6 +68,82 @@ test("known unsafe operational claims and sensitive email intake are absent", ()
   ];
 
   for (const pattern of unsafe) assert.doesNotMatch(publicSource, pattern);
+});
+
+test("approved website terms replace the conflicting legacy platform terms", () => {
+  assert.match(terms, /effectiveDate: "July 15, 2026"/);
+  assert.match(terms, /public website at https:\/\/truthtrace\.ai/i);
+  assert.match(terms, /The website does not currently offer:/i);
+  assert.match(
+    terms,
+    /The public website is not a secure evidence-transfer or case-intake system/i,
+  );
+  assert.match(terms, /Nothing on this website is legal, medical, mental-health, clinical/i);
+
+  for (const pattern of [
+    /Stripe/i,
+    /Kids Mode/i,
+    /privacy@/i,
+    /legal@/i,
+    /fees are non-refundable/i,
+  ]) {
+    assert.doesNotMatch(terms, pattern);
+  }
+});
+
+test("approved website privacy notice is browse-only and has the reviewed effective date", () => {
+  assert.match(privacy, /title: "TruthTrace Website Privacy Notice"/);
+  assert.match(privacy, /effectiveDate: "July 15, 2026"/);
+  assert.match(privacy, /public website at truthtrace\.ai/i);
+  assert.match(privacy, /The website does not currently provide:/i);
+  assert.match(
+    privacy,
+    /does not intentionally use advertising cookies, behavioral tracking, session replay, or marketing analytics/i,
+  );
+  assert.match(privacy, /public website is not a secure case-intake or evidence-transfer system/i);
+  assert.match(
+    privacy,
+    /does not maintain website user accounts, uploaded evidence, case files, or payment records/i,
+  );
+  assert.match(privacy, /Verified privacy contact information, when available/i);
+
+  for (const pattern of [
+    /googletagmanager\.com/i,
+    /google-analytics\.com/i,
+    /hotjar\.com/i,
+    /segment\.(?:com|io)/i,
+    /posthog\.com/i,
+    /\bGTM-[A-Z0-9]+\b/,
+    /\bG-D6SXEJ3K9D\b/,
+    /__lovableEvents/,
+    /\/__l5e\/events(?:\.js)?/i,
+    /\/~flock(?:\.js)?/i,
+    /privacy@/i,
+    /Kids Mode/i,
+    /We apply encryption/i,
+  ]) {
+    assert.doesNotMatch(privacy, pattern);
+  }
+});
+
+test("the temporary contact page is browse-only and contains no intake channel", () => {
+  assert.match(
+    contact,
+    /TruthTrace is currently operating this website as a public informational/i,
+  );
+  assert.match(contact, /Do not submit case details, evidence, confidential family information/i);
+  assert.match(contact, /A verified contact channel will be\s+published/i);
+
+  for (const pattern of [
+    /<form/i,
+    /<input/i,
+    /<textarea/i,
+    /mailto:/i,
+    /tel:/i,
+    /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i,
+  ]) {
+    assert.doesNotMatch(contact, pattern);
+  }
 });
 
 test("public source contains no local or preview URLs", () => {
@@ -115,7 +200,11 @@ test("SSR responses receive the public security-header baseline", () => {
   assert.match(server, /status: 421/);
   assert.match(server, /retiredRouteResponse/);
   assert.match(server, /status: 410/);
+  assert.match(server, /status: 301/);
+  assert.doesNotMatch(server, /status: 308/);
   assert.match(errorPage, /function renderGonePage/);
+  assert.equal(existsSync(resolve(root, "src/lib/lovable-error-reporting.ts")), false);
+  assert.doesNotMatch(publicSource, /__lovableEvents/);
 });
 
 test("publication metadata is locked to the approved truthtrace.ai origin", () => {
@@ -126,6 +215,17 @@ test("publication metadata is locked to the approved truthtrace.ai origin", () =
   assert.match(metadata, /rel: "canonical"/);
 });
 
+test("reduced-motion, forced-colors, and narrow reflow safeguards remain active", () => {
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(styles, /animation-duration: 0\.001ms !important/);
+  assert.match(styles, /transition-duration: 0\.001ms !important/);
+  assert.match(styles, /scroll-behavior: auto !important/);
+  assert.match(styles, /@media \(forced-colors: active\)/);
+  assert.match(styles, /color: CanvasText/);
+  assert.match(styles, /min-width: 320px/);
+  assert.doesNotMatch(styles, /(?:html|body)[^{]*\{[^}]*overflow-x:\s*hidden/is);
+});
+
 test("robots, sitemap, and manifest use the approved publication origin", () => {
   assert.equal(
     robots.replace(/\r\n/g, "\n").trim(),
@@ -133,7 +233,13 @@ test("robots, sitemap, and manifest use the approved publication origin", () => 
   );
 
   const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.deepEqual(locations, ["https://truthtrace.ai/", "https://truthtrace.ai/technology"]);
+  assert.deepEqual(locations, [
+    "https://truthtrace.ai/",
+    "https://truthtrace.ai/technology",
+    "https://truthtrace.ai/privacy",
+    "https://truthtrace.ai/terms",
+    "https://truthtrace.ai/contact",
+  ]);
 
   for (const field of ["id", "start_url", "scope"]) {
     assert.equal(manifest[field], "https://truthtrace.ai/");

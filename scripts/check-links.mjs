@@ -1,4 +1,6 @@
 import { request as createHttpRequest } from "node:http";
+import { readdir, readFile } from "node:fs/promises";
+import { join, relative, resolve } from "node:path";
 
 const baseUrl = new URL(process.argv[2] ?? process.env.SITE_UNDER_TEST ?? "http://127.0.0.1:4173");
 const approvedOrigin = "https://truthtrace.ai";
@@ -10,7 +12,7 @@ if (!localTestHosts.has(baseUrl.hostname) || baseUrl.protocol !== "http:") {
   );
 }
 
-const entryPaths = ["/", "/technology"];
+const entryPaths = ["/", "/technology", "/privacy", "/terms", "/contact"];
 const requiredPublicPaths = new Map([
   ["/favicon.svg", /^image\/svg\+xml\b/i],
   ["/og.png", /^image\/png\b/i],
@@ -25,6 +27,20 @@ const securityHeaders = new Map([
   ["referrer-policy", "strict-origin-when-cross-origin"],
   ["x-content-type-options", "nosniff"],
   ["x-frame-options", "DENY"],
+]);
+const trackingTokens = new Map([
+  ["Google Tag Manager hostname", /googletagmanager\.com/i],
+  ["Google Analytics hostname", /google-analytics\.com/i],
+  ["Google tag loader", /\bgtag\s*\(/i],
+  ["Google tag data layer", /\bdataLayer\b/],
+  ["Hotjar hostname", /(?:^|[./])hotjar\.com\b/i],
+  ["Segment hostname", /(?:^|[./])segment\.(?:com|io)\b/i],
+  ["PostHog hostname", /(?:^|[./])posthog\.com\b/i],
+  ["legacy Google Tag Manager ID", /\bGTM-M6QXKM2C\b/],
+  ["legacy Google Analytics ID", /\bG-D6SXEJ3K9D\b/],
+  ["Lovable browser event hook", /__lovableEvents/],
+  ["Lovable event endpoint", /\/__l5e\/events(?:\.js)?\b/i],
+  ["Lovable flock loader", /\/~flock(?:\.js)?\b/i],
 ]);
 
 async function request(url, options = {}) {
@@ -87,6 +103,30 @@ function hrefsFrom(html) {
   return [...html.matchAll(/\shref=["']([^"']+)["']/gi)].map((match) => match[1]);
 }
 
+function localizeApprovedUrl(href, documentUrl) {
+  const target = new URL(href, documentUrl);
+  if (target.origin === approvedOrigin) {
+    return new URL(`${target.pathname}${target.search}${target.hash}`, baseUrl);
+  }
+  return target;
+}
+
+function expectNoTrackingTokens(content, label) {
+  for (const [token, pattern] of trackingTokens) {
+    if (pattern.test(content)) failures.push(`${label} contains forbidden ${token}`);
+  }
+}
+
+async function builtJavaScriptFiles(directory) {
+  const files = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...(await builtJavaScriptFiles(path)));
+    else if (entry.isFile() && /\.m?js$/i.test(entry.name)) files.push(path);
+  }
+  return files;
+}
+
 function expectExact200(document, url, expectedType) {
   if (!document) return false;
   const { response } = document;
@@ -125,6 +165,7 @@ for (const entryPath of entryPaths) {
 
   const { body, response } = document;
   expectSecurityHeaders(response, entryPath);
+  expectNoTrackingTokens(body, `${entryPath} HTML`);
   const expectedCanonical = new URL(entryPath, approvedOrigin).toString();
   if (!body.includes(`rel="canonical" href="${expectedCanonical}"`)) {
     failures.push(`${entryPath} is missing canonical ${expectedCanonical}`);
@@ -133,10 +174,57 @@ for (const entryPath of entryPaths) {
     failures.push(`${entryPath} is missing Open Graph URL ${expectedCanonical}`);
   }
 
+  if (entryPath === "/privacy") {
+    for (const marker of [
+      "TruthTrace Website Privacy Notice",
+      "The website does not currently provide:",
+      "TruthTrace does not intentionally use advertising cookies, behavioral tracking, session replay, or marketing analytics on the current browse-only website.",
+      "The public website is not a secure case-intake or evidence-transfer system.",
+      "TruthTrace does not maintain website user accounts, uploaded evidence, case files, or payment records through the current public website.",
+    ]) {
+      if (!body.includes(marker)) failures.push(`${entryPath} is missing approved text: ${marker}`);
+    }
+    if (!/Effective Date:[\s\S]{0,80}July 15, 2026/.test(body)) {
+      failures.push(`${entryPath} is missing the approved effective date`);
+    }
+  }
+
+  if (entryPath === "/terms") {
+    for (const marker of [
+      "TruthTrace Website Terms of Use",
+      "The website does not currently offer:",
+      "The public website is not a secure evidence-transfer or case-intake system.",
+    ]) {
+      if (!body.includes(marker)) failures.push(`${entryPath} is missing approved text: ${marker}`);
+    }
+    if (!/Effective Date:[\s\S]{0,80}July 15, 2026/.test(body)) {
+      failures.push(`${entryPath} is missing the approved effective date`);
+    }
+    for (const forbidden of ["Stripe", "Kids Mode", "privacy@", "legal@"]) {
+      if (body.includes(forbidden))
+        failures.push(`${entryPath} contains legacy term: ${forbidden}`);
+    }
+  }
+
+  if (entryPath === "/contact") {
+    for (const marker of [
+      "TruthTrace is currently operating this website as a public informational",
+      "Do not submit case details, evidence, confidential family information,",
+      "A verified contact channel will be published",
+    ]) {
+      if (!body.includes(marker)) failures.push(`${entryPath} is missing approved text: ${marker}`);
+    }
+    for (const forbidden of ["<form", "<input", "<textarea", "mailto:", "tel:"]) {
+      if (body.toLowerCase().includes(forbidden)) {
+        failures.push(`${entryPath} contains forbidden intake markup: ${forbidden}`);
+      }
+    }
+  }
+
   for (const href of hrefsFrom(body)) {
     if (/^(mailto:|tel:|javascript:|data:)/i.test(href)) continue;
 
-    const target = new URL(href, entryUrl);
+    const target = localizeApprovedUrl(href, entryUrl);
     if (target.origin !== baseUrl.origin) continue;
 
     const fragment = target.hash.slice(1);
@@ -153,6 +241,22 @@ for (const entryPath of entryPaths) {
       failures.push(`${href} from ${entryUrl.pathname} has no matching id`);
     }
   }
+}
+
+let builtScriptCount = 0;
+try {
+  const builtPublicDirectory = resolve(import.meta.dirname, "..", ".output", "public");
+  for (const file of await builtJavaScriptFiles(builtPublicDirectory)) {
+    builtScriptCount += 1;
+    expectNoTrackingTokens(
+      await readFile(file, "utf8"),
+      `built JavaScript ${relative(builtPublicDirectory, file).replaceAll("\\", "/")}`,
+    );
+  }
+} catch (error) {
+  failures.push(
+    `built JavaScript could not be scanned: ${error instanceof Error ? error.message : error}`,
+  );
 }
 
 for (const [publicPath, contentType] of requiredPublicPaths) {
@@ -191,7 +295,13 @@ for (const [publicPath, contentType] of requiredPublicPaths) {
     const locations = [...document.body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
     if (
       JSON.stringify(locations) !==
-      JSON.stringify([`${approvedOrigin}/`, `${approvedOrigin}/technology`])
+      JSON.stringify([
+        `${approvedOrigin}/`,
+        `${approvedOrigin}/technology`,
+        `${approvedOrigin}/privacy`,
+        `${approvedOrigin}/terms`,
+        `${approvedOrigin}/contact`,
+      ])
     ) {
       failures.push(`${publicPath} contains routes outside the approved candidate surface`);
     }
@@ -222,25 +332,42 @@ for (const [path, expectedStatus] of new Map([
 }
 
 for (const host of ["truthtrace.ai", "truthtrace.ai."]) {
-  const apexProbe = await requestWithHost("/technology?host=apex", host);
-  if (apexProbe && apexProbe.response.status !== 200) {
-    failures.push(`${host} apex probe returned ${apexProbe.response.status}, expected 200`);
+  for (const entryPath of entryPaths) {
+    const url = new URL(entryPath, approvedOrigin);
+    url.searchParams.set("host", "apex");
+    const path = `${url.pathname}${url.search}`;
+    const apexProbe = await requestWithHost(path, host);
+    if (!apexProbe) continue;
+    if (apexProbe.response.status !== 200) {
+      failures.push(
+        `${host} apex probe ${path} returned ${apexProbe.response.status}, expected 200`,
+      );
+    }
+    if (apexProbe.response.headers.has("set-cookie")) {
+      failures.push(`${host} apex probe ${path} unexpectedly set a cookie`);
+    }
+    expectSecurityHeaders(apexProbe.response, `${host} apex probe ${path}`);
   }
 }
 
 for (const host of ["www.truthtrace.ai", "www.truthtrace.ai."]) {
-  for (const path of ["/", "/technology?host=www"]) {
-    const url = new URL(path, baseUrl);
-    const probe = await requestWithHost(url.pathname + url.search, host);
+  for (const entryPath of entryPaths) {
+    const url = new URL(entryPath, approvedOrigin);
+    url.searchParams.set("host", "www");
+    const path = `${url.pathname}${url.search}`;
+    const probe = await requestWithHost(path, host);
     if (!probe) continue;
-    const expectedLocation = `${approvedOrigin}${path}`;
-    if (probe.response.status !== 308) {
-      failures.push(`${host} probe ${path} returned ${probe.response.status}, expected 308`);
+    const expectedLocation = url.toString();
+    if (probe.response.status !== 301) {
+      failures.push(`${host} probe ${path} returned ${probe.response.status}, expected 301`);
     }
     if (probe.response.headers.get("location") !== expectedLocation) {
       failures.push(
         `${host} probe ${path} location=${probe.response.headers.get("location")}, expected ${expectedLocation}`,
       );
+    }
+    if (probe.response.headers.has("set-cookie")) {
+      failures.push(`${host} probe ${path} unexpectedly set a cookie`);
     }
     expectSecurityHeaders(probe.response, `${host} probe ${path}`);
   }
@@ -276,6 +403,6 @@ if (failures.length) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Link and runtime publication check passed: ${checkedDocuments.size} documents, ${entryPaths.length} entry routes, ${requiredPublicPaths.size} required public paths, one retired-route 410, one true 404, apex handling, www HTML-navigation redirects, and excluded/unknown HTML-host rejection.`,
+    `Link and runtime publication check passed: ${checkedDocuments.size} documents, ${entryPaths.length} entry routes, ${requiredPublicPaths.size} required public paths, ${builtScriptCount} built JavaScript files, one retired-route 410, one true 404, all-five apex probes, all-five www HTML-navigation redirects, and excluded/unknown HTML-host rejection.`,
   );
 }

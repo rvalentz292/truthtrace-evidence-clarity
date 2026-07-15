@@ -36,7 +36,13 @@ const sitemapPath = resolve(root, "public", "sitemap.xml");
 if (existsSync(sitemapPath)) {
   const sitemap = readFileSync(sitemapPath, "utf8");
   const actualLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  const expectedLocations = [`${approvedOrigin}/`, `${approvedOrigin}/technology`];
+  const expectedLocations = [
+    `${approvedOrigin}/`,
+    `${approvedOrigin}/technology`,
+    `${approvedOrigin}/privacy`,
+    `${approvedOrigin}/terms`,
+    `${approvedOrigin}/contact`,
+  ];
   if (JSON.stringify(actualLocations) !== JSON.stringify(expectedLocations)) {
     failures.push(
       `public/sitemap.xml must contain exactly the candidate routes: ${expectedLocations.join(", ")}.`,

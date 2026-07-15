@@ -10,6 +10,7 @@ const links = [
   { label: "Who It Serves", to: "/" as const, hash: "audiences" },
   { label: "Boundaries", to: "/" as const, hash: "trust" },
   { label: "Technology", to: "/technology" as const },
+  { label: "Contact", to: "/contact" as const },
 ];
 
 export function Nav() {

@@ -1,0 +1,294 @@
+import type { WebsiteLegalDocument } from "@/content/website-legal";
+
+export const WEBSITE_PRIVACY = {
+  title: "TruthTrace Website Privacy Notice",
+  effectiveDate: "July 15, 2026",
+  introduction: [
+    "This Privacy Notice explains how TruthTrace handles information when you visit the public website at truthtrace.ai.",
+  ],
+  sections: [
+    {
+      id: "browse-only-website",
+      title: "1. Browse-Only Website",
+      blocks: [
+        {
+          id: "website-purpose",
+          type: "paragraph",
+          text: "The TruthTrace website currently provides general information about TruthTrace and its product direction.",
+        },
+        {
+          id: "not-provided-intro",
+          type: "paragraph",
+          text: "The website does not currently provide:",
+        },
+        {
+          id: "not-provided",
+          type: "list",
+          items: [
+            "User accounts or login",
+            "Evidence or document uploads",
+            "Case intake",
+            "Contact or application forms",
+            "Payment or subscription services",
+            "Personalized case analysis",
+            "A live evidence-processing workspace",
+          ],
+        },
+        {
+          id: "do-not-send",
+          type: "paragraph",
+          text: "Do not send case details, evidence, confidential communications, child-related records, or other sensitive information through this website.",
+        },
+      ],
+    },
+    {
+      id: "information-collected-automatically",
+      title: "2. Information Collected Automatically",
+      blocks: [
+        {
+          id: "technical-information-intro",
+          type: "paragraph",
+          text: "When you visit the website, hosting and security providers may automatically process limited technical information, such as:",
+        },
+        {
+          id: "technical-information",
+          type: "list",
+          items: [
+            "IP address",
+            "Browser and device type",
+            "Operating system",
+            "Pages or files requested",
+            "Date and time of access",
+            "Referring website",
+            "Basic security and error logs",
+          ],
+        },
+        {
+          id: "technical-information-use",
+          type: "paragraph",
+          text: "This information may be used to deliver the website, maintain security, prevent abuse, and diagnose technical problems.",
+        },
+      ],
+    },
+    {
+      id: "cookies-and-analytics",
+      title: "3. Cookies and Analytics",
+      blocks: [
+        {
+          id: "no-tracking",
+          type: "paragraph",
+          text: "TruthTrace does not intentionally use advertising cookies, behavioral tracking, session replay, or marketing analytics on the current browse-only website.",
+        },
+        {
+          id: "necessary-provider-technology",
+          type: "paragraph",
+          text: "Hosting or security providers may use technologies that are necessary to deliver the website, prevent abuse, or maintain basic functionality.",
+        },
+        {
+          id: "future-features",
+          type: "paragraph",
+          text: "If analytics, advertising, accounts, forms, or personalized services are added later, this Privacy Notice will be updated before those features become active.",
+        },
+      ],
+    },
+    {
+      id: "how-information-is-used",
+      title: "4. How Information Is Used",
+      blocks: [
+        {
+          id: "limited-information-intro",
+          type: "paragraph",
+          text: "Limited technical information may be used to:",
+        },
+        {
+          id: "limited-information-uses",
+          type: "list",
+          items: [
+            "Operate and deliver the website",
+            "Maintain website security",
+            "Detect malicious or automated activity",
+            "Investigate technical errors",
+            "Comply with applicable legal obligations",
+          ],
+        },
+        {
+          id: "no-family-evaluation",
+          type: "paragraph",
+          text: "TruthTrace does not use the public website to evaluate family relationships, analyze custody matters, determine credibility, or make legal or clinical findings.",
+        },
+      ],
+    },
+    {
+      id: "sharing-of-information",
+      title: "5. Sharing of Information",
+      blocks: [
+        {
+          id: "service-providers",
+          type: "paragraph",
+          text: "Limited technical information may be processed by service providers that support website hosting, security, content delivery, domain operation, or technical maintenance.",
+        },
+        {
+          id: "no-sale",
+          type: "paragraph",
+          text: "TruthTrace does not sell personal information collected through the public website.",
+        },
+        {
+          id: "legal-disclosure",
+          type: "paragraph",
+          text: "Information may also be disclosed when reasonably necessary to comply with law, respond to valid legal process, protect rights or safety, or investigate misuse of the website.",
+        },
+      ],
+    },
+    {
+      id: "childrens-information",
+      title: "6. Children’s Information",
+      blocks: [
+        {
+          id: "not-directed-to-children",
+          type: "paragraph",
+          text: "The public website is not directed to children under 13 and is not designed to knowingly collect personal information from children.",
+        },
+        {
+          id: "do-not-submit-child-information",
+          type: "paragraph",
+          text: "Do not submit information about a child through the public website.",
+        },
+      ],
+    },
+    {
+      id: "sensitive-information",
+      title: "7. Sensitive Information",
+      blocks: [
+        {
+          id: "do-not-upload-intro",
+          type: "paragraph",
+          text: "Do not send or attempt to upload:",
+        },
+        {
+          id: "sensitive-information-list",
+          type: "list",
+          items: [
+            "Court documents or evidence",
+            "Messages, emails, screenshots, or recordings",
+            "Medical, therapy, or school records",
+            "Information about a child",
+            "Financial or identifying information",
+            "Confidential or privileged communications",
+            "Material subject to a protective, confidentiality, or sealing order",
+          ],
+        },
+        {
+          id: "not-case-intake",
+          type: "paragraph",
+          text: "The public website is not a secure case-intake or evidence-transfer system.",
+        },
+      ],
+    },
+    {
+      id: "data-retention",
+      title: "8. Data Retention",
+      blocks: [
+        {
+          id: "no-user-records",
+          type: "paragraph",
+          text: "TruthTrace does not maintain website user accounts, uploaded evidence, case files, or payment records through the current public website.",
+        },
+        {
+          id: "technical-log-retention",
+          type: "paragraph",
+          text: "Limited technical or security logs may be retained as reasonably necessary to operate, secure, and troubleshoot the website.",
+        },
+      ],
+    },
+    {
+      id: "security",
+      title: "9. Security",
+      blocks: [
+        {
+          id: "reasonable-measures",
+          type: "paragraph",
+          text: "TruthTrace uses reasonable measures intended to protect the public website.",
+        },
+        {
+          id: "no-complete-security",
+          type: "paragraph",
+          text: "No website or internet transmission can be guaranteed to be completely secure. Do not use the public website to transmit confidential, privileged, legally sensitive, or child-related information.",
+        },
+      ],
+    },
+    {
+      id: "third-party-links",
+      title: "10. Third-Party Links",
+      blocks: [
+        {
+          id: "third-party-links-may-appear",
+          type: "paragraph",
+          text: "The website may link to third-party websites or resources.",
+        },
+        {
+          id: "third-party-responsibility",
+          type: "paragraph",
+          text: "TruthTrace does not control and is not responsible for their privacy, security, content, or data practices.",
+        },
+      ],
+    },
+    {
+      id: "your-choices",
+      title: "11. Your Choices",
+      blocks: [
+        {
+          id: "browser-controls",
+          type: "paragraph",
+          text: "You may configure your browser to limit or delete cookies and locally stored website data.",
+        },
+        {
+          id: "verified-contact-method",
+          type: "paragraph",
+          text: "Use only a verified contact method published on the current TruthTrace Contact page.",
+        },
+        {
+          id: "older-address-warning",
+          type: "paragraph",
+          text: "Do not send personal information to an email address found only in an older document, archived page, search result, or third-party listing.",
+        },
+      ],
+    },
+    {
+      id: "changes-to-this-notice",
+      title: "12. Changes to This Notice",
+      blocks: [
+        {
+          id: "notice-updates",
+          type: "paragraph",
+          text: "TruthTrace may update this Privacy Notice when the website or its services change.",
+        },
+        {
+          id: "effective-date",
+          type: "paragraph",
+          text: "The effective date above identifies the current version.",
+        },
+        {
+          id: "material-changes",
+          type: "paragraph",
+          text: "Any material changes related to accounts, uploads, payments, analytics, evidence processing, or personalized services should be published before those features become active.",
+        },
+      ],
+    },
+    {
+      id: "contact",
+      title: "13. Contact",
+      blocks: [
+        {
+          id: "privacy-contact-information",
+          type: "paragraph",
+          text: "Verified privacy contact information, when available, will be published on the TruthTrace Contact page.",
+        },
+        {
+          id: "no-unverified-contact",
+          type: "paragraph",
+          text: "Until a verified contact method is displayed there, do not send personal information, case details, evidence, confidential communications, or child-related records to any address claiming to represent TruthTrace.",
+        },
+      ],
+    },
+  ],
+} as const satisfies WebsiteLegalDocument;

@@ -1024,8 +1024,8 @@ function ClosingCta() {
               </Link>
             </div>
             <p className="mt-5 max-w-2xl text-[13px] leading-relaxed text-muted-foreground">
-              No demo request or evidence intake is offered until a verified contact route, approved
-              data terms, and a secure transfer process are in place.
+              No demo request or evidence intake is offered until a verified contact channel,
+              approved data terms, and a secure transfer process are in place.
             </p>
           </div>
 
@@ -1035,7 +1035,7 @@ function ClosingCta() {
             </div>
             <ul className="mt-4 space-y-3 text-sm">
               {[
-                "A verified organization and contact route",
+                "A verified organization and contact channel",
                 "Approved privacy, retention, deletion, and training terms",
                 "A documented secure-transfer process",
                 "Matter-scoped access and professional consent",
@@ -1073,12 +1073,32 @@ function Footer() {
           Evidence-organization and review-support product direction · No legal advice · No evidence
           uploads on this public site
         </span>
-        <Link
-          to="/technology"
-          className="min-h-11 content-center text-foreground/80 hover:text-foreground"
-        >
-          Design principles
-        </Link>
+        <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <Link
+            to="/technology"
+            className="min-h-11 content-center text-foreground/80 hover:text-foreground"
+          >
+            Design principles
+          </Link>
+          <Link
+            to="/privacy"
+            className="min-h-11 content-center text-foreground/80 hover:text-foreground"
+          >
+            Privacy
+          </Link>
+          <Link
+            to="/terms"
+            className="min-h-11 content-center text-foreground/80 hover:text-foreground"
+          >
+            Terms
+          </Link>
+          <Link
+            to="/contact"
+            className="min-h-11 content-center text-foreground/80 hover:text-foreground"
+          >
+            Contact
+          </Link>
+        </nav>
       </div>
     </footer>
   );

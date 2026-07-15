@@ -61,7 +61,7 @@ function publicationHostResponse(request: Request): Response | undefined {
   url.port = "";
 
   return new Response(null, {
-    status: 308,
+    status: 301,
     headers: {
       "cache-control": "public, max-age=3600",
       location: url.toString(),
