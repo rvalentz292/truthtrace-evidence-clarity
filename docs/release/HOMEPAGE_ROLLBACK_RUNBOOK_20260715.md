@@ -10,7 +10,7 @@ The generated Cloudflare-module output is not a rollback plan. In particular, th
 
 ## Rollback objective
 
-Restore the last explicitly approved, known-good public state while preserving evidence and preventing further privacy, legal, product-identity, availability, or search damage.
+Restore the last explicitly approved, known-good public state while preserving evidence and preventing further privacy, legal, product-identity, availability, or search damage. A rollback is acceptable only if it preserves the approved first-cutover invariants: five same-origin `200` routes, reviewed legal content, the static no-channel contact boundary, `/private-demo` `410`, true `404` responses for unlisted routes, apex canonicalization, and no analytics/tracking.
 
 The intended order of preference is:
 
@@ -25,30 +25,32 @@ This ordering is conceptual until provider-specific procedures are verified. It 
 
 Every field below must be filled and independently checked before go-live:
 
-| Field                                               | Current state                                                                                                                  |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Incident/rollback commander and backup              | Unassigned                                                                                                                     |
-| Release operator and backup                         | Unassigned                                                                                                                     |
-| Hosting provider/account/environment                | Lovable; `Ryan's Lovable` owner workspace; exact candidate environment **BLOCKED**                                             |
-| Production project/service/worker ID                | Current live Lovable project `truthtrace-website`, ID `9dc000d6-e489-4b8f-975b-cf1d2bfdf3a7`; not an approved candidate target |
-| Production branch policy                            | Provider active branch **UNVERIFIED**; private GitHub default `main` is unprotected                                            |
-| `FINAL_CANDIDATE_SHA` / new candidate SHA           | `8fca95f914fe463da89073aa7e97607d59f0a9ad` — immutable implementation; following release-record commit is documentation-only   |
-| New artifact checksum and deployment ID             | Local aggregate SHA-256 `075b0cc6bf1d245b06b42492987155b8529c5cec3fc0942d403afd0e4e4d7941`; provider deployment ID not created |
-| `PREVIOUS_PRODUCTION_SHA`                           | `84a49ca4e38d21322e137e5135d974c0ddbd2f66` — live source correlation; not an immutable deployment identity                     |
-| Prior approved deployment ID                        | Unknown                                                                                                                        |
-| Prior immutable artifact/version                    | Unknown                                                                                                                        |
-| Provider deployment-rollback command                | Unknown                                                                                                                        |
-| Provider status/log command                         | Unknown                                                                                                                        |
-| Custom-domain binding before-state                  | Unknown                                                                                                                        |
-| Custom-domain restore command                       | Unknown                                                                                                                        |
-| DNS provider/zone ID                                | Hostinger DNS verified; authenticated zone/account ID and mutation authority unverified                                        |
-| DNS record and TTL before-state                     | Apex and `www` A `185.158.133.1`, authoritative TTL 14400 at audit time; full authenticated export not captured                |
-| DNS restore command or console procedure            | Unknown                                                                                                                        |
-| Certificate before-state and revalidation procedure | Unknown                                                                                                                        |
-| Legacy-route before/after matrix                    | Incomplete                                                                                                                     |
-| Monitoring channels and owners                      | Unknown                                                                                                                        |
-| Internal/public communication owners                | Unknown                                                                                                                        |
-| Maximum rollback decision and execution times       | Not approved                                                                                                                   |
+| Field                                               | Current state                                                                                                                                       |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Incident/rollback commander and backup              | Unassigned                                                                                                                                          |
+| Release operator and backup                         | Unassigned                                                                                                                                          |
+| Hosting provider/account/environment                | Lovable; `Ryan's Lovable` owner workspace; exact candidate environment **BLOCKED**                                                                  |
+| Production project/service/worker ID                | Current live Lovable project `truthtrace-website`, ID `9dc000d6-e489-4b8f-975b-cf1d2bfdf3a7`; not an approved candidate target                      |
+| Production branch policy                            | Provider active branch **UNVERIFIED**; private GitHub default `main` is unprotected                                                                 |
+| `FINAL_CANDIDATE_SHA` / new candidate SHA           | `04035bd053d61aec308282a9a861c3da94285fc2` — immutable approved-route implementation candidate; publication is not authorized                       |
+| New artifact checksum and deployment ID             | 50 files; 2,930,912 bytes; aggregate SHA-256 `688fc68f5466606c709d0a18033031d4840d6b165b394ea0357b226a023d0ea6`; provider deployment ID not created |
+| Candidate CI                                        | GitHub Actions run `29387686387`, job `87264243575`: `success`                                                                                      |
+| Local evidence manifest                             | 18 files; `SHA256SUMS.txt` SHA-256 `15409ace13507e65966643d80a3562b23268060c7bcc24dde4bb9f7dc311db0b`                                               |
+| `PREVIOUS_PRODUCTION_SHA`                           | `84a49ca4e38d21322e137e5135d974c0ddbd2f66` — live source correlation; not an immutable deployment identity                                          |
+| Prior approved deployment ID                        | Unknown                                                                                                                                             |
+| Prior immutable artifact/version                    | Unknown                                                                                                                                             |
+| Provider deployment-rollback command                | Unknown                                                                                                                                             |
+| Provider status/log command                         | Unknown                                                                                                                                             |
+| Custom-domain binding before-state                  | Unknown                                                                                                                                             |
+| Custom-domain restore command                       | Unknown                                                                                                                                             |
+| DNS provider/zone ID                                | Hostinger DNS verified; authenticated zone/account ID and mutation authority unverified                                                             |
+| DNS record and TTL before-state                     | Apex and `www` A `185.158.133.1`, authoritative TTL 14400 at audit time; full authenticated export not captured                                     |
+| DNS restore command or console procedure            | Unknown                                                                                                                                             |
+| Certificate before-state and revalidation procedure | Unknown                                                                                                                                             |
+| Legacy-route before/after matrix                    | Approved locally: five `200` routes, `/private-demo` `410`, and true `404` for unlisted routes; provider proof remains blocked                      |
+| Monitoring channels and owners                      | Unknown                                                                                                                                             |
+| Internal/public communication owners                | Unknown                                                                                                                                             |
+| Maximum rollback decision and execution times       | Not approved                                                                                                                                        |
 
 Blank or inferred values are a P0 launch blocker.
 
@@ -59,7 +61,9 @@ Two live identities must not be conflated during rollback:
 - `truthtrace.app` currently presents a different blockchain/content-authenticity TruthTrace product. Do not use it as a fallback, redirect target, contact destination, or canonical origin for this family-law candidate unless ownership and product alignment have been formally resolved.
 - `truthtrace.ai` currently presents a legacy family-law site from Lovable project `truthtrace-website` and private repository `rvalentz292/truthtrace-website`, not this public release repository. Restoring it requires its actual immutable Lovable deployment or DNS before-state; checking out an older commit in this repository cannot reproduce that live site.
 
-The existing `truthtrace.ai` sitemap was observed with 10 routes, including `/privacy`, `/terms`, and `/contact`. Rollback verification must cover the complete prelaunch route inventory, not only `/`.
+The legacy `truthtrace.ai` sitemap was observed with 10 routes, but that raw Lovable state contains soft `404` responses, tracking, and unapproved contact surfaces. The approved replacement sitemap has exactly `/`, `/technology`, `/privacy`, `/terms`, and `/contact`. Rollback verification must cover the approved route policy, not only `/` and not merely the legacy sitemap.
+
+A raw restore of the legacy Lovable deployment is therefore insufficient. If provider recovery uses that artifact, a separately approved and rehearsed edge/application containment layer must continue serving the approved `TruthTrace Website Privacy Notice` and `TruthTrace Website Terms of Use`, both effective July 15, 2026, plus the static contact boundary; preserve `/private-demo` as `410`; return true `404` responses for unlisted paths; enforce apex/`www` policy; and suppress legacy Google/Lovable tracking and unauthorized cookies. Without that layer, remain contained and escalate rather than declaring rollback complete.
 
 ## Immediate rollback triggers
 
@@ -69,8 +73,10 @@ The incident commander should order immediate rollback, without waiting for a fi
 - `truthtrace.app` is redirected to or represented as the family-law product without the required approval;
 - real evidence intake, upload, live workspace access, account creation, or lead collection is exposed unexpectedly;
 - personal or family-law information is sent to an unapproved recipient or service;
-- unapproved analytics, cookies, form endpoints, model calls, or error-reporting data appear in production;
-- approved privacy, terms, contact, or other protected legacy routes return an unintended `404`, redirect, or unrelated content;
+- Google/Lovable analytics, tracking hooks/endpoints, unauthorized cookies, form endpoints, model calls, or error-reporting data appear in production;
+- `/privacy` or `/terms` differs from the reviewed July 15, 2026 content, is proxied to Lovable, or returns an unintended redirect/status;
+- `/contact` exposes a form, contact channel, email, telephone number, upload, intake, or unrelated content;
+- `/private-demo` does not return `410`, an unlisted route does not return a true `404`, or either is blanket-redirected home;
 - a canonical, robots, sitemap, apex/`www`, or redirect error risks indexing the wrong product/domain at scale;
 - TLS/certificate failure, redirect loop, broad `5xx`, or unavailable critical routes prevents safe use;
 - security headers are stripped in a way the security owner classifies as unsafe, or an exploitable client/server vulnerability is observed;
@@ -122,11 +128,12 @@ Before launch, the hosting administrator must replace this section through revie
 4. promotes/restores that existing deployment without rebuilding a moving branch;
 5. returns the resulting active deployment ID and status;
 6. retrieves logs, route state, custom-domain state, and certificate state;
-7. can be reversed safely if the selected prior deployment is itself unhealthy.
+7. can be reversed safely if the selected prior deployment is itself unhealthy; and
+8. proves the restored state preserves the approved five-route publication boundary, legal/contact content, `/private-demo` `410`, unlisted-route true `404`, apex canonical host, and no-tracking/no-cookie posture.
 
 The procedure must record expected output and failure modes. It must be tested against a non-production environment and timed within the approved recovery objective.
 
-Do not run the generated Nitro deploy hint as a rollback. Do not assume the auto-derived generated worker name identifies production. Do not rebuild public-repository `main` and deploy it as an emergency substitute: the current live artifact comes from a different private repository. PR #3 is closed and must not be reused implicitly.
+Do not run the generated Nitro deploy hint as a rollback. Do not assume the auto-derived generated worker name identifies production. Do not rebuild public-repository `main` and deploy it as an emergency substitute: the current live artifact comes from a different private repository. PR #3 is closed and must not be reused implicitly. A raw legacy Lovable restore is not an acceptable final rollback state because it does not preserve the approved route, legal/contact, `410`/`404`, canonical-host, and no-tracking invariants. It may be used only inside an already approved and rehearsed containment sequence that restores all of those invariants before public traffic is accepted.
 
 ## Custom-domain binding rollback
 
@@ -145,7 +152,7 @@ Do not repoint a family-law domain to the generated local-preview worker or to `
 
 ## DNS rollback
 
-**HARD STOP — DNS PROVIDER, RECORDS, TTLs, AND RESTORE PROCEDURE UNKNOWN.**
+**HARD STOP — AUTHENTICATED DNS ZONE, COMPLETE BEFORE-STATE, AND RESTORE PROCEDURE UNKNOWN.**
 
 DNS rollback is appropriate only when DNS changed or provider-level application restoration cannot recover the intended public endpoint. Before launch, export and independently verify:
 
@@ -162,22 +169,25 @@ DNS restoration does not instantly purge cached records. The incident commander 
 
 ## Legacy routes, canonical URLs, and indexing containment
 
-After application or DNS rollback, verify all legacy URLs from the approved migration matrix. At minimum, check `/privacy`, `/terms`, and `/contact`, along with `/`, `/technology`, each permanent redirect, and intended `404`/`410` behavior.
+After application or DNS rollback, verify the complete approved public boundary: `/`, `/technology`, `/privacy`, `/terms`, and `/contact` each return direct `200`; `/private-demo` returns `410`; and representative unlisted paths return a true `404`. Verify the apex is canonical and every `www` request uses one `301` directly to apex while preserving path and query, including static-asset requests at the provider edge.
 
 Verify that:
 
-- canonical links name the restored approved origin;
-- the apex/`www` redirect returns to the approved direction;
+- canonical links on all five public pages name the restored apex origin;
+- the `www` host returns one `301` directly to apex with path and query preserved for HTML and static assets;
 - no route crosses into the unrelated `truthtrace.app` product;
-- `robots.txt` and sitemap match the restored release;
-- legal/contact content is the approved version;
+- `robots.txt` matches the restored release and the sitemap contains exactly the five approved public URLs;
+- `/privacy` serves the approved `TruthTrace Website Privacy Notice` and `/terms` serves the approved `TruthTrace Website Terms of Use`, both effective July 15, 2026, directly and neither proxies, embeds, or redirects to Lovable;
+- `/contact` serves the approved static boundary content without a form, public email/phone channel, upload, or intake endpoint;
+- `/private-demo` remains `410` and absent from navigation, page metadata, sitemap, and public links; unlisted routes remain true `404`, without soft-`404` fallback content;
+- no concrete tracking token, Lovable hook, analytics request, or nonessential cookie is present; and
 - social metadata no longer points to the withdrawn artifact.
 
 Changing `robots.txt` is not a substitute for rollback and cannot remove already indexed content immediately. Search-console removal, sitemap resubmission, cache invalidation, and canonical repair must be treated as owner-approved incident follow-up, with exact provider/search procedures recorded separately.
 
 ## Data and integration rollback scope
 
-The audited candidate has no database, authentication, payment, form, email, CRM, analytics, evidence upload, or model endpoint. Therefore there is no application-data migration to reverse for this candidate.
+The audited candidate has no database, authentication, payment, form, public contact channel, CRM, analytics, evidence upload, or model endpoint. The local artifact contains no concrete tracking token or Lovable hook. Therefore there is no application-data migration to reverse for this candidate. Provider-side injection remains unverified until staging and production evidence show the same no-tracking/no-cookie posture at the public edge.
 
 This limited scope is conditional. If any such integration, platform-injected tracking, cookie, intake endpoint, or storage binding is added before launch, this runbook is invalid until it includes:
 
@@ -188,7 +198,7 @@ This limited scope is conditional. If any such integration, platform-injected tr
 - third-party disablement and verification;
 - idempotency and duplicate-submission handling.
 
-The optional platform-injected error hook must also be included if it is active in production.
+Any provider-injected tracker, error hook, analytics request, or nonessential cookie invalidates this runbook until it is disabled and its absence is verified in staging, production, and the rollback target.
 
 ## Post-rollback verification
 
@@ -196,17 +206,20 @@ The verification lead, independently of the operator, must record pass/fail for:
 
 - active provider account/project/environment and restored deployment ID;
 - restored artifact/version checksum and its approval record;
-- HTTPS certificate, apex/`www` redirect, and affected DNS records;
-- homepage and every retained legacy route/status/redirect;
-- privacy, terms, contact, robots, sitemap, canonical, and social metadata;
+- HTTPS certificate, apex canonical host, one-hop path/query-preserving `www` `301` for HTML and static assets, and affected DNS records;
+- direct `200` responses for `/`, `/technology`, `/privacy`, `/terms`, and `/contact`;
+- `/private-demo` `410` and true `404` behavior for representative unlisted paths;
+- direct approved `TruthTrace Website Privacy Notice` and `TruthTrace Website Terms of Use` content, both effective July 15, 2026, with no Lovable proxy/embed/redirect;
+- static `/contact` boundary content with no form, public channel, upload, or intake endpoint;
+- `robots.txt`, the exact-five-URL sitemap, canonical links, and social metadata;
 - static assets, favicon, manifest, and Open Graph image;
 - security headers at the public edge;
 - browser console/network health at mobile and desktop sizes;
 - keyboard navigation, mobile menu, representative controls, reduced-motion/forced-colors behavior, and 200% reflow;
-- absence of unexpected forms, uploads, accounts, tracking, cookies, or cross-domain contacts;
+- absence of forms, public contact/intake channels, uploads, accounts, concrete tracking tokens, Lovable hooks, analytics requests, nonessential cookies, or cross-domain contacts;
 - provider logs and independent availability checks throughout the approved observation window.
 
-Rollback is complete only when the incident commander accepts this evidence and records the restored public state. “Command succeeded” is not sufficient.
+Rollback is complete only when the incident commander accepts this evidence and records the restored public state. “Command succeeded” is not sufficient. A raw legacy Lovable restore cannot close rollback unless the approved containment sequence has also restored and verified every required invariant above.
 
 ## Communications and follow-up
 
@@ -219,4 +232,4 @@ Rollback is complete only when the incident commander accepts this evidence and 
 
 ## Runbook completion gate
 
-This rollback runbook is not operational until provider deployment, custom-domain, and DNS procedures are filled with exact approved commands/actions; the prior recoverable deployment is captured; role owners are named; and the complete sequence has been rehearsed. Until that happens, publication remains **BLOCKED**.
+This rollback runbook is not operational until provider deployment, custom-domain, and DNS procedures are filled with exact approved commands/actions; a prior recoverable deployment that preserves the five routes, legal/contact boundary, `410`/`404`, apex canonical host, and no-tracking posture is captured; role owners are named; and the complete sequence has been rehearsed. A raw legacy Lovable artifact alone is insufficient. Until that happens, publication remains **BLOCKED**.

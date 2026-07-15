@@ -2,7 +2,16 @@
 
 ## Result
 
-The candidate materially improves comprehension, emotional safety, claim discipline, and safe next-action clarity for all six required personas. Scores assess candidate `8fca95f914fe463da89073aa7e97607d59f0a9ad` and its representative interactions, not an unverified production deployment. The release verdict remains `BLOCKED` because exact candidate-to-provider identity, deployment and rollback controls, legal/contact route migration, provider edge/analytics behavior, counsel disposition, and a verified contact route are unresolved. The canonical family-law origin itself is founder-approved and repository configuration passes.
+The candidate materially improves comprehension, emotional safety, claim
+discipline, and safe next-action clarity for all six required personas. Scores
+assess candidate `04035bd053d61aec308282a9a861c3da94285fc2` and its
+representative interactions, not an unverified production deployment. The approved
+first-cutover decision, exact July 15, 2026 TruthTrace Website Privacy Notice and
+TruthTrace Website Terms of Use, and
+static Contact boundary are implemented locally. The release verdict remains
+`BLOCKED` because exact candidate-to-provider identity, provider whole-host behavior,
+staging, deployment and rollback controls, and counsel disposition remain
+unresolved. The canonical origin and route decision are founder-approved.
 
 Scale: `1` is unusable or actively misleading; `10` is exceptionally clear and supported for the persona. Each cell is `before → after`. Baseline scores refer to `main` at `1b5530784b564b679f733f77ff40aa7f7da53978`; after scores refer to the audited working candidate on `homepage-final-publication-gate-20260715`.
 
@@ -22,13 +31,21 @@ Scale: `1` is unusable or actively misleading; `10` is exceptionally clear and s
 
 The first viewport now states the category, audience, evidence types, desired structure, professional-review boundary, preview status, and safest next action without asking for case details. Adverse synthetic conclusions were replaced with neutral record descriptions. “No real family information” and “No evidence uploads” are visible before the interactive examples, and the limitations section excludes legal advice, diagnosis, credibility determinations, custody predictions, admissibility determinations, and replacement of professional judgment.
 
-The remaining trust deduction reflects the absence of a verified production identity and approved public policies, not a weakness hidden by the page. The CTA intentionally leads to a representative workflow rather than collecting a stressed visitor's sensitive matter data.
+The remaining trust deduction reflects the absence of a verified production
+deployment, not missing public policies. The approved Privacy Notice and Terms now
+state the browse-only boundary, and the static Contact page warns visitors not to
+submit case material while publishing no contact channel. The CTA intentionally
+leads to a representative workflow rather than collecting a stressed visitor's
+sensitive matter data.
 
 ### B — Family-law attorney
 
 The page communicates a source-linked chronology, citations, excerpts, locators, sample source identifiers, review boundaries, and role-adapted framing without consumer-app hype. The technology route distinguishes outcome-level objectives from production guarantees. Exact enforcement, preservation, chain-of-custody, role-access, and format-availability claims were removed.
 
-Trust and CTA scores are capped because there is no verified professional contact route, approved pilot status, production product proof, or intake process. That is an honest release limitation: the internal workflow CTA is safe and clear but is not yet a credible professional conversion path.
+Trust and CTA scores are capped because there is no verified professional contact
+channel, approved pilot status, production product proof, or intake process. The
+approved `/contact` page is a boundary notice, not a contact channel: it exposes no
+form, input, email, phone, upload, or intake path.
 
 ### C — Evaluator or forensic professional
 
@@ -46,13 +63,22 @@ Investor trust and proof remain the lowest after-scores because no customer outc
 
 The candidate still demonstrates a technical product concept at the outcome level but removes “EvidenceObject,” deterministic-processing, exact pipeline, universal enforcement, chain-of-custody, and versioned-derivative claims from the public surface. The technology page expressly avoids proprietary implementation disclosure.
 
-Scores are capped because the current HEAD lineage has 86 commits and the all-ref scan reaches 87 commits; prior architecture-rich copy and screenshots may remain in distributed Git history. Removing files from the current tree does not retract historical disclosure. Counsel must decide whether repository-history remediation or other legal action is required before publication.
+Scores are capped because the implementation candidate lineage has 91 commits and the all-ref scan at the implementation-record cutoff reaches 93 commits; prior architecture-rich copy and screenshots may remain in distributed Git history. Removing files from the current tree does not retract historical disclosure. Counsel must decide whether repository-history remediation or other legal action is required before publication.
 
 ### F — Security-conscious visitor
 
-The trust section now gives narrow, testable answers: the rendered public routes have no evidence upload, case intake form, account system, or live matter workspace; therefore no case material is submitted here for storage or model training. It also says retention, deletion, transfer, access, and training terms must be approved before future intake. Route and artifact inspection found no active form, cookie flow, analytics integration, or case-data submission path, and server responses receive a baseline security-header set. Unused generic UI source retains a preference-cookie writer and an HTML chart-style helper; neither is imported by the candidate routes, and both require renewed review before future use.
+The trust section and approved Privacy Notice now give narrow, testable answers:
+the five public `200` routes have no evidence upload, case intake form, account
+system, payment flow, or live matter workspace. The Contact page has no form,
+input, email, phone, upload, or intake path. Lovable's error hook was removed, no
+analytics or cookies are approved, and the built JavaScript scan passed. Policy
+statements are approved content, not automatic operational proof of what a hosting
+provider may inject.
 
-Trust and proof remain capped because the actual production host, deployment artifact, DNS, headers, analytics, privacy/legal routes, and rollback path have not been verified. These scores must be reassessed against the approved live domain before publication.
+Trust and proof remain capped because the actual production host, exact deployment
+artifact, whole-host routing, headers, analytics/cookies, and rollback path have not
+been verified in staging. These scores must be reassessed against the approved live
+domain before publication.
 
 ## What changed the scores
 
@@ -62,9 +88,19 @@ Trust and proof remain capped because the actual production host, deployment art
 - Public-site behavior and future product policy were separated explicitly.
 - Primary and secondary CTAs became working internal links; the unverified pilot mailbox was removed.
 - Keyboard navigation gained a skip link, named navigation regions, pressed-button semantics, visible focus, mobile-menu focus entry, Escape close, and focus restoration.
-- Responsive reflow was verified at 360, 768, 1440, and 1920 CSS-pixel viewports and a 640×360 200%-zoom equivalent.
+- Fresh exact-candidate checks pass the complete required homepage viewport matrix, all five routes at mobile and desktop widths, mobile-menu/CTA/skip-link interactions, and the 640×360 200%-zoom equivalent.
 - The public private-demo route and architecture-rich workspace components were removed from the current tree.
+- Exact approved TruthTrace Website Privacy Notice and TruthTrace Website Terms of Use content is available at the preserved routes,
+  both effective July 15, 2026; the exact static Contact boundary is also present.
+- Candidate route checks cover five `200` pages, the `/private-demo` `410`, true
+  `404` behavior, and the exact five-route sitemap. CI run `29387686387` passed
+  `14/14` tests.
 
 ## Production-trust ceiling
 
-These scores must not be interpreted as a publication readiness score. A visually strong, careful page can still be unsafe to publish into an unknown production system. Until the approved canonical domain and deployment identity are established, the page deliberately blocks indexing and the default production build. The only current verdict is `BLOCKED`.
+These scores must not be interpreted as a publication readiness score. Lighthouse
+for the candidate scored 98 Performance, 100 Accessibility, 100 Best Practices, and
+100 SEO, but a strong local artifact can still be unsafe to publish into an unknown
+production system. The canonical domain and route policy are approved; provider
+identity, whole-host behavior, staging, rollback, and counsel remain unresolved.
+The only current verdict is `BLOCKED`.
