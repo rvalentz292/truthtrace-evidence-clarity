@@ -30,6 +30,24 @@ not to touch tracked files, but its generated branch changed `package.json` and
 both files to their validated starting versions. The platform-generated
 dependency drift is neither hidden nor accepted into the candidate.
 
+## Changed-file scope review
+
+The 17 repository-controlled files already in the remediation were reviewed
+individually and retained because each maps directly to the authorized scope:
+
+| Scope                  | Files                                                                                     | Decision |
+| ---------------------- | ----------------------------------------------------------------------------------------- | -------- |
+| Site URL configuration | `.env.example`, workflow, robots, manifest, sitemap, publication validator, site metadata | retain   |
+| Required routes        | error-page helper, generated route tree, private-demo route, server entry                 | retain   |
+| Analytics removal      | `vite.config.ts`                                                                          | retain   |
+| Automated tests        | link/runtime gate, release unit tests                                                     | retain   |
+| Release evidence       | three remediation/root-cause/certification records                                        | retain   |
+
+This authorization adds only `src/content/website-privacy.ts` to that
+repository-controlled set. `package.json` and `bun.lock` remain visible in the
+PR solely to reverse Lovable's post-checkpoint dependency drift; they restore
+the validated versions and introduce no dependency change.
+
 ## `VITE_SITE_URL` root cause and remediation
 
 Every build script runs `scripts/validate-publication.mjs` before Vite. That Node process reads `process.env.VITE_SITE_URL`; it does not receive Vite's later `loadEnv` injection. The synchronized Lovable build lacked the variable, so the pre-build validator exited before Vite could compile the candidate.
@@ -60,6 +78,21 @@ The signed-in Lovable editor reported that its ignored project-root `.env` conta
 - The Lovable project-level **Visitor analytics** setting was switched from on to off. Fresh public HTML immediately stopped injecting `/~flock.js` and `/__l5e/events.js`.
 - No accessibility, routing, security-header, SEO, or non-tracking performance behavior was removed.
 
+## Security-cookie authorization and disclosure
+
+On 2026-07-15, the product owner authorized classifying Cloudflare's `__cf_bm`
+cookie as `APPROVED_STRICTLY_NECESSARY`, subject to final legal/counsel review.
+The Privacy Notice now discloses only the observed and authorized facts: the
+cookie name; Cloudflare through Lovable hosting as provider; strictly necessary
+security/bot-management category; legitimate-traffic and automated-abuse
+purpose; `lovable.app` domain, `/` path, and approximately 30-minute observed
+expiration; the platform-control boundary; and that TruthTrace does not use it
+for advertising, marketing, personalization, or visitor analytics.
+
+This product authorization removes the prior product-policy objection to the
+cookie. It does not authorize merge before counsel review and does not certify
+the stale public deployment.
+
 ## Route policy
 
 The required `/private-demo=200` gate is implemented as a static, noindex, browse-only page. It has no form, account, upload, evidence intake, API call, AI integration, database, or production evidence-processing connection. It remains excluded from the five-route sitemap.
@@ -82,13 +115,13 @@ The required `/private-demo=200` gate is implemented as a static, noindex, brows
 | Local cookies                                     | none on all required routes and unknown route                           |
 | Browser console                                   | no warnings or errors on all tested routes                              |
 | Canonical / Open Graph                            | correct Lovable origin on all six `200` routes                          |
-| Privacy / terms source                            | unchanged; approved tests pass                                          |
+| Privacy / terms source                            | authorized minimal privacy disclosure; terms unchanged; tests pass      |
 | Sitemap / robots                                  | local `200` and exact; stale public deployment still `404`              |
 
 ## Public-platform result
 
 - Lovable visitor analytics: disabled and verified absent from fresh public HTML.
-- `__cf_bm`: still set by Cloudflare/Lovable hosting on every tested response.
+- `__cf_bm`: product-approved as strictly necessary; final counsel review and exact-deployment verification remain pending.
 - Existing production deployment: stale; legal routes, robots, and sitemap remain `404`.
 - New candidate production build/deployment: not performed and not certified.
 

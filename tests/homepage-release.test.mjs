@@ -109,6 +109,23 @@ test("approved website privacy notice is browse-only and has the reviewed effect
     privacy,
     /does not intentionally use advertising cookies, behavioral tracking, session replay, or marketing analytics/i,
   );
+  assert.match(
+    privacy,
+    /Cloudflare, through Lovable hosting, uses the __cf_bm cookie as a strictly necessary security and bot-management cookie/i,
+  );
+  assert.match(
+    privacy,
+    /distinguish legitimate traffic and protect the hosted site from automated abuse/i,
+  );
+  assert.match(
+    privacy,
+    /platform-controlled cookie for the lovable\.app domain and \/ path with an expiration approximately 30 minutes after the response/i,
+  );
+  assert.match(privacy, /not TruthTrace application code/i);
+  assert.match(
+    privacy,
+    /TruthTrace does not use it for advertising, marketing, personalization, or visitor analytics/i,
+  );
   assert.match(privacy, /public website is not a secure case-intake or evidence-transfer system/i);
   assert.match(
     privacy,

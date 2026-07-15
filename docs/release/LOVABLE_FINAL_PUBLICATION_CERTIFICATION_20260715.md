@@ -17,10 +17,10 @@ PREVIEW_URL: https://id-preview--27174261-3589-4c48-bd32-0375b044b3d9.lovable.ap
 PREVIEW_PUBLISHED: NO — available preview is not the merged remediation candidate
 FILE_TREE_MATCH: NO — no merged/deployed candidate exists
 ROUTE_GATE: LOCAL PASS; STALE PUBLIC FAIL (/privacy, /terms, /contact are 404)
-PRIVACY_COPY_MATCH: LOCAL PASS; STALE PUBLIC FAIL (route is 404)
+PRIVACY_COPY_MATCH: LOCAL CANDIDATE PASS WITH PRODUCT-AUTHORIZED SECURITY-COOKIE DISCLOSURE; STALE PUBLIC FAIL (route is 404)
 TERMS_COPY_MATCH: LOCAL PASS; STALE PUBLIC FAIL (route is 404)
 ANALYTICS_STATUS: LOVABLE VISITOR ANALYTICS DISABLED; FRESH PUBLIC HTML HAS NO /~flock.js OR /__l5e/events.js; CANDIDATE DEPLOYMENT UNPROVEN
-COOKIE_STATUS: BLOCKED — unapproved __cf_bm remains on public responses
+COOKIE_STATUS: APPROVED_STRICTLY_NECESSARY — PRODUCT OWNER AUTHORIZED; FINAL LEGAL/COUNSEL REVIEW PENDING; EXACT PUBLIC DEPLOYMENT UNPROVEN
 CF_BM_SOURCE: CLOUDFLARE BOT MANAGEMENT AT THE LOVABLE HOSTING EDGE
 SITEMAP_STATUS: LOCAL PASS; STALE PUBLIC 404
 ROBOTS_STATUS: LOCAL PASS; STALE PUBLIC 404
@@ -29,14 +29,14 @@ OLD_PROJECT_MUTATED: NO — only the named truth-trace-forge target project was 
 TRUTHTRACE_AI_MUTATED: NO
 ROLLBACK_DOCUMENTED: YES
 FINAL_VERDICT: BLOCKED
-EXACT_NEXT_COMMAND: NONE — DO NOT MERGE OR DEPLOY UNTIL __cf_bm IS DISABLED OR EXPLICITLY APPROVED AND THE LOVABLE INTERNAL TRACKED STATE IS REPLACED BY THE EXACT GITHUB CANDIDATE
+EXACT_NEXT_COMMAND: NONE — DO NOT MERGE UNTIL FINAL LEGAL/COUNSEL APPROVAL IS RECORDED; AFTER MERGE, DEPLOY ONLY THE EXACT MERGED SHA AND RUN THE COMPLETE PUBLIC CERTIFICATION
 ```
 
 ## Blocking facts
 
 1. The remediation candidate is not merged or deployed.
 2. The current public deployment is stale and fails required legal/static routes.
-3. Cloudflare continues to set the unapproved `__cf_bm` cookie.
+3. The product owner approved `__cf_bm` as strictly necessary security infrastructure, but final legal/counsel review is still pending and the authorized disclosure is not on the stale public deployment.
 4. A real production build has not yet proved that the merged candidate receives the required `VITE_SITE_URL`.
 5. The deployed commit/tree cannot be matched because no remediation deployment exists.
 6. During the configuration attempt, Lovable advanced `main` to `fbec9ef33bce5c4d7fea687122e548d8fa3ac7bc` with an unauthorized dependency/lockfile change. Draft PR #5 visibly restores that drift; it is not hidden or accepted as part of the candidate.
