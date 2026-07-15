@@ -1,0 +1,134 @@
+# TruthTrace Homepage Public-History Counsel Handoff — 2026-07-15
+
+**Status:** `COUNSEL REVIEW REQUIRED`
+
+**Decision authority:** Patent counsel and the authorized repository owner.
+
+**Purpose:** Inventory architecture-rich or potentially patent-sensitive material that remains reachable from the public Git repository after the current release candidate removed or qualified the corresponding public-site surfaces.
+
+This is a factual engineering inventory, not a legal opinion, patentability analysis, waiver, publication authorization, or recommendation to rewrite history. No branch, pull-request ref, tag, commit, or object was changed while preparing it.
+
+## 1. Scope and immutable snapshot
+
+The inventory uses the committed public-ref state below. Uncommitted release work in the shared worktree is outside this history analysis.
+
+| Field                                 | Verified value                                                                                              |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Repository                            | `rvalentz292/truthtrace-evidence-clarity`                                                                   |
+| Repository URL                        | `https://github.com/rvalentz292/truthtrace-evidence-clarity`                                                |
+| Visibility                            | `PUBLIC`                                                                                                    |
+| Repository created                    | `2026-06-12T01:54:31Z`                                                                                      |
+| Default branch                        | `main`                                                                                                      |
+| Default-branch SHA                    | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                  |
+| Audited release branch                | `homepage-final-publication-gate-20260715`                                                                  |
+| Audited committed PR #4 head          | `55b07c4e707bed6e7975bf7dfd78d51a7b10d3ef`                                                                  |
+| Sanitizing implementation commit      | `df6647616901b2e5eb2dc1d16255ffcc8140a78d`                                                                  |
+| Reachable commits across fetched refs | 89                                                                                                          |
+| Public remote branches                | `main`, `p0-homepage-controlled`, `website-100m-final-20260714`, `homepage-final-publication-gate-20260715` |
+| Public pull requests                  | #1 merged, #2 merged, #3 closed without merge, #4 open draft                                                |
+| Public tags                           | None returned by `git ls-remote origin`                                                                     |
+
+### Timestamp interpretation
+
+Git commit dates are not necessarily publication dates. GitHub's current public repository-event feed supplies exact branch-creation, pull-request, and recent push times, but it does not expose an historical push event for every June commit.
+
+The inventory therefore labels timestamps as follows:
+
+- **Public event:** an exact GitHub branch-create, pull-request-create, or push event.
+- **Commit timestamp:** the earliest attributable Git timestamp where an historical push time is unavailable. It is evidence of when the commit was created, not proof of the exact second it became public.
+- **Repository-public bound:** for commits dated before the repository existed, `2026-06-12T01:54:31Z` is the earliest possible publication time through this repository. The exact initial-push time is not available from the current event feed.
+
+This distinction prevents the engineering record from overstating a public-disclosure date that GitHub does not prove.
+
+## 2. Executive finding
+
+The current PR #4 tree removes `src/components/site/HeroPipeline.tsx`, `src/components/site/Workspace.tsx`, and `src/routes/private-demo.tsx`; it also rewrites the homepage and technology copy to use qualified, representative, outcome-level language. Those current-tree changes reduce new surface exposure.
+
+They do **not** retract the earlier material:
+
+1. the public `main` tip still contains the former private-demo route, the pipeline component, the workspace component, and the detailed pre-audit homepage;
+2. the public `p0-homepage-controlled` and `website-100m-final-20260714` branch tips retain architecture-rich files;
+3. all four GitHub pull-request head commits descend from early architecture-rich commits;
+4. GitHub exposes `refs/pull/1/head` through `refs/pull/4/head`, and also exposes a current PR #4 merge ref;
+5. PR #3 is now closed without merge, but `website-100m-final-20260714` remains a public branch and its screenshot/document commit remains directly reachable;
+6. PR #4's release documentation itself preserves a compact audit record of some removed terminology; and
+7. existing clones, forks, caches, commit URLs, and previously fetched objects are not recalled by deleting a current-tree file or a branch ref.
+
+No patent-counsel disposition or authorized-owner waiver was found in the inspected repository or pull-request metadata. The publication gate's patent/public-history condition therefore remains `COUNSEL REVIEW REQUIRED`.
+
+## 3. Content inventory
+
+The “current-tree status” column refers to committed PR #4 head `55b07c4e707bed6e7975bf7dfd78d51a7b10d3ef`, not to uncommitted worktree changes.
+
+| ID   | Path and material                                                                                                                                                                                                                                                                                                                                                                                                | First/representative commit SHA                                                                                                   | First known public timestamp                                                                                                              | Current-tree status                                                                                                            | Public branch / PR reachability                                                                                                                                          | Suggested counsel decision |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| H-01 | `src/routes/index.tsx` — early homepage architecture/moat sections described an EvidenceObject-centered transformation, cryptographic identity, deterministic/idempotent processing, provenance/export behavior, and a live workspace model.                                                                                                                                                                     | `3ef21627b0fdade15a60b944ac846819c9e9231f`                                                                                        | `2026-06-12T01:54:31Z` — repository-public bound; commit time `2026-06-12T01:43:59Z` predates repository creation                         | File remains, but the architecture-rich original blob is replaced by qualified release-candidate routing/content.              | The commit is an ancestor of all four public branches and PR #1–#4 heads. It remains fetchable by SHA.                                                                   | `counsel review required`  |
+| H-02 | `src/components/site/HeroPipeline.tsx` — a detailed visual pipeline with EvidenceObject/SHA identity, deterministic/idempotent/auditable framing, export stages, integrity state, and chain-of-custody state.                                                                                                                                                                                                    | `4eb04c596b02374e305f2a7c35f69f6b087d9f4d`                                                                                        | `2026-06-12T01:54:31Z` — repository-public bound; commit time `2026-06-12T01:41:35Z` predates repository creation                         | Deleted by `df6647616901b2e5eb2dc1d16255ffcc8140a78d`.                                                                         | The file remains present at the public `main`, `p0-homepage-controlled`, and `website-100m-final-20260714` tips. Its introducing commit is also an ancestor of PR #1–#4. | `counsel review required`  |
+| H-03 | `src/components/site/Workspace.tsx` — a rich simulated workstation exposing source/timeline/finding relationships, an Evidence Inspector, EvidenceObject identifiers, citations, review state, and chain-of-custody state.                                                                                                                                                                                       | `4eb04c596b02374e305f2a7c35f69f6b087d9f4d`                                                                                        | `2026-06-12T01:54:31Z` — repository-public bound; commit time `2026-06-12T01:41:35Z` predates repository creation                         | Deleted by `df6647616901b2e5eb2dc1d16255ffcc8140a78d`.                                                                         | The file remains present at the public `main`, `p0-homepage-controlled`, and `website-100m-final-20260714` tips. Its introducing commit is also an ancestor of PR #1–#4. | `counsel review required`  |
+| H-04 | `src/routes/about.tsx` — the first About surface used diagrams and public copy to map fragments into EvidenceObjects, timelines, citations, findings, and exports, with deterministic/provenance assertions and system-layer descriptions.                                                                                                                                                                       | `84de85c01867127a55fa008ed593ba89879c0df3`                                                                                        | `2026-06-12T01:59:34Z` — commit timestamp; exact historical push time unavailable                                                         | Original route is absent. PR #3 later added a different About route, which is also absent from PR #4.                          | The historical commit is an ancestor of all four public branches and PR #1–#4. A separate About implementation is present at PR #3 head.                                 | `counsel review required`  |
+| H-05 | `src/routes/about.tsx` — later “Intellectual Property & Innovation” section named proprietary focus areas, asserted filed patent applications, summarized an end-to-end transformation, and identified patent-counsel context.                                                                                                                                                                                   | `b927247c32fda4398c604220fe2b5ffaad77f43e` (merged through `21bd51bc8a84dc761717805d46058abde0c1e90f`)                            | `2026-06-12T02:08:20Z` — commit timestamp; exact historical push time unavailable                                                         | Original section is absent from the PR #4 tree.                                                                                | The commit is an ancestor of all four public branches and PR #1–#4. It is reachable from public `main` history even though the path is absent at that tip.               | `counsel review required`  |
+| H-06 | `src/routes/private-demo.tsx` and `src/routeTree.gen.ts` — a publicly routable `/private-demo` surface embedding `Workspace`; a later change added “Private Demo Environment / Not For Public Distribution” language without access control.                                                                                                                                                                     | `074186d7c36bfb1f258df204d83356ff542f0f89` introduced the route; `f4611047605bbdd2c17bf9603dc7096715e63e10` added the later label | `2026-06-13T01:53:40Z` — first-route commit timestamp; exact historical push time unavailable                                             | Route and generated registration deleted by `df6647616901b2e5eb2dc1d16255ffcc8140a78d`.                                        | Route remains at the public `main`, `p0-homepage-controlled`, and `website-100m-final-20260714` tips. The introducing commit is an ancestor of PR #1–#4.                 | `counsel review required`  |
+| H-07 | `src/routes/technology.tsx` — public technology copy named evidence identity, provenance, incremental processing, citation-bound outputs, deterministic processing, and patent-pending technology.                                                                                                                                                                                                               | `5e88b9fda1fff97b01e9122243e346340967e816`                                                                                        | `2026-06-13T02:33:50Z` — commit timestamp; exact historical push time unavailable                                                         | File remains but is rewritten as qualified design objectives without proprietary mechanics.                                    | Legacy unqualified content remains at the public `main`, `p0-homepage-controlled`, and `website-100m-final-20260714` tips; the commit is an ancestor of PR #1–#4.        | `counsel review required`  |
+| H-08 | `src/components/site/HomePage.tsx` — first componentized homepage repeated deterministic-processing, EvidenceObject, provenance, citation-bound-output, patent-pending, and workflow architecture language.                                                                                                                                                                                                      | `8493a8c88f647f34b459f3ff3819fa9585c9716d`                                                                                        | `2026-06-13T02:34:45Z` — commit timestamp; exact historical push time unavailable                                                         | File remains, materially rewritten and qualified by the release candidate.                                                     | The commit is an ancestor of all four public branches and PR #1–#4. Legacy variants remain in public branch tips.                                                        | `counsel review required`  |
+| H-09 | `src/components/site/HomePage.tsx` — later detailed workstation/proof-chain release added a processing ledger, sample run identifiers/counts, a trust-architecture map, original/derivative handling, custody events, export gating, role access, and universal enforcement language.                                                                                                                            | `c2eb679a36b0e77bbfbd321dace13ef1933cadf2`                                                                                        | `2026-07-12T19:19:06Z` — public `main` PushEvent headed by `1b5530784b564b679f733f77ff40aa7f7da53978`; commit time `2026-07-12T19:18:37Z` | File remains, but the detailed assertions and identifiers are removed or converted to visibly illustrative, non-live examples. | Detailed content is present at the public `main` and `website-100m-final-20260714` tips. The commit is an ancestor of PR #3 and PR #4, but not PR #1 or PR #2.           | `counsel review required`  |
+| H-10 | `docs/homepage/IMPLEMENTATION_REPORT.md`, `docs/homepage/CATEGORY_LEADER_FINAL_GATE.md`, `docs/homepage/VISUAL_QA.md`, `docs/homepage/lighthouse-final.json`, and `docs/homepage/screenshots/candidate/**` — PR #3's reports and captured images describe or visibly reproduce the platform architecture, processing ledger, evidence chain, role view, trust architecture, pilot dialog, and complete homepage. | `64aac286beb3df3c898e2f975f27e589d5079456`                                                                                        | `2026-07-14T18:11:07Z` — exact public branch CreateEvent; PR #3 followed at `2026-07-14T18:11:32Z`                                        | Entire `docs/homepage/**` group is absent from PR #4.                                                                          | Present at the public `website-100m-final-20260714` tip and `refs/pull/3/head`. PR #3 is closed without merge, but the branch remains public.                            | `counsel review required`  |
+| H-11 | `docs/release/HOMEPAGE_PUBLIC_CLAIM_REGISTER_20260715.md`, `HOMEPAGE_CHANGELOG_20260715.md`, `HOMEPAGE_RELEASE_AUDIT_20260715.md`, `HOMEPAGE_PERSONA_SCORECARD_20260715.md`, and `HOMEPAGE_REPOSITORY_MAP_20260715.md` — current audit records summarize, and in the claim register compactly quote, removed architecture terminology and former public assertions.                                              | `df6647616901b2e5eb2dc1d16255ffcc8140a78d`                                                                                        | `2026-07-15T01:12:44Z` — exact public release-branch CreateEvent; PR #4 followed at `2026-07-15T01:13:32Z`                                | Present in the current PR #4 tree. The claim register is the most detailed of the group.                                       | Present at the public `homepage-final-publication-gate-20260715` tip and `refs/pull/4/head`; PR #4 is open as a draft.                                                   | `counsel review required`  |
+
+## 4. Public ref and pull-request reachability map
+
+Closing a pull request does not delete its head branch or all GitHub-maintained pull-request refs. The following state was verified with GitHub metadata plus `git ls-remote origin`.
+
+| Public ref or PR                                      | Current SHA                                | First explicit public event                                                            | Current status                                               | Relevant inventory                                                                                   | Suggested counsel decision |
+| ----------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | -------------------------- |
+| `refs/heads/main`                                     | `1b5530784b564b679f733f77ff40aa7f7da53978` | Repository created `2026-06-12T01:54:31Z`; recent recorded push `2026-07-12T19:19:06Z` | Public default branch                                        | Ancestor access to H-01–H-09; H-02, H-03, H-06, H-07, H-08, and H-09 are also represented at the tip | `counsel review required`  |
+| `refs/heads/p0-homepage-controlled`                   | `98c0e08d6cbac55edc921d65d2cf4bc8696431b7` | Branch CreateEvent `2026-07-10T19:52:05Z`                                              | Public branch; source for merged PR #1 and PR #2             | Ancestor access to H-01–H-08; multiple legacy files remain at tip                                    | `counsel review required`  |
+| PR #1 / `refs/pull/1/head`                            | `8f4e010d3f4772a09788b64049a541072d2cb0c9` | PR created `2026-07-10T20:18:36Z`                                                      | Merged `2026-07-10T20:18:44Z`                                | H-01–H-08 ancestry                                                                                   | `counsel review required`  |
+| PR #2 / `refs/pull/2/head`                            | `98c0e08d6cbac55edc921d65d2cf4bc8696431b7` | PR created `2026-07-10T20:22:01Z`                                                      | Merged `2026-07-10T20:22:08Z`                                | H-01–H-08 ancestry                                                                                   | `counsel review required`  |
+| `refs/heads/website-100m-final-20260714`              | `64aac286beb3df3c898e2f975f27e589d5079456` | Branch CreateEvent `2026-07-14T18:11:07Z`                                              | Public branch remains                                        | H-01–H-10; architecture-rich source, reports, and screenshots at tip                                 | `counsel review required`  |
+| PR #3 / `refs/pull/3/head`                            | `64aac286beb3df3c898e2f975f27e589d5079456` | PR created `2026-07-14T18:11:32Z`                                                      | Closed without merge `2026-07-15T01:29:08Z`                  | H-01–H-10                                                                                            | `counsel review required`  |
+| `refs/heads/homepage-final-publication-gate-20260715` | `55b07c4e707bed6e7975bf7dfd78d51a7b10d3ef` | Branch CreateEvent `2026-07-15T01:12:44Z`                                              | Public release branch                                        | Sanitized current source plus ancestor access to H-01–H-09 and current H-11 documents                | `counsel review required`  |
+| PR #4 / `refs/pull/4/head`                            | `55b07c4e707bed6e7975bf7dfd78d51a7b10d3ef` | PR created `2026-07-15T01:13:32Z`                                                      | Open draft                                                   | H-01–H-09 ancestry; H-11 at tip                                                                      | `counsel review required`  |
+| `refs/pull/4/merge`                                   | `cd19db2d073f62752cde093fce5b55ae25140192` | Observed by `git ls-remote origin` during this audit                                   | GitHub-generated merge-test ref; not a release authorization | Same source ancestry as PR #4                                                                        | `counsel review required`  |
+
+## 5. Counsel decision record
+
+No legal decision is entered by release engineering. Counsel or the authorized owner may replace `counsel review required` for an item only with one of the brief's permitted values:
+
+- `no action`
+- `make repository private`
+- `remove branch/reference`
+- `preserve for patent record`
+- `counsel review required`
+
+| Item IDs  | Recorded decision         | Decision maker   | Date             | Matter / advice reference |
+| --------- | ------------------------- | ---------------- | ---------------- | ------------------------- |
+| H-01–H-11 | `counsel review required` | Not yet recorded | Not yet recorded | Not yet recorded          |
+
+### Engineering facts counsel should account for
+
+- Making a repository private changes future repository access; it does not recall existing clones, caches, screenshots, or prior observations.
+- Removing `website-100m-final-20260714` would reduce a direct branch-tip reference to H-10, but the PR #3 record and previously fetched objects may remain. It would not remove H-01–H-09 from `main` history.
+- Removing `p0-homepage-controlled` would not remove commits already merged into public `main` or GitHub's PR #1/#2 records.
+- Deleting a current-tree path, as PR #4 does, does not remove the historical blob from ancestor commits.
+- The current release documents in H-11 are themselves public while PR #4 and its branch remain public. This handoff will also become public if committed and pushed to that branch; it intentionally identifies categories and provenance rather than adding new implementation mechanics.
+- No history rewrite, force-push, object deletion, branch deletion, repository-visibility change, or request to GitHub support occurred in this pass.
+
+## 6. Evidence and reproducibility
+
+The inventory was produced from read-only inspection using:
+
+- `git ls-remote origin` for public branch and pull-ref presence;
+- `git show-ref`, `git for-each-ref`, and `git branch -r --contains` for ref heads and ancestry;
+- `git merge-base --is-ancestor` for PR-head reachability;
+- `git log --all`, `git log -S`, `git show`, `git grep`, and `git ls-tree` for introduction, deletion, and content status;
+- GitHub repository metadata for public visibility and repository creation;
+- GitHub pull-request metadata for PR head, state, create, merge, and close times; and
+- GitHub public repository events for recent branch-create and push timestamps.
+
+The exact historical June push times are not available in the current GitHub event feed. That limitation is preserved in the timestamp column and must not be converted into a more precise disclosure claim without additional provider evidence.
+
+## 7. Publication-gate disposition
+
+`PATENT_COUNSEL_STATUS: COUNSEL REVIEW REQUIRED`
+
+This document satisfies the engineering inventory requirement only. It does not satisfy the release brief's requirement for a recorded patent/public-history counsel decision or an explicit waiver from the authorized owner. Until one is recorded with decision maker, date, and matter/advice reference, this condition remains open for the final publication gate.

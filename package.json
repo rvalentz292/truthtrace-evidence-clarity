@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "bun run release:config && vite build",
-    "build:artifact": "vite build",
-    "build:dev": "vite build --mode development",
-    "build:publication": "bun run build",
+    "build": "node scripts/validate-publication.mjs && vite build",
+    "build:artifact": "node scripts/validate-publication.mjs && vite build",
+    "build:dev": "node scripts/validate-publication.mjs && vite build --mode development",
+    "build:publication": "node scripts/validate-publication.mjs && vite build",
     "preview": "wrangler dev --config .output/server/wrangler.json --ip 127.0.0.1 --port 4173",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -16,7 +16,9 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
     "check:links": "node scripts/check-links.mjs",
-    "release:config": "node scripts/validate-publication.mjs"
+    "audit:dependencies": "node scripts/audit-dependencies.mjs",
+    "release:config": "node scripts/validate-publication.mjs",
+    "release:surface": "node scripts/validate-release-surface.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

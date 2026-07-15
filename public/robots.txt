@@ -1,3 +1,4 @@
-# Publication interlock: replace only after the production domain and target are approved.
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://truthtrace.ai/sitemap.xml
