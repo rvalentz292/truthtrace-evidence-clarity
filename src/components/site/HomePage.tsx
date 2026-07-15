@@ -787,9 +787,7 @@ function Footer() {
             <span className="text-[14px] font-semibold tracking-tight">TruthTrace</span>
           </div>
           <p className="mt-4 text-[12.5px] leading-relaxed text-muted-foreground">
-            TruthTrace provides evidence-organization and review-support technology. It does not
-            provide legal advice, determine admissibility, recommend custody outcomes, diagnose
-            individuals, or replace qualified professional judgment.
+            {"TruthTrace provides evidence-organization and review-support technology. It does not provide legal advice, determine admissibility, recommend custody outcomes, diagnose individuals, or replace qualified professional judgment."}
           </p>
           <p className="mt-3 text-[12px] leading-relaxed text-muted-foreground">
             No evidence uploads on this site · No real family information shown
