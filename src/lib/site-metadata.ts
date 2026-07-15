@@ -4,20 +4,47 @@ type PageMetadata = {
   description: string;
 };
 
-export const APPROVED_SITE_ORIGIN = "https://truthtrace.ai";
+export const APPROVED_SITE_ORIGIN = "https://truth-trace-forge.lovable.app";
 
-function requireConfiguredSiteOrigin(): string {
-  if (import.meta.env.VITE_SITE_URL?.trim() !== APPROVED_SITE_ORIGIN) {
+function normalizeConfiguredSiteOrigin(value: string | undefined): string {
+  if (!value?.trim()) {
+    throw new Error(`VITE_SITE_URL is required and must equal ${APPROVED_SITE_ORIGIN}.`);
+  }
+
+  let url: URL;
+  try {
+    url = new URL(value.trim());
+  } catch {
+    throw new Error(
+      `VITE_SITE_URL must be a valid absolute HTTPS origin: ${APPROVED_SITE_ORIGIN}.`,
+    );
+  }
+
+  if (
+    url.protocol !== "https:" ||
+    url.username ||
+    url.password ||
+    url.pathname !== "/" ||
+    url.search ||
+    url.hash
+  ) {
+    throw new Error(
+      `VITE_SITE_URL must be an HTTPS origin without credentials, a path, query, or fragment: ${APPROVED_SITE_ORIGIN}.`,
+    );
+  }
+
+  const normalizedOrigin = url.origin;
+  if (normalizedOrigin !== APPROVED_SITE_ORIGIN) {
     throw new Error(
       `VITE_SITE_URL must equal the approved publication origin ${APPROVED_SITE_ORIGIN}.`,
     );
   }
 
-  return APPROVED_SITE_ORIGIN;
+  return normalizedOrigin;
 }
 
 export function createPageHead({ path, title, description }: PageMetadata) {
-  const origin = requireConfiguredSiteOrigin();
+  const origin = normalizeConfiguredSiteOrigin(import.meta.env.VITE_SITE_URL);
   const canonical = new URL(path, origin).toString();
   const socialImage = new URL("/og.png", origin).toString();
 

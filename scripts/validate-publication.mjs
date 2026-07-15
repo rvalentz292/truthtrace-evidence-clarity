@@ -2,11 +2,44 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
-const approvedOrigin = "https://truthtrace.ai";
+const approvedOrigin = "https://truth-trace-forge.lovable.app";
 const failures = [];
 
-if (process.env.VITE_SITE_URL !== approvedOrigin) {
-  failures.push(`VITE_SITE_URL must be present and equal the approved origin ${approvedOrigin}.`);
+function normalizeConfiguredSiteOrigin(value) {
+  if (!value?.trim()) {
+    throw new Error(`VITE_SITE_URL is required and must equal ${approvedOrigin}.`);
+  }
+
+  let url;
+  try {
+    url = new URL(value.trim());
+  } catch {
+    throw new Error(`VITE_SITE_URL must be a valid absolute HTTPS origin: ${approvedOrigin}.`);
+  }
+
+  if (
+    url.protocol !== "https:" ||
+    url.username ||
+    url.password ||
+    url.pathname !== "/" ||
+    url.search ||
+    url.hash
+  ) {
+    throw new Error(
+      `VITE_SITE_URL must be an HTTPS origin without credentials, a path, query, or fragment: ${approvedOrigin}.`,
+    );
+  }
+
+  return url.origin;
+}
+
+try {
+  const configuredOrigin = normalizeConfiguredSiteOrigin(process.env.VITE_SITE_URL);
+  if (configuredOrigin !== approvedOrigin) {
+    failures.push(`VITE_SITE_URL must equal the approved origin ${approvedOrigin}.`);
+  }
+} catch (error) {
+  failures.push(error instanceof Error ? error.message : String(error));
 }
 
 const robotsPath = resolve(root, "public", "robots.txt");

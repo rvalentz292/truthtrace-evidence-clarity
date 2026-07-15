@@ -15,7 +15,7 @@ concurrency:
 
 env:
   CI: "true"
-  VITE_SITE_URL: https://truthtrace.ai
+  VITE_SITE_URL: https://truth-trace-forge.lovable.app
   SITE_UNDER_TEST: http://127.0.0.1:4173
 
 jobs:
