@@ -3,7 +3,7 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 
 const baseUrl = new URL(process.argv[2] ?? process.env.SITE_UNDER_TEST ?? "http://127.0.0.1:4173");
-const approvedOrigin = "https://truthtrace.ai";
+const approvedOrigin = "https://truth-trace-forge.lovable.app";
 const localTestHosts = new Set(["127.0.0.1", "localhost"]);
 
 if (!localTestHosts.has(baseUrl.hostname) || baseUrl.protocol !== "http:") {
@@ -12,7 +12,7 @@ if (!localTestHosts.has(baseUrl.hostname) || baseUrl.protocol !== "http:") {
   );
 }
 
-const entryPaths = ["/", "/technology", "/privacy", "/terms", "/contact"];
+const entryPaths = ["/", "/technology", "/privacy", "/terms", "/contact", "/private-demo"];
 const requiredPublicPaths = new Map([
   ["/favicon.svg", /^image\/svg\+xml\b/i],
   ["/og.png", /^image\/png\b/i],
@@ -165,6 +165,9 @@ for (const entryPath of entryPaths) {
 
   const { body, response } = document;
   expectSecurityHeaders(response, entryPath);
+  if (response.headers.has("set-cookie")) {
+    failures.push(`${entryPath} unexpectedly set a cookie`);
+  }
   expectNoTrackingTokens(body, `${entryPath} HTML`);
   const expectedCanonical = new URL(entryPath, approvedOrigin).toString();
   if (!body.includes(`rel="canonical" href="${expectedCanonical}"`)) {
@@ -218,6 +221,22 @@ for (const entryPath of entryPaths) {
       if (body.toLowerCase().includes(forbidden)) {
         failures.push(`${entryPath} contains forbidden intake markup: ${forbidden}`);
       }
+    }
+  }
+
+  if (entryPath === "/private-demo") {
+    for (const marker of [
+      "Private Demo Environment",
+      "illustrative, non-interactive review page",
+      "does not connect to TruthTrace AI or production evidence processing",
+    ]) {
+      if (!body.includes(marker)) failures.push(`${entryPath} is missing boundary text: ${marker}`);
+    }
+    if (!/<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(body)) {
+      failures.push(`${entryPath} is missing a robots noindex meta tag`);
+    }
+    if (!(response.headers.get("x-robots-tag") ?? "").includes("noindex")) {
+      failures.push(`${entryPath} is missing an X-Robots-Tag noindex header`);
     }
   }
 
@@ -308,10 +327,7 @@ for (const [publicPath, contentType] of requiredPublicPaths) {
   }
 }
 
-for (const [path, expectedStatus] of new Map([
-  ["/private-demo", 410],
-  ["/__release_gate_missing_route__", 404],
-])) {
+for (const [path, expectedStatus] of new Map([["/__release_gate_missing_route__", 404]])) {
   const url = new URL(path, baseUrl);
   const document = await request(url);
   if (!document) continue;
@@ -331,7 +347,7 @@ for (const [path, expectedStatus] of new Map([
   expectSecurityHeaders(response, path);
 }
 
-for (const host of ["truthtrace.ai", "truthtrace.ai."]) {
+for (const host of ["truth-trace-forge.lovable.app", "truth-trace-forge.lovable.app."]) {
   for (const entryPath of entryPaths) {
     const url = new URL(entryPath, approvedOrigin);
     url.searchParams.set("host", "apex");
@@ -350,7 +366,7 @@ for (const host of ["truthtrace.ai", "truthtrace.ai."]) {
   }
 }
 
-for (const host of ["www.truthtrace.ai", "www.truthtrace.ai."]) {
+for (const host of ["www.truth-trace-forge.lovable.app", "www.truth-trace-forge.lovable.app."]) {
   for (const entryPath of entryPaths) {
     const url = new URL(entryPath, approvedOrigin);
     url.searchParams.set("host", "www");
@@ -378,6 +394,8 @@ for (const host of [
   "www.truthtrace.app",
   "truthtrace.app.",
   "www.truthtrace.app.",
+  "truthtrace.ai",
+  "www.truthtrace.ai",
   "unapproved-publication-host.invalid",
 ]) {
   const probe = await requestWithHost("/?host=excluded", host);
@@ -403,6 +421,6 @@ if (failures.length) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Link and runtime publication check passed: ${checkedDocuments.size} documents, ${entryPaths.length} entry routes, ${requiredPublicPaths.size} required public paths, ${builtScriptCount} built JavaScript files, one retired-route 410, one true 404, all-five apex probes, all-five www HTML-navigation redirects, and excluded/unknown HTML-host rejection.`,
+    `Link and runtime publication check passed: ${checkedDocuments.size} documents, ${entryPaths.length} entry routes, ${requiredPublicPaths.size} required public paths, ${builtScriptCount} built JavaScript files, one noindex private-review route, one true 404, all-six canonical-host probes, all-six www HTML-navigation redirects, and excluded/unknown HTML-host rejection.`,
   );
 }

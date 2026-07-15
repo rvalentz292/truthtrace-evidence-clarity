@@ -1,7 +1,7 @@
 import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
-import { renderErrorPage, renderGonePage } from "./lib/error-page";
+import { renderErrorPage } from "./lib/error-page";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -9,9 +9,10 @@ type ServerEntry = {
 
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 
-const APPROVED_CANONICAL_HOST = "truthtrace.ai";
+const APPROVED_CANONICAL_HOST = "truth-trace-forge.lovable.app";
 const EXCLUDED_FAMILY_LAW_HOSTS = new Set(["truthtrace.app", "www.truthtrace.app"]);
 const LOCAL_TEST_HOSTS = new Set(["127.0.0.1", "localhost"]);
+const PRIVATE_REVIEW_PATH = "/private-demo";
 
 const PUBLIC_SECURITY_HEADERS = {
   "cross-origin-opener-policy": "same-origin",
@@ -21,15 +22,19 @@ const PUBLIC_SECURITY_HEADERS = {
   "x-frame-options": "DENY",
 } as const;
 
-function withPublicSecurityHeaders(response: Response): Response {
+function withPublicSecurityHeaders(request: Request, response: Response): Response {
   const headers = new Headers(response.headers);
+  const pathname = new URL(request.url).pathname.replace(/\/+$/, "") || "/";
   for (const [name, value] of Object.entries(PUBLIC_SECURITY_HEADERS)) {
     if (!headers.has(name)) headers.set(name, value);
   }
-  if (response.status >= 400 && !headers.has("x-robots-tag")) {
+  if (
+    (response.status >= 400 || pathname === PRIVATE_REVIEW_PATH) &&
+    !headers.has("x-robots-tag")
+  ) {
     headers.set("x-robots-tag", "noindex, nofollow, noarchive");
   }
-  if (response.status >= 500) {
+  if (response.status >= 500 || pathname === PRIVATE_REVIEW_PATH) {
     headers.set("cache-control", "no-store");
   }
 
@@ -82,19 +87,6 @@ function unauthorizedHostResponse(request: Request): Response | undefined {
   });
 }
 
-function retiredRouteResponse(request: Request): Response | undefined {
-  const pathname = new URL(request.url).pathname.replace(/\/+$/, "") || "/";
-  if (pathname !== "/private-demo") return undefined;
-
-  return new Response(renderGonePage(), {
-    status: 410,
-    headers: {
-      "cache-control": "no-store",
-      "content-type": "text/html; charset=utf-8",
-    },
-  });
-}
-
 async function getServerEntry(): Promise<ServerEntry> {
   if (!serverEntryPromise) {
     serverEntryPromise = import("@tanstack/react-start/server-entry").then(
@@ -127,18 +119,17 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const hostResponse = publicationHostResponse(request);
-      if (hostResponse) return withPublicSecurityHeaders(hostResponse);
+      if (hostResponse) return withPublicSecurityHeaders(request, hostResponse);
       const unauthorizedResponse = unauthorizedHostResponse(request);
-      if (unauthorizedResponse) return withPublicSecurityHeaders(unauthorizedResponse);
-      const retiredResponse = retiredRouteResponse(request);
-      if (retiredResponse) return withPublicSecurityHeaders(retiredResponse);
+      if (unauthorizedResponse) return withPublicSecurityHeaders(request, unauthorizedResponse);
 
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return withPublicSecurityHeaders(await normalizeCatastrophicSsrResponse(response));
+      return withPublicSecurityHeaders(request, await normalizeCatastrophicSsrResponse(response));
     } catch (error) {
       console.error(error);
       return withPublicSecurityHeaders(
+        request,
         new Response(renderErrorPage(), {
           status: 500,
           headers: { "content-type": "text/html; charset=utf-8" },

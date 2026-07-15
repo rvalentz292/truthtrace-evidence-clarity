@@ -7,6 +7,10 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // Keep Lovable's development error relays out of every repository-controlled runtime.
+  // Application error logging remains in src/start.ts and src/server.ts.
+  serverFnErrorLogger: false,
+  ssrErrorLogger: false,
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this

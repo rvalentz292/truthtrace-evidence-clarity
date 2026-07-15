@@ -10,12 +10,14 @@ const read = (path) => readFileSync(resolve(root, path), "utf8");
 const homepage = read("src/components/site/HomePage.tsx");
 const nav = read("src/components/site/Nav.tsx");
 const contact = read("src/routes/contact.tsx");
+const privateDemo = read("src/routes/private-demo.tsx");
 const privacy = read("src/content/website-privacy.ts");
 const terms = read("src/content/website-terms.ts");
 const publicSource = [
   homepage,
   nav,
   contact,
+  privateDemo,
   privacy,
   terms,
   read("src/routes/index.tsx"),
@@ -44,9 +46,16 @@ test("every homepage navigation hash has a real target", () => {
   }
 });
 
-test("the public surface does not expose the former private demo", () => {
-  assert.equal(existsSync(resolve(root, "src/routes/private-demo.tsx")), false);
+test("the required private-demo route is static, noindex, and disconnected from production", () => {
+  assert.equal(existsSync(resolve(root, "src/routes/private-demo.tsx")), true);
   assert.equal(existsSync(resolve(root, "src/components/site/Workspace.tsx")), false);
+  assert.match(privateDemo, /name: "robots", content: "noindex, nofollow, noarchive"/);
+  assert.match(privateDemo, /illustrative, non-interactive review page/i);
+  assert.match(
+    privateDemo,
+    /does not connect to TruthTrace AI or\s+production evidence processing/i,
+  );
+  assert.doesNotMatch(privateDemo, /<form|<input|<textarea|fetch\(|createServerFn|useMutation/i);
 });
 
 test("representative data and public-site boundaries are explicit", () => {
@@ -172,14 +181,35 @@ test("publication configuration requires the exact approved origin", () => {
     encoding: "utf8",
   });
   assert.notEqual(missing.status, 0);
-  assert.match(missing.stderr, /must be present and equal/i);
+  assert.match(missing.stderr, /is required and must equal/i);
 
-  const approved = spawnSync(process.execPath, [validator], {
-    cwd: root,
-    env: { ...process.env, VITE_SITE_URL: "https://truthtrace.ai" },
-    encoding: "utf8",
-  });
-  assert.equal(approved.status, 0, approved.stderr);
+  for (const value of [
+    "not-a-url",
+    "http://truth-trace-forge.lovable.app",
+    "https://truth-trace-forge.lovable.app//",
+    "https://truth-trace-forge.lovable.app/path",
+    "https://example.invalid",
+  ]) {
+    const invalid = spawnSync(process.execPath, [validator], {
+      cwd: root,
+      env: { ...process.env, VITE_SITE_URL: value },
+      encoding: "utf8",
+    });
+    assert.notEqual(invalid.status, 0, `${value} unexpectedly passed`);
+    assert.match(invalid.stderr, /VITE_SITE_URL/);
+  }
+
+  for (const value of [
+    "https://truth-trace-forge.lovable.app",
+    "https://truth-trace-forge.lovable.app/",
+  ]) {
+    const approved = spawnSync(process.execPath, [validator], {
+      cwd: root,
+      env: { ...process.env, VITE_SITE_URL: value },
+      encoding: "utf8",
+    });
+    assert.equal(approved.status, 0, approved.stderr);
+  }
 });
 
 test("SSR responses receive the public security-header baseline", () => {
@@ -198,18 +228,17 @@ test("SSR responses receive the public security-header baseline", () => {
   assert.match(server, /EXCLUDED_FAMILY_LAW_HOSTS/);
   assert.match(server, /unauthorizedHostResponse/);
   assert.match(server, /status: 421/);
-  assert.match(server, /retiredRouteResponse/);
-  assert.match(server, /status: 410/);
+  assert.match(server, /PRIVATE_REVIEW_PATH/);
   assert.match(server, /status: 301/);
   assert.doesNotMatch(server, /status: 308/);
-  assert.match(errorPage, /function renderGonePage/);
+  assert.doesNotMatch(errorPage, /function renderGonePage/);
   assert.equal(existsSync(resolve(root, "src/lib/lovable-error-reporting.ts")), false);
   assert.doesNotMatch(publicSource, /__lovableEvents/);
 });
 
-test("publication metadata is locked to the approved truthtrace.ai origin", () => {
-  assert.match(metadata, /APPROVED_SITE_ORIGIN = "https:\/\/truthtrace\.ai"/);
-  assert.match(metadata, /VITE_SITE_URL\?\.trim\(\) !== APPROVED_SITE_ORIGIN/);
+test("publication metadata is locked to the normalized Lovable production origin", () => {
+  assert.match(metadata, /APPROVED_SITE_ORIGIN = "https:\/\/truth-trace-forge\.lovable\.app"/);
+  assert.match(metadata, /normalizeConfiguredSiteOrigin\(import\.meta\.env\.VITE_SITE_URL\)/);
   assert.match(metadata, /property: "og:url"/);
   assert.match(metadata, /name: "twitter:image"/);
   assert.match(metadata, /rel: "canonical"/);
@@ -229,19 +258,19 @@ test("reduced-motion, forced-colors, and narrow reflow safeguards remain active"
 test("robots, sitemap, and manifest use the approved publication origin", () => {
   assert.equal(
     robots.replace(/\r\n/g, "\n").trim(),
-    "User-agent: *\nAllow: /\n\nSitemap: https://truthtrace.ai/sitemap.xml",
+    "User-agent: *\nAllow: /\n\nSitemap: https://truth-trace-forge.lovable.app/sitemap.xml",
   );
 
   const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
   assert.deepEqual(locations, [
-    "https://truthtrace.ai/",
-    "https://truthtrace.ai/technology",
-    "https://truthtrace.ai/privacy",
-    "https://truthtrace.ai/terms",
-    "https://truthtrace.ai/contact",
+    "https://truth-trace-forge.lovable.app/",
+    "https://truth-trace-forge.lovable.app/technology",
+    "https://truth-trace-forge.lovable.app/privacy",
+    "https://truth-trace-forge.lovable.app/terms",
+    "https://truth-trace-forge.lovable.app/contact",
   ]);
 
   for (const field of ["id", "start_url", "scope"]) {
-    assert.equal(manifest[field], "https://truthtrace.ai/");
+    assert.equal(manifest[field], "https://truth-trace-forge.lovable.app/");
   }
 });

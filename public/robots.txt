@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://truthtrace.ai/sitemap.xml
+Sitemap: https://truth-trace-forge.lovable.app/sitemap.xml

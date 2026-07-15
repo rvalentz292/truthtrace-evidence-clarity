@@ -29,21 +29,3 @@ export function renderErrorPage(): string {
   </body>
 </html>`;
 }
-
-export function renderGonePage(): string {
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Page retired</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow, noarchive" />
-  </head>
-  <body>
-    <main id="main-content">
-      <h1>Page retired</h1>
-      <p>This page is no longer available.</p>
-    </main>
-  </body>
-</html>`;
-}
