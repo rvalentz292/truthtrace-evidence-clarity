@@ -1,0 +1,3 @@
+# Publication interlock: replace only after the production domain and target are approved.
+User-agent: *
+Disallow: /

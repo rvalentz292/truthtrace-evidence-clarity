@@ -10,17 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TechnologyRouteImport } from './routes/technology'
-import { Route as PrivateDemoRouteImport } from './routes/private-demo'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TechnologyRoute = TechnologyRouteImport.update({
   id: '/technology',
   path: '/technology',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivateDemoRoute = PrivateDemoRouteImport.update({
-  id: '/private-demo',
-  path: '/private-demo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,31 +25,27 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/private-demo': typeof PrivateDemoRoute
   '/technology': typeof TechnologyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/private-demo': typeof PrivateDemoRoute
   '/technology': typeof TechnologyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/private-demo': typeof PrivateDemoRoute
   '/technology': typeof TechnologyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/private-demo' | '/technology'
+  fullPaths: '/' | '/technology'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/private-demo' | '/technology'
-  id: '__root__' | '/' | '/private-demo' | '/technology'
+  to: '/' | '/technology'
+  id: '__root__' | '/' | '/technology'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PrivateDemoRoute: typeof PrivateDemoRoute
   TechnologyRoute: typeof TechnologyRoute
 }
 
@@ -66,13 +56,6 @@ declare module '@tanstack/react-router' {
       path: '/technology'
       fullPath: '/technology'
       preLoaderRoute: typeof TechnologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/private-demo': {
-      id: '/private-demo'
-      path: '/private-demo'
-      fullPath: '/private-demo'
-      preLoaderRoute: typeof PrivateDemoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,9 +70,18 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PrivateDemoRoute: PrivateDemoRoute,
   TechnologyRoute: TechnologyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

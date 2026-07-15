@@ -13,8 +13,21 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      document.title = "Page Not Found | TruthTrace";
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <main
+      id="main-content"
+      className="flex min-h-screen items-center justify-center bg-background px-4"
+      tabIndex={-1}
+    >
+      <title>Page Not Found | TruthTrace</title>
+      <meta name="robots" content="noindex, nofollow, noarchive" />
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
@@ -30,7 +43,7 @@ function NotFoundComponent() {
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -38,11 +51,21 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      document.title = "Page Error | TruthTrace";
+    });
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    return () => cancelAnimationFrame(frame);
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <main
+      id="main-content"
+      className="flex min-h-screen items-center justify-center bg-background px-4"
+      tabIndex={-1}
+    >
+      <title>Page Error | TruthTrace</title>
+      <meta name="robots" content="noindex, nofollow, noarchive" />
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
           This page didn't load
@@ -68,7 +91,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           </a>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -77,21 +100,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TruthTrace | Forensic Evidence Intelligence" },
-      { name: "description", content: "TruthTrace is the forensic evidence intelligence layer for family law." },
+      { title: "TruthTrace | Forensic Evidence Intelligence for Family Law" },
       { name: "author", content: "TruthTrace" },
-      { property: "og:title", content: "TruthTrace | Forensic Evidence Intelligence" },
-      { property: "og:description", content: "The evidence layer between raw family law case materials and professional review." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "TruthTrace | Forensic Evidence Intelligence" },
-      { name: "twitter:description", content: "The evidence layer between raw family law case materials and professional review." },
+      { name: "theme-color", content: "#080b11" },
+      { name: "color-scheme", content: "dark" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
   }),
   shellComponent: RootShell,
@@ -107,6 +127,12 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <a
+          href="#main-content"
+          className="fixed left-4 top-3 z-[200] -translate-y-20 rounded-md bg-foreground px-4 py-2 text-sm font-semibold text-background transition-transform focus:translate-y-0"
+        >
+          Skip to main content
+        </a>
         {children}
         <Scripts />
       </body>
