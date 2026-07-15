@@ -1098,6 +1098,15 @@ function Footer() {
           >
             Contact
           </Link>
+          <a
+            href="https://skew-violet-23897131.figma.site"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-h-11 content-center text-foreground/80 hover:text-foreground"
+          >
+            Investor &amp; technical overview
+          </a>
+
         </nav>
       </div>
     </footer>
