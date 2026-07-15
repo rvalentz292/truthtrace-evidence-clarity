@@ -2,7 +2,7 @@
 
 ## Result
 
-The candidate materially improves comprehension, emotional safety, claim discipline, and safe next-action clarity for all six required personas. Scores assess the candidate page and its representative interactions, not an unverified production deployment. The release verdict remains `BLOCKED` because domain ownership, production project identity, deployment and rollback controls, indexed-route migration, canonical/indexing configuration, analytics ownership, and a verified contact route are unresolved.
+The candidate materially improves comprehension, emotional safety, claim discipline, and safe next-action clarity for all six required personas. Scores assess candidate `8fca95f914fe463da89073aa7e97607d59f0a9ad` and its representative interactions, not an unverified production deployment. The release verdict remains `BLOCKED` because exact candidate-to-provider identity, deployment and rollback controls, legal/contact route migration, provider edge/analytics behavior, counsel disposition, and a verified contact route are unresolved. The canonical family-law origin itself is founder-approved and repository configuration passes.
 
 Scale: `1` is unusable or actively misleading; `10` is exceptionally clear and supported for the persona. Each cell is `before → after`. Baseline scores refer to `main` at `1b5530784b564b679f733f77ff40aa7f7da53978`; after scores refer to the audited working candidate on `homepage-final-publication-gate-20260715`.
 

@@ -8,14 +8,14 @@ This record does not authorize merge, production deployment, DNS mutation, provi
 
 ## Candidate identity
 
-| Field                         | Status     | Value                                                                                                 |
-| ----------------------------- | ---------- | ----------------------------------------------------------------------------------------------------- |
-| Starting `main`               | `VERIFIED` | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                            |
-| Audited pre-publication SHA   | `VERIFIED` | `df6647616901b2e5eb2dc1d16255ffcc8140a78d`                                                            |
-| Phase-1 / starting PR #4 head | `VERIFIED` | `55b07c4e707bed6e7975bf7dfd78d51a7b10d3ef`                                                            |
-| Publication candidate SHA     | `BLOCKED`  | Pending creation of the exact implementation commit required by Phase 9                               |
-| Final PR head                 | `BLOCKED`  | Pending the required documentation-only identity commit                                               |
-| Candidate tag                 | `BLOCKED`  | `homepage-public-candidate-20260715` must point to the implementation commit and remain local for now |
+| Field                         | Status     | Value                                                                                                                                                                 |
+| ----------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Starting `main`               | `VERIFIED` | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                                                                            |
+| Audited pre-publication SHA   | `VERIFIED` | `df6647616901b2e5eb2dc1d16255ffcc8140a78d`                                                                                                                            |
+| Phase-1 / starting PR #4 head | `VERIFIED` | `55b07c4e707bed6e7975bf7dfd78d51a7b10d3ef`                                                                                                                            |
+| Publication candidate SHA     | `VERIFIED` | `8fca95f914fe463da89073aa7e97607d59f0a9ad` — exact implementation commit                                                                                              |
+| Final PR head                 | `PENDING`  | The documentation-only commit containing this record; its exact SHA is recorded in PR/terminal metadata because a commit cannot embed its own SHA without changing it |
+| Candidate tag                 | `VERIFIED` | Local annotated `homepage-public-candidate-20260715` peels to the implementation commit; tag object `27adeda60af86893f0cd97b26feb84e255e3e072`; not pushed            |
 
 ## Decision-gate ledger
 
@@ -42,7 +42,7 @@ This record does not authorize merge, production deployment, DNS mutation, provi
 | Lighthouse thresholds                                   | `VERIFIED` locally        | Performance 98, accessibility 100, best practices 100, SEO 100 using Lighthouse 12.8.2 against the final local publication artifact.                                                             |
 | Dependency threshold                                    | `VERIFIED` locally        | 0 critical, 0 high, 2 moderate, 2 low. Required high/critical threshold passes; remaining advisories are retained in ignored evidence.                                                           |
 | High-confidence secret scan                             | `VERIFIED` locally        | Current index/tree patterns and all 248 unique historical blobs reachable before the implementation commit produced zero findings. CI will rescan the final reachable history.                   |
-| GitHub Actions                                          | `BLOCKED`                 | Workflow is not yet part of a pushed PR head, so no passing run exists for this exact tree.                                                                                                      |
+| GitHub Actions                                          | `VERIFIED` for candidate  | Run `29384390019`, job `87254517610`, passed every step on exact implementation SHA `8fca95f914fe463da89073aa7e97607d59f0a9ad`. The final docs-only head must pass again after push.             |
 | Isolated provider staging deployment                    | `BLOCKED`                 | No candidate deployment ID, preview URL, operator, provider environment record, or output checksum exists.                                                                                       |
 | Provider static-asset host normalization/isolation      | `BLOCKED`                 | Local Nitro assets can be served before the SSR host guard; exact provider edge rules for `www`, `.app`, arbitrary hosts, HTTP→HTTPS, headers, and cookies must be proven in isolated staging.   |
 | Rollback rehearsal                                      | `BLOCKED`                 | Not performed because no authorized target, immutable current/prior deployment, or rollback command is available.                                                                                |
@@ -51,7 +51,7 @@ This record does not authorize merge, production deployment, DNS mutation, provi
 
 ## Local validation evidence
 
-Ignored evidence is retained under `artifacts/homepage-publication-20260715/`, including viewport screenshots, the Chromium browser-mode report, Lighthouse JSON/HTML, dependency-audit detail, and reachable-history secret-scan detail. A complete SHA-256 manifest will be generated after the implementation candidate is immutable.
+Ignored evidence is retained under `artifacts/homepage-publication-20260715/`, including viewport screenshots, the Chromium browser-mode report, Lighthouse JSON/HTML, dependency-audit detail, and reachable-history secret-scan detail. The candidate build manifest covers 41 files and 2,875,558 bytes with aggregate SHA-256 `075b0cc6bf1d245b06b42492987155b8529c5cec3fc0942d403afd0e4e4d7941`. `SHA256SUMS.txt` covers all retained evidence files.
 
 The local candidate-quality checks demonstrate that the repository tree is internally consistent and meets the automated quality thresholds. They do not establish provider identity, route-owner approval, production edge behavior, staging identity, deploy authority, rollback authority, or counsel disposition.
 

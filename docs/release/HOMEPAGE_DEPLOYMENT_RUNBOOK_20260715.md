@@ -4,30 +4,31 @@
 
 **Release verdict: BLOCKED**
 
-This is a pre-deployment runbook, not authorization to publish. The repository supports a reproducible local build and preview, but no production provider, account, project/service, zone, production branch, deploy command, DNS change, or rollback command has been verified. The deployment section therefore ends at a hard stop until the release owner supplies provider-specific, tested instructions.
+This is a pre-deployment runbook, not authorization to publish. The current live Lovable workspace, project, private repository, live SHA, and Hostinger DNS records are identified. The PR #4 candidate is not mapped to that project, the provider's active branch and immutable current deployment are not exposed, and no exact candidate deploy or rollback command is proven. The deployment section therefore ends at a hard stop until the release owner supplies provider-specific, exact-SHA, rehearsed instructions.
 
 Do not deploy, merge, change DNS, enable indexing, or redirect a live domain under this runbook while any P0 item remains open.
 
 ## Candidate identity
 
-| Field                               | Required release value                                                                                                                        |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Repository                          | `https://github.com/rvalentz292/truthtrace-evidence-clarity.git`                                                                              |
-| Baseline SHA                        | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                                                    |
-| Candidate branch                    | `homepage-final-publication-gate-20260715`                                                                                                    |
-| Candidate SHA                       | `df6647616901b2e5eb2dc1d16255ffcc8140a78d` — audited implementation/content commit; the following release-record commit is documentation-only |
-| Competing branch                    | `website-100m-final-20260714` at `64aac286beb3df3c898e2f975f27e589d5079456`, draft PR #3                                                      |
-| Intended canonical origin           | **Unapproved**                                                                                                                                |
-| Production provider/account/project | **Unknown**                                                                                                                                   |
-| Production branch                   | **Unknown**                                                                                                                                   |
-| Local generated output root         | `.output/`                                                                                                                                    |
-| Browser/static output               | `.output/public/`                                                                                                                             |
-| Worker/server output                | `.output/server/`                                                                                                                             |
-| Approved provider output target     | **Unknown** — local generated paths do not establish a production upload target                                                               |
-| Approved deploy command             | **Unknown**                                                                                                                                   |
-| Approved rollback command           | **Unknown**                                                                                                                                   |
+| Field                            | Required release value                                                                                                                       |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repository                       | `https://github.com/rvalentz292/truthtrace-evidence-clarity.git`                                                                             |
+| Baseline SHA                     | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                                                   |
+| Candidate branch                 | `homepage-final-publication-gate-20260715`                                                                                                   |
+| Candidate SHA                    | `8fca95f914fe463da89073aa7e97607d59f0a9ad` — immutable publication implementation; the following release-record commit is documentation-only |
+| Superseded branch                | `website-100m-final-20260714` at `64aac286beb3df3c898e2f975f27e589d5079456`; PR #3 closed without merge or deployment                        |
+| Intended canonical origin        | `https://truthtrace.ai` — approved by founder direction                                                                                      |
+| Current provider/account/project | Lovable; `Ryan's Lovable`; live project `truthtrace-website` (`9dc000d6-e489-4b8f-975b-cf1d2bfdf3a7`)                                        |
+| Candidate production target      | **BLOCKED** — no authorized Lovable project contains the PR #4 candidate tree                                                                |
+| Provider production branch       | **Unverified** — private GitHub default `main` has the live SHA, but Lovable did not expose its active branch                                |
+| Local generated output root      | `.output/`                                                                                                                                   |
+| Browser/static output            | `.output/public/`                                                                                                                            |
+| Worker/server output             | `.output/server/`                                                                                                                            |
+| Approved provider output target  | **Unknown** — local generated paths do not establish a production upload target                                                              |
+| Approved deploy command          | **Unknown**                                                                                                                                  |
+| Approved rollback command        | **Unknown**                                                                                                                                  |
 
-The release owner must explicitly dispose of draft PR #3 and approve exactly one candidate SHA. Its existence cannot be resolved by silently merging or cherry-picking it.
+PR #3 is dispositioned. PR #4 and the immutable candidate SHA above are the only authorized candidate identity; this selection does not authorize deployment.
 
 ## Required roles
 
@@ -50,9 +51,8 @@ One person may hold multiple roles, but each role and backup must be explicit in
 
 All boxes must be complete before a production command is introduced into this runbook.
 
-- [ ] Product and brand owner has selected the canonical domain and canonical apex/`www` host in writing.
-- [ ] `truthtrace.app` has been rejected for this candidate or its ownership, authorization, product alignment, contact recipients, and privacy terms have been proven in writing. The audited live site is a different blockchain/content-authenticity product.
-- [ ] If `truthtrace.ai` is selected, the owner has explicitly approved continued `.ai` use despite the no-obsolete-branding instruction.
+- [x] Founder direction selects `https://truthtrace.ai` as the canonical family-law domain and candidate apex.
+- [x] Founder direction excludes `truthtrace.app`; it must not host, redirect, impersonate, or canonicalize this release.
 - [ ] Every URL in the observed 10-route `truthtrace.ai` sitemap has a reviewed migration outcome. At minimum, `/privacy`, `/terms`, and `/contact` have approved destinations and must not disappear accidentally.
 - [ ] Existing `truthtrace.ai` Google Analytics behavior has an explicit retain/replace/remove decision and corresponding privacy review.
 - [ ] Canonical apex/`www` redirect behavior is approved.
@@ -61,11 +61,11 @@ All boxes must be complete before a production command is introduced into this r
 - [ ] Provider-specific preview, production deploy, deployment-ID capture, log, rollback, and status commands are tested in a non-production environment and reviewed into this document.
 - [ ] Current production deployment ID and recoverable artifact are recorded.
 - [ ] Existing DNS records, TTLs, proxy settings, certificates, redirects, and provider custom-domain mappings are exported and stored with the release evidence.
-- [ ] Draft PR #3 has a written disposition; the approved release branch and immutable SHA are unambiguous.
+- [x] PR #3 has a written disposition; PR #4 and immutable SHA `8fca95f914fe463da89073aa7e97607d59f0a9ad` are unambiguous.
 - [ ] Counsel/owner has accepted or remediated the patent-sensitive/product material already present in public Git history.
-- [ ] `VITE_SITE_URL` is approved and populated through the authorized configuration mechanism.
-- [ ] `public/robots.txt` is changed from its deliberate `Disallow: /` interlock only as part of the approved indexing plan.
-- [ ] `public/sitemap.xml` is created from the approved canonical origin and route-migration matrix.
+- [x] `VITE_SITE_URL` is locked to the approved public value `https://truthtrace.ai`.
+- [x] `public/robots.txt` exactly allows the approved candidate and names the canonical sitemap.
+- [x] `public/sitemap.xml` contains only the implemented indexable `/` and `/technology` routes.
 - [ ] Contact, privacy, terms, security, and data-use language is approved before any intake link is added. The current candidate intentionally has no form, upload, account, or lead collection.
 - [ ] Deployment and rollback runbooks have been dry-run, timed, and signed off.
 
@@ -99,39 +99,41 @@ npx --yes bun@1.3.14 run format:check
 npx --yes bun@1.3.14 run lint
 npx --yes bun@1.3.14 run typecheck
 npx --yes bun@1.3.14 run test
+npx --yes bun@1.3.14 run audit:dependencies
 ```
 
 `git status --short` must print nothing. Replace `<approved-candidate-sha>` with the exact reviewed commit; never use a moving branch name as the deployment identity.
 
 ### Publication configuration gate
 
-Do not type an unapproved domain into the environment. After the product/domain owner supplies the approved origin through the release record, set it for the local verification process without echoing it:
+Set the exact approved public value for the local verification process. This value is not a credential:
 
 ```powershell
-$env:VITE_SITE_URL = Read-Host "Approved HTTPS canonical origin"
+$env:VITE_SITE_URL = "https://truthtrace.ai"
 npx --yes bun@1.3.14 run release:config
 npx --yes bun@1.3.14 run build
 ```
 
-The gate must fail if any of these remain unresolved:
+The gate must fail if any of these contradictions occur:
 
-- `VITE_SITE_URL` is missing, malformed, non-HTTPS, credential-bearing, or local;
-- `public/robots.txt` still blocks `/`;
+- `VITE_SITE_URL` is missing or is anything other than exact `https://truthtrace.ai`;
+- `public/robots.txt` differs from the approved allow/sitemap policy;
 - `public/og.png` is absent;
 - `public/favicon.svg` is absent;
-- `public/sitemap.xml` is absent.
+- `public/sitemap.xml` is absent or contains anything other than `/` and `/technology` on the approved origin;
+- the manifest `id`, `start_url`, or `scope` differs from the approved origin.
 
-The audit candidate intentionally fails this gate because the domain is unapproved, robots blocks publication, and the sitemap is absent. Bypassing it is not a release fix.
+Candidate `8fca95f914fe463da89073aa7e97607d59f0a9ad` passes this configuration gate and both build commands. A passing repository gate is candidate-quality evidence, not provider deployment authorization.
 
-### Artifact-only build for audit
+### Candidate artifact build
 
-When publication remains blocked, this command may be used to inspect the generated artifact:
+This command produces the same publication-gated candidate artifact for inspection:
 
 ```powershell
 npx --yes bun@1.3.14 run build:artifact
 ```
 
-`build:artifact` bypasses only the publication-configuration interlock so reviewers can test the candidate. It does not create a publishable artifact and must never be recorded as a passing production build.
+`build:artifact` does not bypass the publication-configuration interlock. It invokes the exact validator before Vite, as do `build`, `build:dev`, and `build:publication`. None of these commands selects a provider project or performs deployment.
 
 The build writes its local output root to `.output/`, with browser/static files under `.output/public/` and the generated worker/server artifact under `.output/server/`. These are verified build locations, not a verified provider project setting or an approved production deployment destination.
 
@@ -153,7 +155,7 @@ Manually verify at minimum:
 
 - `/` returns `200`, has one clear H1, and shows the representative/not-live/no-real-family-information labels;
 - `/technology` returns `200` and describes design objectives rather than live guarantees;
-- a nonexistent URL returns a controlled `404` with `noindex`;
+- `/private-demo` returns `410` with `noindex`, and a unique nonexistent URL returns `404` with `noindex`;
 - homepage hash links arrive below the fixed header;
 - the mobile menu opens by keyboard, receives focus, closes with Escape, and returns focus;
 - representative finding and audience controls update their pressed state and visible content;
@@ -202,7 +204,7 @@ The release operator must pause after identity verification and obtain a recorde
 
 ## Domain and legacy-route cutover
 
-DNS and route cutover are also blocked because current record values, authoritative DNS provider, TTLs, target records, and canonical-host decision are unknown.
+DNS and route cutover are also blocked. Hostinger DNS, apex/`www` A `185.158.133.1`, TTL 14400, and candidate apex canonical direction are observed/approved, but no authenticated full-zone export, mutation authority, candidate target record, provider custom-domain procedure, or exact edge/static-asset redirect policy is proven.
 
 An approved cutover plan must include:
 

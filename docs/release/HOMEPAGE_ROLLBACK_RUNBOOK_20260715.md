@@ -4,7 +4,7 @@
 
 **Release verdict: BLOCKED**
 
-No executable production rollback is currently available. The deployment provider, account, project/service, current deployment ID, recoverable prior artifact, custom-domain binding, DNS provider, record values, TTLs, permissions, and rollback commands are unknown. A production deployment must not occur until this runbook is completed and rehearsed against the approved target.
+No executable production rollback is currently available. Lovable, the authenticated workspace, current live project, private source repository, current live SHA, Hostinger DNS records, and custom-domain correlation are identified. The immutable deployment ID, provider active branch, recoverable prior artifact/version, exact rollback command, candidate target, and rehearsal remain unavailable. A production deployment must not occur until this runbook is completed and rehearsed against the approved target.
 
 The generated Cloudflare-module output is not a rollback plan. In particular, the generated `npx wrangler --cwd ./ deploy` hint is neither an approved deployment command nor a mechanism for restoring the currently live site.
 
@@ -25,30 +25,30 @@ This ordering is conceptual until provider-specific procedures are verified. It 
 
 Every field below must be filled and independently checked before go-live:
 
-| Field                                               | Current state                                                                                                                             |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Incident/rollback commander and backup              | Unassigned                                                                                                                                |
-| Release operator and backup                         | Unassigned                                                                                                                                |
-| Hosting provider/account/environment                | Unknown                                                                                                                                   |
-| Production project/service/worker ID                | Unknown                                                                                                                                   |
-| Production branch policy                            | Unknown                                                                                                                                   |
-| `FINAL_CANDIDATE_SHA` / new candidate SHA           | `df6647616901b2e5eb2dc1d16255ffcc8140a78d` — audited implementation/content commit; following release-record commit is documentation-only |
-| New artifact checksum and deployment ID             | Not created                                                                                                                               |
-| `PREVIOUS_PRODUCTION_SHA`                           | **UNKNOWN**                                                                                                                               |
-| Prior approved deployment ID                        | Unknown                                                                                                                                   |
-| Prior immutable artifact/version                    | Unknown                                                                                                                                   |
-| Provider deployment-rollback command                | Unknown                                                                                                                                   |
-| Provider status/log command                         | Unknown                                                                                                                                   |
-| Custom-domain binding before-state                  | Unknown                                                                                                                                   |
-| Custom-domain restore command                       | Unknown                                                                                                                                   |
-| DNS provider/zone ID                                | Unknown                                                                                                                                   |
-| DNS record and TTL before-state                     | Not exported                                                                                                                              |
-| DNS restore command or console procedure            | Unknown                                                                                                                                   |
-| Certificate before-state and revalidation procedure | Unknown                                                                                                                                   |
-| Legacy-route before/after matrix                    | Incomplete                                                                                                                                |
-| Monitoring channels and owners                      | Unknown                                                                                                                                   |
-| Internal/public communication owners                | Unknown                                                                                                                                   |
-| Maximum rollback decision and execution times       | Not approved                                                                                                                              |
+| Field                                               | Current state                                                                                                                  |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Incident/rollback commander and backup              | Unassigned                                                                                                                     |
+| Release operator and backup                         | Unassigned                                                                                                                     |
+| Hosting provider/account/environment                | Lovable; `Ryan's Lovable` owner workspace; exact candidate environment **BLOCKED**                                             |
+| Production project/service/worker ID                | Current live Lovable project `truthtrace-website`, ID `9dc000d6-e489-4b8f-975b-cf1d2bfdf3a7`; not an approved candidate target |
+| Production branch policy                            | Provider active branch **UNVERIFIED**; private GitHub default `main` is unprotected                                            |
+| `FINAL_CANDIDATE_SHA` / new candidate SHA           | `8fca95f914fe463da89073aa7e97607d59f0a9ad` — immutable implementation; following release-record commit is documentation-only   |
+| New artifact checksum and deployment ID             | Local aggregate SHA-256 `075b0cc6bf1d245b06b42492987155b8529c5cec3fc0942d403afd0e4e4d7941`; provider deployment ID not created |
+| `PREVIOUS_PRODUCTION_SHA`                           | `84a49ca4e38d21322e137e5135d974c0ddbd2f66` — live source correlation; not an immutable deployment identity                     |
+| Prior approved deployment ID                        | Unknown                                                                                                                        |
+| Prior immutable artifact/version                    | Unknown                                                                                                                        |
+| Provider deployment-rollback command                | Unknown                                                                                                                        |
+| Provider status/log command                         | Unknown                                                                                                                        |
+| Custom-domain binding before-state                  | Unknown                                                                                                                        |
+| Custom-domain restore command                       | Unknown                                                                                                                        |
+| DNS provider/zone ID                                | Hostinger DNS verified; authenticated zone/account ID and mutation authority unverified                                        |
+| DNS record and TTL before-state                     | Apex and `www` A `185.158.133.1`, authoritative TTL 14400 at audit time; full authenticated export not captured                |
+| DNS restore command or console procedure            | Unknown                                                                                                                        |
+| Certificate before-state and revalidation procedure | Unknown                                                                                                                        |
+| Legacy-route before/after matrix                    | Incomplete                                                                                                                     |
+| Monitoring channels and owners                      | Unknown                                                                                                                        |
+| Internal/public communication owners                | Unknown                                                                                                                        |
+| Maximum rollback decision and execution times       | Not approved                                                                                                                   |
 
 Blank or inferred values are a P0 launch blocker.
 
@@ -57,7 +57,7 @@ Blank or inferred values are a P0 launch blocker.
 Two live identities must not be conflated during rollback:
 
 - `truthtrace.app` currently presents a different blockchain/content-authenticity TruthTrace product. Do not use it as a fallback, redirect target, contact destination, or canonical origin for this family-law candidate unless ownership and product alignment have been formally resolved.
-- `truthtrace.ai` currently presents a legacy family-law site delivered through infrastructure not demonstrably tied to this repository. Restoring it requires its actual deployment or DNS before-state; checking out an older commit in this repository is not proven to reproduce that live site.
+- `truthtrace.ai` currently presents a legacy family-law site from Lovable project `truthtrace-website` and private repository `rvalentz292/truthtrace-website`, not this public release repository. Restoring it requires its actual immutable Lovable deployment or DNS before-state; checking out an older commit in this repository cannot reproduce that live site.
 
 The existing `truthtrace.ai` sitemap was observed with 10 routes, including `/privacy`, `/terms`, and `/contact`. Rollback verification must cover the complete prelaunch route inventory, not only `/`.
 
@@ -126,7 +126,7 @@ Before launch, the hosting administrator must replace this section through revie
 
 The procedure must record expected output and failure modes. It must be tested against a non-production environment and timed within the approved recovery objective.
 
-Do not run the generated Nitro deploy hint as a rollback. Do not assume the auto-derived generated worker name identifies production. Do not rebuild `main` and deploy it as an emergency substitute: `main` is not proven to be the current live artifact, and draft PR #3 creates an unresolved release-line ambiguity.
+Do not run the generated Nitro deploy hint as a rollback. Do not assume the auto-derived generated worker name identifies production. Do not rebuild public-repository `main` and deploy it as an emergency substitute: the current live artifact comes from a different private repository. PR #3 is closed and must not be reused implicitly.
 
 ## Custom-domain binding rollback
 
@@ -215,7 +215,7 @@ Rollback is complete only when the incident commander accepts this evidence and 
 3. Record the incident timeline, detection source, decision, commands/actions, identifiers, propagation, verification, and final state with sensitive information redacted.
 4. Keep the failed deployment and logs available according to approved evidence-retention rules; do not destroy evidence to make the dashboard look clean.
 5. Open reviewed remediation work. A new publication attempt requires a new candidate SHA, fresh release evidence, and a fresh go/no-go.
-6. Resolve the branch decision around draft PR #3 before preparing another release.
+6. Preserve the recorded PR #3 supersession and do not reintroduce its branch by merge or cherry-pick.
 
 ## Runbook completion gate
 

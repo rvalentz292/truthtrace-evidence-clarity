@@ -4,215 +4,118 @@
 
 **BLOCKED**
 
-The release candidate is locally buildable and testable, but the repository does not establish an approved production identity, domain, deployment project, production branch, deploy command, deployment ID, or rollback mechanism. The live-domain audit also found a material brand and privacy collision between `truthtrace.app` and this family-law product, plus an unresolved migration from the existing `truthtrace.ai` site. No deployment is authorized by this document.
+The repository produces a locally and CI-verified publication candidate for founder-approved `https://truthtrace.ai`. It does not establish an authorized provider target for that candidate, an immutable current deployment, exact deploy/rollback commands, approved legal/contact route treatment, exact-SHA staging, a rollback rehearsal, or counsel disposition. Generated Nitro/Wrangler metadata is build evidence only.
 
-## Audit snapshot
+## Immutable snapshot
 
-| Item                     | Verified state                                                                                                                                |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Repository               | `rvalentz292/truthtrace-evidence-clarity`                                                                                                     |
-| Remote                   | `origin` → `https://github.com/rvalentz292/truthtrace-evidence-clarity.git`                                                                   |
-| Baseline/default branch  | `main`                                                                                                                                        |
-| Baseline SHA             | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                                                    |
-| Release working branch   | `homepage-final-publication-gate-20260715`                                                                                                    |
-| Release-candidate SHA    | `df6647616901b2e5eb2dc1d16255ffcc8140a78d` — audited implementation/content commit; the following release-record commit is documentation-only |
-| Competing candidate      | `website-100m-final-20260714` at `64aac286beb3df3c898e2f975f27e589d5079456`                                                                   |
-| Competing pull request   | Draft PR #3, one commit ahead of `main`; no approved merge/deploy decision was found                                                          |
-| Package manager evidence | `bun.lock`; validation used Bun 1.3.14 through `npx` on the audit workstation                                                                 |
-| Framework                | React 19, TanStack Start/Router, Vite 8, Nitro                                                                                                |
-| Generated server preset  | `cloudflare-module`                                                                                                                           |
-| Publication date gate    | 2026-07-15                                                                                                                                    |
+| Item                        | Verified state                                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Repository                  | `rvalentz292/truthtrace-evidence-clarity`                                                              |
+| Remote                      | `origin` → `https://github.com/rvalentz292/truthtrace-evidence-clarity.git`                            |
+| Default branch / baseline   | `main` / `1b5530784b564b679f733f77ff40aa7f7da53978`                                                    |
+| Release branch              | `homepage-final-publication-gate-20260715`                                                             |
+| Pre-publication SHA         | `df6647616901b2e5eb2dc1d16255ffcc8140a78d`                                                             |
+| Publication candidate SHA   | `8fca95f914fe463da89073aa7e97607d59f0a9ad`                                                             |
+| Superseded candidate        | `website-100m-final-20260714` / `64aac286beb3df3c898e2f975f27e589d5079456`; PR #3 closed without merge |
+| Sole pull-request candidate | Draft PR #4                                                                                            |
+| Candidate CI                | PASS — run `29384390019`                                                                               |
+| Package/runtime pins        | Bun 1.3.14; CI Node 22.17.0; Wrangler 4.110.0; Ubuntu 24.04                                            |
+| Framework                   | React 19, TanStack Start/Router, TypeScript, Vite 8, Nitro Cloudflare-module output                    |
 
-The candidate SHA above identifies the immutable audited public implementation. The branch's following release-record commit changes documentation only; its PR-head SHA must also be retained in the pull request, but it does not change the public runtime tree.
+The following release-record commit changes documentation only. Its PR-head SHA must be retained separately; it does not change the public runtime tree relative to the candidate above.
 
-## Source topology
+## Runtime topology
 
-### Application entry and runtime
+| Path                   | Responsibility                                                                                | Release behavior                                                                                                                       |
+| ---------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `vite.config.ts`       | Loads the Lovable TanStack configuration and custom server entry                              | Generated Cloudflare preset is not an authorized provider target                                                                       |
+| `src/server.ts`        | SSR fetch entry, host policy, 410, security/noindex headers, catastrophic-error normalization | Apex/local HTML allowed; `www` 308 to apex; excluded/unknown HTML hosts 421; `/private-demo` 410; static assets may bypass this worker |
+| `src/start.ts`         | TanStack Start request middleware                                                             | Converts unexpected server errors into controlled HTML                                                                                 |
+| `src/router.tsx`       | Router/query construction                                                                     | Scroll restoration and generated route tree                                                                                            |
+| `src/routeTree.gen.ts` | Generated route registry                                                                      | Public application routes `/` and `/technology`; former private route absent                                                           |
+| `src/styles.css`       | Global design, focus, responsive, reduced-motion, and forced-colors rules                     | System fonts; no external font request                                                                                                 |
 
-| Path                   | Responsibility                                                                                 | Release notes                                                                                                                                |
-| ---------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `vite.config.ts`       | Loads `@lovable.dev/vite-tanstack-config` and points TanStack Start to the custom server entry | The upstream config selects Cloudflare as a default build target; that default is not evidence of an approved production provider or account |
-| `src/server.ts`        | SSR fetch entry, catastrophic-error normalization, and response security headers               | Adds `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options`, and `Cross-Origin-Opener-Policy` when absent      |
-| `src/start.ts`         | TanStack Start request middleware                                                              | Converts unexpected server errors into the controlled HTML error page                                                                        |
-| `src/router.tsx`       | Router and query-client construction                                                           | Uses the generated route tree and scroll restoration                                                                                         |
-| `src/routeTree.gen.ts` | Generated route registry                                                                       | Current public routes are `/` and `/technology`; the former `/private-demo` route has been removed                                           |
-| `src/styles.css`       | Global visual system and responsive/forced-colors behavior                                     | Uses system/local font fallbacks; no external font fetch is required                                                                         |
+## Public routes
 
-### Public routes and page composition
+| Route/path             | Source / handler                          | Intended result                                                       |
+| ---------------------- | ----------------------------------------- | --------------------------------------------------------------------- |
+| `/`                    | `src/routes/index.tsx`                    | Canonical 200 family-law product overview and representative workflow |
+| `/technology`          | `src/routes/technology.tsx`               | Canonical 200 design principles and public boundaries                 |
+| `/private-demo`        | `src/server.ts`                           | 410, `noindex`, no redirect or replacement                            |
+| Unknown HTML route     | `src/routes/__root.tsx` + server response | True 404, `noindex`, no homepage redirect                             |
+| Catastrophic SSR error | `src/lib/error-page.ts` + `src/server.ts` | Controlled 500 HTML, `noindex`, `no-store`                            |
 
-| Route               | Source                                              | Purpose                                                                          | Indexing state                                                                                                        |
-| ------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `/`                 | `src/routes/index.tsx`                              | Public family-law forensic-evidence product overview and representative workflow | Metadata can become canonical only when `VITE_SITE_URL` is approved; repository-wide robots currently blocks indexing |
-| `/technology`       | `src/routes/technology.tsx`                         | Product design principles and boundaries                                         | Same publication interlocks as `/`                                                                                    |
-| Not-found route     | `src/routes/__root.tsx`                             | Controlled 404 UI                                                                | Explicit `noindex` behavior                                                                                           |
-| Root error boundary | `src/routes/__root.tsx` and `src/lib/error-page.ts` | Controlled browser/server error experience                                       | Explicit `noindex` behavior                                                                                           |
+There is no public account, upload, intake, contact form, pilot form, live workspace, or API-backed evidence flow.
 
-There is no public account, upload, intake, contact form, pilot form, live workspace, or API-backed evidence flow in this candidate.
+## Page and policy composition
 
-### Homepage components
+| Path                               | Responsibility                                                                                   |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `src/components/site/HomePage.tsx` | Qualified product narrative, representative records/workflow, audience views, trust boundaries   |
+| `src/components/site/Nav.tsx`      | Desktop/mobile navigation, focus entry, Escape close, trigger-focus restoration                  |
+| `src/components/site/Section.tsx`  | Section landmarks, headings, decorative semantics, fixed-header scroll offsets                   |
+| `src/lib/site-metadata.ts`         | Exact approved canonical/Open Graph/Twitter URLs; alternate or missing origin throws             |
+| `public/robots.txt`                | Exact allow policy plus canonical sitemap                                                        |
+| `public/sitemap.xml`               | Exactly `/` and `/technology` on `https://truthtrace.ai`                                         |
+| `public/site.webmanifest`          | Absolute approved `id`, `start_url`, and `scope`                                                 |
+| `.output/public/_headers`          | Generated baseline static headers; exact provider application and asset-host behavior remains P0 |
 
-| Path                               | Responsibility                                                                                                                    | Material release behavior                                                                                                                                      |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/components/site/HomePage.tsx` | Homepage narrative, representative source-to-observation workflow, audience views, trust boundaries, and closing publication gate | Capability language is qualified as design intent or representative behavior; illustrative data is labeled as not live and contains no real family information |
-| `src/components/site/Nav.tsx`      | Desktop/mobile navigation                                                                                                         | Hash targets match page sections; mobile disclosure supports focus entry, Escape close, and focus return                                                       |
-| `src/components/site/Section.tsx`  | Shared section layout                                                                                                             | Provides section landmarks, headings, decorative semantics, and fixed-header scroll offset                                                                     |
-| `src/lib/site-metadata.ts`         | Page metadata composition                                                                                                         | Emits absolute canonical/Open Graph URLs only for a valid HTTPS `VITE_SITE_URL`; omission is intentional when production identity is unapproved                |
+The historical `HeroPipeline.tsx`, `Workspace.tsx`, and private-demo route are absent from the candidate tree but remain reachable in public Git history pending counsel disposition.
 
-The prior `HeroPipeline.tsx`, `Workspace.tsx`, and `/private-demo` route were removed from the current tree. They must not be restored without a fresh claims, security, privacy, and patent-sensitivity review.
+## Commands and gates
 
-### Public assets and policy files
+| Script               | Command                                                                         | Meaning                                                                                                        |
+| -------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `dev`                | `vite dev`                                                                      | Local development only                                                                                         |
+| `build`              | `node scripts/validate-publication.mjs && vite build`                           | Exact-origin publication-gated build                                                                           |
+| `build:artifact`     | `node scripts/validate-publication.mjs && vite build`                           | Same gate; creates auditable local output without deployment                                                   |
+| `build:dev`          | `node scripts/validate-publication.mjs && vite build --mode development`        | Development-mode output; still cannot bypass publication identity                                              |
+| `build:publication`  | `node scripts/validate-publication.mjs && vite build`                           | Exact publication build                                                                                        |
+| `preview`            | `wrangler dev --config .output/server/wrangler.json --ip 127.0.0.1 --port 4173` | Local generated-worker preview; not provider staging                                                           |
+| `format:check`       | `prettier --check .`                                                            | Formatting gate                                                                                                |
+| `lint`               | `eslint .`                                                                      | Static lint gate                                                                                               |
+| `typecheck`          | `tsc --noEmit`                                                                  | Type gate                                                                                                      |
+| `test`               | `node --test tests/*.test.mjs`                                                  | Release regression tests                                                                                       |
+| `audit:dependencies` | `node scripts/audit-dependencies.mjs`                                           | Fails on critical/high/unclassified advisories; reports moderate/low                                           |
+| `check:links`        | `node scripts/check-links.mjs`                                                  | Local-only document, asset, canonical, host, 410, 404, header, and no-cookie checks                            |
+| `release:config`     | `node scripts/validate-publication.mjs`                                         | Exact origin/robots/sitemap/manifest/assets gate                                                               |
+| `release:surface`    | `node scripts/validate-release-surface.mjs`                                     | Required docs, exact staged snapshot, forbidden paths, current-tree and reachable-history high-confidence scan |
 
-| Path                      | State                                   | Publication significance                                                                                                  |
-| ------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `public/og.png`           | Present                                 | Generated social preview; used only when an approved absolute site origin is configured                                   |
-| `public/favicon.svg`      | Present                                 | Site icon and manifest icon                                                                                               |
-| `public/site.webmanifest` | Present                                 | App identity, theme, scope, and icon metadata                                                                             |
-| `public/_headers`         | Present                                 | Static-host-compatible security-header declarations; the server entry also supplies the same core headers                 |
-| `public/robots.txt`       | Present and intentionally `Disallow: /` | Publication interlock; must remain blocking until the production domain and cutover are approved                          |
-| `public/sitemap.xml`      | Absent                                  | Publication gate failure; it cannot be authored correctly until the canonical domain and migration route set are approved |
+The GitHub workflow pins the operating system, runtime/package-manager versions, and action revisions. It performs a frozen install and all candidate-quality gates without production secrets or deployment credentials. A green workflow is not a deployment authorization system.
 
-## Commands and quality gates
+## Configuration and data flow
 
-The scripts below are the exact commands declared by the current `package.json`.
+| Name              | Scope                              | Candidate status                                     |
+| ----------------- | ---------------------------------- | ---------------------------------------------------- |
+| `VITE_SITE_URL`   | Public build-time canonical origin | Required exact `https://truthtrace.ai`; not a secret |
+| `SITE_UNDER_TEST` | Validation-only local origin       | CI uses `http://127.0.0.1:4173`                      |
+| `NODE_ENV`        | Conventional runtime mode          | No secret value committed                            |
 
-| Script              | Command                                                                         | Meaning                                                                                                           |
-| ------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `dev`               | `vite dev`                                                                      | Local development server                                                                                          |
-| `build`             | `bun run release:config && vite build`                                          | Publication build; deliberately refuses to build until publication configuration passes                           |
-| `build:artifact`    | `vite build`                                                                    | Produces an auditable build artifact without representing publication approval                                    |
-| `build:dev`         | `vite build --mode development`                                                 | Development-mode build                                                                                            |
-| `build:publication` | `bun run build`                                                                 | Alias for the gated publication build                                                                             |
-| `preview`           | `wrangler dev --config .output/server/wrangler.json --ip 127.0.0.1 --port 4173` | Local preview of the generated Cloudflare-module artifact                                                         |
-| `lint`              | `eslint .`                                                                      | Static lint gate                                                                                                  |
-| `format`            | `prettier --write .`                                                            | Formatting mutation; not a release check by itself                                                                |
-| `format:check`      | `prettier --check .`                                                            | Formatting gate                                                                                                   |
-| `typecheck`         | `tsc --noEmit`                                                                  | TypeScript gate                                                                                                   |
-| `test`              | `node --test tests/*.test.mjs`                                                  | Node release-regression tests                                                                                     |
-| `check:links`       | `node scripts/check-links.mjs`                                                  | Checks `/`, `/technology`, internal fragments, internal responses, and a deliberate 404 against a running preview |
-| `release:config`    | `node scripts/validate-publication.mjs`                                         | Requires an approved HTTPS site URL, publication-safe robots policy, social/favicon assets, and sitemap           |
+`DATABASE_URL`, `STRIPE_SECRET_KEY`, and `VITE_FOO` occur only as commented examples and are not dependencies.
 
-Requested release-operation matrix:
-
-| Operation         | Exact verified command or status                                                                                     |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| install           | `npx --yes bun@1.3.14 install --frozen-lockfile`                                                                     |
-| develop           | `npx --yes bun@1.3.14 run dev`                                                                                       |
-| lint              | `npx --yes bun@1.3.14 run lint`                                                                                      |
-| typecheck         | `npx --yes bun@1.3.14 run typecheck`                                                                                 |
-| test              | `npx --yes bun@1.3.14 run test`                                                                                      |
-| build             | `npx --yes bun@1.3.14 run build` — blocked until the publication configuration is approved                           |
-| preview           | `npx --yes bun@1.3.14 run preview` after `build:artifact`                                                            |
-| deploy-preview    | **UNKNOWN / P0** — no provider preview target, account, project, or approved command is present                      |
-| deploy-production | **UNKNOWN / P0** — generated Nitro/Wrangler hints are not approved production instructions                           |
-| rollback          | **UNKNOWN / P0** — provider deployment ID, prior recoverable artifact, DNS before-state, and approved command absent |
-
-Reproducible validation on a workstation without Bun already installed:
-
-```powershell
-npx --yes bun@1.3.14 install --frozen-lockfile
-npx --yes bun@1.3.14 run format:check
-npx --yes bun@1.3.14 run lint
-npx --yes bun@1.3.14 run typecheck
-npx --yes bun@1.3.14 run test
-npx --yes bun@1.3.14 run build:artifact
-```
-
-The audited `release:config`/`build` failure is expected while the release is blocked. `build:artifact` is for local inspection only and must not be substituted for a passing publication build.
-
-## Configuration and data-flow inventory
-
-### Actual public configuration
-
-| Environment name | Scope                              | Status                                                                                  |
-| ---------------- | ---------------------------------- | --------------------------------------------------------------------------------------- |
-| `VITE_SITE_URL`  | Public build-time canonical origin | Required for publication; intentionally blank in `.env.example` pending domain approval |
-| `NODE_ENV`       | Server runtime mode                | Read by `src/lib/config.server.ts`; no value is committed                               |
-
-### Commented examples, not current application requirements
-
-`DATABASE_URL`, `STRIPE_SECRET_KEY`, and `VITE_FOO` appear only as instructional comments in the server configuration helper. They are not current release dependencies and no values are present in the repository.
-
-### External services and user data
-
-- No database, authentication, payment, email, CRM, analytics, ad tracker, form endpoint, evidence upload, or model endpoint is wired into the current candidate.
-- No cookie banner is required for the rendered `/` and `/technology` candidate because neither route imports an active cookie or analytics integration. Unused `src/components/ui/sidebar.tsx` can write a preference cookie, and unused `src/components/ui/chart.tsx` generates chart styles with `dangerouslySetInnerHTML`; neither is emitted by the candidate routes, and both require renewed privacy/security review before adoption. This posture must also be revisited if production infrastructure injects tracking or cookies.
-- The optional Lovable browser error hook reports an exception and pathname only if the hosting platform injects its expected global. Its production presence, recipient, retention, and privacy terms are unverified.
-- A current-tree and Git-history high-confidence secret-pattern scan found no credential match. Repository history is public, however, and its prior claims/architecture content cannot be recalled from existing clones.
+- No database, authentication, payment, email, CRM, form endpoint, evidence upload, or model endpoint is wired into the candidate.
+- No analytics is configured in candidate source. The optional Lovable browser error hook can run only when a provider injects its expected global; exact staging must determine whether it, analytics, or cookies are injected.
+- Unused generic `sidebar.tsx` and `chart.tsx` contain a preference-cookie helper and style HTML injection respectively; neither is in the candidate route bundles and any future use requires renewed review.
+- Current-tree and full reachable-history high-confidence scans found no credential match. Public architecture/claims history remains a counsel issue, not a secret-scan pass-through.
 
 ## Build and hosting evidence
 
-The generated `.output/nitro.json` reports:
+The candidate build writes `.output/public/` and `.output/server/`, with generated preset `cloudflare-module`, auto-derived worker name `rvalentz292-truthtrace-evidence-clarity`, and generated Wrangler metadata. These are not an approved production account, project, upload target, deploy command, or rollback mechanism.
 
-- preset: `cloudflare-module`;
-- generated preview hint: `npx wrangler --cwd ./ dev`;
-- generated deploy hint: `npx wrangler --cwd ./ deploy`.
+The exact local candidate artifact manifest covers 41 files and 2,875,558 bytes with aggregate SHA-256 `075b0cc6bf1d245b06b42492987155b8529c5cec3fc0942d403afd0e4e4d7941`.
 
-The verified local build output root is `.output/`: browser assets are generated under `.output/public/` and the worker/server artifact under `.output/server/`. Those directories describe local build output only; no approved provider output-directory setting or production upload target has been identified.
-
-The generated `.output/server/wrangler.json` also contains the auto-derived worker name `rvalentz292-truthtrace-evidence-clarity`, a generated asset binding, and a generated compatibility date.
-
-These are build-tool outputs, not approved operational instructions. The repository contains no tracked production `wrangler.toml`/`wrangler.jsonc`, Vercel configuration, Netlify configuration, Docker deployment definition, GitHub Actions deployment workflow, production account identifier, zone identifier, worker/service identifier, environment mapping, production branch declaration, deployment ID convention, or verified rollback command. No one should run either generated deploy hint until all of those identities are established and approved.
-
-## Live identity and migration findings
-
-### `truthtrace.app`: material identity collision
-
-The audited live `truthtrace.app` and its `www` host present a different TruthTrace product centered on blockchain/content authenticity and creator participation. That identity does not match this repository’s family-law forensic-evidence product. The former homepage CTA to an address on that domain was therefore removed.
-
-Until ownership, authorization, recipient identity, privacy terms, and product alignment are proven, this repository must not:
-
-- use `truthtrace.app` as `VITE_SITE_URL`;
-- send family-law prospects or sensitive narratives to `truthtrace.app` email addresses;
-- inherit that site’s legal documents or product claims;
-- redirect either domain to the other.
-
-### `truthtrace.ai`: live legacy family-law site
-
-The audited live `truthtrace.ai` host presents a family-law product and is the closer product match, but it is not demonstrably deployed from this repository or commit history. Observed delivery signals include Cloudflare, Lovable, and Google Analytics. Both apex and `www` returned content without a verified canonical redirect.
-
-Its observed sitemap contains 10 routes, including `/privacy`, `/terms`, and `/contact`, while this candidate currently provides only `/` and `/technology`. A direct replacement would therefore remove indexed and legal destinations and could also remove existing analytics without an approved migration.
-
-Before any `truthtrace.ai` cutover, the owner must produce a route-by-route migration table that assigns each legacy URL exactly one outcome: retained page, permanent redirect to a reviewed destination, deliberate `410 Gone`, or temporary preservation. Legal URLs must have approved replacement content before cutover. The apex/`www` canonical host, analytics decision, search-console ownership, sitemap, and robots policy must be part of the same approval.
-
-The request’s instruction not to revive obsolete `.ai` branding remains controlling unless the owner explicitly approves this domain after resolving the product-brand decision.
-
-## Branch and release-line ambiguity
-
-Draft PR #3 (`website-100m-final-20260714`, SHA `64aac286beb3df3c898e2f975f27e589d5079456`) is one commit ahead of `main` and presents itself as a superseding candidate. It was observed as draft, without completed checks/review, and with an explicit no-merge/no-deploy posture. Its content also retains claims, demo, SEO, and domain issues that this release branch addresses.
-
-The release owner must decide whether:
-
-1. this audited release branch supersedes PR #3;
-2. PR #3 will be closed;
-3. selected work will be reconciled through a separately reviewed change.
-
-Do not merge, cherry-pick, or deploy PR #3 as an implicit resolution. A branch selection must be written into the release approval and must identify the exact candidate SHA.
+Current live identity is separately verified as Hostinger DNS plus Lovable project `truthtrace-website` behind Cloudflare, sourced from private repository `rvalentz292/truthtrace-website` at SHA `84a49ca4e38d21322e137e5135d974c0ddbd2f66`. The active Lovable branch and immutable deployment ID were not exposed. This public release repository is not the current production source repository.
 
 ## Publication blockers
 
-| Severity | Blocker                                                             | Required evidence to clear                                                                                                              |
-| -------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| P0       | Production product/domain identity is unapproved                    | Named owner approval for canonical domain, product identity, and use of apex/`www`                                                      |
-| P0       | `truthtrace.app` is a different live product                        | Written ownership/authorization and product-alignment decision; otherwise explicit prohibition remains                                  |
-| P0       | `truthtrace.ai` migration is incomplete                             | Complete legacy-route matrix, reviewed legal destinations, redirects/statuses, canonical-host decision, analytics/search plan           |
-| P0       | Deployment target is unknown                                        | Provider account, project/service/zone IDs, production branch, permissions, approved deploy command, deployment-ID capture procedure    |
-| P0       | Rollback path is unknown                                            | Verified provider-specific application rollback and DNS rollback procedures, permissions, timing, and rehearsal evidence                |
-| P0       | Candidate branch is ambiguous                                       | Written disposition of draft PR #3 and approval of one exact release SHA                                                                |
-| P0       | Publication configuration intentionally fails                       | Approved `VITE_SITE_URL`, publication-safe `robots.txt`, correct canonical sitemap, and passing `bun run release:config`                |
-| P0       | Public Git history contains prior patent-sensitive/product material | Counsel/owner disposition; current-tree removal cannot retract public clones/history                                                    |
-| P1       | Production monitoring/analytics decision is unrecorded              | Approved observability and privacy posture, or an explicit decision to launch without analytics plus manual monitoring ownership        |
-| P1       | Legal/contact experience has no approved production destination     | Reviewed contact, privacy, and terms destinations or an explicit prelaunch decision that keeps the site non-interactive and non-indexed |
+| Severity | Blocker                                                | Evidence required to clear                                                                                               |
+| -------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| P0       | Candidate target/project/branch mapping absent         | Authorized project contains exact candidate SHA and records repository/branch mapping                                    |
+| P0       | Current/prior deployment and exact commands absent     | Immutable deployment IDs, provider-native deploy/rollback commands, permissions, and rehearsal                           |
+| P0       | Legal/contact legacy-route holds unresolved            | Approved content/owners and implemented treatment for `/privacy`, `/terms`, `/contact`, `/contact-us`, plus `/about`     |
+| P0       | Provider edge/static-asset behavior unproven           | Exact-SHA staging proves apex/`www`, `.app`, unknown hosts, HTTP→HTTPS, assets, TLS, headers, caches, cookies, analytics |
+| P0       | Public-history counsel decision absent                 | Recorded permitted counsel/authorized-owner disposition or waiver                                                        |
+| P1       | Moderate/low dependency advisories remain              | Remediation or time-bounded security acceptance                                                                          |
+| P1       | Browse-only contact/observability posture not accepted | Explicit no-contact/no-analytics approval or separately reviewed mechanism                                               |
 
-## Release ownership record required before publication
-
-The release checklist must name accountable people or teams for:
-
-- product and brand/domain approval;
-- legal, privacy, claims, and patent review;
-- DNS and hosting administration;
-- deployment execution;
-- rollback authority;
-- post-launch monitoring and incident response;
-- final go/no-go approval.
-
-Blank roles, generated provider hints, and verbal assumptions are not sufficient evidence. Until these records and the P0 evidence above exist, the only valid publication verdict is **BLOCKED**.
+Until these records exist, the only valid publication verdict is **BLOCKED**.

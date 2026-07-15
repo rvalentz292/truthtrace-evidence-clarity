@@ -26,6 +26,7 @@ No provider mutation, deployment, DNS change, branch merge, or rollback was perf
 | Release branch              | `VERIFIED`       | `homepage-final-publication-gate-20260715`                                                         |
 | Phase-3 starting HEAD       | `VERIFIED`       | `55b07c4e707bed6e7975bf7dfd78d51a7b10d3ef`                                                         |
 | Audited pre-publication SHA | `VERIFIED`       | `df6647616901b2e5eb2dc1d16255ffcc8140a78d`                                                         |
+| Publication candidate SHA   | `VERIFIED`       | `8fca95f914fe463da89073aa7e97607d59f0a9ad`                                                         |
 | Approved family-law domain  | `VERIFIED`       | `https://truthtrace.ai`                                                                            |
 | `truthtrace.app` role       | `NOT APPLICABLE` | Excluded by founder direction; it must not host, redirect, or canonicalize this family-law release |
 | Mutation posture            | `VERIFIED`       | Read-only; no deploy, publish, unpublish, domain edit, DNS edit, revert, or rollback call was made |
@@ -104,10 +105,11 @@ The release candidate must not be published by treating the currently live proje
 | Candidate-associated provider latest SHA   | `VERIFIED`   | Lovable reports `a6268b6dce3b6a6a606c7d1f8e3c6b9baeb38c20`, an internal revert revision created 2026-07-13; it is not PR #4's head and is not a commit in the public release repository                                                                           |
 | Candidate provider ↔ public repo history   | `VERIFIED`   | Lovable edit history contains the exact GitHub merge SHAs for public-repository PRs #1 and #2, proving historical sync with `rvalentz292/truthtrace-evidence-clarity`                                                                                             |
 | Candidate provider production branch       | `UNVERIFIED` | Lovable's GitHub integration normally syncs the default branch, and historical edits match public-repository `main`; the current active provider branch was not returned by the read API                                                                          |
-| PR #4 exact tree in Lovable                | `BLOCKED`    | Neither the live production project nor `truth-trace-forge` reports PR #4 head `55b07c4…` or the audited implementation `df66476…`. Publishing either current provider snapshot would not publish the approved release branch                                     |
+| PR #4 exact tree in Lovable                | `BLOCKED`    | Neither the live production project nor `truth-trace-forge` reports publication candidate `8fca95f914fe463da89073aa7e97607d59f0a9ad`. Publishing either current provider snapshot would not publish the approved release branch                                   |
 | Approved target project for domain cutover | `BLOCKED`    | Founder direction approves the domain and PR #4, but no reviewed procedure establishes whether code must enter `truthtrace-website`, whether the custom domain must move to `truth-trace-forge`, or whether a new immutable staging/production target is required |
 | Candidate repository build command         | `VERIFIED`   | Current `build`, `build:artifact`, and `build:publication` scripts declare `node scripts/validate-publication.mjs && vite build`; this is distinct from the legacy live project's unguarded `vite build`                                                          |
 | Candidate local output                     | `VERIFIED`   | `.output/public/` plus `.output/server/`                                                                                                                                                                                                                          |
+| Candidate local artifact identity          | `VERIFIED`   | 41 build files, 2,875,558 bytes; aggregate SHA-256 `075b0cc6bf1d245b06b42492987155b8529c5cec3fc0942d403afd0e4e4d7941`. This is local evidence, not a provider deployment ID.                                                                                      |
 | Candidate generated runtime preset         | `VERIFIED`   | `cloudflare-module` in generated Nitro output                                                                                                                                                                                                                     |
 | Candidate production environment names     | `VERIFIED`   | `VITE_SITE_URL` is the only candidate-specific public build variable; approved value is `https://truthtrace.ai`. `NODE_ENV` is a conventional server runtime input. `SITE_UNDER_TEST` is validation-only.                                                         |
 | Generated Wrangler worker name             | `UNVERIFIED` | `rvalentz292-truthtrace-evidence-clarity` is auto-derived output, not a verified Cloudflare account/service/project                                                                                                                                               |
@@ -198,7 +200,7 @@ Current production identity is partially proven and no longer anonymous:
 - The authenticated provider workspace is `Ryan's Lovable`, with the operator holding `owner` role.
 - The live project is `truthtrace-website`.
 - The connected private repository is `rvalentz292/truthtrace-website`.
-- The production branch is `main`.
+- The private repository's default `main` branch has the live SHA; the active Lovable production branch remains unverified.
 - The live commit is `84a49ca4e38d21322e137e5135d974c0ddbd2f66`.
 
 The exact provider deployment ID, exact candidate cutover command, exact rollback command, recoverable prior deployment, and PR #4-to-provider SHA mapping remain unproven. Under the publication-gate rule, the only valid production-identity verdict is **BLOCKED**.

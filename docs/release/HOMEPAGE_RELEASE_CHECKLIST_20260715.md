@@ -1,189 +1,93 @@
 # TruthTrace Homepage Release Checklist — 2026-07-15
 
-## Gate status
+## Immutable identity
 
-**Release verdict: BLOCKED**
+- [x] Repository: `rvalentz292/truthtrace-evidence-clarity`.
+- [x] Branch: `homepage-final-publication-gate-20260715`.
+- [x] Starting `main`: `1b5530784b564b679f733f77ff40aa7f7da53978`.
+- [x] Pre-publication SHA: `df6647616901b2e5eb2dc1d16255ffcc8140a78d`.
+- [x] Publication candidate: `8fca95f914fe463da89073aa7e97607d59f0a9ad`.
+- [ ] Final PR head recorded after the documentation-only commit.
+- [x] Local annotated tag `homepage-public-candidate-20260715` points exactly to the publication candidate and remains unpushed while blocked.
+- [x] PR #3 closed with the exact supersession comment; not merged or deployed.
+- [x] PR #4 is the sole draft candidate.
 
-Checkboxes represent verified evidence as of the local release candidate audit. An unchecked item is not permission to infer a pass. Every unchecked P0/P1 item includes an owner and current status.
+## Candidate-quality gates
 
-Release identity:
+- [x] Frozen Bun 1.3.14 install; lockfile unchanged.
+- [x] Format check.
+- [x] Lint: 0 errors; 6 existing generic Fast Refresh warnings.
+- [x] Typecheck.
+- [x] Tests: 10/10.
+- [x] Exact `https://truthtrace.ai` publication configuration.
+- [x] Production artifact build.
+- [x] Publication build.
+- [x] Local link/route/runtime validation.
+- [x] No `.map`, `sourceMappingURL=`, or `sourcesContent` production output.
+- [x] Dependency threshold: 0 critical, 0 high; 2 moderate and 2 low recorded.
+- [x] Current staged/tree and reachable-history high-confidence secret checks.
+- [x] No tracked non-example environment file, credential container, or generated artifact.
+- [x] Candidate GitHub Actions run `29384390019` passed on exact SHA `8fca95f914fe463da89073aa7e97607d59f0a9ad`.
+- [ ] GitHub Actions passes again on the final documentation-only PR head. **Status:** pending that commit.
 
-- Starting branch: `main`
-- Starting SHA: `1b5530784b564b679f733f77ff40aa7f7da53978`
-- Release branch: `homepage-final-publication-gate-20260715`
-- Final candidate SHA: `df6647616901b2e5eb2dc1d16255ffcc8140a78d` (audited implementation/content commit; the following release-record commit is documentation-only)
-- Local evidence root: `artifacts/homepage-release-20260715/`
+## Public configuration and routing
 
-## Code
+- [x] Founder-approved canonical family-law origin is `https://truthtrace.ai`.
+- [x] `truthtrace.app` is absent from public metadata and is not a redirect target.
+- [x] Canonical, Open Graph, Twitter, manifest, robots, and sitemap are internally consistent.
+- [x] Sitemap contains only `/` and `/technology`.
+- [x] Candidate source has no form, upload, intake, account, pilot application, unverified email, or configured analytics.
+- [x] Unknown HTML routes return a true noindex 404 locally.
+- [x] `/private-demo` returns a true noindex 410 locally and is absent from navigation/sitemap.
+- [x] Apex/`www`, `.app`, trailing-dot, and arbitrary-host HTML probes pass locally.
+- [ ] Provider/static-asset host routing, HTTP→HTTPS, TLS, cache, cookie, analytics, and header behavior proven on exact-SHA staging. **Owner:** hosting administrator. **Status:** BLOCKED/P0.
+- [ ] `/privacy`, `/terms`, `/contact`, and `/contact-us` content/ownership/treatment approved and implemented. **Owners:** founder + legal/privacy/contact + SEO. **Status:** BLOCKED/P0.
+- [ ] `/about` retirement approved by founder/product/counsel/SEO or an approved replacement is supplied. **Status:** BLOCKED/P0.
 
-- [x] Dedicated release branch created; no direct work on `main`.
-- [x] Frozen dependency install completed.
-- [x] Format check passes.
-- [x] Lint completes with 0 errors; 6 non-blocking Fast Refresh warnings recorded.
-- [x] Typecheck passes.
-- [x] Release tests pass, 7/7.
-- [x] Production artifact build passes with `bun run build:artifact`.
-- [x] Generated artifact runs through the repository preview command.
-- [ ] Default publication build passes. **Owner:** release engineering. **Status:** OPEN/P0; correctly blocked by missing domain, blocking robots, and missing sitemap.
-- [x] Final candidate implementation SHA recorded in the audit and release record; PR head is a documentation-only follow-up with the same public runtime tree.
-- [x] Final `git diff --check`, status review, install, format, lint, typecheck, tests, artifact build, publication interlock, links, headers, HTTP status, secret scan, dependency audit, and Lighthouse gate recorded.
+## Accessibility, interaction, and performance
 
-## Content
+- [x] Required viewport matrix: 360×800, 390×844, 768×1024, 1024×768, 1366×768, 1440×900, 1920×1080.
+- [x] No horizontal overflow at the required viewports.
+- [x] Keyboard skip link reaches and focuses `main`.
+- [x] Mobile menu opens into its first link; Escape closes and restores trigger focus.
+- [x] Representative CTA, finding, and role controls operate with correct pressed state.
+- [x] Reduced-motion emulation applies 0.001 ms maximum motion duration and auto scrolling.
+- [x] Forced-colors emulation preserves critical text and removes gradient masking.
+- [x] 200% reflow equivalent at 640 CSS px has no horizontal overflow.
+- [x] Lighthouse: performance 98, accessibility 100, best practices 100, SEO 100.
+- [ ] Qualified screen-reader, Safari/WebKit, and physical-device audit. **Status:** P2 follow-up; not a substitute for the automated pass.
 
-- [x] First viewport states the category, problem, differentiation, and next action.
-- [x] Tone is calm, neutral, and trauma-aware.
-- [x] Copy avoids legal advice, diagnosis, credibility, abuse/alienation, admissibility, and outcome determinations.
-- [x] Representative product proof is visibly labeled, not buried in footer copy.
-- [x] No fake testimonial, customer logo, case study, certification, or outcome metric remains.
-- [x] Footer states evidence-organization/review-support and professional-judgment boundaries.
-- [ ] Live route/content inventory has an approved migration disposition. **Owner:** product owner + counsel + SEO owner. **Status:** OPEN/P0.
+## Production identity and operations
 
-## Claims
+- [x] DNS provider: Hostinger; apex and `www` current A record `185.158.133.1`.
+- [x] Current hosting provider: Lovable behind Cloudflare.
+- [x] Authenticated workspace: `Ryan's Lovable`, ID `y7ZA6ipwj5Jqti1HCn6I`, owner role.
+- [x] Current live project: `truthtrace-website`, ID `9dc000d6-e489-4b8f-975b-cf1d2bfdf3a7`.
+- [x] Current live private repository: `rvalentz292/truthtrace-website`.
+- [x] Current live SHA: `84a49ca4e38d21322e137e5135d974c0ddbd2f66`.
+- [ ] Lovable active production branch directly verified. **Status:** UNVERIFIED/P0; GitHub `main` correlation alone is insufficient.
+- [ ] Immutable current production deployment ID and publish timestamp. **Status:** BLOCKED/P0.
+- [ ] Exact PR #4 candidate-to-provider project/repository/branch mapping. **Status:** BLOCKED/P0.
+- [ ] Exact deploy command and required operator permission. **Status:** BLOCKED/P0.
+- [ ] Exact rollback command, immutable prior deployment, and rollback permission. **Status:** BLOCKED/P0.
+- [ ] Isolated provider preview from candidate SHA/artifact checksum. **Status:** BLOCKED/P0.
+- [ ] Rollback rehearsal restores the recorded prior deployment and passes verification. **Status:** BLOCKED/P0.
 
-- [x] Meaningful visible, metadata, CTA, alt/accessibility, and representative-demo claims inventoried.
-- [x] Public claims classified as `PROVEN`, `MODELED`, `PLANNED`, `POSITIONING`, or `UNSAFE / REMOVE`.
-- [x] Unsupported availability, pilot, immutability, universal traceability/enforcement, and measured-outcome claims removed or qualified.
-- [x] No unresolved material false claim found on the candidate public surface.
-- [x] No real family information is presented as demo evidence.
-- [ ] Patent counsel disposes prior architecture language/screenshots still reachable in public Git history. **Owner:** patent counsel + repository owner. **Status:** OPEN/P0.
+## Legal, privacy, claims, and history
 
-## Accessibility
-
-- [x] Automated accessibility gate passes; Lighthouse accessibility score is 100.
-- [x] Manual keyboard gate passes.
-- [x] Heading hierarchy and header/nav/main/footer landmarks pass.
-- [x] Skip navigation, visible focus, named controls, and pressed-state semantics pass.
-- [x] Mobile menu focus entry, Escape close, and focus restoration pass.
-- [x] Primary touch targets meet the 44px baseline.
-- [x] Reduced-motion, forced-colors, and non-color status treatment are present.
-- [ ] Qualified screen-reader/assistive-technology audit completed. **Owner:** accessibility/QA. **Status:** OPEN/P2; not a claim of full WCAG 2.2 AA conformance.
-- [ ] Native browser 200% zoom test recorded. **Owner:** accessibility/QA. **Status:** OPEN/P2; equivalent 640px reflow passed.
-
-## Responsive design
-
-- [x] 360×800 inner viewport reviewed; PNG capture retained.
-- [x] 390×844 inner viewport and mobile menu reviewed; PNG capture retained.
-- [x] 768×1024 inner viewport reviewed; PNG capture retained.
-- [x] 1024×768 inner viewport reviewed; PNG capture retained.
-- [x] 1366×768 inner viewport reviewed; PNG capture retained.
-- [x] 1440×900 inner viewport reviewed; PNG capture retained.
-- [x] 1920×1080 inner viewport reviewed; PNG capture retained.
-- [x] `browser-smoke-summary.json` records exact inner viewports; saved PNG dimensions exclude native browser scrollbar/chrome/inset pixels and are therefore smaller.
-- [x] No unexpected horizontal overflow found.
-- [x] Hero, proof controls, cards, legal text, footer, wrapping, and touch targets remain usable.
-- [ ] Safari/WebKit and physical iOS/Android passes recorded. **Owner:** QA. **Status:** OPEN/P2.
-
-## Performance
-
-- [x] Lighthouse mobile performance score 99, meeting the >= 90 target.
-- [x] LCP 1,895 ms, meeting the <= 2.5 s target.
-- [x] CLS 0, meeting the <= 0.10 target.
-- [x] Total Blocking Time 0 ms.
-- [x] Best Practices score 100, meeting the >= 95 target.
-- [x] No production source maps emitted.
-- [ ] Reduce the 50,186-byte potential unused-JavaScript estimate without regressing behavior. **Owner:** engineering. **Status:** OPEN/P2.
-- [ ] INP measured under a representative interaction trace. **Owner:** performance owner. **Status:** OPEN/P2; unavailable in the local run.
-- [ ] Field Core Web Vitals baseline captured after launch. **Owner:** performance/operations. **Status:** PENDING POST-LAUNCH.
-
-## SEO
-
-- [x] Page titles and descriptions are accurate and route-specific.
-- [x] Open Graph and Twitter card metadata support the approved URL when configured.
-- [x] Social-preview image, favicon, manifest, and theme color are present.
-- [x] 404 is noindex with a distinct title.
-- [x] Heading hierarchy and internal link text pass.
-- [x] No unsupported structured data was added while organization/product identity remains unapproved.
-- [ ] Canonical family-law domain approved. **Owner:** Ryan/product owner. **Status:** OPEN/P0.
-- [ ] `VITE_SITE_URL` set to that approved HTTPS origin. **Owner:** release engineering. **Status:** BLOCKED ON DOMAIN/P0.
-- [ ] `robots.txt` changed from the deliberate `Disallow: /` interlock to approved production behavior. **Owner:** SEO + release engineering. **Status:** BLOCKED ON DOMAIN/ROUTES/P0.
-- [ ] Route-accurate `sitemap.xml` added. **Owner:** SEO + release engineering. **Status:** BLOCKED ON ROUTE MIGRATION/P0.
-- [ ] Lighthouse SEO rerun at >= 95. **Owner:** SEO owner. **Status:** CURRENTLY 63/P0.
-- [ ] LinkedIn, X, iMessage, Slack, and email public-URL previews verified. **Owner:** marketing/QA. **Status:** PENDING APPROVED HTTPS DEPLOYMENT.
-
-## Security
-
-- [x] Current-tree high-confidence secret scan has no matches.
-- [x] Full-history high-confidence secret scan has no matches across 87 reachable commits.
-- [x] No tracked non-example environment file exists.
-- [x] No service-role key, API key, test credential, private bucket name, internal URL, debug endpoint, or private family evidence was found on the candidate public surface.
-- [x] Production source-map count is zero.
-- [x] Baseline response security headers pass in the generated-worker preview.
-- [x] Rendered candidate routes have no third-party tracker, cookie, form, evidence upload, or unsafe-HTML surface.
-- [ ] Review or remove unused generic modules before importing them: `sidebar.tsx` writes a preference cookie and `chart.tsx` generates chart CSS through `dangerouslySetInnerHTML`. **Owner:** security/privacy + engineering. **Status:** OPEN/P2.
-- [ ] Four dependency advisories dispositioned: 2 moderate and 2 low, no high/critical. **Owner:** engineering/security. **Status:** OPEN/P1; remediate or record a time-bounded waiver and rerun.
-- [ ] Production CDN/edge security headers verified. **Owner:** hosting administrator/security. **Status:** BLOCKED ON DEPLOYMENT/P0.
-- [ ] Repeat the full interaction/screenshot matrix after the last non-structural copy/contrast/dependency refinements. **Owner:** QA. **Status:** OPEN/P2; final build, links, headers, secret scan, HTTP status, and Lighthouse were rerun.
-
-## Privacy
-
-- [x] Candidate explicitly says no evidence upload or intake occurs on this public site.
-- [x] Candidate does not send family information to analytics, mail, or a form endpoint.
-- [x] Future intake/training/retention claims are not invented.
-- [ ] Approved disposition for live `/privacy`, `/terms`, and `/contact` routes recorded. **Owner:** counsel + privacy/product owner. **Status:** OPEN/P0.
-- [ ] Future data collection has approved consent, destination, retention, deletion, access, training-use, and incident-handling terms before activation. **Owner:** privacy/security/counsel. **Status:** NOT AUTHORIZED; required before any intake feature.
-
-## Analytics
-
-- [x] Candidate source contains no analytics or tracker.
-- [x] No sensitive form content can be collected because no form exists.
-- [ ] Owner decides whether to preserve, replace, or explicitly waive the legacy `.ai` analytics behavior. **Owner:** product/privacy. **Status:** OPEN/P1.
-- [ ] Approved analytics event names, consent behavior, PII exclusions, property identity, and monitoring owner documented if analytics is enabled. **Owner:** product/privacy + operations. **Status:** NOT CONFIGURED.
-- [ ] Production analytics events verified after deployment, or written N/A decision recorded. **Owner:** analytics owner. **Status:** PENDING POST-LAUNCH.
-
-## Forms
-
-- [x] No form, evidence upload, email link, or fake-success state exists on the candidate.
-- [x] Browser form validation and submission flows are truthfully recorded as N/A.
-- [x] Primary CTA leads to the representative workflow; secondary CTA leads to product boundaries.
-- [ ] Verified professional contact/pilot route approved, or browse-only launch explicitly accepted. **Owner:** Ryan/product owner + privacy/security. **Status:** OPEN/P1.
-- [ ] If a form is later added, accessible validation, honest success/failure, data destination, delivery, spam protection, privacy terms, retention, and monitoring pass before launch. **Owner:** engineering/privacy. **Status:** NOT AUTHORIZED.
-
-## Domain
-
-- [ ] Canonical family-law production domain approved in writing. **Owner:** Ryan/product owner. **Status:** OPEN/P0.
-- [ ] Ownership and intended use of apex and `www` hosts verified. **Owner:** DNS/hosting administrator. **Status:** OPEN/P0.
-- [ ] The unrelated `truthtrace.app` product/email identity is explicitly excluded or its intended role proven. **Owner:** Ryan/product owner. **Status:** OPEN/P0.
-- [ ] Apex/`www` redirect policy approved and tested. **Owner:** DNS/SEO owner. **Status:** OPEN/P0.
-- [ ] DNS records and cutover TTL documented. **Owner:** DNS administrator. **Status:** OPEN/P0.
-- [ ] TLS certificate and renewal path verified on the approved host. **Owner:** hosting administrator. **Status:** OPEN/P0.
-
-## Deployment
-
-- [x] Candidate generates a Nitro Cloudflare-module artifact locally.
-- [x] Wrangler can serve that artifact locally.
-- [ ] Actual production provider and account/project identity verified. **Owner:** hosting administrator. **Status:** OPEN/P0.
-- [ ] Production repository integration and branch verified. **Owner:** hosting administrator + repository owner. **Status:** OPEN/P0.
-- [ ] Competing draft PR #3 dispositioned; one release candidate selected. **Owner:** Ryan/repository owner. **Status:** OPEN/P0.
-- [ ] Exact approved production build/output/environment names recorded. **Owner:** release engineering. **Status:** OPEN/P0.
-- [ ] Exact provider-native preview and production deployment commands verified. **Owner:** hosting administrator. **Status:** OPEN/P0.
-- [ ] Non-production deployment smoke test passes. **Owner:** release owner + QA. **Status:** OPEN/P0.
-- [ ] Production deployment receives explicit human authorization. **Owner:** Ryan/release owner. **Status:** NOT AUTHORIZED.
-
-## Rollback
-
-- [ ] Previous production SHA recorded. **Owner:** hosting administrator. **Status:** UNKNOWN/P0.
-- [ ] Previous production deployment identifier recorded. **Owner:** hosting administrator. **Status:** UNKNOWN/P0.
-- [ ] Exact provider-native rollback command verified. **Owner:** hosting administrator. **Status:** UNKNOWN/P0.
-- [ ] DNS rollback requirements and TTL documented. **Owner:** DNS administrator. **Status:** UNKNOWN/P0.
-- [ ] Rollback data impact confirmed as marketing-surface-only. **Owner:** engineering/product. **Status:** OPEN/P0.
-- [ ] Named rollback decision maker and operator recorded. **Owner:** Ryan/release owner. **Status:** OPEN/P0.
-- [ ] Rollback rehearsal or non-production proof recorded. **Owner:** release owner. **Status:** OPEN/P0.
-
-## Post-launch monitoring
-
-- [x] Time-window checklist prepared for immediate, 15-minute, 1-hour, and next-morning verification.
-- [ ] Monitoring owner and escalation channel recorded. **Owner:** Ryan/operations. **Status:** OPEN/P1.
-- [ ] Uptime, error, and abuse monitoring method approved. **Owner:** operations/security. **Status:** OPEN/P1.
-- [ ] Form-delivery check assigned or written N/A browse-only decision recorded. **Owner:** product/operations. **Status:** OPEN/P1.
-- [ ] Analytics-event check assigned or written N/A decision recorded. **Owner:** product/privacy/analytics. **Status:** OPEN/P1.
-- [ ] Core Web Vitals, search directives, social preview, console/network, and 404 checks assigned. **Owner:** QA/SEO/performance. **Status:** PENDING APPROVED DEPLOYMENT.
+- [x] Candidate copy and representative examples remain qualified and browse-only.
+- [x] No real family evidence or personal information found on the public surface.
+- [x] No legal-advice, admissibility, measured-outcome, certification, customer-count, pricing, or testimonial claim added.
+- [x] Public-history inventory H-01 through H-11 recorded without history rewrite or ref deletion.
+- [ ] Patent counsel disposition or authorized-owner waiver recorded. **Status:** COUNSEL REVIEW REQUIRED/P0.
+- [ ] Moderate/low dependency advisories remediated or time-bounded acceptance recorded. **Status:** P1.
+- [ ] Browse-only no-contact/no-analytics posture explicitly accepted or a separately reviewed mechanism approved. **Status:** P1.
 
 ## Publication decision
 
-- [ ] All P0 blockers resolved.
-- [ ] Every remaining P1 item fixed or covered by an explicit risk/owner/remediation-date waiver.
-- [ ] Final full-tree validation rerun and attached.
-- [ ] Deployment and rollback identifiers recorded.
-- [ ] Human release owner changes the verdict after reviewing fresh evidence.
+- [ ] Production authorization granted.
+- [ ] Merge authorized.
+- [ ] DNS/cutover authorized.
+- [ ] Candidate tag push authorized.
 
-Until every P0 box is complete, the only valid verdict is **BLOCKED**.
+Current checklist verdict: **BLOCKED**. Passing repository and CI gates does not satisfy the unchecked provider, route, staging, rollback, and counsel gates.

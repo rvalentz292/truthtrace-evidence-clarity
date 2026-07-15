@@ -2,7 +2,7 @@
 
 ## Release status
 
-This changelog records material changes from `main` at `1b5530784b564b679f733f77ff40aa7f7da53978` to the working release candidate on `homepage-final-publication-gate-20260715`. The changes repair the public artifact but do not authorize deployment. Verdict: `BLOCKED`.
+This changelog records material changes from `main` at `1b5530784b564b679f733f77ff40aa7f7da53978` to publication candidate `8fca95f914fe463da89073aa7e97607d59f0a9ad` on `homepage-final-publication-gate-20260715`. The changes repair and publication-gate the public artifact but do not authorize deployment. Verdict: `BLOCKED`.
 
 ## 1. Reframed the product from asserted operation to qualified direction
 
@@ -102,7 +102,7 @@ This changelog records material changes from `main` at `1b5530784b564b679f733f77
 
 **Residual risk:** Exact 200% browser zoom and high-contrast testing should be repeated manually on target Windows/macOS browsers after deployment.
 
-## 8. Added safe metadata, social assets, error metadata, and a publication interlock
+## 8. Authorized and locked the approved candidate metadata and crawler policy
 
 **Problem:** Baseline metadata had no verified canonical domain, no complete social image, weak route distinction, and no guard preventing an unknown target from being indexed.
 
@@ -110,11 +110,11 @@ This changelog records material changes from `main` at `1b5530784b564b679f733f77
 
 **Files changed:** `src/lib/site-metadata.ts`, `src/routes/index.tsx`, `src/routes/technology.tsx`, `src/routes/__root.tsx`, `public/og.png`, `public/favicon.svg`, `public/site.webmanifest`, `public/robots.txt`, `.env.example`, `scripts/validate-publication.mjs`, `package.json`.
 
-**Implementation:** Added route-specific titles/descriptions and conditional canonical, Open Graph, and Twitter URLs derived only from a valid HTTPS `VITE_SITE_URL`. Added an original representative social card, favicon, manifest, distinct 404/error titles, and noindex metadata for error states. Added a build-time validator. `robots.txt` deliberately blocks all indexing until production identity is approved, and the default `build` invokes the validator; `build:artifact` remains available for non-publishable verification.
+**Implementation:** Locked route-specific canonical, Open Graph, Twitter, manifest, robots, and sitemap configuration to founder-approved `https://truthtrace.ai`. Added an original representative social card, favicon, distinct 404/error titles, and noindex metadata/header behavior for excluded/error states. Every `build*` command invokes the exact validator; alternate, local, preview, missing, or credential-bearing origins fail.
 
-**Verification:** Source tests confirm the default build is validator-protected. The artifact build succeeds. The publication build intentionally fails while `VITE_SITE_URL` is missing, `robots.txt` blocks `/`, and `public/sitemap.xml` is absent. Error-route browser checks confirmed noindex and distinct titles.
+**Verification:** All 10 source tests pass. Configuration, artifact, and publication builds pass with the exact approved value. Robots exactly allows the candidate, sitemap contains only `/` and `/technology`, manifest identity is absolute, and Lighthouse SEO is 100. Error and retired-route browser checks confirm noindex and distinct titles.
 
-**Residual risk:** This is an intentional P0 block. The production domain, canonical host policy, sitemap, robots release state, www/apex redirects, existing indexed routes, and live social scrapes must be approved and verified before the build can pass.
+**Residual risk:** Passing metadata/crawler configuration is not production authorization. Legal/contact legacy routes, provider/static-asset host routing, apex/`www`, TLS, cache, injected analytics/cookies, and live social scraping remain exact-staging gates.
 
 ## 9. Added runtime security headers and safer SSR failure handling
 
@@ -124,11 +124,11 @@ This changelog records material changes from `main` at `1b5530784b564b679f733f77
 
 **Files changed:** `src/server.ts`, `public/_headers`, `src/routes/__root.tsx`.
 
-**Implementation:** Applied `Cross-Origin-Opener-Policy: same-origin`, a restrictive Permissions Policy, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Content-Type-Options: nosniff`, and `X-Frame-Options: DENY` to application responses, with a static-host header file as an additional provider-compatible declaration. Normalized swallowed catastrophic SSR JSON into the existing HTML error page and added recovery actions.
+**Implementation:** Applied `Cross-Origin-Opener-Policy: same-origin`, a restrictive Permissions Policy, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Content-Type-Options: nosniff`, and `X-Frame-Options: DENY` to application responses. Added 4xx/5xx noindex headers, 5xx no-store, catastrophic SSR normalization, strict HTML-host handling, path/query-preserving `www` redirect, unknown/`.app` 421 rejection, and a noindex 410 tombstone for `/private-demo`.
 
 **Verification:** Release tests assert all five header names in the server entry. Local production-preview header checks and error-state browser checks are part of the release evidence package.
 
-**Residual risk:** Provider behavior may override, merge, or omit headers. Content Security Policy, HSTS, caching, and final headers must be decided and verified on the approved production host; do not infer them from local preview.
+**Residual risk:** Local Cloudflare static assets can be served before the SSR guard. The authorized provider must enforce and prove HTML plus asset behavior for apex/`www`, `.app`, arbitrary hosts, HTTP→HTTPS, headers, caching, and cookies in exact-SHA staging.
 
 ## 10. Added reproducible release checks and a production-output preview path
 
@@ -136,13 +136,13 @@ This changelog records material changes from `main` at `1b5530784b564b679f733f77
 
 **Why it matters:** A release gate needs exact repeatable commands, and browser verification must exercise the artifact that would actually be deployed.
 
-**Files changed:** `package.json`, `bun.lock`, `.prettierrc`, `scripts/check-links.mjs`, `scripts/validate-publication.mjs`, `tests/homepage-release.test.mjs`, `src/routes/README.md`.
+**Files changed:** `package.json`, `.github/workflows/homepage-release-gate.yml`, `scripts/audit-dependencies.mjs`, `scripts/check-links.mjs`, `scripts/validate-publication.mjs`, `scripts/validate-release-surface.mjs`, `tests/homepage-release.test.mjs`.
 
-**Implementation:** Added `typecheck`, `test`, `format:check`, `check:links`, `release:config`, `build:artifact`, and protected publication build scripts. Added pinned Wrangler tooling and a preview command for `.output/server/wrangler.json`. Added tests for hash targets, removed private surface, representative labels, unsafe copy, local URLs, publication interlock, security headers, and the no-report-export boundary. Configured Prettier to tolerate repository line endings on Windows.
+**Implementation:** Protected every build command, added strict link/host/route checks, dependency thresholding, exact staged-snapshot and full-reachable-history secret checks, and a deterministic pull-request workflow. CI pins Node 22.17.0, Bun 1.3.14, Ubuntu 24.04, and action commit SHAs; it requires no production secret and never deploys.
 
-**Verification:** Dependency installation with the frozen Bun lockfile succeeded. Lint and typecheck passed; lint retained six non-blocking Fast Refresh warnings in existing UI modules. The release test suite passed. The artifact build completed, the Wrangler preview served the production output, internal links and 404 behavior passed the link checker, and browser console/error checks were clean. The dependency audit reported four advisories (two moderate and two low) and no high-severity advisory. The publication build remains intentionally blocked by unresolved production configuration.
+**Verification:** Frozen install, format, lint, typecheck, 10/10 tests, dependency threshold, both builds, source-map/embedded-source checks, preview, links, 410/404, host behavior, browser modes, and Lighthouse pass locally. GitHub Actions run `29384390019` passed every step on the exact candidate. Dependency audit reports 0 critical/high and 2 moderate/2 low.
 
-**Residual risk:** The four dependency advisories require owner review and tracked remediation even though none is high severity. The repository still has no connected CI workflow or verified deployment project. Local green checks are necessary but not sufficient for release.
+**Residual risk:** The four lower-severity advisories require remediation or time-bounded acceptance. Green CI does not select a provider project, approve legacy routes, create staging, prove edge behavior, or establish rollback.
 
 ## 11. Preserved local evidence without committing generated audit artifacts
 
@@ -150,9 +150,9 @@ This changelog records material changes from `main` at `1b5530784b564b679f733f77
 
 **Why it matters:** Committing generated artifacts can bloat the repository or accidentally preserve sensitive local context, while omitting them entirely weakens the audit trail.
 
-**Files changed:** `.gitignore`; local `artifacts/homepage-release-20260715/` evidence tree.
+**Files changed:** `.gitignore`; local `artifacts/homepage-publication-20260715/` evidence tree.
 
-**Implementation:** Kept generated release evidence under the required local artifact path and excluded the artifact directory from source control. Release documentation records the evidence locations and verification results; `artifacts/homepage-release-20260715/SHA256SUMS.txt` records a relative-path SHA-256 manifest for retained files.
+**Implementation:** Kept generated release evidence under the required local artifact path and excluded the artifact directory from source control. Release documentation records evidence locations and verification results; `artifacts/homepage-publication-20260715/SHA256SUMS.txt` records the final relative-path SHA-256 manifest.
 
 **Verification:** Git status can distinguish source/document changes from ignored audit output; artifact files remain available in the shared workspace for human inspection and can be checked against the SHA-256 manifest.
 
@@ -160,11 +160,11 @@ This changelog records material changes from `main` at `1b5530784b564b679f733f77
 
 ## Unresolved blockers
 
-- Approved production domain and identity are not established; `truthtrace.app` is a different product and `truthtrace.ai` is a legacy deployment not tied demonstrably to this repository.
-- Production provider, project, branch, deployment command, deployment ID, environment, and rollback mechanism are unverified.
+- The canonical domain is approved, but no authorized Lovable target/project/branch contains the immutable candidate.
+- The current live project/private repository/SHA are identified, but immutable deployment ID, exact deploy/rollback commands, candidate environment, and rollback mechanism remain unverified.
 - The legacy live site exposes indexed `/privacy`, `/terms`, `/contact`, and other routes absent from this candidate; no redirect or migration plan is approved.
-- Canonical URL, sitemap, robots release state, www/apex redirect policy, analytics ownership, and live social-card validation are incomplete.
-- The remote `website-100m-final-20260714` candidate and draft PR #3 diverge from this release branch; the owner must choose the authoritative candidate rather than silently combining them.
+- Provider/static-asset host isolation, apex/`www`, HTTP→HTTPS, analytics/cookies, and live social-card validation are incomplete.
+- PR #3 is closed and superseded; PR #4 is the sole candidate.
 - Patent counsel must assess historical public repository disclosure.
 
 Until those items are resolved and the full live-domain gate is rerun, the release verdict is `BLOCKED`.
