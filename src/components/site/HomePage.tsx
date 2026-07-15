@@ -589,6 +589,7 @@ function Pathways() {
     <section className="relative border-y border-border bg-surface/20">
       <Section>
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* anchors: id="parents" id="professionals" */}
           <PathwayColumn
             id="parents"
             eyebrow="For parents"
