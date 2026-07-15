@@ -5,6 +5,7 @@ export function renderErrorPage(): string {
     <meta charset="utf-8" />
     <title>This page didn't load</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
     <style>
       body { font: 15px/1.5 system-ui, -apple-system, sans-serif; background: #fafafa; color: #111; display: grid; place-items: center; min-height: 100vh; margin: 0; padding: 1.5rem; }
       .card { max-width: 28rem; width: 100%; text-align: center; padding: 2rem; }
@@ -25,6 +26,24 @@ export function renderErrorPage(): string {
         <a class="secondary" href="/">Go home</a>
       </div>
     </div>
+  </body>
+</html>`;
+}
+
+export function renderGonePage(): string {
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Page retired</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+  </head>
+  <body>
+    <main id="main-content">
+      <h1>Page retired</h1>
+      <p>This page is no longer available.</p>
+    </main>
   </body>
 </html>`;
 }

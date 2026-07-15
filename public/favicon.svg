@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TruthTrace">
+  <rect width="64" height="64" rx="14" fill="#080b11" />
+  <path d="M32 9 51 17v14c0 12-7.7 20.6-19 25-11.3-4.4-19-13-19-25V17L32 9Z" fill="#4f8cff" fill-opacity=".14" stroke="#4f8cff" stroke-width="3" />
+  <path d="m21 33 7 7 16-17" fill="none" stroke="#69e0c7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
+  <circle cx="44" cy="23" r="3.2" fill="#d9f9f1" />
+</svg>

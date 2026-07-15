@@ -1,0 +1,19 @@
+{
+  "name": "TruthTrace",
+  "short_name": "TruthTrace",
+  "description": "Forensic Evidence Intelligence for Family Law",
+  "id": "https://truthtrace.ai/",
+  "start_url": "https://truthtrace.ai/",
+  "scope": "https://truthtrace.ai/",
+  "display": "standalone",
+  "background_color": "#080b11",
+  "theme_color": "#080b11",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,22 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HomePage } from "@/components/site/HomePage";
+import { createPageHead } from "@/lib/site-metadata";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "TruthTrace | Forensic Evidence Intelligence" },
-      {
-        name: "description",
-        content: "TruthTrace structures family-law evidence into source-linked timelines, findings, and attorney-reviewable packets.",
-      },
-      { property: "og:title", content: "TruthTrace | Forensic Evidence Intelligence" },
-      {
-        property: "og:description",
-        content: "A calm, evidence-constrained layer between fragmented family-law records and professional review.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-  }),
+  head: () =>
+    createPageHead({
+      path: "/",
+      title: "TruthTrace | Forensic Evidence Intelligence for Family Law",
+      description:
+        "TruthTrace is being designed to turn fragmented family-law evidence into a structured chronology with visible links back to source material for professional review.",
+    }),
   component: HomePage,
 });

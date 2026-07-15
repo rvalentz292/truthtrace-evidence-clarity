@@ -1,10 +1,28 @@
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { motion, MotionConfig } from "framer-motion";
 import {
-  AudioLines, Briefcase, Camera, Check, ChevronRight, Circle, Database, Eye, FileCheck2,
-  FileText, Fingerprint, GitBranch, Hash, Layers3, Lock, Mail, MessageSquare, Quote,
-  ShieldCheck, UserCheck, UserRound, Video, X,
+  AudioLines,
+  Briefcase,
+  Camera,
+  Check,
+  ChevronRight,
+  Circle,
+  Database,
+  Eye,
+  FileCheck2,
+  FileText,
+  Fingerprint,
+  GitBranch,
+  Hash,
+  Layers3,
+  Lock,
+  MessageSquare,
+  Quote,
+  ShieldCheck,
+  UserCheck,
+  UserRound,
+  Video,
+  X,
 } from "lucide-react";
 import type { ComponentType, ReactNode, SVGProps } from "react";
 
@@ -14,28 +32,24 @@ import { Eyebrow, Section, SectionHeader } from "@/components/site/Section";
 /* ------------------------------- Page shell ------------------------------- */
 
 export function HomePage() {
-  const [pilotOpen, setPilotOpen] = useState(false);
   return (
-    <MotionConfig reducedMotion="user">
-      <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
-        <Background />
-        <Nav />
-        <main className="relative pt-14">
-          <Hero onRequestPilot={() => setPilotOpen(true)} />
-          <ChaosToIntelligence />
-          <ProofChain />
-          <ProcessingLedger />
-          <NoCitationNoClaim />
-          <Differentiators />
-          <RoleView />
-          <EvidenceCategories />
-          <TrustArchitecture />
-          <ClosingCta onRequestPilot={() => setPilotOpen(true)} />
-        </main>
-        <Footer />
-        {pilotOpen && <PilotModal onClose={() => setPilotOpen(false)} />}
-      </div>
-    </MotionConfig>
+    <div className="relative min-h-screen overflow-x-clip bg-background text-foreground">
+      <Background />
+      <Nav />
+      <main id="main-content" className="relative pt-14" tabIndex={-1}>
+        <Hero />
+        <ChaosToIntelligence />
+        <ProofChain />
+        <ProcessingLedger />
+        <NoCitationNoClaim />
+        <Differentiators />
+        <RoleView />
+        <EvidenceCategories />
+        <TrustArchitecture />
+        <ClosingCta />
+      </main>
+      <Footer />
+    </div>
   );
 }
 
@@ -50,57 +64,66 @@ function Background() {
 
 /* ---------------------------------- Hero ---------------------------------- */
 
-function Hero({ onRequestPilot }: { onRequestPilot: () => void }) {
+function Hero() {
   return (
     <Section className="!pb-16 !pt-20 sm:!pb-24 sm:!pt-28 lg:!pb-28 lg:!pt-32">
       <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12">
         <div className="min-w-0">
-          <Eyebrow>Forensic Evidence Intelligence</Eyebrow>
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-6 max-w-4xl text-balance text-[38px] font-semibold leading-[1.03] tracking-tight sm:text-[52px] lg:text-[62px]"
-          >
-            Turn evidence chaos into{" "}
-            <span className="text-gradient-primary">source-verifiable case intelligence.</span>
-          </motion.h1>
+          <Eyebrow>Forensic Evidence Intelligence for Family Law</Eyebrow>
+          <h1 className="mt-6 max-w-4xl text-balance text-[38px] font-semibold leading-[1.03] tracking-tight sm:text-[52px] lg:text-[62px]">
+            Turn fragmented evidence into{" "}
+            <span className="text-gradient-primary">structured, source-linked clarity.</span>
+          </h1>
           <p className="mt-7 max-w-3xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            TruthTrace transforms messages, documents, images, recordings, and case records into a
-            structured timeline, citation-bound findings, and reviewable evidence packages.
+            TruthTrace is being designed to help parents, attorneys, and evaluators organize
+            messages, documents, images, recordings, and case records into a reviewable chronology
+            with visible links back to source material.
           </p>
           <p className="mt-4 max-w-3xl text-pretty text-sm leading-relaxed text-foreground/75 sm:text-base">
-            Originals preserved. Every finding traceable. No citation, no claim.
+            Built for the evidence work between fragmented files and professional review—not to
+            replace legal judgment.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <button
-              type="button"
-              onClick={onRequestPilot}
-              className="inline-flex min-h-11 items-center justify-center rounded-md border border-primary/60 bg-primary/15 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              Request controlled pilot access
-            </button>
             <Link
               to="/"
               hash="proof-chain"
+              activeOptions={{ includeHash: true }}
+              data-testid="primary-workflow-cta"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-primary/60 bg-primary/15 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              View the representative workflow
+            </Link>
+            <Link
+              to="/"
+              hash="trust"
+              activeOptions={{ includeHash: true }}
               className="inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-transparent px-5 py-2.5 text-sm font-medium text-foreground/85 transition-colors hover:border-foreground/40 hover:text-foreground"
             >
-              View the forensic demonstration
+              Review product boundaries
             </Link>
           </div>
 
           <div className="mt-10 border-y border-border py-5">
             <div className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/80 sm:text-[11px]">
-              {["Evidence Identity", "Provenance", "Deterministic Processing", "Citation-Bound Outputs", "Human-Reviewable"].map((item, i) => (
+              {[
+                "Source Identity",
+                "Visible Provenance",
+                "Structured Chronology",
+                "Professional Review",
+              ].map((item, i) => (
                 <span key={item} className="flex items-center gap-5">
-                  {i > 0 && <span aria-hidden className="hidden size-1 rounded-full bg-primary sm:block" />}
+                  {i > 0 && (
+                    <span aria-hidden className="hidden size-1 rounded-full bg-primary sm:block" />
+                  )}
                   {item}
                 </span>
               ))}
             </div>
           </div>
-          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-            Currently operating in controlled pilot · Not a general-availability product
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Representative product preview · Illustrative case data · No real family information
+            shown · No evidence uploads on this site
           </p>
         </div>
 
@@ -119,31 +142,39 @@ function HeroVisual() {
       <div className="pointer-events-none absolute inset-0 grid-bg radial-fade opacity-40" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_55%_at_50%_-10%,color-mix(in_oklab,var(--primary)_16%,transparent),transparent)]" />
 
-      <div className="relative mb-4 flex items-center justify-between border-b border-border/60 pb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+      <div className="relative mb-4 flex flex-col gap-2 border-b border-border/60 pb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <span className="flex items-center gap-2">
-          <span aria-hidden className="size-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--primary)]" />
+          <span
+            aria-hidden
+            className="size-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--primary)]"
+          />
           Forensic Review Workstation
         </span>
-        <span className="text-foreground/60">Representative demonstration dataset</span>
+        <span className="text-foreground/70">Illustrative data · Not live</span>
       </div>
 
       <div className="relative grid gap-3 sm:grid-cols-5">
         {/* Finding */}
         <div className="sm:col-span-3 rounded-lg border border-primary/40 bg-primary/[0.08] p-4">
           <div className="flex items-center justify-between">
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">Finding</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
+              Finding
+            </span>
             <span className="font-mono text-[10px] text-muted-foreground">FND-0184</span>
           </div>
           <p className="mt-3 text-sm font-medium leading-snug text-foreground">
-            Scheduled contact window was not completed during the documented period.
+            Voicemail and messages reference the same scheduled contact window.
           </p>
           <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground">
-            Describes cited records only. Does not determine intent, credibility, or legal significance.
+            Shows cited records only. Does not determine what occurred, why, or its legal
+            significance.
           </p>
         </div>
         {/* Timeline event */}
         <div className="sm:col-span-2 rounded-lg border border-border bg-surface/40 p-4">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Timeline Event</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+            Timeline Event
+          </span>
           <div className="mt-3 font-mono text-[11px] text-foreground/90">2024-03-18 · 21:07</div>
           <div className="mt-1 text-[12px] text-foreground/80">EVT-0921 · Co-parent · Audio</div>
         </div>
@@ -151,37 +182,48 @@ function HeroVisual() {
         {/* Citation */}
         <div className="sm:col-span-3 rounded-lg border border-border bg-surface/40 p-4">
           <div className="flex items-center justify-between">
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Source Excerpt</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              Source Excerpt
+            </span>
             <span className="inline-flex items-center gap-1 font-mono text-[10px] text-muted-foreground">
               <Quote className="size-3" /> CIT-0417
             </span>
           </div>
           <blockquote className="mt-2 border-l-2 border-primary/60 pl-2.5 text-[12px] italic text-foreground/90">
-            "…voicemail excerpt referencing the prior scheduling agreement…"
+            "…voicemail excerpt referencing the documented scheduling window…"
           </blockquote>
           <div className="mt-2 font-mono text-[10px] text-muted-foreground">
             voicemail-2024-03-18.m4a · t=00:18–00:34
           </div>
         </div>
-        {/* EvidenceObject */}
+        {/* Representative source record */}
         <div className="sm:col-span-2 rounded-lg border border-border bg-surface/40 p-4">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">EvidenceObject</span>
-          <div className="mt-3 font-mono text-[11px] text-foreground/90">EO-2024-03-18-7f3a</div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+            Preserved source record
+          </span>
+          <div className="mt-3 font-mono text-[11px] text-foreground/90">SRC-2024-03-18-7f3a</div>
           <div className="mt-2 grid gap-1 font-mono text-[10px] text-muted-foreground">
-            <div className="flex items-center gap-1.5"><Hash className="size-3" />a3f2…91c7</div>
+            <div className="flex items-center gap-1.5">
+              <Hash className="size-3" />
+              a3f2…91c7
+            </div>
             <div className="inline-flex items-center gap-1 text-success">
-              <Check className="size-3" /> original preserved
+              <Check className="size-3" /> shown as preserved
             </div>
           </div>
         </div>
       </div>
 
       <div className="relative mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-border/60 pt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-        <span>Finding</span><ChevronRight className="size-3" />
-        <span>Event</span><ChevronRight className="size-3" />
-        <span>Citation</span><ChevronRight className="size-3" />
-        <span>Excerpt</span><ChevronRight className="size-3" />
-        <span className="text-foreground/85">EvidenceObject · SHA-256</span>
+        <span>Finding</span>
+        <ChevronRight className="size-3" />
+        <span>Event</span>
+        <ChevronRight className="size-3" />
+        <span>Citation</span>
+        <ChevronRight className="size-3" />
+        <span>Excerpt</span>
+        <ChevronRight className="size-3" />
+        <span className="text-foreground/85">Source record · illustrative SHA-256</span>
       </div>
     </div>
   );
@@ -191,31 +233,33 @@ function HeroVisual() {
 
 function ChaosToIntelligence() {
   const before = [
-    "7,380 raw messages",
-    "683 pages of documents",
-    "Mixed screenshots, emails, recordings",
-    "Unclear chronology",
-    "Manual review burden",
+    "Message threads across platforms",
+    "Long document sets",
+    "Mixed screenshots, emails, and recordings",
+    "Chronology assembled by hand",
+    "Source context that is easy to lose",
   ];
   const after = [
-    "Immutable EvidenceObjects",
-    "Normalized timeline",
-    "Source-linked findings",
-    "Citation registry",
-    "Reviewable evidence package",
-  ];
-  const numeric = [
-    ["977", "Relevant records identified"],
-    ["498", "Higher-evidence records"],
-    ["100%", "Findings citation-bound"],
+    "Source records kept distinct",
+    "Structured chronology",
+    "Observations linked to citations",
+    "Review boundaries made visible",
+    "Focused professional review",
   ];
   return (
-    <section className="relative border-y border-border bg-surface/20">
+    <section id="how" className="relative scroll-mt-20 border-y border-border bg-surface/20">
       <Section>
         <SectionHeader
-          eyebrow="Evidence Chaos → Reviewable Intelligence"
-          title={<>Evidence does not arrive organized. <span className="text-gradient-primary">TruthTrace makes it reviewable.</span></>}
-          sub="Mixed-format records are preserved, identified, normalized, and linked into one inspectable evidence chain."
+          eyebrow="Fragmented Evidence → Reviewable Chronology"
+          title={
+            <>
+              Evidence does not arrive organized.{" "}
+              <span className="text-gradient-primary">
+                The review process still needs structure.
+              </span>
+            </>
+          }
+          sub="The representative workflow shows how mixed-format records can remain identifiable while events, excerpts, and citations are arranged for human review."
         />
         <div className="mt-12 grid gap-3 lg:grid-cols-[1fr_auto_1fr]">
           <ChaosColumn label="Before · Evidence dump" tone="muted" items={before} />
@@ -225,30 +269,38 @@ function ChaosToIntelligence() {
           <ChaosColumn label="After · Reviewable intelligence" tone="primary" items={after} />
         </div>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          {numeric.map(([v, l]) => (
-            <div key={l} className="border-l border-primary/45 bg-background/45 p-5">
-              <div className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">{v}</div>
-              <div className="mt-2 text-sm text-muted-foreground">{l}</div>
-            </div>
-          ))}
-        </div>
-        <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-          Representative modeled case example · Not measured customer results
+        <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+          Representative workflow only. No measured customer outcomes or live processing results are
+          shown.
         </p>
       </Section>
     </section>
   );
 }
 
-function ChaosColumn({ label, items, tone }: { label: string; items: string[]; tone: "muted" | "primary" }) {
+function ChaosColumn({
+  label,
+  items,
+  tone,
+}: {
+  label: string;
+  items: string[];
+  tone: "muted" | "primary";
+}) {
   return (
-    <div className={`rounded-xl border p-5 sm:p-6 ${tone === "primary" ? "border-primary/40 bg-primary/[0.06]" : "border-border bg-background/40"}`}>
-      <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{label}</div>
+    <div
+      className={`rounded-xl border p-5 sm:p-6 ${tone === "primary" ? "border-primary/40 bg-primary/[0.06]" : "border-border bg-background/40"}`}
+    >
+      <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+        {label}
+      </div>
       <ul className="mt-5 space-y-2.5">
         {items.map((it) => (
           <li key={it} className="flex items-start gap-2.5 text-sm text-foreground/85">
-            <span aria-hidden className={`mt-1.5 size-1.5 shrink-0 rounded-full ${tone === "primary" ? "bg-primary" : "bg-muted-foreground/60"}`} />
+            <span
+              aria-hidden
+              className={`mt-1.5 size-1.5 shrink-0 rounded-full ${tone === "primary" ? "bg-primary" : "bg-muted-foreground/60"}`}
+            />
             {it}
           </li>
         ))}
@@ -271,27 +323,48 @@ type Finding = {
 const FINDINGS: Finding[] = [
   {
     id: "FND-0184",
-    text: "Scheduled contact window was not completed during the documented period.",
-    qualifier: "Describes cited records only. Does not determine intent, credibility, or legal significance.",
+    text: "Voicemail and messages reference the same scheduled contact window.",
+    qualifier:
+      "Shows cited records only. Does not determine what occurred, why, or its legal significance.",
     event: { id: "EVT-0921", when: "2024-03-18 · 21:07", actor: "Co-parent", kind: "Audio" },
-    citation: { id: "CIT-0417", excerpt: "…voicemail excerpt referencing the prior scheduling agreement…", source: "voicemail-2024-03-18.m4a", locator: "t=00:18–00:34" },
-    evidence: { id: "EO-2024-03-18-7f3a", hash: "a3f2c81d…91c7", type: "audio/m4a" },
+    citation: {
+      id: "CIT-0417",
+      excerpt: "…voicemail excerpt referencing the documented scheduling window…",
+      source: "voicemail-2024-03-18.m4a",
+      locator: "t=00:18–00:34",
+    },
+    evidence: { id: "SRC-2024-03-18-7f3a", hash: "a3f2c81d…91c7", type: "audio/m4a" },
   },
   {
     id: "FND-0192",
-    text: "Pickup discrepancy recorded by a third-party administrator on the cited date.",
-    qualifier: "Reflects the third-party record as documented. No credibility determination is made.",
-    event: { id: "EVT-0944", when: "2024-03-14 · 08:11", actor: "School administrator", kind: "Document" },
-    citation: { id: "CIT-0422", excerpt: "…discrepancy between scheduled pickup and actual attendance logged…", source: "school-attendance-2024-03-14.pdf", locator: "p. 2" },
-    evidence: { id: "EO-2024-03-14-1c02", hash: "b1e7d40a…4e12", type: "application/pdf" },
+    text: "School record notes pickup timing on the cited date.",
+    qualifier: "Reflects the cited record as written. No conclusion about responsibility is made.",
+    event: {
+      id: "EVT-0944",
+      when: "2024-03-14 · 08:11",
+      actor: "School administrator",
+      kind: "Document",
+    },
+    citation: {
+      id: "CIT-0422",
+      excerpt: "…record includes scheduled and logged pickup times…",
+      source: "school-attendance-2024-03-14.pdf",
+      locator: "p. 2",
+    },
+    evidence: { id: "SRC-2024-03-14-1c02", hash: "b1e7d40a…4e12", type: "application/pdf" },
   },
   {
     id: "FND-0207",
-    text: "Message thread contains statements that appear inconsistent with an earlier cited message.",
-    qualifier: "Consistency observation limited to the cited records. Interpretation is left to qualified reviewers.",
+    text: "Two cited messages use different dates for the same scheduled exchange.",
+    qualifier: "Limited to the cited text. Interpretation is left to qualified reviewers.",
     event: { id: "EVT-0977", when: "2024-03-22 · 16:58", actor: "Co-parent", kind: "Messages" },
-    citation: { id: "CIT-0451", excerpt: "…prior statement on 03-11 conflicts with the message on 03-22…", source: "messages-export-2024-Q1.rsmf", locator: "msg #4218" },
-    evidence: { id: "EO-2024-03-22-9b8d", hash: "c99a12ef…7a03", type: "application/rsmf" },
+    citation: {
+      id: "CIT-0451",
+      excerpt: "…one message references 03-11; a later message references 03-22…",
+      source: "messages-export-2024-Q1.rsmf",
+      locator: "msg #4218",
+    },
+    evidence: { id: "SRC-2024-03-22-9b8d", hash: "c99a12ef…7a03", type: "application/rsmf" },
   },
 ];
 
@@ -302,29 +375,47 @@ function ProofChain() {
     <section id="proof-chain" className="scroll-mt-14 relative">
       <Section>
         <SectionHeader
-          eyebrow="Finding → Source Proof Chain"
-          title={<>Every finding traces back to <span className="text-gradient-primary">an original source.</span></>}
-          sub="Select a finding to inspect its timeline event, citation, source excerpt, and the EvidenceObject with SHA-256 identity."
+          eyebrow="Representative Observation → Cited Source"
+          title={
+            <>
+              Inspect how a sample observation links to{" "}
+              <span className="text-gradient-primary">its cited source.</span>
+            </>
+          }
+          sub="Select an illustrative observation to view its associated timeline event, excerpt, locator, and source identifier. The example does not determine intent, credibility, or legal significance."
         />
+
+        <p className="mt-6 rounded-lg border border-primary/30 bg-primary/[0.06] px-4 py-3 text-sm leading-relaxed text-foreground/85">
+          Representative demonstration · Illustrative case data · No real family information shown ·
+          Static interface, not live product telemetry
+        </p>
 
         <div className="mt-10 grid gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           {/* Finding list */}
-          <div role="tablist" aria-label="Findings" className="flex flex-col gap-2">
+          <div
+            role="group"
+            aria-label="Representative observations"
+            className="flex flex-col gap-2"
+          >
             {FINDINGS.map((f) => {
               const active = f.id === id;
               return (
                 <button
                   key={f.id}
-                  role="tab"
-                  aria-selected={active}
-                  aria-controls="proof-chain-panel"
+                  type="button"
+                  data-finding-id={f.id}
+                  aria-pressed={active}
                   onClick={() => setId(f.id)}
                   className={`group rounded-xl border p-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                    active ? "border-primary/50 bg-primary/[0.08]" : "border-border bg-surface/40 hover:border-foreground/25"
+                    active
+                      ? "border-primary/50 bg-primary/[0.08]"
+                      : "border-border bg-surface/40 hover:border-foreground/25"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">Finding</span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
+                      Sample observation
+                    </span>
                     <span className="font-mono text-[10px] text-muted-foreground">{f.id}</span>
                   </div>
                   <p className="mt-2 text-sm font-medium leading-snug text-foreground">{f.text}</p>
@@ -334,15 +425,23 @@ function ProofChain() {
           </div>
 
           {/* Panel */}
-          <div id="proof-chain-panel" role="tabpanel" className="rounded-2xl border border-border bg-background/60 p-5 sm:p-6">
-            <ProofRow label="Finding" mono={selected.id}>
+          <div
+            id="proof-chain-panel"
+            aria-live="polite"
+            className="rounded-2xl border border-border bg-background/60 p-5 sm:p-6"
+          >
+            <ProofRow label="Sample observation" mono={selected.id}>
               <p className="text-sm text-foreground">{selected.text}</p>
-              <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground">{selected.qualifier}</p>
+              <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground">
+                {selected.qualifier}
+              </p>
             </ProofRow>
             <ProofArrow />
             <ProofRow label="Timeline event" mono={selected.event.id}>
               <div className="font-mono text-[12px] text-foreground/90">{selected.event.when}</div>
-              <div className="mt-1 text-[12px] text-muted-foreground">{selected.event.actor} · {selected.event.kind}</div>
+              <div className="mt-1 text-[12px] text-muted-foreground">
+                {selected.event.actor} · {selected.event.kind}
+              </div>
             </ProofRow>
             <ProofArrow />
             <ProofRow label="Citation" mono={selected.citation.id}>
@@ -354,15 +453,18 @@ function ProofChain() {
               </div>
             </ProofRow>
             <ProofArrow />
-            <ProofRow label="EvidenceObject" mono={selected.evidence.id}>
+            <ProofRow label="Source record" mono={selected.evidence.id}>
               <div className="grid gap-2 sm:grid-cols-3">
                 <MetaCell k="type" v={selected.evidence.type} />
-                <MetaCell k="sha-256" v={selected.evidence.hash} />
-                <MetaCell k="original" v="preserved" tone="success" />
+                <MetaCell k="sample sha-256" v={selected.evidence.hash} />
+                <MetaCell k="source state" v="shown as preserved" tone="success" />
               </div>
             </ProofRow>
             <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-              Representative demonstration dataset
+              Representative demonstration · Identifiers are illustrative
+            </p>
+            <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground">
+              Export limitation: this public preview does not create or download a report.
             </p>
           </div>
         </div>
@@ -375,7 +477,9 @@ function ProofRow({ label, mono, children }: { label: string; mono: string; chil
   return (
     <div>
       <div className="flex items-center justify-between">
-        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{label}</span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          {label}
+        </span>
         <span className="font-mono text-[10px] text-foreground/70">{mono}</span>
       </div>
       <div className="mt-2">{children}</div>
@@ -383,25 +487,67 @@ function ProofRow({ label, mono, children }: { label: string; mono: string; chil
   );
 }
 function ProofArrow() {
-  return <div aria-hidden className="my-4 flex items-center gap-3 text-primary/70"><span className="h-px flex-1 bg-border" /><ChevronRight className="size-4 rotate-90" /><span className="h-px flex-1 bg-border" /></div>;
+  return (
+    <div aria-hidden className="my-4 flex items-center gap-3 text-primary/70">
+      <span className="h-px flex-1 bg-border" />
+      <ChevronRight className="size-4 rotate-90" />
+      <span className="h-px flex-1 bg-border" />
+    </div>
+  );
 }
 function MetaCell({ k, v, tone }: { k: string; v: string; tone?: "success" }) {
   return (
     <div className="rounded-md border border-border bg-surface/40 p-2.5">
-      <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{k}</div>
-      <div className={`mt-1 truncate font-mono text-[11px] ${tone === "success" ? "text-success" : "text-foreground/90"}`}>{v}</div>
+      <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+        {k}
+      </div>
+      <div
+        className={`mt-1 break-all font-mono text-[11px] ${tone === "success" ? "text-success" : "text-foreground/90"}`}
+      >
+        {v}
+      </div>
     </div>
   );
 }
 
-/* -------------------------- Deterministic ledger -------------------------- */
+/* ------------------ Representative processing record ------------------ */
 
 const LEDGER_STAGES = [
-  { id: "01", stage: "Intake",        artifact: "8 EvidenceObjects registered",  run: "run_a3f2c8", meta: "originals preserved" },
-  { id: "02", stage: "Normalization", artifact: "12 derived artifacts produced", run: "run_a3f2c8", meta: "derived · versioned" },
-  { id: "03", stage: "Timeline",      artifact: "24 events assembled",           run: "run_a3f2c8", meta: "chronology built" },
-  { id: "04", stage: "Citations",     artifact: "31 citations bound",            run: "run_a3f2c8", meta: "source-linked" },
-  { id: "05", stage: "Packet",        artifact: "1 review packet prepared",      run: "run_a3f2c8", meta: "reviewable" },
+  {
+    id: "01",
+    stage: "Intake",
+    artifact: "8 sample source records listed",
+    run: "example-01",
+    meta: "source state shown",
+  },
+  {
+    id: "02",
+    stage: "Normalization",
+    artifact: "12 sample derivatives listed",
+    run: "example-01",
+    meta: "relationship shown",
+  },
+  {
+    id: "03",
+    stage: "Timeline",
+    artifact: "24 sample events arranged",
+    run: "example-01",
+    meta: "chronology shown",
+  },
+  {
+    id: "04",
+    stage: "Citations",
+    artifact: "31 sample citations mapped",
+    run: "example-01",
+    meta: "source links shown",
+  },
+  {
+    id: "05",
+    stage: "Review",
+    artifact: "1 sample review view prepared",
+    run: "example-01",
+    meta: "review boundary shown",
+  },
 ];
 
 function ProcessingLedger() {
@@ -409,16 +555,28 @@ function ProcessingLedger() {
     <section className="relative border-y border-border bg-surface/20">
       <Section>
         <SectionHeader
-          eyebrow="Deterministic Processing Ledger"
-          title={<>The system can <span className="text-gradient-primary">show its work.</span></>}
-          sub="Each processing stage records artifacts, run identifiers, and provenance markers so reviewers can inspect how a case was assembled."
+          eyebrow="Representative Processing Record"
+          title={
+            <>
+              See what a traceable review record is{" "}
+              <span className="text-gradient-primary">intended to show.</span>
+            </>
+          }
+          sub="This static example displays stage names, illustrative artifact counts, example run identifiers, and provenance markers. It does not describe live processing."
         />
         <div className="mt-10 overflow-hidden rounded-2xl border border-border">
           <div className="hidden grid-cols-[80px_1fr_1.4fr_140px_1fr] gap-4 border-b border-border bg-background/60 px-5 py-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:grid">
-            <span>Stage</span><span>Name</span><span>Artifact</span><span>Run</span><span>Provenance</span>
+            <span>Stage</span>
+            <span>Name</span>
+            <span>Artifact</span>
+            <span>Run</span>
+            <span>Provenance</span>
           </div>
           {LEDGER_STAGES.map((s, i) => (
-            <div key={s.id} className={`grid grid-cols-1 gap-2 border-b border-border px-5 py-4 md:grid-cols-[80px_1fr_1.4fr_140px_1fr] md:gap-4 md:py-3.5 ${i === LEDGER_STAGES.length - 1 ? "border-b-0" : ""} ${i % 2 === 0 ? "bg-background/40" : "bg-background/20"}`}>
+            <div
+              key={s.id}
+              className={`grid grid-cols-1 gap-2 border-b border-border px-5 py-4 md:grid-cols-[80px_1fr_1.4fr_140px_1fr] md:gap-4 md:py-3.5 ${i === LEDGER_STAGES.length - 1 ? "border-b-0" : ""} ${i % 2 === 0 ? "bg-background/40" : "bg-background/20"}`}
+            >
               <span className="font-mono text-[11px] text-primary">{s.id}</span>
               <span className="text-sm font-medium text-foreground">{s.stage}</span>
               <span className="text-[13px] text-foreground/85">{s.artifact}</span>
@@ -430,7 +588,7 @@ function ProcessingLedger() {
           ))}
         </div>
         <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-          Representative demonstration ledger · Not live telemetry
+          Representative processing record · Illustrative values · Not live telemetry
         </p>
       </Section>
     </section>
@@ -443,18 +601,23 @@ function NoCitationNoClaim() {
   return (
     <Section>
       <SectionHeader
-        eyebrow="No Citation, No Claim"
-        title={<>Unsupported assertions do <span className="text-gradient-primary">not pass the export gate.</span></>}
-        sub="Every generated factual assertion must resolve to a source citation. When support is missing, the system flags or blocks the claim instead of filling the gap."
+        eyebrow="Illustrative Citation Check"
+        title={
+          <>
+            A draft statement without cited support is{" "}
+            <span className="text-gradient-primary">held for review.</span>
+          </>
+        }
+        sub="This static comparison shows the intended difference between a source-linked observation and an unsupported inference. It does not establish production export enforcement."
       />
       <div className="mt-10 grid gap-4 md:grid-cols-2">
         <GateCard
           state="pass"
-          claim="Scheduled contact window was not completed on 2024-03-18."
+          claim="The cited voicemail references the documented contact window on 2024-03-18."
           rows={[
             ["Citation attached", "CIT-0417"],
             ["Exact excerpt", "voicemail-2024-03-18.m4a · t=00:18–00:34"],
-            ["Export eligible", "yes"],
+            ["Review state", "shown as source-linked"],
           ]}
         />
         <GateCard
@@ -462,7 +625,7 @@ function NoCitationNoClaim() {
           claim="Co-parent intentionally interfered with the schedule."
           rows={[
             ["Missing source support", "no citation resolves"],
-            ["Export prevented", "yes"],
+            ["Review state", "shown as held"],
             ["Human review", "required"],
           ]}
         />
@@ -471,23 +634,38 @@ function NoCitationNoClaim() {
   );
 }
 
-function GateCard({ state, claim, rows }: { state: "pass" | "block"; claim: string; rows: [string, string][] }) {
+function GateCard({
+  state,
+  claim,
+  rows,
+}: {
+  state: "pass" | "block";
+  claim: string;
+  rows: [string, string][];
+}) {
   const pass = state === "pass";
   return (
-    <article className={`rounded-2xl border p-6 ${pass ? "border-success/40 bg-success/[0.06]" : "border-destructive/40 bg-destructive/[0.06]"}`}>
+    <article
+      className={`rounded-2xl border p-6 ${pass ? "border-success/40 bg-success/[0.06]" : "border-destructive/40 bg-destructive/[0.06]"}`}
+    >
       <div className="flex items-center justify-between">
-        <span className={`inline-flex items-center gap-2 rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] ${pass ? "bg-success/15 text-success ring-1 ring-success/30" : "bg-destructive/15 text-destructive ring-1 ring-destructive/30"}`}>
+        <span
+          className={`inline-flex items-center gap-2 rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] ${pass ? "bg-success/15 text-success ring-1 ring-success/30" : "bg-destructive/15 text-destructive-foreground ring-1 ring-destructive/30"}`}
+        >
           {pass ? <Check className="size-3" /> : <X className="size-3" />}
-          {pass ? "Pass · Citation-bound" : "Blocked · No support"}
+          {pass ? "Linked example" : "Held for review"}
         </span>
-        <span className="font-mono text-[10px] text-muted-foreground">export gate</span>
+        <span className="font-mono text-[10px] text-muted-foreground">illustrative check</span>
       </div>
       <p className="mt-4 text-sm font-medium text-foreground">"{claim}"</p>
       <dl className="mt-5 space-y-2">
         {rows.map(([k, v]) => (
-          <div key={k} className="flex items-center justify-between border-t border-border/70 pt-2 text-[12px]">
+          <div
+            key={k}
+            className="grid gap-1 border-t border-border/70 pt-2 text-[12px] sm:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] sm:gap-3"
+          >
             <dt className="text-muted-foreground">{k}</dt>
-            <dd className={`font-mono ${pass ? "text-foreground/90" : "text-foreground/90"}`}>{v}</dd>
+            <dd className="break-words font-mono text-foreground/90 sm:text-right">{v}</dd>
           </div>
         ))}
       </dl>
@@ -498,17 +676,42 @@ function GateCard({ state, claim, rows }: { state: "pass" | "block"; claim: stri
 /* --------------------------- Four differentiators ------------------------ */
 
 const DIFFS = [
-  { icon: Fingerprint, title: "Original evidence preserved", body: "The original artifact remains distinct from every derived transcript, extraction, timeline event, or report." },
-  { icon: Hash,        title: "Deterministic evidence identity", body: "SHA-256 identity and versioned derived artifacts support repeatable processing and change detection." },
-  { icon: Quote,       title: "Citation-bound intelligence", body: "Findings remain linked to exact pages, messages, excerpts, bounding boxes, or timecodes." },
-  { icon: UserCheck,   title: "Role-aware, reviewable outputs", body: "Language and priority can adapt for parents, attorneys, and evaluators while the underlying evidence remains unchanged." },
+  {
+    icon: Fingerprint,
+    title: "Source distinction",
+    body: "Designed to keep an original source record distinct from any transcript, extraction, timeline event, or review note.",
+  },
+  {
+    icon: Hash,
+    title: "Stable source identity",
+    body: "Designed to give reviewers a consistent way to distinguish source records and their related derivatives.",
+  },
+  {
+    icon: Quote,
+    title: "Visible citation links",
+    body: "Designed to connect an observation to a page, message, excerpt, or timecode that a reviewer can inspect.",
+  },
+  {
+    icon: UserCheck,
+    title: "Professional review boundary",
+    body: "Designed to support different reviewer needs without presenting automated output as professional judgment.",
+  },
 ];
 
 function Differentiators() {
   return (
     <section className="relative border-y border-border bg-surface/20">
       <Section>
-        <SectionHeader eyebrow="What Makes TruthTrace Different" title={<>Four principles. <span className="text-gradient-primary">Every one enforced.</span></>} />
+        <SectionHeader
+          eyebrow="What Makes TruthTrace Different"
+          title={
+            <>
+              Four product design principles.{" "}
+              <span className="text-gradient-primary">One review boundary.</span>
+            </>
+          }
+          sub="These are design objectives for the product direction, not certifications or production guarantees."
+        />
         <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
           {DIFFS.map((d) => (
             <article key={d.title} className="min-h-56 bg-background p-6">
@@ -526,27 +729,39 @@ function Differentiators() {
 /* ------------------------------ Role view -------------------------------- */
 
 type Role = "parent" | "attorney" | "evaluator";
-const ROLE_VIEWS: Record<Role, { label: string; icon: ComponentType<SVGProps<SVGSVGElement>>; framing: string; priority: string; nextAction: string }> = {
+const ROLE_VIEWS: Record<
+  Role,
+  {
+    label: string;
+    icon: ComponentType<SVGProps<SVGSVGElement>>;
+    framing: string;
+    priority: string;
+    nextAction: string;
+  }
+> = {
   parent: {
     label: "Parent",
     icon: UserRound,
-    framing: "A scheduled contact window on 2024-03-18 does not appear to have been completed. This is drawn only from the cited voicemail and messages.",
-    priority: "Bring this to your attorney",
+    framing:
+      "This sample view links a scheduled contact window to the cited voicemail and messages. It does not say why the records differ.",
+    priority: "Review the cited records with your attorney",
     nextAction: "Share the packet with your legal counsel for review",
   },
   attorney: {
     label: "Attorney",
     icon: Briefcase,
-    framing: "Finding FND-0184: scheduled contact window not completed on 2024-03-18. Supported by CIT-0417 (voicemail excerpt) and prior scheduling messages.",
-    priority: "Cross-reference with the prior scheduling agreement",
+    framing:
+      "Sample observation FND-0184: the cited voicemail and messages reference the same scheduled contact window. Inspect CIT-0417 and the source messages.",
+    priority: "Cross-reference the cited scheduling records",
     nextAction: "Assemble a source-linked exhibit set for review",
   },
   evaluator: {
     label: "Evaluator",
     icon: Eye,
-    framing: "One documented instance in the cited period where the scheduled contact window was not completed. Presented as a discrete, source-linked observation.",
-    priority: "Consider alongside other cited observations",
-    nextAction: "Inspect original EvidenceObjects before drawing inferences",
+    framing:
+      "One source-linked scheduling observation in the illustrative period. Presented without an inference about intent, credibility, or responsibility.",
+    priority: "Consider only alongside the cited records",
+    nextAction: "Inspect the illustrative source records before drawing inferences",
   },
 };
 
@@ -554,24 +769,36 @@ function RoleView() {
   const [role, setRole] = useState<Role>("attorney");
   const v = ROLE_VIEWS[role];
   return (
-    <Section>
+    <Section id="audiences">
       <SectionHeader
-        eyebrow="Role-Aware Output"
-        title={<>The view changes. <span className="text-gradient-primary">The evidence does not.</span></>}
-        sub="Language, priority, and framing adapt for parents, attorneys, and evaluators. The underlying EvidenceObjects, citations, and excerpts stay identical."
+        eyebrow="Illustrative Reviewer Views"
+        title={
+          <>
+            The framing can change.{" "}
+            <span className="text-gradient-primary">The cited sample record stays visible.</span>
+          </>
+        }
+        sub="In this representative interface, parent, attorney, and evaluator views use different framing while showing the same sample source identifier, citation, and excerpt."
       />
-      <div role="tablist" aria-label="Role view" className="mt-8 inline-flex rounded-lg border border-border bg-surface/60 p-1">
+      <div
+        role="group"
+        aria-label="Choose a representative reviewer view"
+        className="mt-8 flex max-w-full flex-wrap gap-1 rounded-lg border border-border bg-surface/60 p-1 sm:inline-flex"
+      >
         {(Object.keys(ROLE_VIEWS) as Role[]).map((r) => {
           const active = r === role;
           const Icon = ROLE_VIEWS[r].icon;
           return (
             <button
               key={r}
-              role="tab"
-              aria-selected={active}
+              type="button"
+              data-role-view={r}
+              aria-pressed={active}
               onClick={() => setRole(r)}
-              className={`inline-flex min-h-9 items-center gap-2 rounded-md px-4 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-                active ? "bg-primary/15 text-foreground ring-1 ring-primary/40" : "text-muted-foreground hover:text-foreground"
+              className={`inline-flex min-h-11 items-center gap-2 rounded-md px-4 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                active
+                  ? "bg-primary/15 text-foreground ring-1 ring-primary/40"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <Icon aria-hidden className="size-4" />
@@ -582,8 +809,10 @@ function RoleView() {
       </div>
 
       <div className="mt-6 grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="rounded-2xl border border-border bg-background/60 p-6">
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">Role-adapted framing</div>
+        <div aria-live="polite" className="rounded-2xl border border-border bg-background/60 p-6">
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
+            Role-adapted framing
+          </div>
           <p className="mt-3 text-base leading-relaxed text-foreground">{v.framing}</p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <InfoRow k="Priority framing" v={v.priority} />
@@ -591,23 +820,30 @@ function RoleView() {
           </div>
         </div>
         <div className="rounded-2xl border border-border bg-surface/40 p-6">
-          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Unchanged evidence</div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+            Unchanged evidence
+          </div>
           <ul className="mt-3 space-y-2 text-[13px]">
             {[
-              ["EvidenceObject", "EO-2024-03-18-7f3a"],
+              ["Source record", "SRC-2024-03-18-7f3a"],
               ["Citation", "CIT-0417"],
               ["Source excerpt", "voicemail-2024-03-18.m4a · t=00:18–00:34"],
               ["Timeline event", "EVT-0921"],
               ["SHA-256", "a3f2…91c7"],
             ].map(([k, val]) => (
-              <li key={k} className="flex items-center justify-between border-t border-border/70 pt-2">
+              <li
+                key={k}
+                className="grid gap-1 border-t border-border/70 pt-2 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] sm:gap-3"
+              >
                 <span className="text-muted-foreground">{k}</span>
-                <span className="font-mono text-[11px] text-foreground/90">{val}</span>
+                <span className="break-all font-mono text-[11px] text-foreground/90 sm:text-right">
+                  {val}
+                </span>
               </li>
             ))}
           </ul>
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-success">
-            <Check className="mr-1 inline size-3" /> Identity · citation · excerpt preserved
+            <Check className="mr-1 inline size-3" /> Same illustrative identity · citation · excerpt
           </p>
         </div>
       </div>
@@ -618,7 +854,9 @@ function RoleView() {
 function InfoRow({ k, v }: { k: string; v: string }) {
   return (
     <div className="rounded-lg border border-border bg-surface/40 p-3">
-      <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{k}</div>
+      <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+        {k}
+      </div>
       <div className="mt-1 text-sm text-foreground/90">{v}</div>
     </div>
   );
@@ -626,39 +864,40 @@ function InfoRow({ k, v }: { k: string; v: string }) {
 
 /* --------------------------- Evidence categories ------------------------- */
 
-const CATEGORIES: { icon: ComponentType<SVGProps<SVGSVGElement>>; label: string; status: "available" | "pilot" | "dev" }[] = [
-  { icon: MessageSquare, label: "Messages",              status: "available" },
-  { icon: Mail,          label: "Emails",                status: "available" },
-  { icon: FileText,      label: "PDFs & documents",      status: "available" },
-  { icon: Camera,        label: "Screenshots & photos",  status: "available" },
-  { icon: AudioLines,    label: "Audio recordings",      status: "pilot" },
-  { icon: Video,         label: "Video recordings",      status: "dev" },
-  { icon: Database,      label: "Co-parenting exports",  status: "pilot" },
-  { icon: Layers3,       label: "iMazing / RSMF",        status: "pilot" },
+const CATEGORIES: { icon: ComponentType<SVGProps<SVGSVGElement>>; label: string }[] = [
+  { icon: MessageSquare, label: "Messages" },
+  { icon: FileText, label: "Emails and documents" },
+  { icon: Camera, label: "Screenshots and photos" },
+  { icon: AudioLines, label: "Audio recordings" },
+  { icon: Video, label: "Video recordings" },
+  { icon: Database, label: "Co-parenting exports" },
+  { icon: Layers3, label: "Device and message exports" },
+  { icon: FileCheck2, label: "Existing case records" },
 ];
-
-const STATUS_LABEL = {
-  available: { text: "Available now",   cls: "text-success"           },
-  pilot:     { text: "Pilot-supported", cls: "text-primary"           },
-  dev:       { text: "In development",  cls: "text-muted-foreground"  },
-} as const;
 
 function EvidenceCategories() {
   return (
     <section className="relative border-y border-border bg-surface/20">
       <Section>
         <SectionHeader
-          eyebrow="Designed For Real Evidence Chaos"
-          title={<>Built for the record as it actually <span className="text-gradient-primary">arrives.</span></>}
+          eyebrow="Evidence Arrives From Many Sources"
+          title={
+            <>
+              The review problem starts before the records are{" "}
+              <span className="text-gradient-primary">in one place.</span>
+            </>
+          }
+          sub="These are common evidence categories shown to explain the product direction. The website does not promise format acceptance and does not provide an upload surface."
         />
         <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {CATEGORIES.map((c) => {
-            const s = STATUS_LABEL[c.status];
             return (
               <div key={c.label} className="min-h-32 bg-background p-5">
                 <c.icon aria-hidden className="size-5 text-primary" />
                 <div className="mt-5 text-sm font-medium text-foreground">{c.label}</div>
-                <div className={`mt-2 font-mono text-[10px] uppercase tracking-[0.14em] ${s.cls}`}>{s.text}</div>
+                <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                  Representative category
+                </div>
               </div>
             );
           })}
@@ -671,22 +910,60 @@ function EvidenceCategories() {
 /* ---------------------------- Trust architecture ------------------------- */
 
 const TRUST_ITEMS = [
-  { icon: Hash,        title: "SHA-256 evidence identity",    body: "Each ingested artifact carries a durable hash so identity is verifiable across processing runs." },
-  { icon: Lock,        title: "Original artifact preservation", body: "Originals remain stored and distinct from any derived transcript or extraction." },
-  { icon: GitBranch,   title: "Versioned derived artifacts",   body: "Extractions, transcriptions, and normalizations are tracked as versioned derivatives of the original." },
-  { icon: ShieldCheck, title: "Chain-of-custody events",       body: "Ingest, processing, review, and export actions are recorded as inspectable events." },
-  { icon: Quote,       title: "Citation pointers",             body: "Findings reference pages, messages, excerpts, timecodes, or bounding boxes rather than free-floating text." },
-  { icon: UserCheck,   title: "Human review boundaries",       body: "Qualified professionals remain the interpreters. TruthTrace supports, does not replace, their judgment." },
-  { icon: FileCheck2,  title: "Export gating",                 body: "Unsupported claims are flagged or blocked at the export gate rather than emitted as conclusions." },
-  { icon: ShieldCheck, title: "Role-based access",             body: "Access surfaces are scoped by role and matter within controlled pilot deployments." },
+  {
+    icon: Hash,
+    title: "Source identity",
+    body: "Design objective: keep source records distinguishable as information is arranged for review.",
+  },
+  {
+    icon: Quote,
+    title: "Citation visibility",
+    body: "Design objective: keep each displayed observation connected to a locator and source excerpt.",
+  },
+  {
+    icon: GitBranch,
+    title: "Visible uncertainty",
+    body: "Design objective: state what a cited record supports and where interpretation still belongs to a reviewer.",
+  },
+  {
+    icon: UserCheck,
+    title: "Professional judgment",
+    body: "Attorneys, evaluators, courts, and other qualified professionals remain responsible for interpretation.",
+  },
+  {
+    icon: Lock,
+    title: "No public evidence intake",
+    body: "This website has no evidence upload, case intake form, account system, or live matter workspace.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "No case data submitted here",
+    body: "Because this site does not accept evidence, no case material is submitted here for storage or model training.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Policy before intake",
+    body: "Retention, deletion, transfer, access, and training terms must be approved before any future evidence intake opens.",
+  },
+  {
+    icon: Fingerprint,
+    title: "Representative proof only",
+    body: "All case-like records and identifiers on this page are illustrative and do not depict a real family.",
+  },
 ];
 
 function TrustArchitecture() {
   return (
-    <Section>
+    <Section id="trust">
       <SectionHeader
-        eyebrow="Trust Architecture"
-        title={<>A forensic trust model, <span className="text-gradient-primary">not a marketing checklist.</span></>}
+        eyebrow="Public-Site Boundaries"
+        title={
+          <>
+            Trust starts with saying{" "}
+            <span className="text-gradient-primary">what this site does not do.</span>
+          </>
+        }
+        sub="Product design objectives are separated from public-site facts so visitors can assess this preview without mistaking it for a live evidence-handling service."
       />
       <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
         {TRUST_ITEMS.map((t) => (
@@ -699,11 +976,14 @@ function TrustArchitecture() {
       </div>
 
       <div className="mt-8 rounded-2xl border border-border bg-surface/40 p-6">
-        <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Limitations statement</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          Limitations statement
+        </div>
         <p className="mt-3 max-w-4xl text-[14px] leading-relaxed text-foreground/85">
-          TruthTrace supports evidence organization, provenance, review, and source traceability. It does
-          not provide legal advice, diagnose individuals, determine credibility, predict custody outcomes,
-          or guarantee admissibility. All outputs are subject to professional review.
+          TruthTrace is designed to support evidence organization, provenance, review, and source
+          traceability. It does not provide legal advice, diagnose individuals, determine
+          credibility, predict custody outcomes, determine admissibility, or replace professional
+          judgment. The representative interface is not a legal conclusion or a live case analysis.
         </p>
       </div>
     </Section>
@@ -712,54 +992,60 @@ function TrustArchitecture() {
 
 /* ------------------------------- Closing CTA ----------------------------- */
 
-function ClosingCta({ onRequestPilot }: { onRequestPilot: () => void }) {
+function ClosingCta() {
   return (
-    <section id="pilot" className="scroll-mt-14 relative border-t border-border bg-surface/20">
+    <section className="relative border-t border-border bg-surface/20">
       <Section>
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <Eyebrow>Controlled Pilot</Eyebrow>
+            <Eyebrow>Representative Workflow</Eyebrow>
             <h2 className="mt-5 text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-5xl">
-              Bring one difficult evidence set.
+              Inspect the connection between an observation and its source.
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              See whether TruthTrace can turn it into a structured, source-verifiable record that a
-              professional can actually review.
+              The public preview shows the intended evidence-to-citation relationship without
+              accepting case files, making legal conclusions, or presenting illustrative data as
+              customer proof.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                onClick={onRequestPilot}
-                className="inline-flex min-h-11 items-center justify-center rounded-md border border-primary/60 bg-primary/15 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                Request controlled pilot access
-              </button>
               <Link
                 to="/"
                 hash="proof-chain"
+                activeOptions={{ includeHash: true }}
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-primary/60 bg-primary/15 px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                View the representative workflow
+              </Link>
+              <Link
+                to="/technology"
                 className="inline-flex min-h-11 items-center justify-center rounded-md border border-border bg-transparent px-5 py-2.5 text-sm font-medium text-foreground/85 transition-colors hover:border-foreground/40 hover:text-foreground"
               >
-                View the forensic demonstration
+                Review the design principles
               </Link>
             </div>
             <p className="mt-5 max-w-2xl text-[13px] leading-relaxed text-muted-foreground">
-              Controlled pilot access is limited. Submitted matters remain subject to intake, privacy,
-              and technical-fit review.
+              No demo request or evidence intake is offered until a verified contact channel,
+              approved data terms, and a secure transfer process are in place.
             </p>
           </div>
 
           <div className="rounded-2xl border border-border bg-background/60 p-6">
-            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">Pilot intake checkpoints</div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
+              Before any future evidence intake
+            </div>
             <ul className="mt-4 space-y-3 text-sm">
               {[
-                "Matter fit and evidence composition review",
-                "Privacy, custody, and access agreements",
-                "Technical intake for source materials",
-                "Controlled processing and review window",
-                "Structured, source-linked packet delivered for professional review",
+                "A verified organization and contact channel",
+                "Approved privacy, retention, deletion, and training terms",
+                "A documented secure-transfer process",
+                "Matter-scoped access and professional consent",
+                "Human review and escalation procedures",
               ].map((item, i) => (
                 <li key={item} className="flex items-start gap-3">
-                  <span aria-hidden className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/10 font-mono text-[10px] text-primary">
+                  <span
+                    aria-hidden
+                    className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full border border-primary/40 bg-primary/10 font-mono text-[10px] text-primary"
+                  >
                     {i + 1}
                   </span>
                   <span className="text-foreground/85">{item}</span>
@@ -773,64 +1059,46 @@ function ClosingCta({ onRequestPilot }: { onRequestPilot: () => void }) {
   );
 }
 
-/* --------------------------------- Modal --------------------------------- */
-
-function PilotModal({ onClose }: { onClose: () => void }) {
-  const mailto = "mailto:pilots@truthtrace.app?subject=Controlled%20pilot%20access%20request";
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="pilot-modal-title"
-      className="fixed inset-0 z-[100] grid place-items-center bg-background/70 p-4 backdrop-blur-sm"
-      onClick={onClose}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-md rounded-2xl border border-border bg-background p-6 shadow-[0_30px_80px_-20px_rgba(79,140,255,0.35)]"
-      >
-        <button
-          type="button"
-          aria-label="Close"
-          onClick={onClose}
-          className="absolute right-3 top-3 grid size-8 place-items-center rounded-md text-muted-foreground hover:bg-surface/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        >
-          <X className="size-4" />
-        </button>
-        <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">Controlled Pilot</div>
-        <h3 id="pilot-modal-title" className="mt-3 text-2xl font-semibold tracking-tight">
-          Request pilot access
-        </h3>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          Pilot intake is handled directly by the TruthTrace team. Send a short note describing the
-          matter type, evidence composition, and professional context, and we will follow up with
-          next steps.
-        </p>
-        <a
-          href={mailto}
-          className="mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-md border border-primary/60 bg-primary/15 px-5 py-2.5 text-sm font-medium text-foreground hover:bg-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        >
-          Contact pilot intake
-        </a>
-        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-          Submissions subject to intake, privacy, and technical-fit review
-        </p>
-      </div>
-    </div>
-  );
-}
-
 /* --------------------------------- Footer -------------------------------- */
 
 function Footer() {
   return (
     <footer className="relative border-t border-border px-5 py-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-        <span className="inline-flex items-center gap-2">
-          <Circle aria-hidden className="size-2 fill-current opacity-60" />
-          © {new Date().getFullYear()} TruthTrace
+      <div className="mx-auto grid max-w-7xl gap-4 text-xs leading-relaxed text-muted-foreground md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-center">
+        <span className="inline-flex items-center gap-2 whitespace-nowrap">
+          <Circle aria-hidden className="size-2 fill-current opacity-60" /> ©{" "}
+          {new Date().getFullYear()} TruthTrace
         </span>
-        <span>Forensic Evidence Intelligence · Controlled pilot · Professional review required</span>
+        <span className="md:text-center">
+          Evidence-organization and review-support product direction · No legal advice · No evidence
+          uploads on this public site
+        </span>
+        <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <Link
+            to="/technology"
+            className="min-h-11 content-center text-foreground/80 hover:text-foreground"
+          >
+            Design principles
+          </Link>
+          <Link
+            to="/privacy"
+            className="min-h-11 content-center text-foreground/80 hover:text-foreground"
+          >
+            Privacy
+          </Link>
+          <Link
+            to="/terms"
+            className="min-h-11 content-center text-foreground/80 hover:text-foreground"
+          >
+            Terms
+          </Link>
+          <Link
+            to="/contact"
+            className="min-h-11 content-center text-foreground/80 hover:text-foreground"
+          >
+            Contact
+          </Link>
+        </nav>
       </div>
     </footer>
   );
