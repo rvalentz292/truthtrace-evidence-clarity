@@ -8,22 +8,22 @@ The release candidate is locally buildable and testable, but the repository does
 
 ## Audit snapshot
 
-| Item                     | Verified state                                                                                                                     |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Repository               | `rvalentz292/truthtrace-evidence-clarity`                                                                                          |
-| Remote                   | `origin` → `https://github.com/rvalentz292/truthtrace-evidence-clarity.git`                                                        |
-| Baseline/default branch  | `main`                                                                                                                             |
-| Baseline SHA             | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                                         |
-| Release working branch   | `homepage-final-publication-gate-20260715`                                                                                         |
-| Release-candidate SHA    | To be recorded after the release branch is committed; the audited changes are currently a working-tree delta from the baseline SHA |
-| Competing candidate      | `website-100m-final-20260714` at `64aac286beb3df3c898e2f975f27e589d5079456`                                                        |
-| Competing pull request   | Draft PR #3, one commit ahead of `main`; no approved merge/deploy decision was found                                               |
-| Package manager evidence | `bun.lock`; validation used Bun 1.3.14 through `npx` on the audit workstation                                                      |
-| Framework                | React 19, TanStack Start/Router, Vite 8, Nitro                                                                                     |
-| Generated server preset  | `cloudflare-module`                                                                                                                |
-| Publication date gate    | 2026-07-15                                                                                                                         |
+| Item                     | Verified state                                                                                                                                |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repository               | `rvalentz292/truthtrace-evidence-clarity`                                                                                                     |
+| Remote                   | `origin` → `https://github.com/rvalentz292/truthtrace-evidence-clarity.git`                                                                   |
+| Baseline/default branch  | `main`                                                                                                                                        |
+| Baseline SHA             | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                                                    |
+| Release working branch   | `homepage-final-publication-gate-20260715`                                                                                                    |
+| Release-candidate SHA    | `df6647616901b2e5eb2dc1d16255ffcc8140a78d` — audited implementation/content commit; the following release-record commit is documentation-only |
+| Competing candidate      | `website-100m-final-20260714` at `64aac286beb3df3c898e2f975f27e589d5079456`                                                                   |
+| Competing pull request   | Draft PR #3, one commit ahead of `main`; no approved merge/deploy decision was found                                                          |
+| Package manager evidence | `bun.lock`; validation used Bun 1.3.14 through `npx` on the audit workstation                                                                 |
+| Framework                | React 19, TanStack Start/Router, Vite 8, Nitro                                                                                                |
+| Generated server preset  | `cloudflare-module`                                                                                                                           |
+| Publication date gate    | 2026-07-15                                                                                                                                    |
 
-The release SHA must replace the pending entry above in the final release record after commit. A working-tree state is not a deployable identity.
+The candidate SHA above identifies the immutable audited public implementation. The branch's following release-record commit changes documentation only; its PR-head SHA must also be retained in the pull request, but it does not change the public runtime tree.
 
 ## Source topology
 

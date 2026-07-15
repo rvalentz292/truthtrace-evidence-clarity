@@ -4,7 +4,7 @@
 
 This register covers the public copy and observable behavior in the release candidate's `/` and `/technology` routes, route metadata, social metadata, navigation and accessibility labels, calls to action, footer, and structured-data disposition. No JSON-LD or other structured data is emitted; unsupported Organization, SoftwareApplication, rating, review, pricing, customer-count, office, award, or social-profile claims were not added. It also records material claims removed from the `main` baseline at `1b5530784b564b679f733f77ff40aa7f7da53978`.
 
-The audited candidate is the working tree on `homepage-final-publication-gate-20260715`. The publication verdict is `BLOCKED`. The wording is substantially safer, but no public artifact may be promoted until the approved production domain, deployment target, production branch, route-migration plan, canonical/indexing configuration, and rollback mechanism are verified.
+The audited implementation/content candidate is commit `df6647616901b2e5eb2dc1d16255ffcc8140a78d` on `homepage-final-publication-gate-20260715`; the following release-record commit changes documentation only. The publication verdict is `BLOCKED`. The wording is substantially safer, but no public artifact may be promoted until the approved production domain, deployment target, production branch, route-migration plan, canonical/indexing configuration, and rollback mechanism are verified.
 
 ## Classification standard
 

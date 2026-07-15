@@ -6,21 +6,21 @@ This checklist does **not** authorize deployment. It may be executed only after 
 
 Fill these values before starting:
 
-| Field                              | Required value                |
-| ---------------------------------- | ----------------------------- |
-| Release owner                      | `PENDING`                     |
-| Verification lead                  | `PENDING`                     |
-| Security/on-call owner             | `PENDING`                     |
-| Approved canonical URL             | `PENDING`                     |
-| Production provider/project        | `PENDING`                     |
-| Final candidate SHA                | `PENDING_RELEASE_COMMIT`      |
-| Previous production SHA            | `UNKNOWN`                     |
-| Previous deployment identifier     | `UNKNOWN`                     |
-| New deployment identifier          | `PENDING`                     |
-| Exact rollback command             | `UNKNOWN`                     |
-| Monitoring dashboard/log location  | `PENDING`                     |
-| Analytics decision/property        | `PENDING` or documented `N/A` |
-| Form-delivery decision/destination | `PENDING` or documented `N/A` |
+| Field                              | Required value                                                                                                                   |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Release owner                      | `PENDING`                                                                                                                        |
+| Verification lead                  | `PENDING`                                                                                                                        |
+| Security/on-call owner             | `PENDING`                                                                                                                        |
+| Approved canonical URL             | `PENDING`                                                                                                                        |
+| Production provider/project        | `PENDING`                                                                                                                        |
+| Final candidate SHA                | `df6647616901b2e5eb2dc1d16255ffcc8140a78d` — audited implementation/content commit; following release-record commit is docs-only |
+| Previous production SHA            | `UNKNOWN`                                                                                                                        |
+| Previous deployment identifier     | `UNKNOWN`                                                                                                                        |
+| New deployment identifier          | `PENDING`                                                                                                                        |
+| Exact rollback command             | `UNKNOWN`                                                                                                                        |
+| Monitoring dashboard/log location  | `PENDING`                                                                                                                        |
+| Analytics decision/property        | `PENDING` or documented `N/A`                                                                                                    |
+| Form-delivery decision/destination | `PENDING` or documented `N/A`                                                                                                    |
 
 For every failed check, capture the UTC and local timestamp, URL, device/browser, deployment identifier, screenshot/log reference, owner, and decision. Do not “watch and wait” through a privacy, identity, routing, broken-CTA, or rollback-critical failure.
 

@@ -25,30 +25,30 @@ This ordering is conceptual until provider-specific procedures are verified. It 
 
 Every field below must be filled and independently checked before go-live:
 
-| Field                                               | Current state          |
-| --------------------------------------------------- | ---------------------- |
-| Incident/rollback commander and backup              | Unassigned             |
-| Release operator and backup                         | Unassigned             |
-| Hosting provider/account/environment                | Unknown                |
-| Production project/service/worker ID                | Unknown                |
-| Production branch policy                            | Unknown                |
-| `FINAL_CANDIDATE_SHA` / new candidate SHA           | Pending release commit |
-| New artifact checksum and deployment ID             | Not created            |
-| `PREVIOUS_PRODUCTION_SHA`                           | **UNKNOWN**            |
-| Prior approved deployment ID                        | Unknown                |
-| Prior immutable artifact/version                    | Unknown                |
-| Provider deployment-rollback command                | Unknown                |
-| Provider status/log command                         | Unknown                |
-| Custom-domain binding before-state                  | Unknown                |
-| Custom-domain restore command                       | Unknown                |
-| DNS provider/zone ID                                | Unknown                |
-| DNS record and TTL before-state                     | Not exported           |
-| DNS restore command or console procedure            | Unknown                |
-| Certificate before-state and revalidation procedure | Unknown                |
-| Legacy-route before/after matrix                    | Incomplete             |
-| Monitoring channels and owners                      | Unknown                |
-| Internal/public communication owners                | Unknown                |
-| Maximum rollback decision and execution times       | Not approved           |
+| Field                                               | Current state                                                                                                                             |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Incident/rollback commander and backup              | Unassigned                                                                                                                                |
+| Release operator and backup                         | Unassigned                                                                                                                                |
+| Hosting provider/account/environment                | Unknown                                                                                                                                   |
+| Production project/service/worker ID                | Unknown                                                                                                                                   |
+| Production branch policy                            | Unknown                                                                                                                                   |
+| `FINAL_CANDIDATE_SHA` / new candidate SHA           | `df6647616901b2e5eb2dc1d16255ffcc8140a78d` — audited implementation/content commit; following release-record commit is documentation-only |
+| New artifact checksum and deployment ID             | Not created                                                                                                                               |
+| `PREVIOUS_PRODUCTION_SHA`                           | **UNKNOWN**                                                                                                                               |
+| Prior approved deployment ID                        | Unknown                                                                                                                                   |
+| Prior immutable artifact/version                    | Unknown                                                                                                                                   |
+| Provider deployment-rollback command                | Unknown                                                                                                                                   |
+| Provider status/log command                         | Unknown                                                                                                                                   |
+| Custom-domain binding before-state                  | Unknown                                                                                                                                   |
+| Custom-domain restore command                       | Unknown                                                                                                                                   |
+| DNS provider/zone ID                                | Unknown                                                                                                                                   |
+| DNS record and TTL before-state                     | Not exported                                                                                                                              |
+| DNS restore command or console procedure            | Unknown                                                                                                                                   |
+| Certificate before-state and revalidation procedure | Unknown                                                                                                                                   |
+| Legacy-route before/after matrix                    | Incomplete                                                                                                                                |
+| Monitoring channels and owners                      | Unknown                                                                                                                                   |
+| Internal/public communication owners                | Unknown                                                                                                                                   |
+| Maximum rollback decision and execution times       | Not approved                                                                                                                              |
 
 Blank or inferred values are a P0 launch blocker.
 

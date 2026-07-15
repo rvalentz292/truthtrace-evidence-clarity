@@ -11,7 +11,7 @@ Release identity:
 - Starting branch: `main`
 - Starting SHA: `1b5530784b564b679f733f77ff40aa7f7da53978`
 - Release branch: `homepage-final-publication-gate-20260715`
-- Final candidate SHA: `PENDING_RELEASE_COMMIT`
+- Final candidate SHA: `df6647616901b2e5eb2dc1d16255ffcc8140a78d` (audited implementation/content commit; the following release-record commit is documentation-only)
 - Local evidence root: `artifacts/homepage-release-20260715/`
 
 ## Code
@@ -25,8 +25,8 @@ Release identity:
 - [x] Production artifact build passes with `bun run build:artifact`.
 - [x] Generated artifact runs through the repository preview command.
 - [ ] Default publication build passes. **Owner:** release engineering. **Status:** OPEN/P0; correctly blocked by missing domain, blocking robots, and missing sitemap.
-- [ ] Final release commit SHA recorded in the PR/release record. **Owner:** release owner. **Status:** PENDING COMMIT.
-- [ ] Final `git diff --check`, status review, and full post-commit gate recorded. **Owner:** release owner. **Status:** PENDING FINAL HANDOFF.
+- [x] Final candidate implementation SHA recorded in the audit and release record; PR head is a documentation-only follow-up with the same public runtime tree.
+- [x] Final `git diff --check`, status review, install, format, lint, typecheck, tests, artifact build, publication interlock, links, headers, HTTP status, secret scan, dependency audit, and Lighthouse gate recorded.
 
 ## Content
 

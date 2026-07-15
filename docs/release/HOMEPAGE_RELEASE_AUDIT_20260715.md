@@ -12,13 +12,13 @@ No production deployment or merge is authorized by this audit.
 
 ## Release identity
 
-| Field               | Value                                                                                                                                                                                                                                                        |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Starting branch     | `main`                                                                                                                                                                                                                                                       |
-| Starting SHA        | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                                                                                                                                                                   |
-| Release branch      | `homepage-final-publication-gate-20260715`                                                                                                                                                                                                                   |
-| Final candidate SHA | `PENDING_RELEASE_COMMIT` — the audited candidate is still a working tree at this evidence cutoff; record `git rev-parse HEAD` after the release commit in the PR and release record. A commit cannot truthfully embed its own final SHA without changing it. |
-| Audit date          | 2026-07-14 America/Chicago, for the 2026-07-15 gate                                                                                                                                                                                                          |
+| Field               | Value                                                                                                                                                                                                               |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Starting branch     | `main`                                                                                                                                                                                                              |
+| Starting SHA        | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                                                                                                                          |
+| Release branch      | `homepage-final-publication-gate-20260715`                                                                                                                                                                          |
+| Final candidate SHA | `df6647616901b2e5eb2dc1d16255ffcc8140a78d` — immutable audited implementation/content commit. The branch's following release-record commit changes documentation only and leaves the public runtime tree identical. |
+| Audit date          | 2026-07-14 America/Chicago, for the 2026-07-15 gate                                                                                                                                                                 |
 
 There is also a remote draft candidate, `website-100m-final-20260714` at `64aac286beb3df3c898e2f975f27e589d5079456`, in draft PR #3. It is one commit ahead of the starting `main` SHA and has no recorded checks or approval. It was inspected but not merged or cherry-picked.
 

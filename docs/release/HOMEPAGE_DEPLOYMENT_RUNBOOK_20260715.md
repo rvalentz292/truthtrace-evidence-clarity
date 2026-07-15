@@ -10,22 +10,22 @@ Do not deploy, merge, change DNS, enable indexing, or redirect a live domain und
 
 ## Candidate identity
 
-| Field                               | Required release value                                                                   |
-| ----------------------------------- | ---------------------------------------------------------------------------------------- |
-| Repository                          | `https://github.com/rvalentz292/truthtrace-evidence-clarity.git`                         |
-| Baseline SHA                        | `1b5530784b564b679f733f77ff40aa7f7da53978`                                               |
-| Candidate branch                    | `homepage-final-publication-gate-20260715`                                               |
-| Candidate SHA                       | Record the immutable post-commit SHA before approval; do not deploy a dirty working tree |
-| Competing branch                    | `website-100m-final-20260714` at `64aac286beb3df3c898e2f975f27e589d5079456`, draft PR #3 |
-| Intended canonical origin           | **Unapproved**                                                                           |
-| Production provider/account/project | **Unknown**                                                                              |
-| Production branch                   | **Unknown**                                                                              |
-| Local generated output root         | `.output/`                                                                               |
-| Browser/static output               | `.output/public/`                                                                        |
-| Worker/server output                | `.output/server/`                                                                        |
-| Approved provider output target     | **Unknown** — local generated paths do not establish a production upload target          |
-| Approved deploy command             | **Unknown**                                                                              |
-| Approved rollback command           | **Unknown**                                                                              |
+| Field                               | Required release value                                                                                                                        |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repository                          | `https://github.com/rvalentz292/truthtrace-evidence-clarity.git`                                                                              |
+| Baseline SHA                        | `1b5530784b564b679f733f77ff40aa7f7da53978`                                                                                                    |
+| Candidate branch                    | `homepage-final-publication-gate-20260715`                                                                                                    |
+| Candidate SHA                       | `df6647616901b2e5eb2dc1d16255ffcc8140a78d` — audited implementation/content commit; the following release-record commit is documentation-only |
+| Competing branch                    | `website-100m-final-20260714` at `64aac286beb3df3c898e2f975f27e589d5079456`, draft PR #3                                                      |
+| Intended canonical origin           | **Unapproved**                                                                                                                                |
+| Production provider/account/project | **Unknown**                                                                                                                                   |
+| Production branch                   | **Unknown**                                                                                                                                   |
+| Local generated output root         | `.output/`                                                                                                                                    |
+| Browser/static output               | `.output/public/`                                                                                                                             |
+| Worker/server output                | `.output/server/`                                                                                                                             |
+| Approved provider output target     | **Unknown** — local generated paths do not establish a production upload target                                                               |
+| Approved deploy command             | **Unknown**                                                                                                                                   |
+| Approved rollback command           | **Unknown**                                                                                                                                   |
 
 The release owner must explicitly dispose of draft PR #3 and approve exactly one candidate SHA. Its existence cannot be resolved by silently merging or cherry-picking it.
 
