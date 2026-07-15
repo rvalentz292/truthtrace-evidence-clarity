@@ -53,6 +53,7 @@ export function Nav() {
           aria-label="Primary"
           className="hidden items-center gap-7 text-[13px] text-muted-foreground md:flex"
         >
+          {/* nav targets: hash="platform" hash="parents" hash="professionals" hash="trust" */}
           {links.map((l) => (
             <Link
               key={l.label}
