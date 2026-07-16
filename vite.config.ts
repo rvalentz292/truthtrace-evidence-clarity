@@ -6,7 +6,7 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-export default defineConfig({
+const config = {
   nitro: {
     // Wrangler 4.110.0 embeds a workerd runtime supporting dates through 2026-07-15.
     // Pin this value so builds do not become invalid merely because the calendar advances.
@@ -17,4 +17,6 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-});
+};
+
+export default defineConfig(config);
