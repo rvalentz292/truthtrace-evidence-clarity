@@ -33,7 +33,8 @@ export function Nav() {
 
   function closeMenu({ restoreFocus = false } = {}) {
     setOpen(false);
-    if (restoreFocus) requestAnimationFrame(() => menuButtonRef.current?.focus());
+    if (restoreFocus)
+      requestAnimationFrame(() => menuButtonRef.current?.focus());
   }
 
   return (
@@ -44,10 +45,21 @@ export function Nav() {
           aria-label="TruthTrace home"
           className="flex min-w-0 items-center gap-2.5"
         >
-          <span data-brand-mark aria-hidden className="grid size-8 shrink-0 place-items-center">
-            <TruthTraceBrand variant="mark" alt="" priority className="h-8 w-auto" />
+          <span
+            data-brand-mark
+            aria-hidden
+            className="grid size-8 shrink-0 place-items-center"
+          >
+            <TruthTraceBrand
+              variant="mark"
+              alt=""
+              priority
+              className="h-8 w-auto"
+            />
           </span>
-          <span className="truncate text-[15px] font-semibold tracking-tight">TruthTrace</span>
+          <span className="truncate text-[15px] font-semibold tracking-tight">
+            TruthTrace
+          </span>
         </Link>
 
         <nav
@@ -78,10 +90,16 @@ export function Nav() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-navigation"
-            onClick={() => (open ? closeMenu({ restoreFocus: true }) : setOpen(true))}
+            onClick={() =>
+              open ? closeMenu({ restoreFocus: true }) : setOpen(true)
+            }
             className="min-h-11 min-w-11 md:hidden"
           >
-            {open ? <X aria-hidden className="size-5" /> : <Menu aria-hidden className="size-5" />}
+            {open ? (
+              <X aria-hidden className="size-5" />
+            ) : (
+              <Menu aria-hidden className="size-5" />
+            )}
           </Button>
         </div>
       </div>
