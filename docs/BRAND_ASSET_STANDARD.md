@@ -17,12 +17,12 @@ The previous abstract square mark and checkmark favicon are retired.
 
 ## Canonical assets
 
-| Asset | Path | Approved use |
-| --- | --- | --- |
-| Horizontal logo | `/brand/truthtrace-logo-primary.svg` | Marketing, large headers, investor material, dark-background brand placements |
-| Shield mark | `/brand/truthtrace-logo-mark.svg` | Navigation, footer, compact product chrome |
-| Favicon | `/favicon.svg` | Browser tabs and web manifest |
-| React wrapper | `src/components/brand/TruthTraceBrand.tsx` | All product/UI logo rendering |
+| Asset           | Path                                       | Approved use                                                                  |
+| --------------- | ------------------------------------------ | ----------------------------------------------------------------------------- |
+| Horizontal logo | `/brand/truthtrace-logo-primary.svg`       | Marketing, large headers, investor material, dark-background brand placements |
+| Shield mark     | `/brand/truthtrace-logo-mark.svg`          | Navigation, footer, compact product chrome                                    |
+| Favicon         | `/favicon.svg`                             | Browser tabs and web manifest                                                 |
+| React wrapper   | `src/components/brand/TruthTraceBrand.tsx` | All product/UI logo rendering                                                 |
 
 Do not recreate the logo with CSS primitives, Lucide icons, emoji, or text-only placeholders when a canonical asset can be used.
 
