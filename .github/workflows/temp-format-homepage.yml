@@ -1,0 +1,35 @@
+name: Temporary HomePage formatter
+
+on:
+  push:
+    branches:
+      - brand/standardize-truthtrace-logo
+
+permissions:
+  contents: read
+
+jobs:
+  format-homepage:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.17.0
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Format HomePage
+        run: npx prettier --write src/components/site/HomePage.tsx
+
+      - name: Upload formatted HomePage
+        uses: actions/upload-artifact@v4
+        with:
+          name: formatted-homepage
+          path: src/components/site/HomePage.tsx
+          if-no-files-found: error
+          retention-days: 1
