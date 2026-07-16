@@ -1,4 +1,4 @@
-name: Temporary link-check diagnostic
+name: Temporary typecheck diagnostic
 
 on:
   pull_request:
@@ -9,12 +9,8 @@ permissions:
   contents: read
 
 jobs:
-  debug-link-check:
+  debug-typecheck:
     runs-on: ubuntu-24.04
-    env:
-      CI: "true"
-      VITE_SITE_URL: https://truthtrace.ai
-      SITE_UNDER_TEST: http://127.0.0.1:4173
     steps:
       - name: Check out candidate
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -32,49 +28,21 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build publication artifact
-        run: bun run build:publication
-
-      - name: Run and capture link check
+      - name: Capture typecheck diagnostic
         shell: bash
         run: |
           set +e
-          setsid bun run preview > "$RUNNER_TEMP/homepage-preview.log" 2>&1 &
-          preview_pid=$!
-          cleanup() {
-            kill -- "-$preview_pid" 2>/dev/null || true
-            wait "$preview_pid" 2>/dev/null || true
-          }
-          trap cleanup EXIT
-
-          ready=0
-          for attempt in $(seq 1 40); do
-            if curl --fail --silent --show-error --connect-timeout 2 --max-time 5 "$SITE_UNDER_TEST/" > /dev/null; then
-              ready=1
-              break
-            fi
-            sleep 0.5
-          done
-
-          if [[ "$ready" -ne 1 ]]; then
-            echo "Preview did not become ready." > link-check.log
-            cat "$RUNNER_TEMP/homepage-preview.log" >> link-check.log
-            exit 0
-          fi
-
-          bun run check:links > link-check.log 2>&1
-          echo "$?" > link-check-status.txt
-          cp "$RUNNER_TEMP/homepage-preview.log" preview.log
+          bun run typecheck > typecheck.log 2>&1
+          echo "$?" > typecheck-status.txt
           exit 0
 
       - name: Upload diagnostic
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: link-check-diagnostic
+          name: typecheck-diagnostic
           path: |
-            link-check.log
-            link-check-status.txt
-            preview.log
-          if-no-files-found: warn
+            typecheck.log
+            typecheck-status.txt
+          if-no-files-found: error
           retention-days: 1
