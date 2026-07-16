@@ -28,7 +28,13 @@ if (!robots) {
   }
 }
 
-for (const asset of ["public/og.png", "public/favicon.svg", "public/sitemap.xml"]) {
+for (const asset of [
+  "public/og.png",
+  "public/favicon.svg",
+  "public/sitemap.xml",
+  "public/brand/truthtrace-logo-primary.svg",
+  "public/brand/truthtrace-logo-mark.svg",
+]) {
   if (!existsSync(resolve(root, asset))) failures.push(`${asset} is required for publication.`);
 }
 
