@@ -7,6 +7,11 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  nitro: {
+    // Wrangler 4.110.0 embeds a workerd runtime supporting dates through 2026-07-15.
+    // Pin this value so builds do not become invalid merely because the calendar advances.
+    compatibilityDate: "2026-07-15",
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
