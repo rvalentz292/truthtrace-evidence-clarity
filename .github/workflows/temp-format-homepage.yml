@@ -1,22 +1,22 @@
 name: Temporary HomePage formatter
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - brand/standardize-truthtrace-logo
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   format-homepage:
     runs-on: ubuntu-24.04
     steps:
-      - name: Check out branch
+      - name: Check out formatting branch
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: brand/standardize-truthtrace-logo
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
@@ -34,10 +34,16 @@ jobs:
       - name: Format HomePage
         run: bunx prettier --write src/components/site/HomePage.tsx
 
-      - name: Upload formatted HomePage
-        uses: actions/upload-artifact@v4
-        with:
-          name: formatted-homepage
-          path: src/components/site/HomePage.tsx
-          if-no-files-found: error
-          retention-days: 1
+      - name: Commit formatting result
+        shell: bash
+        run: |
+          if git diff --quiet -- src/components/site/HomePage.tsx; then
+            echo "HomePage already matches the repository format contract."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/components/site/HomePage.tsx
+          git commit -m "style: format homepage with repository Prettier contract"
+          git push origin HEAD:brand/standardize-truthtrace-logo
