@@ -1,10 +1,20 @@
 # Implementation Changelog
 
-Reviewed implementation commit: `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a`
+Homepage/UI implementation milestone commit: `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a`
 
-Reviewed implementation tree: `78e08ec7aab85d944c64ceff6eaa9f7a14d72549`
+Homepage/UI implementation milestone tree: `78e08ec7aab85d944c64ceff6eaa9f7a14d72549`
 
-Diff against baseline `ac459269…`: 15 files, +1,409 / -936.
+Initial evidence-wrapper commit: `f595f0148d7bbc16d42b0e13037b65b4fb7e28dd`
+
+Initial evidence-wrapper tree: `f5c42b43db6d1bb5260febcef440d852ca37814c`
+
+Deployable candidate commit: `4fc4f133be2b67d077325b26cf2d9dc23f9eb756`
+
+Deployable candidate tree: `e022f2f850b2cf05a64f000edc879268ada01f35`
+
+Homepage/UI milestone diff against baseline `ac459269…`: 15 files, +1,409 / -936.
+
+The later documentation-only branch head is reported externally by Git and draft PR #6. It cannot contain its own SHA/tree, and it does not replace the recorded deployable candidate identity above.
 
 ## Homepage architecture
 
@@ -37,9 +47,17 @@ Diff against baseline `ac459269…`: 15 files, +1,409 / -936.
 - Updated homepage/root title and description to the approved source-linked positioning.
 - Updated Open Graph/Twitter alternative text while retaining `/og.png` and canonical `truthtrace.ai`.
 - Added `resolveJsonModule` for the typed illustrative fixture.
-- Strengthened tests to 19 contracts, including fixture integrity, actual nav targets, semantic interaction, prohibited claims, and an exact public-asset allowlist.
-- Added all 15 Jarvis records to the required release-surface list.
+- Strengthened tests to 20 contracts, including fixture integrity, actual nav targets, semantic interaction, prohibited claims, an exact public-asset allowlist, and the pinned worker-compatibility contract.
+- Expanded the required release surface to 32 files, including all 15 Jarvis records and the deterministic worker configuration/validator.
 - Preserved the generated TanStack Start registration update produced by the current toolchain.
+
+## Release determinism and CI remediation
+
+- Pinned Nitro/Cloudflare compatibility date `2026-07-15` in repository-controlled Nitro/Vite configuration exercised by local builds and GitHub Actions.
+- Added a worker-artifact validator and build command so preview cannot start with a missing or drifted compatibility date.
+- Kept package versions and the lockfile unchanged; `package.json` gained only the validation script entry.
+- Passed 20/20 tests and the deterministic public-release gate in [GitHub Actions run `29510743848`](https://github.com/rvalentz292/truthtrace-evidence-clarity/actions/runs/29510743848), job `87663236467`.
+- Deployable-candidate release-surface verification covered 32 required files and 151 tracked files with no forbidden path or high-confidence secret finding; ref-scoped history totals are recorded in `RELEASE_VERIFICATION.md`.
 
 ## Deliberately unchanged
 

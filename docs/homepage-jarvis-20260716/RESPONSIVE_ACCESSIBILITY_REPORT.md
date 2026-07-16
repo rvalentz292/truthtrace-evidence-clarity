@@ -1,6 +1,8 @@
 # Responsive and Accessibility Report
 
-Test target: local production worker at `http://127.0.0.1:4173`, built from reviewed implementation commit `4f7c5f09…` with `VITE_SITE_URL=https://truthtrace.ai`.
+Capture and browser-test target: local production worker at `http://127.0.0.1:4173`, built from UI evidence milestone `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a` with `VITE_SITE_URL=https://truthtrace.ai`.
+
+Deployable candidate `4fc4f133be2b67d077325b26cf2d9dc23f9eb756` / tree `e022f2f850b2cf05a64f000edc879268ada01f35` changes release configuration and validation only. Final `build:artifact` and `build:publication` output retained the same content-addressed client asset names and byte sizes, establishing byte-equivalent UI verification. The browser observations and screenshots below therefore retain their original `4f7c5f09…` provenance and have not been relabeled.
 
 ## Responsive matrix
 
@@ -60,6 +62,7 @@ The first 200% probe exposed 55 px of command-center min-content overflow and tr
 - Required homepage requests: 200; no failed required asset request.
 - Internal anchors: every hash resolved to an existing element.
 - Mobile and desktop navigation, footer links, legal-page links, and browse-only CTAs were exercised by browser and link checker.
+- Candidate `4fc4f133be2b67d077325b26cf2d9dc23f9eb756` passed the final link matrix after both local builds, and GitHub Actions run `29510743848` job `87663236467` passed the complete deterministic release gate with generated Worker date `2026-07-15`.
 
 ## Instrumentation
 

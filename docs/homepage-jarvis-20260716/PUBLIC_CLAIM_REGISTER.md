@@ -1,6 +1,8 @@
 # Public-Claim Register
 
-Reviewed implementation: `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a`.
+Homepage/UI claim-review milestone: `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a` / tree `78e08ec7aab85d944c64ceff6eaa9f7a14d72549`.
+
+Deployable candidate: `4fc4f133be2b67d077325b26cf2d9dc23f9eb756` / tree `e022f2f850b2cf05a64f000edc879268ada01f35`. The release remediation pins Cloudflare compatibility date `2026-07-15` and does not alter the reviewed public claims. Candidate verification passed 20/20 tests and green GitHub Actions [run `29510743848`](https://github.com/rvalentz292/truthtrace-evidence-clarity/actions/runs/29510743848), job `87663236467`.
 
 Classes: VERIFIED CURRENT BEHAVIOR, VERIFIED WITHIN A LIMITED SCOPE, BOUNDED ARCHITECTURE, ILLUSTRATIVE OR SYNTHETIC, UNRESOLVED, REMOVE, and COUNSEL REVIEW REQUIRED.
 

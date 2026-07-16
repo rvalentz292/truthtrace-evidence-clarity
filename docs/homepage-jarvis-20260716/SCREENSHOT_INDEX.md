@@ -1,6 +1,8 @@
 # Screenshot Index
 
-All screenshots were captured from the local production worker using synthetic/illustrative data only. No production case, family, credential, or private information is present.
+All screenshots were captured from the local production worker at UI evidence milestone `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a` using synthetic/illustrative data only. No production case, family, credential, or private information is present.
+
+Deployable candidate `4fc4f133be2b67d077325b26cf2d9dc23f9eb756` / tree `e022f2f850b2cf05a64f000edc879268ada01f35` contains release-configuration and validation changes only. Both final local builds reproduced the same content-addressed client asset names and byte sizes, providing byte-equivalent UI correlation. These captures and hashes intentionally retain their original milestone provenance; they have not been relabeled as deployable-candidate captures.
 
 | File                                           | Viewport/state                 | Purpose                                    | SHA-256                                                            |
 | ---------------------------------------------- | ------------------------------ | ------------------------------------------ | ------------------------------------------------------------------ |

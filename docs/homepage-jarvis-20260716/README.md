@@ -4,23 +4,27 @@ This directory is the audit, verification, and exact-SHA handoff package for the
 
 ## Candidate identity
 
-| Field                          | Value                                                               |
-| ------------------------------ | ------------------------------------------------------------------- |
-| Repository                     | `rvalentz292/truthtrace-evidence-clarity`                           |
-| Branch                         | `codex/homepage-jarvis-final-20260716`                              |
-| Authoritative baseline commit  | `ac459269af22f90ebe3d9095a3add00dff426252`                          |
-| Authoritative baseline tree    | `45452418fad4a55bb80ee53c6203d17d0a36d443`                          |
-| Reviewed implementation commit | `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a`                          |
-| Reviewed implementation tree   | `78e08ec7aab85d944c64ceff6eaa9f7a14d72549`                          |
-| Evidence-wrapper commit        | `f595f0148d7bbc16d42b0e13037b65b4fb7e28dd`                          |
-| Evidence-wrapper tree          | `f5c42b43db6d1bb5260febcef440d852ca37814c`                          |
-| Draft PR                       | `https://github.com/rvalentz292/truthtrace-evidence-clarity/pull/6` |
-| Canonical origin               | `https://truthtrace.ai`                                             |
-| Lovable project                | `27174261-3589-4c48-bd32-0375b044b3d9`                              |
-| Provider hostname              | `https://truth-trace-forge.lovable.app`                             |
-| Publication state              | Not synchronized and not published                                  |
+| Field                           | Value                                                               |
+| ------------------------------- | ------------------------------------------------------------------- |
+| Repository                      | `rvalentz292/truthtrace-evidence-clarity`                           |
+| Branch                          | `codex/homepage-jarvis-final-20260716`                              |
+| Authoritative baseline commit   | `ac459269af22f90ebe3d9095a3add00dff426252`                          |
+| Authoritative baseline tree     | `45452418fad4a55bb80ee53c6203d17d0a36d443`                          |
+| Homepage/UI milestone commit    | `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a`                          |
+| Homepage/UI milestone tree      | `78e08ec7aab85d944c64ceff6eaa9f7a14d72549`                          |
+| Initial evidence-wrapper commit | `f595f0148d7bbc16d42b0e13037b65b4fb7e28dd`                          |
+| Initial evidence-wrapper tree   | `f5c42b43db6d1bb5260febcef440d852ca37814c`                          |
+| Deployable candidate commit     | `4fc4f133be2b67d077325b26cf2d9dc23f9eb756`                          |
+| Deployable candidate tree       | `e022f2f850b2cf05a64f000edc879268ada01f35`                          |
+| Cloudflare compatibility date   | `2026-07-15`                                                        |
+| Green GitHub Actions run        | `29510743848`, job `87663236467`                                    |
+| Draft PR                        | `https://github.com/rvalentz292/truthtrace-evidence-clarity/pull/6` |
+| Canonical origin                | `https://truthtrace.ai`                                             |
+| Lovable project                 | `27174261-3589-4c48-bd32-0375b044b3d9`                              |
+| Provider hostname               | `https://truth-trace-forge.lovable.app`                             |
+| Publication state               | Not synchronized and not published                                  |
 
-The implementation commit is the immutable runtime identity reviewed by this package. The later documentation commit contains these records and screenshots; a Git commit cannot truthfully contain its own SHA.
+The deployable candidate commit is the immutable release identity proven by the green [GitHub Actions run](https://github.com/rvalentz292/truthtrace-evidence-clarity/actions/runs/29510743848). It preserves the reviewed homepage/UI milestone and adds deterministic Cloudflare build compatibility. A later documentation-only branch head may update these records without changing release-affecting files, but a Git commit cannot truthfully contain its own SHA or tree. That final documentation-only identity and its exact-head status must therefore be reported externally by Git and draft PR #6.
 
 ## Evidence classes
 
