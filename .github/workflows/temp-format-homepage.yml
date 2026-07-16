@@ -1,6 +1,9 @@
 name: Temporary HomePage formatter
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - brand/standardize-truthtrace-logo
