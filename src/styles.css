@@ -38,7 +38,8 @@
 
   --font-display: "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
-  --font-mono: "Cascadia Code", "SFMono-Regular", Consolas, ui-monospace, monospace;
+  --font-mono:
+    "Cascadia Code", "SFMono-Regular", Consolas, ui-monospace, monospace;
 }
 
 :root {
@@ -138,7 +139,11 @@
 
 /* Utilities */
 @utility text-gradient {
-  background: linear-gradient(180deg, oklch(0.99 0 0) 0%, oklch(0.78 0.02 250) 100%);
+  background: linear-gradient(
+    180deg,
+    oklch(0.99 0 0) 0%,
+    oklch(0.78 0.02 250) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -176,7 +181,11 @@
 
 @utility radial-fade {
   mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    black 30%,
+    transparent 75%
+  );
 }
 
 @keyframes flow-dash {
