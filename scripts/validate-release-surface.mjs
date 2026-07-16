@@ -24,6 +24,8 @@ if (untracked.length) {
 
 const requiredFiles = [
   ".github/workflows/homepage-release-gate.yml",
+  "nitro.config.ts",
+  "scripts/validate-worker-artifact.mjs",
   "docs/release/HOMEPAGE_REPOSITORY_MAP_20260715.md",
   "docs/release/HOMEPAGE_PUBLIC_CLAIM_REGISTER_20260715.md",
   "docs/release/HOMEPAGE_PERSONA_SCORECARD_20260715.md",

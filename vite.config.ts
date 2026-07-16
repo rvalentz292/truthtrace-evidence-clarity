@@ -6,6 +6,10 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// Nitro's pinned beta normalizes compatibility dates through the build timezone.
+// UTC keeps the generated Worker metadata identical across local and CI hosts.
+process.env.TZ = "UTC";
+
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).

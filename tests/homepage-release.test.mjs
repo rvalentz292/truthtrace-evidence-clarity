@@ -30,6 +30,8 @@ const publicSource = [
   read("src/routes/__root.tsx"),
 ].join("\n");
 const packageJson = JSON.parse(read("package.json"));
+const nitroConfig = read("nitro.config.ts");
+const viteConfig = read("vite.config.ts");
 const server = read("src/server.ts");
 const errorPage = read("src/lib/error-page.ts");
 const metadata = read("src/lib/site-metadata.ts");
@@ -285,6 +287,16 @@ test("publication configuration requires the exact approved origin", () => {
     encoding: "utf8",
   });
   assert.equal(approved.status, 0, approved.stderr);
+});
+
+test("Worker builds pin the compatibility date supported by the release runtime", () => {
+  assert.match(nitroConfig, /compatibilityDate:\s*"2026-07-15"/);
+  assert.match(nitroConfig, /compatibility_date:\s*"2026-07-15"/);
+  assert.match(viteConfig, /process\.env\.TZ\s*=\s*"UTC"/);
+  assert.equal(
+    packageJson.scripts["release:artifact"],
+    "node scripts/validate-worker-artifact.mjs",
+  );
 });
 
 test("SSR responses receive the public security-header baseline", () => {
