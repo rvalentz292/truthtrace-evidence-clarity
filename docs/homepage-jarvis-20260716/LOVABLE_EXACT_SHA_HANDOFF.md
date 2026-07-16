@@ -2,23 +2,26 @@
 
 ## Immutable identities
 
-| Field                          | Required value                             |
-| ------------------------------ | ------------------------------------------ |
-| GitHub repository              | `rvalentz292/truthtrace-evidence-clarity`  |
-| Branch                         | `codex/homepage-jarvis-final-20260716`     |
-| Reviewed implementation commit | `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a` |
-| Reviewed implementation tree   | `78e08ec7aab85d944c64ceff6eaa9f7a14d72549` |
-| Baseline / rollback commit     | `ac459269af22f90ebe3d9095a3add00dff426252` |
-| Baseline / rollback tree       | `45452418fad4a55bb80ee53c6203d17d0a36d443` |
-| Lovable project ID             | `27174261-3589-4c48-bd32-0375b044b3d9`     |
-| Observed Lovable project name  | `truth-trace-forge`                        |
-| Provider hostname              | `https://truth-trace-forge.lovable.app`    |
-| Canonical hostname             | `https://truthtrace.ai`                    |
-| Required public build setting  | `VITE_SITE_URL=https://truthtrace.ai`      |
-| Current synchronization state  | **NOT SYNCHRONIZED**                       |
-| Current publication state      | **NOT PUBLISHED BY THIS EXECUTION**        |
+| Field                          | Required value                                                      |
+| ------------------------------ | ------------------------------------------------------------------- |
+| GitHub repository              | `rvalentz292/truthtrace-evidence-clarity`                           |
+| Branch                         | `codex/homepage-jarvis-final-20260716`                              |
+| Reviewed implementation commit | `4f7c5f09a88ce35bd0406a8bb6b690a90cb6769a`                          |
+| Reviewed implementation tree   | `78e08ec7aab85d944c64ceff6eaa9f7a14d72549`                          |
+| Evidence-wrapper commit        | `f595f0148d7bbc16d42b0e13037b65b4fb7e28dd`                          |
+| Evidence-wrapper tree          | `f5c42b43db6d1bb5260febcef440d852ca37814c`                          |
+| Draft PR                       | `https://github.com/rvalentz292/truthtrace-evidence-clarity/pull/6` |
+| Baseline / rollback commit     | `ac459269af22f90ebe3d9095a3add00dff426252`                          |
+| Baseline / rollback tree       | `45452418fad4a55bb80ee53c6203d17d0a36d443`                          |
+| Lovable project ID             | `27174261-3589-4c48-bd32-0375b044b3d9`                              |
+| Observed Lovable project name  | `truth-trace-forge`                                                 |
+| Provider hostname              | `https://truth-trace-forge.lovable.app`                             |
+| Canonical hostname             | `https://truthtrace.ai`                                             |
+| Required public build setting  | `VITE_SITE_URL=https://truthtrace.ai`                               |
+| Current synchronization state  | **NOT SYNCHRONIZED**                                                |
+| Current publication state      | **NOT PUBLISHED BY THIS EXECUTION**                                 |
 
-The reviewed implementation commit is intentionally the runtime identity recorded inside this later evidence package. The evidence-wrapper commit and final branch HEAD are reported by Git/PR after this document is committed.
+The reviewed implementation commit is intentionally the runtime identity recorded inside the later evidence-wrapper commit. The final documentation-only branch HEAD is reported by Git and draft PR #6 because a commit cannot contain its own SHA.
 
 ## Expected implementation files
 

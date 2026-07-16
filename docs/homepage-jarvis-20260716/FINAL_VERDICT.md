@@ -9,7 +9,7 @@
 - Browser/responsive/accessibility matrix: PASS.
 - Lighthouse: mobile 98/100/100/100; desktop 100/100/100/100; CLS 0.
 - Claims: bounded, illustrative, removed, or counsel-tagged; no known unsupported homepage claim remains.
-- Draft PR: `DRAFT_PR_PENDING_AFTER_EVIDENCE_COMMIT`.
+- Draft PR: `https://github.com/rvalentz292/truthtrace-evidence-clarity/pull/6` (open, draft, not merged).
 - Lovable synchronization: not performed.
 - Publication: not performed.
 
@@ -17,7 +17,7 @@
 
 The implementation is complete, the reviewed runtime SHA/tree are immutable, the exact Lovable handoff exists, and no known P0 code, homepage-claim, accessibility, route, or release defect remains. Counsel review is still required for final legal approval but does not prevent a technical candidate. Provider-edge checks are required after authorized exact-SHA synchronization and are not misreported as local proof.
 
-The final release verdict becomes active when this evidence package is committed, pushed, and attached to the required draft PR without changing the reviewed runtime tree.
+This evidence package is committed, pushed, and attached to the required draft PR without changing the reviewed runtime tree. The final release verdict is therefore active for the technical candidate; it is not a deployment claim.
 
 `TRUTHTRACE_HOMEPAGE_READY_TO_PUBLISH`
 
