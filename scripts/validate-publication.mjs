@@ -6,7 +6,9 @@ const approvedOrigin = "https://truthtrace.ai";
 const failures = [];
 
 if (process.env.VITE_SITE_URL !== approvedOrigin) {
-  failures.push(`VITE_SITE_URL must be present and equal the approved origin ${approvedOrigin}.`);
+  failures.push(
+    `VITE_SITE_URL must be present and equal the approved origin ${approvedOrigin}.`,
+  );
 }
 
 const robotsPath = resolve(root, "public", "robots.txt");
@@ -35,13 +37,16 @@ for (const asset of [
   "public/brand/truthtrace-logo-primary.svg",
   "public/brand/truthtrace-logo-mark.svg",
 ]) {
-  if (!existsSync(resolve(root, asset))) failures.push(`${asset} is required for publication.`);
+  if (!existsSync(resolve(root, asset)))
+    failures.push(`${asset} is required for publication.`);
 }
 
 const sitemapPath = resolve(root, "public", "sitemap.xml");
 if (existsSync(sitemapPath)) {
   const sitemap = readFileSync(sitemapPath, "utf8");
-  const actualLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  const actualLocations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+    (match) => match[1],
+  );
   const expectedLocations = [
     `${approvedOrigin}/`,
     `${approvedOrigin}/technology`,
