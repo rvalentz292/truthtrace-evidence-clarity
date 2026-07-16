@@ -35,7 +35,7 @@ export function createPageHead({ path, title, description }: PageMetadata) {
       { property: "og:image:height", content: "909" },
       {
         property: "og:image:alt",
-        content: "TruthTrace — structured, source-linked clarity for family-law evidence review",
+        content: "TruthTrace — source-linked evidence intelligence for family-law review",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: title },
@@ -43,7 +43,7 @@ export function createPageHead({ path, title, description }: PageMetadata) {
       { name: "twitter:image", content: socialImage },
       {
         name: "twitter:image:alt",
-        content: "TruthTrace — structured, source-linked clarity for family-law evidence review",
+        content: "TruthTrace — source-linked evidence intelligence for family-law review",
       },
     ],
     links: [{ rel: "canonical", href: canonical }],

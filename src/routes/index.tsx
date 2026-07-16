@@ -6,9 +6,9 @@ export const Route = createFileRoute("/")({
   head: () =>
     createPageHead({
       path: "/",
-      title: "TruthTrace | Forensic Evidence Intelligence for Family Law",
+      title: "TruthTrace | Source-Linked Evidence Intelligence for Family Law",
       description:
-        "TruthTrace is being designed to turn fragmented family-law evidence into a structured chronology with visible links back to source material for professional review.",
+        "TruthTrace helps parents and family-law professionals organize fragmented records into structured chronologies with citations back to exact source locations for human review.",
     }),
   component: HomePage,
 });

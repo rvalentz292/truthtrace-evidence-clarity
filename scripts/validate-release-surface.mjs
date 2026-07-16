@@ -38,6 +38,21 @@ const requiredFiles = [
   "docs/release/HOMEPAGE_LEGACY_ROUTE_MIGRATION_20260715.md",
   "docs/release/HOMEPAGE_PUBLIC_HISTORY_COUNSEL_HANDOFF_20260715.md",
   "docs/release/HOMEPAGE_FINAL_PUBLICATION_GATE_20260715.md",
+  "docs/homepage-jarvis-20260716/README.md",
+  "docs/homepage-jarvis-20260716/JARVIS_AUDIT.md",
+  "docs/homepage-jarvis-20260716/CURRENT_STATE_RECONCILIATION.md",
+  "docs/homepage-jarvis-20260716/SOURCE_PRECEDENCE_REGISTER.md",
+  "docs/homepage-jarvis-20260716/PR5_DISPOSITION.md",
+  "docs/homepage-jarvis-20260716/PUBLIC_CLAIM_REGISTER.md",
+  "docs/homepage-jarvis-20260716/SUPERSEDED_CLAIMS_REGISTER.md",
+  "docs/homepage-jarvis-20260716/FINAL_POSITIONING_AND_COPY.md",
+  "docs/homepage-jarvis-20260716/IMPLEMENTATION_CHANGELOG.md",
+  "docs/homepage-jarvis-20260716/RESPONSIVE_ACCESSIBILITY_REPORT.md",
+  "docs/homepage-jarvis-20260716/PERFORMANCE_SEO_REPORT.md",
+  "docs/homepage-jarvis-20260716/RELEASE_VERIFICATION.md",
+  "docs/homepage-jarvis-20260716/SCREENSHOT_INDEX.md",
+  "docs/homepage-jarvis-20260716/LOVABLE_EXACT_SHA_HANDOFF.md",
+  "docs/homepage-jarvis-20260716/FINAL_VERDICT.md",
 ];
 
 const indexEntries = new Map();
