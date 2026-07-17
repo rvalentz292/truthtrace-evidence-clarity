@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320">
+  <defs>
+    <linearGradient id="shieldGradient" x1="28" y1="292" x2="246" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#003A9E"/>
+      <stop offset="0.30" stop-color="#006DDE"/>
+      <stop offset="0.56" stop-color="#38D8FF"/>
+      <stop offset="0.78" stop-color="#0587E8"/>
+      <stop offset="1" stop-color="#0041B3"/>
+    </linearGradient>
+    <linearGradient id="graphGradient" x1="52" y1="195" x2="230" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#159EE8"/>
+      <stop offset="0.55" stop-color="#38D8FF"/>
+      <stop offset="1" stop-color="#B5F3FF"/>
+    </linearGradient>
+  </defs>
+  <g id="logo-mark">
+    <path d="M140 16 L258 55 C263 57 266 61 266 68 L266 128 C266 207 221 264 140 304 C59 264 14 207 14 128 L14 68 C14 61 17 57 22 55 Z" fill="none" stroke="url(#shieldGradient)" stroke-width="25" stroke-linecap="round" stroke-linejoin="round" opacity="0.16"/>
+    <path d="M140 16 L258 55 C263 57 266 61 266 68 L266 128 C266 207 221 264 140 304 C59 264 14 207 14 128 L14 68 C14 61 17 57 22 55 Z" fill="none" stroke="url(#shieldGradient)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M140 16 L258 55 C263 57 266 61 266 68 L266 128 C266 207 221 264 140 304 C59 264 14 207 14 128 L14 68 C14 61 17 57 22 55 Z" fill="none" stroke="#BDF4FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+    <path d="M62 181 L103 136 L151 174 L216 88" fill="none" stroke="url(#graphGradient)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" opacity="0.14"/>
+    <path d="M62 181 L103 136 L151 174 L216 88" fill="none" stroke="url(#graphGradient)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="62" cy="181" r="14" fill="url(#graphGradient)" stroke="#E5FBFF" stroke-width="1.2"/>
+    <circle cx="103" cy="136" r="17" fill="url(#graphGradient)" stroke="#E5FBFF" stroke-width="1.2"/>
+    <circle cx="151" cy="174" r="18" fill="url(#graphGradient)" stroke="#E5FBFF" stroke-width="1.2"/>
+    <circle cx="216" cy="88" r="21" fill="url(#graphGradient)" stroke="#E5FBFF" stroke-width="1.2"/>
+  </g>
+</svg>

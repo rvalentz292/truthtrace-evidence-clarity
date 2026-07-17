@@ -94,7 +94,10 @@ function Hero() {
               className="group inline-flex min-h-11 items-center gap-2 rounded-sm border border-primary/60 bg-primary/15 px-5 text-[13.5px] font-medium tracking-tight text-foreground transition-colors hover:bg-primary/25"
             >
               Explore the Platform
-              <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight
+                aria-hidden
+                className="size-4 transition-transform group-hover:translate-x-0.5"
+              />
             </Link>
             <Link
               to="/"
@@ -209,8 +212,7 @@ const EVENTS: TimelineEvent[] = [
     channel: "Communications",
     linkedSourceIds: ["SRC-01", "SRC-04"],
     citation: {
-      excerpt:
-        "Three outbound attempts recorded. No connected call appears in the sampled record.",
+      excerpt: "Three outbound attempts recorded. No connected call appears in the sampled record.",
       reference: "Message export · Entries 1183–1185",
       locator: "messages_aug_14.txt · lines 1183–1185",
       evidenceId: "EO-9F2A…",
@@ -226,8 +228,7 @@ const EVENTS: TimelineEvent[] = [
     channel: "Document",
     linkedSourceIds: ["SRC-02"],
     citation: {
-      excerpt:
-        "Weekday evening contact window defined as 7:00 PM to 8:00 PM local time.",
+      excerpt: "Weekday evening contact window defined as 7:00 PM to 8:00 PM local time.",
       reference: "Parenting plan v3 · § 4.2",
       locator: "parenting_plan_v3.pdf · p. 6",
       evidenceId: "EO-4B71…",
@@ -333,7 +334,9 @@ function CommandCenterVisual({ compact = false }: { compact?: boolean }) {
 
       <div
         className={`grid gap-px bg-border/60 ${
-          compact ? "lg:grid-cols-[180px_minmax(0,1fr)_220px]" : "lg:grid-cols-[220px_minmax(0,1fr)_280px]"
+          compact
+            ? "lg:grid-cols-[180px_minmax(0,1fr)_220px]"
+            : "lg:grid-cols-[220px_minmax(0,1fr)_280px]"
         }`}
       >
         {/* Left rail — sources */}
@@ -476,7 +479,10 @@ function StateChip({
   state: EvidenceSource["state"];
   className?: string;
 }) {
-  const map: Record<EvidenceSource["state"], { color: string; Icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }> }> = {
+  const map: Record<
+    EvidenceSource["state"],
+    { color: string; Icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }> }
+  > = {
     "Verified source": { color: "text-success border-success/40", Icon: CheckCircle2 },
     Processed: { color: "text-foreground/75 border-border", Icon: Circle },
     "Review required": { color: "text-amber-400 border-amber-400/40", Icon: AlertTriangle },
@@ -543,18 +549,15 @@ function ProofChain() {
           See exactly where the statement came from.
         </h2>
         <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-          TruthTrace connects observations to timeline events, exact citations, source excerpts,
-          and originating evidence records.
+          TruthTrace connects observations to timeline events, exact citations, source excerpts, and
+          originating evidence records.
         </p>
       </div>
 
       {/* Horizontal on desktop, stacked on mobile */}
       <ol className="mt-10 grid gap-3 lg:grid-cols-5">
         {steps.map((s, i) => (
-          <li
-            key={s.label}
-            className="relative rounded-sm border border-border bg-surface/30 p-4"
-          >
+          <li key={s.label} className="relative rounded-sm border border-border bg-surface/30 p-4">
             <div className="flex items-center justify-between">
               <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">
                 {s.label}
@@ -640,7 +643,10 @@ function PathwayColumn({
   action: string;
 }) {
   return (
-    <div id={id} className="scroll-mt-20 rounded-sm border border-border bg-background/60 p-6 sm:p-8">
+    <div
+      id={id}
+      className="scroll-mt-20 rounded-sm border border-border bg-background/60 p-6 sm:p-8"
+    >
       <Eyebrow>{eyebrow}</Eyebrow>
       <h3 className="mt-4 text-balance text-[24px] font-semibold leading-[1.15] tracking-tight sm:text-[28px]">
         {title}
@@ -718,10 +724,7 @@ function TrustArchitecture() {
 
       <div className="mt-10 grid gap-3 sm:grid-cols-2">
         {principles.map((p) => (
-          <div
-            key={p.title}
-            className="rounded-sm border border-border bg-background/60 p-5"
-          >
+          <div key={p.title} className="rounded-sm border border-border bg-background/60 p-5">
             <h3 className="text-[15px] font-semibold tracking-tight text-foreground">{p.title}</h3>
             <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">{p.body}</p>
           </div>
@@ -782,13 +785,18 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_auto]">
         <div className="max-w-xl">
           <div className="flex items-center gap-2.5">
-            <div aria-hidden className="grid size-7 place-items-center rounded-sm bg-primary/15 ring-1 ring-primary/40">
+            <div
+              aria-hidden
+              className="grid size-7 place-items-center rounded-sm bg-primary/15 ring-1 ring-primary/40"
+            >
               <div className="h-1.5 w-1.5 rounded-[1px] bg-primary" />
             </div>
             <span className="text-[14px] font-semibold tracking-tight">TruthTrace</span>
           </div>
           <p className="mt-4 text-[12.5px] leading-relaxed text-muted-foreground">
-            {"TruthTrace provides evidence-organization and review-support technology. It does not provide legal advice, determine admissibility, recommend custody outcomes, diagnose individuals, or replace qualified professional judgment."}
+            {
+              "TruthTrace provides evidence-organization and review-support technology. It does not provide legal advice, determine admissibility, recommend custody outcomes, diagnose individuals, or replace qualified professional judgment."
+            }
           </p>
           <p className="mt-3 text-[12px] leading-relaxed text-muted-foreground">
             No evidence uploads on this site · No real family information shown
@@ -831,7 +839,11 @@ function FooterCol({
   items,
 }: {
   heading: string;
-  items: { label: string; to: "/" | "/technology" | "/privacy" | "/terms" | "/contact"; hash?: string }[];
+  items: {
+    label: string;
+    to: "/" | "/technology" | "/privacy" | "/terms" | "/contact";
+    hash?: string;
+  }[];
 }) {
   return (
     <div>

@@ -1,6 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TruthTrace">
-  <rect width="64" height="64" rx="14" fill="#080b11" />
-  <path d="M32 9 51 17v14c0 12-7.7 20.6-19 25-11.3-4.4-19-13-19-25V17L32 9Z" fill="#4f8cff" fill-opacity=".14" stroke="#4f8cff" stroke-width="3" />
-  <path d="m21 33 7 7 16-17" fill="none" stroke="#69e0c7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" />
-  <circle cx="44" cy="23" r="3.2" fill="#d9f9f1" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">TruthTrace</title>
+  <desc id="desc">TruthTrace shield and evidence graph.</desc>
+  <defs>
+    <linearGradient id="g" x1="8" y1="58" x2="55" y2="4" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0044B5"/>
+      <stop offset="0.55" stop-color="#32D5FF"/>
+      <stop offset="1" stop-color="#006BD8"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 4 57 12v13c0 17-9 28-25 35C16 53 7 42 7 25V12Z"
+        fill="none" stroke="url(#g)" stroke-width="4.5" stroke-linejoin="round"/>
+  <path d="m16 40 8-10 9 8 14-19"
+        fill="none" stroke="url(#g)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="16" cy="40" r="4" fill="url(#g)"/>
+  <circle cx="24" cy="30" r="4.5" fill="url(#g)"/>
+  <circle cx="33" cy="38" r="4.5" fill="url(#g)"/>
+  <circle cx="47" cy="19" r="5" fill="url(#g)"/>
 </svg>
