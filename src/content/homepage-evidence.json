@@ -1,0 +1,85 @@
+{
+  "disclosure": "Illustrative case data. No real family information shown.",
+  "sources": [
+    {
+      "id": "SRC-04",
+      "kind": "Document",
+      "label": "Parenting-plan.pdf",
+      "detail": "6 pages · registered Mar 11",
+      "identity": "EV-00A4",
+      "integrity": "9f2a…c714",
+      "state": "Source registered"
+    },
+    {
+      "id": "SRC-11",
+      "kind": "Message export",
+      "label": "Message-export.txt",
+      "detail": "428 lines · registered Mar 12",
+      "identity": "EV-00B1",
+      "integrity": "6c91…ed42",
+      "state": "Source registered"
+    },
+    {
+      "id": "SRC-16",
+      "kind": "Image",
+      "label": "Calendar-capture.png",
+      "detail": "Image 2 of 4 · registered Mar 13",
+      "identity": "EV-00C6",
+      "integrity": "31d7…88fa",
+      "state": "Context required"
+    }
+  ],
+  "events": [
+    {
+      "id": "OBS-014",
+      "date": "Mar 12",
+      "time": "6:42 PM",
+      "title": "Schedule change recorded",
+      "observation": "A message records a 20-minute pickup delay.",
+      "timelineEvent": "6:42 PM · Schedule change noted",
+      "citation": "MSG-011 · lines 184–187",
+      "excerpt": "“Running about 20 minutes behind. I’ll be there around 7:00.”",
+      "sourceLocator": "Message-export.txt · lines 184–187",
+      "sourceIdentity": "EV-00B1 · Message export",
+      "integrityId": "sha256 · 6c91…ed42",
+      "reviewState": "Citation linked · human review required",
+      "reviewTone": "linked",
+      "reviewNote": "The cited text supports the stated timing change. It does not establish intent.",
+      "linkedSourceIds": ["SRC-11"]
+    },
+    {
+      "id": "OBS-019",
+      "date": "Mar 13",
+      "time": "9:10 AM",
+      "title": "Calendar image needs context",
+      "observation": "An image shows a calendar entry, but its author and creation time are not established.",
+      "timelineEvent": "9:10 AM · Calendar image registered",
+      "citation": "IMG-016 · image 2",
+      "excerpt": "“Exchange · Friday · 5:00 PM”",
+      "sourceLocator": "Calendar-capture.png · image 2 of 4",
+      "sourceIdentity": "EV-00C6 · Image record",
+      "integrityId": "sha256 · 31d7…88fa",
+      "reviewState": "Context required",
+      "reviewTone": "review",
+      "reviewNote": "The image records visible text. It does not establish who created the entry or when.",
+      "linkedSourceIds": ["SRC-16"]
+    },
+    {
+      "id": "OBS-023",
+      "date": "Mar 14",
+      "time": "2:05 PM",
+      "title": "Documented time compared",
+      "observation": "The document lists a 5:00 PM exchange time that can be reviewed alongside the later message.",
+      "timelineEvent": "2:05 PM · Exchange-time comparison prepared",
+      "citation": "DOC-004 · page 6, section 2",
+      "excerpt": "“The exchange begins at 5:00 p.m. at the designated location.”",
+      "sourceLocator": "Parenting-plan.pdf · page 6, section 2",
+      "sourceIdentity": "EV-00A4 · Document record",
+      "integrityId": "sha256 · 9f2a…c714",
+      "reviewState": "Human review required",
+      "reviewTone": "review",
+      "reviewNote": "The comparison keeps both records visible. Relevance and legal significance remain human judgments.",
+      "linkedSourceIds": ["SRC-04", "SRC-11"]
+    }
+  ]
+}

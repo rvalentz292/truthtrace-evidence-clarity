@@ -71,6 +71,9 @@ jobs:
       - name: Publication build
         run: bun run build:publication
 
+      - name: Validate generated Worker compatibility
+        run: bun run release:artifact
+
       - name: Reject production source maps and embedded sources
         shell: bash
         run: |

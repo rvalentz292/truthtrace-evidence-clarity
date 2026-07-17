@@ -3,10 +3,31 @@ import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
 const approvedOrigin = "https://truthtrace.ai";
+const approvedCompatibilityDate = "2026-07-15";
 const failures = [];
 
 if (process.env.VITE_SITE_URL !== approvedOrigin) {
   failures.push(`VITE_SITE_URL must be present and equal the approved origin ${approvedOrigin}.`);
+}
+
+const nitroConfig = existsSync(resolve(root, "nitro.config.ts"))
+  ? readFileSync(resolve(root, "nitro.config.ts"), "utf8")
+  : "";
+const viteConfig = existsSync(resolve(root, "vite.config.ts"))
+  ? readFileSync(resolve(root, "vite.config.ts"), "utf8")
+  : "";
+if (!nitroConfig.includes(`compatibilityDate: "${approvedCompatibilityDate}"`)) {
+  failures.push(
+    `nitro.config.ts must pin compatibilityDate to ${approvedCompatibilityDate} for deterministic Worker builds.`,
+  );
+}
+if (!nitroConfig.includes(`compatibility_date: "${approvedCompatibilityDate}"`)) {
+  failures.push(
+    `nitro.config.ts must pin Cloudflare Wrangler compatibility_date to ${approvedCompatibilityDate}.`,
+  );
+}
+if (!viteConfig.includes('process.env.TZ = "UTC"')) {
+  failures.push("vite.config.ts must set the Nitro build timezone to UTC.");
 }
 
 const robotsPath = resolve(root, "public", "robots.txt");
@@ -72,4 +93,6 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Publication configuration gate passed for ${approvedOrigin}.`);
+console.log(
+  `Publication configuration gate passed for ${approvedOrigin} with Worker compatibility date ${approvedCompatibilityDate}.`,
+);

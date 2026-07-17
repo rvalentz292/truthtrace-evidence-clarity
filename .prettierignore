@@ -6,3 +6,4 @@ pnpm-lock.yaml
 package-lock.json
 bun.lock
 routeTree.gen.ts
+docs/homepage-jarvis-20260716/lighthouse-*.json
